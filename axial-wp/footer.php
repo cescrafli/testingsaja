@@ -111,7 +111,7 @@
                 </div>
             </div>
         </footer>
-        <button id="scrollTrigger" type="button">
+        <button id="scrollTrigger" type="button" aria-label="Scroll to top">
             <i class="icon icon-arrow_right"></i>
         </button>
         <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
@@ -121,4 +121,5 @@
         <?php wp_footer(); ?>
 </body>
 </html>
+
 

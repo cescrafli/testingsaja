@@ -16,6 +16,10 @@ jobs:
         with:
           name: wpcom
           path: |
-            .
-            !.git*
+                  - name: Upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpcom
+          path: |
+            axial-wp
           retention-days: 1

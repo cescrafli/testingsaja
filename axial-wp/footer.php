@@ -7,9 +7,7 @@
                             <span class="brand_name"> Axial <span class="highlight">Construct</span> </span>
                         </a>
                         <p class="footer_main-block_subtitle footer_main-block_subtitle--brand">
-                            Libero volutpat sed cras ornare arcu dui vivamus. Ac tortor dignissim convallis aenean et tortor at risus
-                            viverra
-                        </p>
+                            Libero volutpat sed cras ornare arcu dui vivamus. Ac Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                     </div>
                     <div class="footer_main-block">
                         <h4 class="footer_main-block_title">Contacts</h4>
@@ -121,5 +119,6 @@
         <?php wp_footer(); ?>
 </body>
 </html>
+
 
 

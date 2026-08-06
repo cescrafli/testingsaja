@@ -12,8 +12,7 @@ get_header();
                             <span class="subtitle">Contact us</span>
                             <h2 class="title">Get <span class="highlight">In Touch</span></h2>
                             <p class="text">
-                                Pellentesque sit amet porttitor eget dolor morbi non arcu. Vitae justo eget magna fermentum iaculis eu non
-                            </p>
+                                Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                         </div>
                         <?php echo do_shortcode('[contact-form-7 id="87e6ad6" title="Contact form 1"]'); ?>
                     </div>
@@ -68,4 +67,5 @@ get_header();
             </div>
         </main>
 <?php get_footer(); ?>
+
 

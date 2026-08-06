@@ -31,9 +31,7 @@ get_header();
                                     Composite Materials â€“ Applications for the Future
                                 </h4>
                                 <p class="main_text">
-                                    Non nisi est sit amet facilisis magna. Eget est lorem ipsum dolor sit amet consectetur. Et egestas quis
-                                    ipsum suspendisse
-                                </p>
+                                    Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -57,9 +55,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Impact of Technology on Construction Finance</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -83,9 +79,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">The Importance of Healthy Buildings in a Pandemic</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -109,9 +103,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Technical Focus Issue of Materials Evaluation</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -135,9 +127,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Random Number Genera tor goes nano for stability</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -161,9 +151,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Possibly Perfect Way to Build Bridges</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -187,9 +175,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Difficulties in Installing a Private Solar Station</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -213,9 +199,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Multi-Point Unmanned Food Delivery Robot</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -239,9 +223,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Sustainable Heating Solutions</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -265,9 +247,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">6 Best Free Construction Management Software</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -291,9 +271,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">Pros, Cons, and Costs of Modular or Prefab Homes</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -317,9 +295,7 @@ get_header();
                                 </div>
                                 <h4 class="main_title">5 Best Software Tools for Avoiding Construction Project</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -498,22 +474,19 @@ get_header();
                                 <i class="icon-comment icon--bubble"></i>
                                 <a class="link" href="#">
                                     <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
+                                    in tempor eros Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</a>
                             </li>
                             <li class="list-item">
                                 <i class="icon-comment icon--bubble"></i>
                                 <a class="link" href="#">
                                     <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
+                                    in tempor eros Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</a>
                             </li>
                             <li class="list-item">
                                 <i class="icon-comment icon--bubble"></i>
                                 <a class="link" href="#">
                                     <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
+                                    in tempor eros Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</a>
                             </li>
                         </ul>
                     </div>
@@ -618,3 +591,4 @@ get_header();
             </div>
         </main>
 <?php get_footer(); ?>
+

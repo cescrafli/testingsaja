@@ -22,19 +22,10 @@ get_header();
                             </div>
                             <h3 class="about_article-header">Description</h3>
                             <p class="about_article-text">
-                                Congue eu consequat ac felis donec et odio pellentesque. Nullam ac tortor vitae purus. Bibendum neque
-                                egestas congue quisque egestas diam in arcu cursus. Sit amet purus gravida quis blandit turpis. Erat nam at
-                                lectus urna duis convallis convallis tellus. Turpis nunc eget lorem dolor sed. Dignissim cras tincidunt
-                                lobortis feugiat. Tempor nec feugiat nisl pretium fusce id velit. Blandit libero volutpat sed cras ornare
-                                arcu. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Purus semper eget
-                                duis at tellus at urna. Consequat ac felis donec et odio pellentesque diam volutpat
-                            </p>
+                                Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                             <h3 class="about_article-header">Building better development</h3>
                             <p class="about_article-text">
-                                Aenean sed adipiscing diam donec adipiscing tristique risus. Nunc pulvinar sapien et ligula ullamcorper
-                                malesuada. Venenatis urna cursus eget nunc scelerisque viverra mauris in. A cras semper auctor neque vitae
-                                tempus.
-                            </p>
+                                Aenean sed adipiscing diam donec adipiscing tristique risus. Nunc pulvinar sapien et Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                             <ul class="checklist">
                                 <li class="checklist_item"><i class="icon-check icon"></i> Building the future with ideas</li>
                                 <li class="checklist_item"><i class="icon-check icon"></i> Designing future with excellence</li>
@@ -43,11 +34,7 @@ get_header();
                             </ul>
                             <h3 class="about_article-header">Engineering With Style</h3>
                             <p class="about_article-text">
-                                Aliquet nec ullamcorper sit amet risus nullam eget felis. Ligula ullamcorper malesuada proin libero. Viverra
-                                mauris in aliquam sem. Sem viverra aliquet eget sit amet. Dignissim convallis aenean et tortor at. Velit
-                                scelerisque in dictum non consectetur a. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula
-                                ullamcorper.
-                            </p>
+                                Aliquet nec ullamcorper sit amet risus nullam eget felis. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                         </article>
                         <div class="about_aside">
                             <div class="about_info about_aside-item">
@@ -252,9 +239,7 @@ get_header();
                         <span class="subtitle">Feedback</span>
                         <h2 class="title">What <span class="highlight">Our Clients</span> Say About Us</h2>
                         <p class="text">
-                            Non curabitur gravida arcu ac tortor dignissim convallis aenean. Dui id ornare arcu odio. Sodales ut eu sem
-                            integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam
-                        </p>
+                            Non curabitur gravida arcu ac Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                         <a class="btn" href="contacts.html">Consult now</a>
                     </div>
                     <div class="feedback_slider swiper">
@@ -310,7 +295,7 @@ get_header();
                                     </div>
                                     <div class="media_info">
                                         <span class="name">John Smith</span>
-                                        <span class="company">Loremipsum</span>
+                                        <span class="company">PT Mega Bangun</span>
                                     </div>
                                 </div>
                             </div>
@@ -405,3 +390,4 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+

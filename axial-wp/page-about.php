@@ -101,10 +101,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Process Engineering</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -130,10 +127,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Chemistry and Metallurgy</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -159,10 +153,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Electrical Engineering</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -183,10 +174,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Specialty Services</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -207,10 +195,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Civil engineering</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -236,10 +221,7 @@ get_header();
                                     <div class="main">
                                         <h3 class="title">Construction Management</h3>
                                         <p class="text">
-                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis
-                                            ullamcorper velit. Viverra aliquet eget sit amet tellus cras adipiscing. Molestie ac feugiat sed
-                                            lectus vestibulum mattis ullamcorper velit
-                                        </p>
+                                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                         <ul class="list">
                                             <li class="checklist_item"><i class="icon-arrow_right icon"></i> Making lives easier</li>
                                             <li class="checklist_item">
@@ -385,8 +367,7 @@ get_header();
 
                                 <h4 class="features_card-title">We Develop Unique Projects</h4>
                                 <p class="features_card-description">
-                                    Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                </p>
+                                    Senectus et netus et malesuada. Nunc pulvinar sapien et Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                             </div>
                         </div>
                         <div class="features_card features_card--alt" data-aos="fade-up" data-aos-delay="50">
@@ -557,8 +538,7 @@ get_header();
 
                                 <h4 class="features_card-title">We Offer Innovative Technologies</h4>
                                 <p class="features_card-description">
-                                    Consectetur adipiscing elit pellentesque habitant. Arcu felis bibendum ut tristique
-                                </p>
+                                    Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                             </div>
                         </div>
                         <div class="features_card features_card--alt" data-aos="fade-up" data-aos-delay="200">
@@ -647,8 +627,7 @@ get_header();
                                 </div>
                                 <p class="main">
                                     Curabitur vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris pharetra et. Et
-                                    ligula ullamcorper malesuada proin pellentesque diam volutpat commodo
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                                 <div class="media">
                                     <div class="media_avatar avatar">
                                         <picture>
@@ -715,8 +694,7 @@ get_header();
                                 </div>
                                 <p class="main">
                                     Curabitur vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris pharetra et. Et
-                                    ligula ullamcorper malesuada proin pellentesque diam volutpat commodo
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                                 <div class="media">
                                     <div class="media_avatar avatar">
                                         <picture>
@@ -779,3 +757,4 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+

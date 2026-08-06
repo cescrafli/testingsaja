@@ -27,10 +27,7 @@ get_header();
                             </div>
                             <h3 class="main_title" data-aos="fade-up" data-aos-delay="50">Food Factory Design and Construction</h3>
                             <p class="main_text" data-aos="fade-up" data-aos-delay="100">
-                                Elit scelerisque mauris pellentesque pulvinar. Mattis aliquam faucibus purus in massa tempor. Diam phasellus
-                                vestibulum lorem sed risus ultricies. Nisi scelerisque eu ultrices vitae auctor eu augue ut. Et sollicitudin
-                                ac orci phasellus egestas tellus rutrum tellus
-                            </p>
+                                Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                             <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
                                 Details <i class="icon-arrow_right icon"></i>
                             </a>
@@ -56,10 +53,7 @@ get_header();
                             </div>
                             <h3 class="main_title" data-aos="fade-up" data-aos-delay="50">Fresh Concept Construction Renovation</h3>
                             <p class="main_text" data-aos="fade-up" data-aos-delay="100">
-                                Vel orci porta non pulvinar neque laoreet. Erat velit scelerisque in dictum non consectetur a. Mus mauris
-                                vitae ultricies leo. Malesuada fames ac turpis egestas maecenas pharetra. Adipiscing tristique risus nec
-                                feugiat in
-                            </p>
+                                Vel orci porta non pulvinar neque laoreet. Erat vKami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                             <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
                                 Details <i class="icon-arrow_right icon"></i>
                             </a>
@@ -85,10 +79,7 @@ get_header();
                             </div>
                             <h3 class="main_title" data-aos="fade-up" data-aos-delay="50">Jazzy Elite Construction Shopping Center</h3>
                             <p class="main_text" data-aos="fade-up" data-aos-delay="100">
-                                Euismod elementum nisi quis eleifend quam adipiscing vitae proin. Consectetur purus ut faucibus pulvinar
-                                elementum integer. Cursus in hac habitasse platea dictumst quisque. Ut tortor pretium viverra suspendisse
-                                potenti nullam ac tortor
-                            </p>
+                                Euismod elementum nisi quis eleifend quam adipiscing vitae proin. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                             <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
                                 Details <i class="icon-arrow_right icon"></i>
                             </a>
@@ -116,10 +107,7 @@ get_header();
                                 Installation and Creation of a Water Supply System
                             </h3>
                             <p class="main_text" data-aos="fade-up" data-aos-delay="100">
-                                Tortor id aliquet lectus proin nibh. Amet consectetur adipiscing elit pellentesque habitant morbi tristique
-                                senectus et. Purus in mollis nunc sed id semper risus in hendrerit. Morbi tristique senectus et netus et
-                                malesuada
-                            </p>
+                                Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                             <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
                                 Details <i class="icon-arrow_right icon"></i>
                             </a>
@@ -129,3 +117,4 @@ get_header();
             </div>
         </main>
 <?php get_footer(); ?>
+

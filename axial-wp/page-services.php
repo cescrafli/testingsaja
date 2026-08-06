@@ -17,8 +17,7 @@ get_header();
                                 <span class="number">01</span>
                                 <h4 class="title">Process Engineering</h4>
                                 <p class="description">
-                                    Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                </p>
+                                    Senectus et netus et malesuada. Nunc pulvinar sapien et Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -30,8 +29,7 @@ get_header();
                                 <span class="number">02</span>
                                 <h4 class="title">Construction Services</h4>
                                 <p class="description">
-                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam vestibulum morbi
-                                </p>
+                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -56,8 +54,7 @@ get_header();
                                 <span class="number">04</span>
                                 <h4 class="title">Electrical Engineering</h4>
                                 <p class="description">
-                                    Ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus. Nam aliquam sem et tortor
-                                </p>
+                                    Ac Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -102,9 +99,7 @@ get_header();
                             <h2 class="title">Building The Future on a <span class="highlight">Foundation of Excellence</span></h2>
                             <p class="text">
                                 Risus commodo viverra maecenas accumsan lacus vel. Semper viverra nam libero justo laoreet sit amet cursus.
-                                Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Adipiscing elit duis tristique
-                                sollicitudin nibh sit
-                            </p>
+                                Commodo ullamcorper a lacus Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                         </div>
                         <ul class="numbers_list">
                             <li class="numbers_list-item">
@@ -151,8 +146,7 @@ get_header();
                             </h2>
                             <p class="text" data-aos="fade-up" data-aos-delay="50">
                                 Nibh praesent tristique magna sit amet purus gravida quis. Bibendum arcu vitae elementum curabitur vitae
-                                nulla facilisi. Quam vulputate dignissim suspendisse in
-                            </p>
+                                nulla facilisi. Quam vulputate dignissim Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                         </div>
                         <ul class="achievements">
                             <li class="achievements_item" data-aos="fade-up" data-aos-delay="100">
@@ -247,9 +241,7 @@ get_header();
                                 <span class="highlight">20 Years</span>
                             </h2>
                             <p class="text" data-aos="fade-up" data-aos-delay="50">
-                                Convallis a cras semper auctor neque vitae. Lectus proin nibh nisl condimentum fermentum odio eu. Augue
-                                neque gravida in fermentum et sollicitudin
-                            </p>
+                                Convallis a cras semper Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                         </div>
                         <ul class="skills">
                             <li class="skills_item">
@@ -428,4 +420,5 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+
 

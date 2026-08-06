@@ -33,9 +33,7 @@ get_header();
                             <div id="collapseThree" class="collapse show" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor.
-                                    </p>
+                                        Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                 </div>
                             </div>
                         </div>
@@ -50,10 +48,7 @@ get_header();
                             <div id="collapseOne" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien
-                                    </p>
+                                        Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                 </div>
                             </div>
                         </div>
@@ -68,12 +63,7 @@ get_header();
                             <div id="collapseTwo" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa id neque aliquam vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices
-                                        dui sapien
-                                    </p>
+                                        Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                 </div>
                             </div>
                         </div>
@@ -88,11 +78,7 @@ get_header();
                             <div id="collapseFour" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa
-                                    </p>
+                                        Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                                 </div>
                             </div>
                         </div>
@@ -249,4 +235,5 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+
 

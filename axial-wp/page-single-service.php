@@ -15,9 +15,7 @@ get_header();
                             </h2>
                         </div>
                         <p class="text" data-aos="fade-left">
-                            Vestibulum morbi blandit cursus risus at ultrices. Dui nunc mattis enim ut tellus. Morbi blandit cursus risus at
-                            ultrices. Proin nibh nisl condimentum id venenatis
-                        </p>
+                            Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                     </div>
                     <div class="tabs_services">
                         <div class="tabs_nav nav nav-tabs">
@@ -78,15 +76,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -130,15 +122,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -182,15 +168,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -234,15 +214,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -286,15 +260,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -338,15 +306,9 @@ get_header();
                                             <div class="description">
                                                 <p class="text">
                                                     Nulla facilisi nullam vehicula ipsum a arcu cursus. Libero volutpat sed cras ornare arcu
-                                                    dui vivamus arcu felis. Feugiat sed lectus vestibulum mattis ullamcorper velit sed
-                                                    ullamcorper morbie enim facilisis gravid. A condimentum vitae sapien pellentesque
-                                                    habitant
-                                                </p>
+                                                    dui vivamus arcu felis. Feugiat sed lectus Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                                 <p class="text">
-                                                    A condimentum vitae sapien pellentesque habitant. Ac turpis egestas maecenas pharetra
-                                                    convallis posuere morbi. Sed sed risus pretium quam vulputate dignissim. Elit eget
-                                                    gravida cum sociis natoque penatibus
-                                                </p>
+                                                    A Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -363,9 +325,7 @@ get_header();
                         <h2 class="title">The Process of Working <span class="highlight">with Us</span></h2>
                     </div>
                     <p class="process_text">
-                        Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Vehicula ipsum a arcu cursus vitae congue mauris.
-                        Enim facilisis gravida neque convallis a cras
-                    </p>
+                        Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Vehicula ipsum a arcu cursus vitae Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                 </div>
                 <div class="container-fluid process_fluid p-0">
                     <div class="container">
@@ -436,8 +396,7 @@ get_header();
                                         <i class="icon-check icon"></i> Sed id semper risus in hendrerit
                                     </li>
                                     <li class="checklist_item" data-aos="fade-up" data-aos-delay="150">
-                                        <i class="icon-check icon"></i> Nulla pellentesque dignissim
-                                    </li>
+                                        <i class="icon-check icon"></i> Nulla Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</li>
                                 </ul>
                             </div>
                         </li>
@@ -446,8 +405,7 @@ get_header();
                                 <span class="number">01</span>
                                 <h4 class="title">Process Engineering</h4>
                                 <p class="description">
-                                    Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                </p>
+                                    Senectus et netus et malesuada. Nunc pulvinar sapien et Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                                 <a class="link link-arrow" href="single-service.html"> Details <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -456,8 +414,7 @@ get_header();
                                 <span class="number">02</span>
                                 <h4 class="title">Construction Services</h4>
                                 <p class="description">
-                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam vestibulum morbi
-                                </p>
+                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-service.html"> Details <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -523,8 +480,7 @@ get_header();
                                 </div>
                                 <p class="main">
                                     Curabitur vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris pharetra et. Et
-                                    ligula ullamcorper malesuada proin pellentesque diam volutpat commodo
-                                </p>
+                                    Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                                 <div class="media">
                                     <div class="media_avatar avatar">
                                         <picture>
@@ -591,8 +547,7 @@ get_header();
                                 </div>
                                 <p class="main">
                                     Curabitur vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris pharetra et. Et
-                                    ligula ullamcorper malesuada proin pellentesque diam volutpat commodo
-                                </p>
+                                    Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                                 <div class="media">
                                     <div class="media_avatar avatar">
                                         <picture>
@@ -681,9 +636,7 @@ get_header();
                             <div id="collapseThree" class="collapse show" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor.
-                                    </p>
+                                        Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                                 </div>
                             </div>
                         </div>
@@ -698,10 +651,7 @@ get_header();
                             <div id="collapseOne" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien
-                                    </p>
+                                        Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                                 </div>
                             </div>
                         </div>
@@ -716,12 +666,7 @@ get_header();
                             <div id="collapseTwo" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa id neque aliquam vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices
-                                        dui sapien
-                                    </p>
+                                        Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Memberikan layanan terpadu mulai dari perencanaan arsitektur hingga eksekusi lapangan.</p>
                                 </div>
                             </div>
                         </div>
@@ -736,11 +681,7 @@ get_header();
                             <div id="collapseFour" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa
-                                    </p>
+                                        Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 </div>
                             </div>
                         </div>
@@ -749,3 +690,4 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+

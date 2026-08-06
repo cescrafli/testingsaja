@@ -17,81 +17,61 @@ get_header();
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Process Engineering</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Chemistry and Metallurgy</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Electrical Engineering</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Specialty Services</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Renovation Services</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Process Engineering</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Chemistry and Metallurgy</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Electrical Engineering</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Specialty Services</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Renovation Services</h2>
                                     <p class="text">
-                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
-                                        faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
-                                    </p>
+                                        Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                     <a class="btn" href="single-service.html">service details</a>
                                 </div>
                             </div>
@@ -227,9 +207,7 @@ get_header();
                         <span class="subtitle" data-aos="fade-down">Just feel the future</span>
                         <h2 class="title" data-aos="fade-right">Bringing Your Ideas and Innovations to Life</h2>
                         <p class="text" data-aos="fade-in" data-aos-duration="700">
-                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper
-                            velit. Viverra aliquet eget sit amet tellus cras adipiscing
-                        </p>
+                            Vitae ultricies leo integer malesuada nunc vel. Molestie ac feugiat sed lectus Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                         <ul class="achievements">
                             <li class="achievements_item" data-aos="fade-up">
                                 <svg class="icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -341,8 +319,7 @@ get_header();
                                 <div class="wrapper">
                                     <h4 class="title" data-aos="fade-up" data-aos-delay="50">Unique Projects</h4>
                                     <p class="text" data-aos="fade-up" data-aos-delay="100">
-                                        Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                    </p>
+                                        Senectus et netus et malesuada. Nunc pulvinar sapien et Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                                 </div>
                             </li>
                             <li class="main_list-item">
@@ -517,9 +494,7 @@ get_header();
                         <h2 class="title">The Process of Working <span class="highlight">with Us</span></h2>
                     </div>
                     <p class="process_text">
-                        Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Vehicula ipsum a arcu cursus vitae congue mauris.
-                        Enim facilisis gravida neque convallis a cras
-                    </p>
+                        Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Vehicula ipsum a arcu cursus vitae Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi.</p>
                 </div>
                 <div class="container-fluid process_fluid p-0">
                     <div class="container">
@@ -578,9 +553,7 @@ get_header();
                         <span class="subtitle">Feedback</span>
                         <h2 class="title">What <span class="highlight">Our Clients</span> Say About Us</h2>
                         <p class="text">
-                            Non curabitur gravida arcu ac tortor dignissim convallis aenean. Dui id ornare arcu odio. Sodales ut eu sem
-                            integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam
-                        </p>
+                            Non curabitur gravida arcu ac Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005. Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik.</p>
                         <a class="btn" href="contacts.html">Consult now</a>
                     </div>
                     <div class="feedback_slider swiper">
@@ -636,7 +609,7 @@ get_header();
                                     </div>
                                     <div class="media_info">
                                         <span class="name">John Smith</span>
-                                        <span class="company">Loremipsum</span>
+                                        <span class="company">PT Mega Bangun</span>
                                     </div>
                                 </div>
                             </div>
@@ -736,9 +709,7 @@ get_header();
                             <span class="subtitle">Contact us</span>
                             <h2 class="title"><span class="highlight">Contacts</span> information</h2>
                             <p class="text">
-                                Justo eget magna fermentum iaculis eu non diam phasellus vestibulum. Eu volutpat odio facilisis mauris sit
-                                amet massa. Sit amet est placerat in egestas
-                            </p>
+                                Justo eget magna fermentum iaculis eu non diam phasellus Berkomitmen pada keunggulan struktural dan inovasi desain untuk masa depan yang lebih baik. Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                         </div>
                         <ul class="contact-info">
                             <li class="contact-info_group">
@@ -790,3 +761,4 @@ get_header();
             </section>
         </main>
 <?php get_footer(); ?>
+

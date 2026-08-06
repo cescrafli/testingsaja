@@ -18,8 +18,7 @@ get_header();
                             <h4 class="main_name">Benjamin Miller</h4>
                             <h5 class="main_position">Chief Engineering Officer</h5>
                             <p class="main_text">
-                                Morbi tempus iaculis urna id volutpat lacus laoreet non. Purus faucibus ornare suspendisse sed
-                            </p>
+                                Morbi tempus iaculis urna id volutpat lacus laoreet non. Purus faucibus ornare Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                             <ul class="socials">
                                 <li class="socials_item">
                                     <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -203,8 +202,7 @@ get_header();
                             <h4 class="main_name">John Doe</h4>
                             <h5 class="main_position">Transportation Department</h5>
                             <p class="main_text">
-                                Purus semper eget duis at tellus at urna condimentum mattis. Nunc id cursus metus aliquam eleifend mi
-                            </p>
+                                Purus semper eget Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                             <ul class="socials">
                                 <li class="socials_item">
                                     <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -233,3 +231,4 @@ get_header();
             </div>
         </main>
 <?php get_footer(); ?>
+

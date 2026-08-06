@@ -67,8 +67,7 @@
                                 <span class="number">01</span>
                                 <h4 class="title">Process Engineering</h4>
                                 <p class="description">
-                                    Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                </p>
+                                    Senectus et netus et malesuada. Nunc pulvinar sapien et Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -80,8 +79,7 @@
                                 <span class="number">02</span>
                                 <h4 class="title">Construction Services</h4>
                                 <p class="description">
-                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam vestibulum morbi
-                                </p>
+                                    Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -106,8 +104,7 @@
                                 <span class="number">04</span>
                                 <h4 class="title">Electrical Engineering</h4>
                                 <p class="description">
-                                    Ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus. Nam aliquam sem et tortor
-                                </p>
+                                    Ac Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional.</p>
                                 <a class="link link-arrow" href="single-service.html">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
@@ -299,9 +296,7 @@
                     <div class="spots_info">
                         <p class="spots_info-text">
                             Molestie nunc non blandit massa. Lacus sed viverra tellus in hac habitasse platea. Velit egestas dui id ornare
-                            arcu. Sapien pellentesque habitant morbi tristique senectus et netus. Ut consequat semper viverra nam libero.
-                            Convallis aenean et tortor
-                        </p>
+                            Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif. Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                         <div class="wrapper">
                             <div class="spots_info-number">
                                 <h2 class="countNum number" data-suffix="+" data-value="200">0</h2>
@@ -356,8 +351,7 @@
 
                                 <h4 class="features_card-title">We Develop Unique Projects</h4>
                                 <p class="features_card-description">
-                                    Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
-                                </p>
+                                    Senectus et netus et malesuada. Nunc pulvinar sapien et Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                             </div>
                         </div>
                         <div class="features_card" data-aos="fade-up" data-aos-delay="50">
@@ -528,8 +522,7 @@
 
                                 <h4 class="features_card-title">We Offer Innovative Technologies</h4>
                                 <p class="features_card-description">
-                                    Consectetur adipiscing elit pellentesque habitant. Arcu felis bibendum ut tristique
-                                </p>
+                                    Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                             </div>
                         </div>
                         <div class="features_card" data-aos="fade-up" data-aos-delay="200">
@@ -607,10 +600,7 @@
                         <div class="team_main">
                             <p class="team_main-text" data-aos="fade-right" data-aos-duration="300">
                                 Leo in vitae turpis massa sed elementum tempus egestas sed. Sed sed risus pretium quam vulputate dignissim
-                                suspendisse in. Placerat orci nulla pellentesque dignissim enim. Tortor pretium viverra suspendisse potenti
-                                nullam augue. Vestibulum lorem sed risus ultricies tristique nulla. Erat velit scelerisque in dictum non
-                                consectetur
-                            </p>
+                                Kami telah menyelesaikan berbagai proyek komersial dan residensial dengan standar K3 tertinggi. Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama.</p>
                             <ul class="checklist">
                                 <li class="checklist_item" data-aos="fade-up"><i class="icon-check icon"></i> Ingenuity for life</li>
                                 <li class="checklist_item" data-aos="fade-up" data-aos-delay="50">
@@ -700,9 +690,7 @@
                             <div id="collapseThree" class="collapse show" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor.
-                                    </p>
+                                        Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Menggabungkan estetika dan fungsionalitas untuk menciptakan ruang yang inspiratif.</p>
                                 </div>
                             </div>
                         </div>
@@ -717,10 +705,7 @@
                             <div id="collapseOne" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien
-                                    </p>
+                                        Solusi teknik sipil terbaik untuk infrastruktur modern yang kokoh dan tahan lama. Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005.</p>
                                 </div>
                             </div>
                         </div>
@@ -735,12 +720,7 @@
                             <div id="collapseTwo" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa id neque aliquam vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices
-                                        dui sapien
-                                    </p>
+                                        Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar. Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 </div>
                             </div>
                         </div>
@@ -755,11 +735,7 @@
                             <div id="collapseFour" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa
-                                    </p>
+                                        Kepercayaan klien adalah fondasi utama dari setiap mahakarya yang kami bangun sejak 2005. Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 </div>
                             </div>
                         </div>
@@ -798,9 +774,7 @@
                                 </div>
                                 <h4 class="main_title">Composite Materials â€“ Applications for the Future</h4>
                                 <p class="main_text">
-                                    Non nisi est sit amet facilisis magna. Eget est lorem ipsum dolor sit amet consectetur. Et egestas quis
-                                    ipsum suspendisse
-                                </p>
+                                    Dedikasi tanpa kompromi terhadap keselamatan kerja dan perlindungan lingkungan sekitar.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -824,9 +798,7 @@
                                 </div>
                                 <h4 class="main_title">Impact of Technology on Construction Finance</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -850,9 +822,7 @@
                                 </div>
                                 <h4 class="main_title">The Importance of Healthy Buildings in a Pandemic</h4>
                                 <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
+                                    Menghadirkan kualitas bangunan premium dengan menggunakan material berstandar internasional. Tim ahli kami memastikan setiap detail proyek dikerjakan dengan presisi dan efisiensi waktu.</p>
                                 <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
@@ -1011,4 +981,5 @@
         <!--  homepage content end  -->
         
 <?php get_footer(); ?>
+
 

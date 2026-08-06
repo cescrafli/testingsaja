@@ -1,9 +1,9 @@
-﻿<footer class="footer primary-bg">
+<footer class="footer primary-bg">
             <div class="container">
                 <div class="footer_main">
                     <div class="footer_main-block">
                         <a class="brand" href="index.html">
-                            <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Axial Construct" />
+                            <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/img/logo.jpg" alt="Axial Construct" />
                             <span class="brand_name"> Axial <span class="highlight">Construct</span> </span>
                         </a>
                         <p class="footer_main-block_subtitle footer_main-block_subtitle--brand">

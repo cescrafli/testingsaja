@@ -15,45 +15,7 @@ get_header();
                                 Pellentesque sit amet porttitor eget dolor morbi non arcu. Vitae justo eget magna fermentum iaculis eu non
                             </p>
                         </div>
-                        <form
-                            action="form.php"
-                            class="contact_form contact-form d-flex flex-wrap justify-content-between"
-                            method="POST"
-                            name="feedbackForm"
-                            data-type="feedback"
-                        >
-                            <input
-                                class="contact-form_field contact-form_field--half field required"
-                                name="feedbackName"
-                                id="feedbackName"
-                                type="text"
-                                placeholder="Full name"
-                            />
-                            <input
-                                class="contact-form_field contact-form_field--half field required"
-                                data-type="tel"
-                                type="text"
-                                name="feedbackTel"
-                                id="feedbackTel"
-                                placeholder="Phone"
-                            />
-                            <input
-                                class="contact-form_field field required"
-                                data-type="email"
-                                type="text"
-                                name="feedbackEmail"
-                                id="feedbackEmail"
-                                placeholder="Email Address"
-                            />
-                            <textarea
-                                class="contact-form_field field required"
-                                data-type="message"
-                                name="feedbackMessage"
-                                id="feedbackMessage"
-                                placeholder="Message"
-                            ></textarea>
-                            <button type="submit" class="contact-form_btn btn">Send message</button>
-                        </form>
+                        <?php echo do_shortcode('[contact-form-7 id="87e6ad6" title="Contact form 1"]'); ?>
                     </div>
                     <div class="secondary">
                         <ul class="contact_info contact-info">
@@ -106,3 +68,4 @@ get_header();
             </div>
         </main>
 <?php get_footer(); ?>
+

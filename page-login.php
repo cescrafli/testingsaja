@@ -3,7 +3,10 @@
  * Template Name: Employee Login
  */
 
+session_start();
+
 // Handle Form Submission
+$error_message = '';
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['emp_username'] ) && isset( $_POST['emp_password'] ) ) {
     global $wpdb;
     $username = sanitize_text_field( $_POST['emp_username'] );
@@ -17,13 +20,24 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['emp_username'] ) &&
     $user = $wpdb->get_row( $query );
 
     if ( $user ) {
-        // Jika Berhasil Login -> Redirect ke about.html
-        wp_redirect( 'https://griyadjayasentosa.id/about.html' );
-        exit;
+        // Cek apakah status akun aktif (status = 1)
+        if ( isset($user->status) && $user->status != 1 ) {
+            $error_message = "Akun Anda telah dinonaktifkan. Silakan hubungi Administrator.";
+        } else {
+            // Update last_login
+            $wpdb->query( $wpdb->prepare( "UPDATE {$table_name} SET last_login = NOW() WHERE username = %s", $username ) );
+            
+            // Set session variables
+            $_SESSION['emp_id'] = isset($user->employee_id) ? $user->employee_id : $user->id; // Fallback to id just in case
+            $_SESSION['emp_username'] = $user->username;
+            $_SESSION['emp_role'] = $user->role;
+            
+            // Jika Berhasil Login -> Redirect ke dashboard
+            wp_redirect( home_url( '/employee-dashboard/' ) );
+            exit;
+        }
     } else {
-        // Jika Gagal Login -> Redirect ke services.html
-        wp_redirect( 'https://griyadjayasentosa.id/services.html' );
-        exit;
+        $error_message = "Username atau password salah.";
     }
 }
 ?>
@@ -219,6 +233,11 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['emp_username'] ) &&
             <img src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Logo Griya Djaya Sentosa">
             <h1>Portal Karyawan</h1>
             <p>Masukkan kredensial Anda untuk melanjutkan</p>
+            <?php if ( ! empty( $error_message ) ) : ?>
+                <div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem;">
+                    <?php echo esc_html($error_message); ?>
+                </div>
+            <?php endif; ?>
         </div>
         
         <form action="" method="POST">

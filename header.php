@@ -16,7 +16,7 @@
         <header class="header" data-page="home" data-page-parent="home">
             <div class="container d-flex">
                 <a class="brand" href="index.html">
-                    <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
+                    <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya" />
                     <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
                 </a>
                 <nav class="header_nav collapse" id="headerMenu">

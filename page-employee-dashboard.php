@@ -7,7 +7,7 @@ session_start();
 
 // Cek apakah user sudah login
 if ( ! isset( $_SESSION['emp_id'] ) || ! isset( $_SESSION['emp_role'] ) ) {
-    wp_redirect( home_url( '/portal/' ) ); // Redirect ke halaman portal/login
+    wp_redirect( home_url( '/griyadjayamasuk/' ) ); // Redirect ke halaman rahasia
     exit;
 }
 
@@ -74,7 +74,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
     // LOGOUT
     if ( $action === 'logout' ) {
         session_destroy();
-        wp_redirect( home_url( '/portal/' ) );
+        wp_redirect( home_url( '/griyadjayamasuk/' ) );
         exit;
     }
 }

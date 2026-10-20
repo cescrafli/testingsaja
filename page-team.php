@@ -1,321 +1,14 @@
-﻿<?php
+<?php
 /* Template Name: Team */
-get_header();
-?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Team | Griya Djaya Sentosa</title>
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/preload.min.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css" />
-
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/team.min.css" />
-    </head>
-    <body>
-        <header class="header" data-page="team" data-page-parent="services">
-            <div class="container d-flex">
-                <a class="brand" href="index.html">
-                    <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                    <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                </a>
-                <nav class="header_nav collapse" id="headerMenu">
-                    <ul class="header_nav-list">
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="index.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#homeMenu"
-                                data-trigger="dropdown"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="homeMenu"
-                                data-page="home"
-                                data-page-parent="home"
-                            >
-                                <span class="nav-item_text"> Home </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="homeMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home" data-page-parent="home" href="index.html">
-                                            Home 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home2" data-page-parent="home" href="index2.html">
-                                            Home 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="about.html" data-page="about" data-single="true">
-                                <span class="nav-item_text">About</span>
-                            </a>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="services.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#servicesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="services"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="servicesMenu"
-                            >
-                                <span class="nav-item_text"> Services </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="servicesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="services"
-                                            data-page-parent="services"
-                                            href="services.html"
-                                            data-main="true"
-                                        >
-                                            Services
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-service"
-                                            data-page-parent="services"
-                                            href="single-service.html"
-                                        >
-                                            Single Service
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="team" data-page-parent="services" href="team.html">
-                                            Team
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="projects.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#projectsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="projects"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="projectsMenu"
-                            >
-                                <span class="nav-item_text"> Projects </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="projectsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects"
-                                            data-page-parent="projects"
-                                            href="projects.html"
-                                            data-main="true"
-                                        >
-                                            Projects 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects2"
-                                            data-page-parent="projects"
-                                            href="projects2.html"
-                                        >
-                                            Projects 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-project"
-                                            data-page-parent="projects"
-                                            href="single-project.html"
-                                        >
-                                            Single project
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="blog.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#blogMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="blog"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="blogMenu"
-                            >
-                                <span class="nav-item_text"> Blog </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="blogMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="blog"
-                                            data-page-parent="blog"
-                                            href="blog.html"
-                                            data-main="true"
-                                        >
-                                            Blog 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="blog2" data-page-parent="blog" href="blog2.html">
-                                            Blog 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-post"
-                                            data-page-parent="blog"
-                                            href="single-post.html"
-                                        >
-                                            Single post
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="contacts.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#contactsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="contacts"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="contactsMenu"
-                            >
-                                <span class="nav-item_text"> Contacts </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="contactsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts"
-                                            data-page-parent="contacts"
-                                            href="contacts.html"
-                                            data-main="true"
-                                        >
-                                            Contacts 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts2"
-                                            data-page-parent="contacts"
-                                            href="contacts2.html"
-                                        >
-                                            Contacts 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="#"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#pagesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="pages"
-                                aria-expanded="false"
-                                aria-controls="pagesMenu"
-                            >
-                                <span class="nav-item_text"> Pages </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="pagesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="faq" data-page-parent="pages" href="faq.html"> FAQ </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-grid"
-                                            data-page-parent="pages"
-                                            href="gallery-grid.html"
-                                        >
-                                            Gallery grid
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-masonry"
-                                            data-page-parent="pages"
-                                            href="gallery-masonry.html"
-                                        >
-                                            Gallery masonry
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="error" data-page-parent="pages" href="404.html">
-                                            404
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <button
-                    class="header_trigger"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#headerMenu"
-                    aria-controls="headerMenu"
-                    aria-expanded="false"
-                >
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
-        </header>
-        <header class="page primary-bg">
+global $custom_css; $custom_css = 'team'; get_header();
+?><header class="page primary-bg">
             <div class="container">
                 <div class="section_header">
                     <span class="subtitle subtitle--extended">Better than others</span>
                     <h1 class="title">Team</h1>
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs_item">
-                            <a href="index.html">Home</a>
+                            <a href="<?php echo home_url('/'); ?>">Home</a>
                         </li>
 
                         <li class="breadcrumbs_item breadcrumbs_item--current">
@@ -326,8 +19,8 @@ get_header();
             </div>
             <div class="media">
                 <picture>
-                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                    <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="media" />
+                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                    <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="media" />
                 </picture>
             </div>
         </header>
@@ -338,8 +31,8 @@ get_header();
                     <li class="team_list-item" data-aos="fade-up">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Benjamin Miller" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="Benjamin Miller" />
                             </picture>
                         </div>
                         <div class="main">
@@ -350,33 +43,33 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
                     <li class="team_list-item" data-aos="fade-up" data-aos-delay="50">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Stephanie Ramirez" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="Stephanie Ramirez" />
                             </picture>
                         </div>
                         <div class="main">
@@ -387,33 +80,33 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
                     <li class="team_list-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="William Collins" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="William Collins" />
                             </picture>
                         </div>
                         <div class="main">
@@ -424,33 +117,33 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
                     <li class="team_list-item" data-aos="fade-up" data-aos-delay="50">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Sebastian Jenkins" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="Sebastian Jenkins" />
                             </picture>
                         </div>
                         <div class="main">
@@ -461,33 +154,33 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
                     <li class="team_list-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="Bryan Perry" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="Bryan Perry" />
                             </picture>
                         </div>
                         <div class="main">
@@ -498,33 +191,33 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
                     <li class="team_list-item" data-aos="fade-up">
                         <div class="media">
                             <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="John Doe" />
+                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2"  />
+                                <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg?v=2" alt="John Doe" />
                             </picture>
                         </div>
                         <div class="main">
@@ -535,25 +228,25 @@ get_header();
                             </p>
                             <ul class="socials">
                                 <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                        <i class="icon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="socials_item">
-                                    <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
-                                </li>
+    <a class="socials_item-link" href="https://www.instagram.com/griyajayaupvc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="icon-instagram"></i>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.tiktok.com/@griyadjayaupvc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://www.youtube.com/@GRIYAJAYAUPVC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="1em" height="1em" fill="currentColor"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+</li>
+<li class="socials_item">
+    <a class="socials_item-link" href="https://api.whatsapp.com/send/?phone=628111021088&text=&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="icon-whatsapp"></i>
+    </a>
+</li>
                             </ul>
                         </div>
                     </li>
@@ -561,129 +254,28 @@ get_header();
             </div>
         </main>
         <!-- team content end  -->
-        <footer class="footer primary-bg">
-            <div class="container">
-                <div class="footer_main">
-                    <div class="footer_main-block">
-                        <a class="brand" href="index.html">
-                            <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                            <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                        </a>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--brand">
-                            Libero volutpat sed cras ornare arcu dui vivamus. Ac tortor dignissim convallis aenean et tortor at risus
-                            viverra
-                        </p>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Contacts</h4>
-                        <div class="group-wrapper">
-                            <i class="icon-call icon"></i>
-                            <div class="group">
-                                <a href="tel:+13136453395">1 - 313 - 645 - 3395</a>
-                                <a href="tel:+14699702609">1 - 469 - 970 - 2609</a>
-                            </div>
-                        </div>
-                        <div class="group-wrapper">
-                            <i class="icon-location icon"></i>
-                            <div class="group">
-                                <span>2047 Cyrus Viaduct</span>
-                                <span>East Jadynchester</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Company</h4>
-                        <ul class="footer_main-block_nav">
-                            <li class="list-item">
-                                <a class="nav-link link" href="about.html" data-page="about">
-                                    <i class="icon-chevron_right icon"></i> About
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="services.html" data-page="services">
-                                    <i class="icon-chevron_right icon"></i> Services
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="projects.html" data-page="projects">
-                                    <i class="icon-chevron_right icon"></i> Projects
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="blog.html" data-page="blog">
-                                    <i class="icon-chevron_right icon"></i> Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Subscribe to Our News</h4>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--newsletter">
-                            Find out about the last days and the latest promotions of our Corporation
-                        </p>
-                        <form
-                            class="footer_main-block_form"
-                            data-type="newsletter"
-                            action="#"
-                            method="POST"
-                            name="newsletterForm"
-                            id="newsletterForm"
-                        >
-                            <input
-                                class="field required"
-                                name="newsletterEmail"
-                                id="newsletterEmail"
-                                type="text"
-                                placeholder="Email"
-                                data-type="email"
-                            />
-                            <button class="btn btn--submit btn--static" type="submit" aria-label="Subscribe">
-                                <span class="text">Subscribe</span>
-                                <i class="icon-paperplane icon"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="footer_secondary">
-                    <p class="footer_secondary-copyright">
-                        <span>Merkulove &copy; Griya Djaya Sentosa Template</span>
-                        <span>All rights reserved Copyrights <span id="currentYear"></span></span>
-                    </p>
-                    <ul class="socials">
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <i class="icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                <i class="icon-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                <i class="icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                <i class="icon-whatsapp"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-        <button id="scrollTrigger" type="button">
-            <i class="icon icon-arrow_right"></i>
-        </button>
-        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
-        <script src="https://www.youtube.com/player_api"></script>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js"></script>
-    </body>
-</html>
+        
 
 <?php
 get_footer();
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

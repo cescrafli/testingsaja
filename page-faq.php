@@ -1,45 +1,26 @@
 <?php
 /* Template Name: Faq */
-get_header();
-?>
-<main>
+global $custom_css; $custom_css = 'faq'; get_header();
+?><?php get_template_part("template-parts/page-banner"); ?>
             <section class="faq section">
                 <div class="container">
                     <div class="faq_header section_header">
-                        <span class="subtitle">Dealing with your worries</span>
+                        <span class="subtitle">Pertanyaan yang Sering Diajukan</span>
                         <h2 class="title">
-                            If Your Question Is Not Here
-                            <span class="highlight">Contact Us</span>
+                            Masih Ada yang Ingin Ditanyakan?
+                            <span class="highlight">Hubungi Kami</span>
                         </h2>
                         <p class="text">
-                            Porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nisi scelerisque eu ultrices vitae auctor
-                            eu augue ut lectus
+                            Tim kami siap membantu kebutuhan proyek Anda, dari rumah tinggal hingga gedung komersial.
                         </p>
                         <div class="wrapper">
-                            <a class="btn" href="contacts.html">Contact Us</a>
+                            <a class="btn" href="<?php echo home_url('/' . 'contacts' . '/'); ?>">Hubungi Kami</a>
                         </div>
                     </div>
                     <div class="faq_accordion" id="faq_accordion">
                         <div class="faq_accordion-item">
-                            <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true">
-                                <span class="question h5">Where is Company Located?</span>
-                                <span class="icon">
-                                    <i class="icon icon-plus"></i>
-                                    <i class="icon icon-minus"></i>
-                                </span>
-                            </button>
-                            <div id="collapseThree" class="collapse show" data-bs-parent="#faq_accordion">
-                                <div class="content">
-                                    <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="faq_accordion-item">
                             <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false">
-                                <span class="question h5">What is a Structural Engineer?</span>
+                                <span class="question h5">Berapa lama estimasi pengerjaan untuk proyek kusen atau fasad?</span>
                                 <span class="icon">
                                     <i class="icon icon-plus"></i>
                                     <i class="icon icon-minus"></i>
@@ -48,36 +29,30 @@ get_header();
                             <div id="collapseOne" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien
+                                        Estimasi waktu pengerjaan bergantung pada volume pesanan dan tingkat kerumitan desain. Kirimkan gambar kerja atau kebutuhan Anda, dan tim kami akan menyampaikan estimasi waktu yang jelas bersama penawaran.
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="faq_accordion-item">
-                            <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
-                                <span class="question h5">What are the Service Provided by Company?</span>
+                            <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false">
+                                <span class="question h5">Apakah produk UPVC dari Griya Djaya Sentosa bergaransi?</span>
                                 <span class="icon">
                                     <i class="icon icon-plus"></i>
                                     <i class="icon icon-minus"></i>
                                 </span>
                             </button>
-                            <div id="collapseTwo" class="collapse" data-bs-parent="#faq_accordion">
+                            <div id="collapseThree" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa id neque aliquam vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices
-                                        dui sapien
+                                        Ya. Produk UPVC kami dilindungi garansi hingga 10 tahun. Garansi ini berlaku khusus untuk produk UPVC. Untuk syarat dan ketentuan lengkapnya, silakan hubungi tim kami.
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="faq_accordion-item">
                             <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false">
-                                <span class="question h5">How Long Does It Take to Build a House?</span>
+                                <span class="question h5">Di wilayah mana saja Griya Djaya Sentosa beroperasi?</span>
                                 <span class="icon">
                                     <i class="icon icon-plus"></i>
                                     <i class="icon icon-minus"></i>
@@ -86,10 +61,23 @@ get_header();
                             <div id="collapseFour" class="collapse" data-bs-parent="#faq_accordion">
                                 <div class="content">
                                     <p class="text">
-                                        Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Non quam lacus
-                                        suspendisse faucibus interdum posuere lorem. Ut diam quam nulla porttitor massa id neque aliquam
-                                        vestibulum. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Ut diam quam nulla
-                                        porttitor massa
+                                        Kami telah mengerjakan proyek di berbagai lokasi di Indonesia. Sampaikan lokasi proyek Anda, dan tim kami akan mengonfirmasi jangkauan layanan serta pengirimannya.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq_accordion-item">
+                            <button class="trigger" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false">
+                                <span class="question h5">Apakah saya bisa memesan desain atau spesifikasi secara custom?</span>
+                                <span class="icon">
+                                    <i class="icon icon-plus"></i>
+                                    <i class="icon icon-minus"></i>
+                                </span>
+                            </button>
+                            <div id="collapseFive" class="collapse" data-bs-parent="#faq_accordion">
+                                <div class="content">
+                                    <p class="text">
+                                        Bisa. Kami mengerjakan desain custom sesuai gambar kerja atau spesifikasi dari arsitek maupun kontraktor, mulai dari pilihan profil, finishing, hingga tipe sistem bukaan.
                                     </p>
                                 </div>
                             </div>
@@ -97,193 +85,153 @@ get_header();
                     </div>
                 </div>
             </section>
-            <div class="gallery presentation" data-role="gallery">
+            <?php
+            // Fetch recent projects to get a variety of images
+            $latest_project_args = array(
+                'post_type' => 'project',
+                'posts_per_page' => 10,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'post_status' => 'publish'
+            );
+            $latest_project_query = new WP_Query($latest_project_args);
+            
+            $projects_images = [];
+            if ($latest_project_query->have_posts()) {
+                while ($latest_project_query->have_posts()) {
+                    $latest_project_query->the_post();
+                    $faq_project_title = get_the_title();
+                    $imgs = [];
+                    for($i=1; $i<=10; $i++) {
+                        $img = get_post_meta(get_the_ID(), '_project_gallery_'.$i, true);
+                        if ($img) $imgs[] = array('url' => $img, 'caption' => $faq_project_title);
+                    }
+                    if (!empty($imgs)) {
+                        $projects_images[] = $imgs;
+                    }
+                }
+                wp_reset_postdata();
+            }
+            
+            $faq_galleries = [];
+            // Round-robin selection: 1st image from Proj A, 1st from Proj B... then 2nd from Proj A, etc.
+            for ($image_index = 0; $image_index < 10; $image_index++) {
+                foreach ($projects_images as $project_imgs) {
+                    if (isset($project_imgs[$image_index])) {
+                        $faq_galleries[] = $project_imgs[$image_index];
+                        if (count($faq_galleries) >= 4) break 2;
+                    }
+                }
+            }
+            
+            // Fallback if less than 4 images
+            while(count($faq_galleries) < 4) {
+                $faq_galleries[] = array(
+                    'url' => get_template_directory_uri() . '/img/placeholder.jpg?v=2',
+                    'caption' => 'Project Gallery'
+                );
+            }
+            ?>
+            <div class="gallery presentation">
+                <?php foreach($faq_galleries as $item): ?>
                 <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
+                    <a class="media faq-gallery-link" href="<?php echo esc_url($item['url']); ?>" data-caption="<?php echo esc_attr($item['caption']); ?>">
                         <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
+                            <source data-srcset="<?php echo esc_url($item['url']); ?>" srcset="<?php echo esc_url($item['url']); ?>"  />
+                            <img class="lazy" data-src="<?php echo esc_url($item['url']); ?>" src="<?php echo esc_url($item['url']); ?>" alt="<?php echo esc_attr($item['caption']); ?>" style="object-fit: cover; width: 100%; height: 100%;" />
                         </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
                     </a>
                 </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <section class="contact section">
-                <div class="container">
-                    <div class="contact_form">
-                        <div class="contact_form-header section_header">
-                            <span class="subtitle">Contact us</span>
-                            <h2 class="title">
-                                Do You Have any
-                                <span class="highlight">Questions?</span>
-                            </h2>
-                        </div>
-                        <form
-                            action="form.php"
-                            class="contact_form-form contact-form d-flex flex-wrap justify-content-between"
-                            method="POST"
-                            name="feedbackForm"
-                            data-type="feedback"
-                        >
-                            <input
-                                class="contact-form_field contact-form_field--half field required"
-                                name="feedbackName"
-                                id="feedbackName"
-                                type="text"
-                                placeholder="Full name"
-                            />
-                            <input
-                                class="contact-form_field contact-form_field--half field required"
-                                data-type="tel"
-                                type="text"
-                                name="feedbackTel"
-                                id="feedbackTel"
-                                placeholder="Phone"
-                            />
-                            <input
-                                class="contact-form_field field required"
-                                data-type="email"
-                                type="text"
-                                name="feedbackEmail"
-                                id="feedbackEmail"
-                                placeholder="Email Address"
-                            />
-                            <textarea
-                                class="contact-form_field field required"
-                                data-type="message"
-                                name="feedbackMessage"
-                                id="feedbackMessage"
-                                placeholder="Message"
-                            ></textarea>
-                            <button type="submit" class="contact-form_btn btn">Send message</button>
-                        </form>
-                    </div>
-                    <div class="contact_info">
-                        <h3 class="contact_info-header">Are You Going to Implement Project?</h3>
-                        <ul class="contact-info">
-                            <li class="contact-info_group">
-                                <span class="name">Address</span>
-                                <span class="content">2047 Cyrus Viaduct East Jadynchester</span>
-                            </li>
-                            <li class="contact-info_group">
-                                <span class="name">Email</span>
-                                <span class="content d-inline-flex flex-column">
-                                    <a class="link" href="mailto:example.com">info@construct.com</a>
-                                    <a class="link" href="mailto:example.com">support@construct.com</a>
-                                </span>
-                            </li>
-                            <li class="contact-info_group">
-                                <span class="name">Phone</span>
-                                <span class="content d-inline-flex flex-column">
-                                    <a class="link" href="tel:+13136453395">1 - 313 - 645 - 3395</a>
-                                    <a class="link" href="tel:+14699702609">1 - 469 - 970 - 2609</a>
-                                </span>
-                            </li>
-                        </ul>
-                        <ul class="socials">
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <i class="icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <i class="icon-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i class="icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                    <i class="icon-whatsapp"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
+            
+            <script>
+            // Bulletproof Custom Vanilla Lightbox for FAQ Page
+            document.addEventListener("DOMContentLoaded", function() {
+                var links = document.querySelectorAll('.faq-gallery-link');
+                links.forEach(function(link) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var src = this.getAttribute('href');
+                        var caption = this.getAttribute('data-caption');
+                        
+                        var overlay = document.createElement('div');
+                        overlay.style.position = 'fixed';
+                        overlay.style.top = '0';
+                        overlay.style.left = '0';
+                        overlay.style.width = '100vw';
+                        overlay.style.height = '100vh';
+                        overlay.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                        overlay.style.zIndex = '999999';
+                        overlay.style.display = 'flex';
+                        overlay.style.flexDirection = 'column';
+                        overlay.style.alignItems = 'center';
+                        overlay.style.justifyContent = 'center';
+                        overlay.style.cursor = 'pointer';
+                        overlay.style.opacity = '0';
+                        overlay.style.transition = 'opacity 0.3s ease';
+                        
+                        var img = document.createElement('img');
+                        img.src = src;
+                        img.style.maxWidth = '90%';
+                        img.style.maxHeight = '80%';
+                        img.style.objectFit = 'contain';
+                        img.style.boxShadow = '0 5px 25px rgba(0,0,0,0.5)';
+                        img.style.borderRadius = '4px';
+                        
+                        var text = document.createElement('div');
+                        text.innerText = caption;
+                        text.style.color = '#fff';
+                        text.style.marginTop = '20px';
+                        text.style.fontSize = '18px';
+                        text.style.fontFamily = 'Archivo, sans-serif';
+                        text.style.fontWeight = '600';
+                        
+                        var closeBtn = document.createElement('div');
+                        closeBtn.innerHTML = '&times;';
+                        closeBtn.style.position = 'absolute';
+                        closeBtn.style.top = '20px';
+                        closeBtn.style.right = '30px';
+                        closeBtn.style.color = '#fff';
+                        closeBtn.style.fontSize = '40px';
+                        closeBtn.style.lineHeight = '1';
+                        
+                        overlay.appendChild(img);
+                        overlay.appendChild(text);
+                        overlay.appendChild(closeBtn);
+                        
+                        document.body.appendChild(overlay);
+                        
+                        // Fade in
+                        setTimeout(function() { overlay.style.opacity = '1'; }, 10);
+                        
+                        overlay.addEventListener('click', function() {
+                            overlay.style.opacity = '0';
+                            setTimeout(function() {
+                                if (document.body.contains(overlay)) {
+                                    document.body.removeChild(overlay);
+                                }
+                            }, 300);
+                        });
+                    });
+                });
+            });
+            </script>
+            </main>
 <?php
 get_footer();
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

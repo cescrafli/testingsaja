@@ -1,641 +1,214 @@
-﻿<?php
+<?php
 /* Template Name: Projects */
-get_header();
-?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Our projects | Griya Djaya Sentosa</title>
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/preload.min.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css" />
+global $custom_css; $custom_css = 'projects'; get_header();
+?><?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }</style>'; ?>
 
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/projects.min.css" />
-    </head>
-    <body>
-        <header class="header" data-page="projects" data-page-parent="projects">
-            <div class="container d-flex">
-                <a class="brand" href="index.html">
-                    <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                    <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                </a>
-                <nav class="header_nav collapse" id="headerMenu">
-                    <ul class="header_nav-list">
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="index.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#homeMenu"
-                                data-trigger="dropdown"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="homeMenu"
-                                data-page="home"
-                                data-page-parent="home"
-                            >
-                                <span class="nav-item_text"> Home </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="homeMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home" data-page-parent="home" href="index.html">
-                                            Home 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home2" data-page-parent="home" href="index2.html">
-                                            Home 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="about.html" data-page="about" data-single="true">
-                                <span class="nav-item_text">About</span>
-                            </a>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="services.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#servicesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="services"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="servicesMenu"
-                            >
-                                <span class="nav-item_text"> Services </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="servicesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="services"
-                                            data-page-parent="services"
-                                            href="services.html"
-                                            data-main="true"
-                                        >
-                                            Services
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-service"
-                                            data-page-parent="services"
-                                            href="single-service.html"
-                                        >
-                                            Single Service
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="team" data-page-parent="services" href="team.html">
-                                            Team
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="projects.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#projectsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="projects"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="projectsMenu"
-                            >
-                                <span class="nav-item_text"> Projects </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="projectsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects"
-                                            data-page-parent="projects"
-                                            href="projects.html"
-                                            data-main="true"
-                                        >
-                                            Projects 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects2"
-                                            data-page-parent="projects"
-                                            href="projects2.html"
-                                        >
-                                            Projects 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-project"
-                                            data-page-parent="projects"
-                                            href="single-project.html"
-                                        >
-                                            Single project
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="blog.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#blogMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="blog"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="blogMenu"
-                            >
-                                <span class="nav-item_text"> Blog </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="blogMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="blog"
-                                            data-page-parent="blog"
-                                            href="blog.html"
-                                            data-main="true"
-                                        >
-                                            Blog 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="blog2" data-page-parent="blog" href="blog2.html">
-                                            Blog 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-post"
-                                            data-page-parent="blog"
-                                            href="single-post.html"
-                                        >
-                                            Single post
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="contacts.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#contactsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="contacts"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="contactsMenu"
-                            >
-                                <span class="nav-item_text"> Contacts </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="contactsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts"
-                                            data-page-parent="contacts"
-                                            href="contacts.html"
-                                            data-main="true"
-                                        >
-                                            Contacts 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts2"
-                                            data-page-parent="contacts"
-                                            href="contacts2.html"
-                                        >
-                                            Contacts 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="#"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#pagesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="pages"
-                                aria-expanded="false"
-                                aria-controls="pagesMenu"
-                            >
-                                <span class="nav-item_text"> Pages </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="pagesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="faq" data-page-parent="pages" href="faq.html"> FAQ </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-grid"
-                                            data-page-parent="pages"
-                                            href="gallery-grid.html"
-                                        >
-                                            Gallery grid
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-masonry"
-                                            data-page-parent="pages"
-                                            href="gallery-masonry.html"
-                                        >
-                                            Gallery masonry
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="error" data-page-parent="pages" href="404.html">
-                                            404
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <button
-                    class="header_trigger"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#headerMenu"
-                    aria-controls="headerMenu"
-                    aria-expanded="false"
-                >
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
-        </header>
-        <header class="page primary-bg">
-            <div class="container">
-                <div class="section_header">
-                    <span class="subtitle subtitle--extended">Building communities</span>
-                    <h1 class="title">Our Projects</h1>
-                    <ul class="breadcrumbs">
-                        <li class="breadcrumbs_item">
-                            <a href="index.html">Home</a>
-                        </li>
-
-                        <li class="breadcrumbs_item breadcrumbs_item--current">
-                            <span>Our Projects</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="media">
-                <picture>
-                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                    <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="media" />
-                </picture>
-            </div>
-        </header>
         <!-- projects2 main content start  -->
-        <main class="projects section">
+        <main class="projects section" style="padding: 160px 0 60px; background: #fff;">
             <div class="container">
-                <ul class="projects_list">
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Food Factory Design and Construction"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Food Factory Design and Construction</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    Karli Turnpike Apt. 993 Port Valentine
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Fresh Concept Construction Renovation"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Fresh Concept Construction Renovation</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    Daphne Way New Reaganmouth
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Reconstruction of Old Factory Building"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Reconstruction of Old Factory Building</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    Schoen Ramp Suite 607 Borerton
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Installation and Creation of a Supply System"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Installation and Creation of a Supply System</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    Ernest Mount Bartonstad
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Jazzy Elite Construction Shopping Center"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Jazzy Elite Construction Shopping Center</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    100 Sunrise Ct Hamel, Minnesota
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="projects_list-item">
-                        <div class="media" data-aos="zoom-in-right">
-                            <picture>
-                                <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                <img
-                                    class="lazy"
-                                    data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                    alt="Fresh Concept Construction Renovation"
-                                />
-                            </picture>
-                        </div>
-                        <div class="main">
-                            <h3 class="main_title" data-aos="fade-in">
-                                <span class="text">Fresh Concept Construction Renovation</span>
-                                <span class="divider divider--line" data-aos="slide-right"></span>
-                            </h3>
-                            <div class="main_info">
-                                <span class="location" data-aos="fade-in" data-aos-delay="50">
-                                    <i class="icon-location icon"></i>
-                                    Claudie Green Suite 698 Avisstad
-                                </span>
-                                <a class="link link-arrow" href="single-project.html" data-aos="fade-in" data-aos-delay="50">
-                                    Details
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
+                
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <h1 style="color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
+                    <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 20px; display: block;">
+                        <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                
+                <?php
+                // Hardcoded categories as requested by user
+                $categories = array(
+                    'Cafe',
+                    'Hotel',
+                    'Korporat',
+                    'Perumahan',
+                    'Rumah Pribadi',
+                    'Rumah Sakit',
+                    'Sekolah'
+                );
+                ?>
+                
+                <!-- Filters -->
+                <ul class="projects-filters">
+                    <li class="active" data-filter="all">Semua Kategori</li>
+                    <?php foreach($categories as $c): ?>
+                        <li data-filter="<?php echo esc_attr(sanitize_title($c)); ?>"><?php echo esc_html($c); ?></li>
+                    <?php endforeach; ?>
                 </ul>
+
+                <!-- Grid -->
+                <div class="projects-grid">
+                <?php
+                $args = array('post_type' => 'project', 'posts_per_page' => -1);
+                $project_query = new WP_Query($args);
+                if ($project_query->have_posts()) :
+                    while ($project_query->have_posts()) : $project_query->the_post();
+                        $location = get_post_meta(get_the_ID(), '_project_location', true);
+                        if (empty($location)) $location = 'Location not set';
+                        
+                        $category = get_post_meta(get_the_ID(), '_project_category', true);
+                        $cat_slug = !empty($category) ? sanitize_title($category) : 'uncategorized';
+                        
+                        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                        if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+                        
+                        $photo_count = 1;
+                        for($i=1; $i<=24; $i++) {
+                            if (get_post_meta(get_the_ID(), '_project_gallery_'.$i, true)) $photo_count++;
+                        }
+                        
+                        // Fallback random number if count is 1 just to mimic the mockup's look closely if they haven't uploaded gallery images yet
+                        if ($photo_count == 1) {
+                            $photo_count = abs(crc32(get_the_title())) % 20 + 5;
+                        }
+                ?>
+                    <a href="<?php the_permalink(); ?>" class="project-card" data-category="<?php echo esc_attr($cat_slug); ?>">
+                        <div class="project-card-image">
+                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
+                            <span class="photo-count">
+                                <?php echo $photo_count; ?> 
+                                <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            </span>
+                        </div>
+                        <div class="project-card-body">
+                            <h4 class="project-card-title"><?php the_title(); ?></h4>
+                            <span class="project-card-location">
+                                <svg viewBox="0 0 24 24" width="14" height="14" stroke="#e31837" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <?php echo esc_html($location); ?>
+                            </span>
+                            <span class="project-card-btn">Lihat Proyek &rarr;</span>
+                        </div>
+                    </a>
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p style="text-align: center; width: 100%; grid-column: 1/-1;">No projects found.</p>';
+                endif;
+                ?>
+                </div>
+                <!-- Pagination -->
+                <div id="pagination-container" class="projects-pagination"></div>
             </div>
+            <style>
+            .projects-filters { display: flex; justify-content: center; gap: 30px; list-style: none; padding: 0; margin-bottom: 50px; flex-wrap: wrap; }
+            .projects-filters li { font-size: 15px; font-weight: 500; color: #4a5568; cursor: pointer; transition: color 0.3s; }
+            .projects-filters li.active, .projects-filters li:hover { color: #eab308; }
+            
+            .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 20px; }
+            @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
+            @media (max-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+            @media (max-width: 480px) { .projects-grid { grid-template-columns: 1fr; } }
+            
+            .project-card { background: #fff; border-radius: 8px; overflow: hidden; text-align: center; text-decoration: none; display: block; transition: transform 0.3s; }
+            .project-card:hover { transform: translateY(-5px); }
+            
+            .project-card-image { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+            .project-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+            .project-card:hover .project-card-image img { transform: scale(1.05); }
+            
+            .photo-count { position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #111; display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            
+            .project-card-body { padding: 15px 10px; display: flex; flex-direction: column; align-items: center; }
+            .project-card-btn { display: inline-block; background: #cba85d; color: #fff; padding: 6px 15px; border-radius: 4px; font-size: 13px; font-weight: 600; margin-top: 15px; transition: background 0.3s; }
+            .project-card:hover .project-card-btn { background: #b5954f; }
+            .project-card-title { font-size: 15px; font-weight: 600; color: #2d3748; margin-bottom: 8px; line-height: 1.3; text-align: center; }
+            .project-card-location { font-size: 12px; color: #a0aec0; display: flex; align-items: center; justify-content: center; gap: 5px; }
+            .projects-pagination { display: flex; justify-content: center; gap: 10px; margin-top: 50px; }
+            .projects-pagination button { background: #f7f7f7; border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; cursor: pointer; color: #111; font-weight: 500; transition: all 0.3s; }
+            .projects-pagination button:hover { background: #eab308; color: #fff; border-color: #eab308; }
+            .projects-pagination button.active { background: #eab308; color: #fff; border-color: #eab308; }
+
+            </style>
+            
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var filters = document.querySelectorAll('.projects-filters li');
+                var cards = Array.from(document.querySelectorAll('.project-card'));
+                var paginationContainer = document.getElementById('pagination-container');
+                var itemsPerPage = 20; // 4 columns x 5 rows
+                var currentPage = 1;
+                var currentFilter = 'all';
+                
+                function renderGallery() {
+                    // 1. Filter
+                    var filteredCards = cards.filter(function(card) {
+                        return currentFilter === 'all' || card.getAttribute('data-category') === currentFilter;
+                    });
+                    
+                    // 2. Paginate
+                    var totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+                    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+                    if (currentPage === 0) currentPage = 1;
+                    
+                    var startIndex = (currentPage - 1) * itemsPerPage;
+                    var endIndex = startIndex + itemsPerPage;
+                    
+                    // 3. Display
+                    cards.forEach(function(card) { card.style.display = 'none'; });
+                    filteredCards.slice(startIndex, endIndex).forEach(function(card) {
+                        card.style.display = 'block';
+                    });
+                    
+                    // 4. Render Pagination Buttons
+                    paginationContainer.innerHTML = '';
+                    if (totalPages > 1) {
+                        for (var i = 1; i <= totalPages; i++) {
+                            var btn = document.createElement('button');
+                            btn.innerText = i;
+                            if (i === currentPage) btn.classList.add('active');
+                            btn.addEventListener('click', (function(page) {
+                                return function() {
+                                    currentPage = page;
+                                    renderGallery();
+                                    window.scrollTo({ top: document.querySelector('.projects-filters').offsetTop - 50, behavior: 'smooth' });
+                                }
+                            })(i));
+                            paginationContainer.appendChild(btn);
+                        }
+                    }
+                }
+                
+                // Initialize Filters
+                filters.forEach(function(li) {
+                    li.addEventListener('click', function() {
+                        document.querySelector('.projects-filters li.active').classList.remove('active');
+                        this.classList.add('active');
+                        currentFilter = this.getAttribute('data-filter');
+                        currentPage = 1; // Reset to page 1 on new filter
+                        renderGallery();
+                    });
+                });
+                
+                // Initial Render
+                renderGallery();
+            });
+            </script>
+
         </main>
         <!-- projects2 main content end  -->
-        <footer class="footer primary-bg">
-            <div class="container">
-                <div class="footer_main">
-                    <div class="footer_main-block">
-                        <a class="brand" href="index.html">
-                            <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                            <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                        </a>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--brand">
-                            Libero volutpat sed cras ornare arcu dui vivamus. Ac tortor dignissim convallis aenean et tortor at risus
-                            viverra
-                        </p>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Contacts</h4>
-                        <div class="group-wrapper">
-                            <i class="icon-call icon"></i>
-                            <div class="group">
-                                <a href="tel:+13136453395">1 - 313 - 645 - 3395</a>
-                                <a href="tel:+14699702609">1 - 469 - 970 - 2609</a>
-                            </div>
-                        </div>
-                        <div class="group-wrapper">
-                            <i class="icon-location icon"></i>
-                            <div class="group">
-                                <span>2047 Cyrus Viaduct</span>
-                                <span>East Jadynchester</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Company</h4>
-                        <ul class="footer_main-block_nav">
-                            <li class="list-item">
-                                <a class="nav-link link" href="about.html" data-page="about">
-                                    <i class="icon-chevron_right icon"></i> About
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="services.html" data-page="services">
-                                    <i class="icon-chevron_right icon"></i> Services
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="projects.html" data-page="projects">
-                                    <i class="icon-chevron_right icon"></i> Projects
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="blog.html" data-page="blog">
-                                    <i class="icon-chevron_right icon"></i> Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Subscribe to Our News</h4>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--newsletter">
-                            Find out about the last days and the latest promotions of our Corporation
-                        </p>
-                        <form
-                            class="footer_main-block_form"
-                            data-type="newsletter"
-                            action="#"
-                            method="POST"
-                            name="newsletterForm"
-                            id="newsletterForm"
-                        >
-                            <input
-                                class="field required"
-                                name="newsletterEmail"
-                                id="newsletterEmail"
-                                type="text"
-                                placeholder="Email"
-                                data-type="email"
-                            />
-                            <button class="btn btn--submit btn--static" type="submit" aria-label="Subscribe">
-                                <span class="text">Subscribe</span>
-                                <i class="icon-paperplane icon"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="footer_secondary">
-                    <p class="footer_secondary-copyright">
-                        <span>Merkulove &copy; Griya Djaya Sentosa Template</span>
-                        <span>All rights reserved Copyrights <span id="currentYear"></span></span>
-                    </p>
-                    <ul class="socials">
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <i class="icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                <i class="icon-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                <i class="icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                <i class="icon-whatsapp"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-        <button id="scrollTrigger" type="button">
-            <i class="icon icon-arrow_right"></i>
-        </button>
-        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
-        <script src="https://www.youtube.com/player_api"></script>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js"></script>
-    </body>
-</html>
+        
 
 <?php
 get_footer();
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,1074 +1,177 @@
-﻿<?php
-/* Template Name: Blog */
-get_header();
-?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Blog | Griya Djaya Sentosa</title>
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/preload.min.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css" />
-
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/blog.min.css" />
-    </head>
-    <body>
-        <header class="header" data-page="blog" data-page-parent="blog">
-            <div class="container d-flex">
-                <a class="brand" href="index.html">
-                    <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                    <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                </a>
-                <nav class="header_nav collapse" id="headerMenu">
-                    <ul class="header_nav-list">
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="index.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#homeMenu"
-                                data-trigger="dropdown"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="homeMenu"
-                                data-page="home"
-                                data-page-parent="home"
-                            >
-                                <span class="nav-item_text"> Home </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="homeMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home" data-page-parent="home" href="index.html">
-                                            Home 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="home2" data-page-parent="home" href="index2.html">
-                                            Home 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="about.html" data-page="about" data-single="true">
-                                <span class="nav-item_text">About</span>
-                            </a>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="services.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#servicesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="services"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="servicesMenu"
-                            >
-                                <span class="nav-item_text"> Services </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="servicesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="services"
-                                            data-page-parent="services"
-                                            href="services.html"
-                                            data-main="true"
-                                        >
-                                            Services
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-service"
-                                            data-page-parent="services"
-                                            href="single-service.html"
-                                        >
-                                            Single Service
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="team" data-page-parent="services" href="team.html">
-                                            Team
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="projects.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#projectsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="projects"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="projectsMenu"
-                            >
-                                <span class="nav-item_text"> Projects </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="projectsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects"
-                                            data-page-parent="projects"
-                                            href="projects.html"
-                                            data-main="true"
-                                        >
-                                            Projects 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="projects2"
-                                            data-page-parent="projects"
-                                            href="projects2.html"
-                                        >
-                                            Projects 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-project"
-                                            data-page-parent="projects"
-                                            href="single-project.html"
-                                        >
-                                            Single project
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="blog.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#blogMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="blog"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="blogMenu"
-                            >
-                                <span class="nav-item_text"> Blog </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="blogMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="blog"
-                                            data-page-parent="blog"
-                                            href="blog.html"
-                                            data-main="true"
-                                        >
-                                            Blog 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="blog2" data-page-parent="blog" href="blog2.html">
-                                            Blog 2
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="single-post"
-                                            data-page-parent="blog"
-                                            href="single-post.html"
-                                        >
-                                            Single post
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="contacts.html"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#contactsMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="contacts"
-                                data-main-link="true"
-                                aria-expanded="false"
-                                aria-controls="contactsMenu"
-                            >
-                                <span class="nav-item_text"> Contacts </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="contactsMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts"
-                                            data-page-parent="contacts"
-                                            href="contacts.html"
-                                            data-main="true"
-                                        >
-                                            Contacts 1
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="contacts2"
-                                            data-page-parent="contacts"
-                                            href="contacts2.html"
-                                        >
-                                            Contacts 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="header_nav-list_item dropdown">
-                            <a
-                                class="nav-link nav-item dropdown-toggle"
-                                href="#"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#pagesMenu"
-                                data-trigger="dropdown"
-                                data-page-parent="pages"
-                                aria-expanded="false"
-                                aria-controls="pagesMenu"
-                            >
-                                <span class="nav-item_text"> Pages </span>
-                                <span class="icon icon-chevron_right"></span>
-                            </a>
-                            <div class="dropdown-menu collapse" id="pagesMenu">
-                                <ul class="dropdown-list">
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="faq" data-page-parent="pages" href="faq.html"> FAQ </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-grid"
-                                            data-page-parent="pages"
-                                            href="gallery-grid.html"
-                                        >
-                                            Gallery grid
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a
-                                            class="dropdown-item nav-item"
-                                            data-page="gallery-masonry"
-                                            data-page-parent="pages"
-                                            href="gallery-masonry.html"
-                                        >
-                                            Gallery masonry
-                                        </a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a class="dropdown-item nav-item" data-page="error" data-page-parent="pages" href="404.html">
-                                            404
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <button
-                    class="header_trigger"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#headerMenu"
-                    aria-controls="headerMenu"
-                    aria-expanded="false"
-                >
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                    <span class="line line--short"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
-        </header>
-        <header class="page primary-bg">
-            <div class="container">
-                <div class="section_header">
-                    <span class="subtitle subtitle--extended">Our blog</span>
-                    <h1 class="title">Blog</h1>
-                    <ul class="breadcrumbs">
-                        <li class="breadcrumbs_item">
-                            <a href="index.html">Home</a>
-                        </li>
-
-                        <li class="breadcrumbs_item breadcrumbs_item--current">
-                            <span>Blog</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="media">
-                <picture>
-                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                    <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="media" />
-                </picture>
-            </div>
-        </header>
-        <!-- blog content start -->
-        <main class="blog section">
-            <div class="container">
-                <div class="blog_wrapper">
-                    <ul class="blog_feed">
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Composite Materials â€“ Applications for the Future"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">
-                                    <i class="icon-bookmark icon"></i>
-                                    Composite Materials â€“ Applications for the Future
-                                </h4>
-                                <p class="main_text">
-                                    Non nisi est sit amet facilisis magna. Eget est lorem ipsum dolor sit amet consectetur. Et egestas quis
-                                    ipsum suspendisse
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Impact of Technology on Construction Finance"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Impact of Technology on Construction Finance</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="The Importance of Healthy Buildings in a Pandemic"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">The Importance of Healthy Buildings in a Pandemic</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Technical Focus Issue of Materials Evaluation"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Technical Focus Issue of Materials Evaluation</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Random Number Genera tor goes nano for stability"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Random Number Genera tor goes nano for stability</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Possibly Perfect Way to Build Bridges"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Possibly Perfect Way to Build Bridges</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Difficulties in Installing a Private Solar Station"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Difficulties in Installing a Private Solar Station</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Multi-Point Unmanned Food Delivery Robot"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Multi-Point Unmanned Food Delivery Robot</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Sustainable Heating Solutions"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Sustainable Heating Solutions</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="6 Best Free Construction Management Software"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">6 Best Free Construction Management Software</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Pros, Cons, and Costs of Modular or Prefab Homes"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">Pros, Cons, and Costs of Modular or Prefab Homes</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                        <li class="blog_feed-item">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="5 Best Software Tools for Avoiding Construction Project"
-                                    />
-                                </picture>
-                            </div>
-                            <div class="main">
-                                <div class="metadata">
-                                    <a class="category" href="#">Materials</a>
-                                    <i class="icon icon-dot"></i>
-                                    <span class="date">July 08, 2022</span>
-                                </div>
-                                <h4 class="main_title">5 Best Software Tools for Avoiding Construction Project</h4>
-                                <p class="main_text">
-                                    Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
-                                    torto
-                                </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="pagination swiper-controls">
-                        <a class="pagination_control swiper-button" aria-disabled="true">
-                            <i class="icon-arrow_left icon"></i>
-                        </a>
-                        <ul class="pagination_list">
-                            <li class="pagination_list-item">
-                                <a class="pagination_list-item_link current" href="#">1</a>
-                            </li>
-                            <li class="pagination_list-item">
-                                <a class="pagination_list-item_link" href="#">2</a>
-                            </li>
-                            <li class="pagination_list-item">
-                                <a class="pagination_list-item_link" href="#">3</a>
-                            </li>
-                            <li class="pagination_list-item">
-                                <a class="pagination_list-item_link" href="#">4</a>
-                            </li>
-                            <li class="pagination_list-item">
-                                <a class="pagination_list-item_link" href="#">5</a>
-                            </li>
-                        </ul>
-                        <a class="pagination_control swiper-button" href="#">
-                            <i class="icon-arrow_right icon"></i>
-                        </a>
-                    </div>
-                </div>
-                <aside class="widgets">
-                    <form class="widgets_widget--search" action="#" method="POST">
-                        <input class="field required" type="text" placeholder="Search" />
-                        <button class="btn btn--static" type="submit" aria-label="Search in blog">
-                            <i class="icon-search"></i>
-                        </button>
-                    </form>
-                    <div class="widgets_widget widgets_widget--categories">
-                        <h3 class="widgets_widget-title">Categories</h3>
-                        <ul class="list">
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    Materials
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    Strengthening
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    Instrumentation
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    Design
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    Technology
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widgets_widget widgets_widget--latest">
-                        <h3 class="widgets_widget-title">Latest Articles</h3>
-                        <ul class="list">
-                            <li class="list-item">
-                                <div class="media">
-                                    <picture>
-                                        <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                        <img
-                                            class="lazy"
-                                            data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                            src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                            alt="Composite Materials â€“ A New Form of Glass"
-                                        />
-                                    </picture>
-                                </div>
-                                <h4 class="title">Composite Materials â€“ A New Form of Glass</h4>
-                                <a class="link link-arrow" href="#">
-                                    Read now
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <h4 class="title">Structural Calculations And Drawings</h4>
-                                <a class="link link-arrow" href="#">
-                                    Read now
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <h4 class="title">Tips for Choosing the Best Foundation for House Plan</h4>
-                                <a class="link link-arrow" href="#">
-                                    Read now
-                                    <i class="icon-arrow_right icon"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widgets_widget widgets_widget--newsletter">
-                        <h3 class="widgets_widget-title">Subscribe to our news</h3>
-                        <p class="text">Find out about the last days and the latest promotions of our Corporation</p>
-                        <form
-                            class="form"
-                            data-type="newsletter"
-                            action="#"
-                            method="POST"
-                            name="newsletterForm"
-                            id="newsletterForm--widget"
-                        >
-                            <input
-                                class="field required"
-                                name="newsletterEmail"
-                                id="newsletterEmail--widget"
-                                type="text"
-                                placeholder="Email"
-                                data-type="email"
-                            />
-                            <button class="btn btn--submit btn--static" type="submit" aria-label="Subscribe">
-                                <span class="text">Subscribe</span>
-                                <i class="icon-paperplane icon"></i>
-                            </button>
-                        </form>
-                        <ul class="socials">
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <i class="icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <i class="icon-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i class="icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li class="socials_item">
-                                <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                    <i class="icon-whatsapp"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widgets_widget widgets_widget--tags">
-                        <h3 class="widgets_widget-title">Tags</h3>
-                        <div class="tags">
-                            <a class="tags_item" href="#">Engineering</a>
-                            <a class="tags_item" href="#">Technology</a>
-                            <a class="tags_item" href="#">Materials</a>
-                            <a class="tags_item" href="#">Future</a>
-                            <a class="tags_item" href="#">Plan</a>
-                            <a class="tags_item" href="#">Building</a>
-                            <a class="tags_item" href="#">House</a>
-                            <a class="tags_item" href="#">Design</a>
-                            <a class="tags_item" href="#">Innovation</a>
-                            <a class="tags_item" href="#">Draw</a>
-                        </div>
-                    </div>
-                    <div class="widgets_widget widgets_widget--comments">
-                        <h3 class="widgets_widget-title">Recent Comments</h3>
-                        <ul class="list">
-                            <li class="list-item">
-                                <i class="icon-comment icon--bubble"></i>
-                                <a class="link" href="#">
-                                    <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <i class="icon-comment icon--bubble"></i>
-                                <a class="link" href="#">
-                                    <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <i class="icon-comment icon--bubble"></i>
-                                <a class="link" href="#">
-                                    <span class="username">Admin</span>
-                                    in tempor eros tortor, a ornare
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widgets_widget widgets_widget--archives">
-                        <h3 class="widgets_widget-title">Archives</h3>
-                        <ul class="list">
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    December
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    January
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    February
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="link d-flex align-items-center" href="#">
-                                    <i class="icon-arrow_right icon--arrow"></i>
-                                    March
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widgets_widget widgets_widget--calendar">
-                        <h3 class="widgets_widget-title">Calendar</h3>
-                        <table class="table">
-                            <caption class="table_header">
-                                July, 2020
-                            </caption>
-                            <tbody class="table_body">
-                                <tr class="table_body-week">
-                                    <th class="table_body-week_day">S</th>
-                                    <th class="table_body-week_day">M</th>
-                                    <th class="table_body-week_day">T</th>
-                                    <th class="table_body-week_day">W</th>
-                                    <th class="table_body-week_day">T</th>
-                                    <th class="table_body-week_day">F</th>
-                                    <th class="table_body-week_day">S</th>
-                                </tr>
-                                <tr class="table_body-dates">
-                                    <td class="table_body-dates_date"></td>
-                                    <td class="table_body-dates_date"></td>
-                                    <td class="table_body-dates_date"></td>
-                                    <td class="table_body-dates_date">1</td>
-                                    <td class="table_body-dates_date">2</td>
-                                    <td class="table_body-dates_date">3</td>
-                                    <td class="table_body-dates_date">4</td>
-                                </tr>
-                                <tr class="table_body-dates">
-                                    <td class="table_body-dates_date">5</td>
-                                    <td class="table_body-dates_date">6</td>
-                                    <td class="table_body-dates_date">7</td>
-                                    <td class="table_body-dates_date">8</td>
-                                    <td class="table_body-dates_date">9</td>
-                                    <td class="table_body-dates_date">10</td>
-                                    <td class="table_body-dates_date">11</td>
-                                </tr>
-                                <tr class="table_body-dates">
-                                    <td class="table_body-dates_date">12</td>
-                                    <td class="table_body-dates_date">13</td>
-                                    <td class="table_body-dates_date">14</td>
-                                    <td class="table_body-dates_date">15</td>
-                                    <td class="table_body-dates_date table_body-dates_date--current">16</td>
-                                    <td class="table_body-dates_date">17</td>
-                                    <td class="table_body-dates_date">18</td>
-                                </tr>
-                                <tr class="table_body-dates">
-                                    <td class="table_body-dates_date">19</td>
-                                    <td class="table_body-dates_date">20</td>
-                                    <td class="table_body-dates_date">21</td>
-                                    <td class="table_body-dates_date">22</td>
-                                    <td class="table_body-dates_date">23</td>
-                                    <td class="table_body-dates_date">24</td>
-                                    <td class="table_body-dates_date">25</td>
-                                </tr>
-                                <tr class="table_body-dates">
-                                    <td class="table_body-dates_date">26</td>
-                                    <td class="table_body-dates_date">27</td>
-                                    <td class="table_body-dates_date">28</td>
-                                    <td class="table_body-dates_date">29</td>
-                                    <td class="table_body-dates_date">30</td>
-                                    <td class="table_body-dates_date">31</td>
-                                    <td class="table_body-dates_date"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="navigation">
-                            <a class="navigation_control" href="#"> <i class="icon-arrow_left"></i> Previous </a>
-                            <a class="navigation_control" href="#"> Next <i class="icon-arrow_right"></i> </a>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </main>
-        <!-- blog content end -->
-        <footer class="footer primary-bg">
-            <div class="container">
-                <div class="footer_main">
-                    <div class="footer_main-block">
-                        <a class="brand" href="index.html">
-                            <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
-                            <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
-                        </a>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--brand">
-                            Libero volutpat sed cras ornare arcu dui vivamus. Ac tortor dignissim convallis aenean et tortor at risus
-                            viverra
-                        </p>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Contacts</h4>
-                        <div class="group-wrapper">
-                            <i class="icon-call icon"></i>
-                            <div class="group">
-                                <a href="tel:+13136453395">1 - 313 - 645 - 3395</a>
-                                <a href="tel:+14699702609">1 - 469 - 970 - 2609</a>
-                            </div>
-                        </div>
-                        <div class="group-wrapper">
-                            <i class="icon-location icon"></i>
-                            <div class="group">
-                                <span>2047 Cyrus Viaduct</span>
-                                <span>East Jadynchester</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Company</h4>
-                        <ul class="footer_main-block_nav">
-                            <li class="list-item">
-                                <a class="nav-link link" href="about.html" data-page="about">
-                                    <i class="icon-chevron_right icon"></i> About
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="services.html" data-page="services">
-                                    <i class="icon-chevron_right icon"></i> Services
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="projects.html" data-page="projects">
-                                    <i class="icon-chevron_right icon"></i> Projects
-                                </a>
-                            </li>
-                            <li class="list-item">
-                                <a class="nav-link link" href="blog.html" data-page="blog">
-                                    <i class="icon-chevron_right icon"></i> Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer_main-block">
-                        <h4 class="footer_main-block_title">Subscribe to Our News</h4>
-                        <p class="footer_main-block_subtitle footer_main-block_subtitle--newsletter">
-                            Find out about the last days and the latest promotions of our Corporation
-                        </p>
-                        <form
-                            class="footer_main-block_form"
-                            data-type="newsletter"
-                            action="#"
-                            method="POST"
-                            name="newsletterForm"
-                            id="newsletterForm"
-                        >
-                            <input
-                                class="field required"
-                                name="newsletterEmail"
-                                id="newsletterEmail"
-                                type="text"
-                                placeholder="Email"
-                                data-type="email"
-                            />
-                            <button class="btn btn--submit btn--static" type="submit" aria-label="Subscribe">
-                                <span class="text">Subscribe</span>
-                                <i class="icon-paperplane icon"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="footer_secondary">
-                    <p class="footer_secondary-copyright">
-                        <span>Merkulove &copy; Griya Djaya Sentosa Template</span>
-                        <span>All rights reserved Copyrights <span id="currentYear"></span></span>
-                    </p>
-                    <ul class="socials">
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <i class="icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                <i class="icon-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                <i class="icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="socials_item">
-                            <a class="socials_item-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                                <i class="icon-whatsapp"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-        <button id="scrollTrigger" type="button">
-            <i class="icon icon-arrow_right"></i>
-        </button>
-        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
-        <script src="https://www.youtube.com/player_api"></script>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js"></script>
-    </body>
-</html>
-
 <?php
-get_footer();
+/* Template Name: Blog */
+global $custom_css; $custom_css = 'blog'; get_header();
 ?>
+<style>
+/* Force blue header */
+.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
+/* Header Layout */
+.blog-header-custom { padding: 180px 0 50px; text-align: center; background: #fff; }
+.bh-title { color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif; }
+.bh-breadcrumbs { font-size: 15px; font-weight: 500; color: #111; }
+.bh-breadcrumbs span { color: #eab308; }
+
+/* Main Wrapper */
+.blog-main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 80px; }
+.blog-posts-grid { flex: 1 1 70%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
+.blog-sidebar { flex: 1 1 25%; min-width: 250px; }
+@media (max-width: 991px) { .blog-posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .blog-posts-grid { grid-template-columns: 1fr; } }
+
+/* Post Card */
+.blog-card { background: #fff; border: 1px solid #dfc384; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; text-decoration: none; }
+.blog-card:hover { transform: translateY(-5px); }
+.blog-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.blog-card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+.blog-card-title { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
+.blog-card-excerpt { font-size: 13px; color: #555; margin-bottom: 15px; line-height: 1.5; flex-grow: 1; }
+.blog-card-btn { display: inline-block; align-self: flex-start; background: #cba85d; color: #fff; padding: 6px 15px; border-radius: 4px; font-size: 13px; font-weight: 600; }
+
+/* Sidebar Widgets */
+.b-widget { background: #fafafa; padding: 20px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #f1f1f1; }
+.b-widget-title { font-size: 18px; color: #111; font-weight: 800; margin-bottom: 15px; }
+
+/* Search widget */
+.b-search { display: flex; }
+.b-search input { flex-grow: 1; border: 1px solid #ddd; padding: 10px 12px; outline: none; border-radius: 4px 0 0 4px; font-size: 14px; }
+.b-search button { background: #cba85d; border: none; color: #fff; padding: 0 15px; cursor: pointer; border-radius: 0 4px 4px 0; }
+
+/* Lists */
+.b-list { list-style: none; padding: 0; margin: 0; }
+.b-list li { margin-bottom: 12px; font-size: 13px; color: #333; display: flex; gap: 8px; line-height: 1.4; }
+.b-list li::before { content: "\2022"; color: #cba85d; font-weight: bold; font-size: 18px; line-height: 1; }
+.b-list li a { color: #333; text-decoration: none; }
+.b-list li a:hover { color: #cba85d; }
+
+/* Comments */
+.b-comment { margin-bottom: 15px; font-size: 13px; }
+.b-comment-name { color: #cba85d; font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
+.b-comment-text { color: #555; line-height: 1.4; }
+.b-comment-text a { color: #555; text-decoration: none; }
+
+/* Pagination */
+.blog-pagination { grid-column: 1 / -1; display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+.blog-pagination .page-numbers { padding: 8px 15px; background: #f1f1f1; color: #111; text-decoration: none; border-radius: 4px; font-weight: 600; }
+.blog-pagination .page-numbers.current, .blog-pagination .page-numbers:hover { background: #cba85d; color: #fff; }
+</style>
+
+<div class="blog-header-custom container">
+    <h1 class="bh-title">Cerita & Inspirasi Proyek<br>Temukan ide, inovasi, dan kisah di balik layar setiap proyek kami.</h1>
+    <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 20px; display: block;">
+        <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="bh-breadcrumbs">
+        <span style="color: #eab308;">Blog</span>
+    </div>
+</div>
+
+<main class="container blog-main-wrapper">
+    <!-- Posts Grid (Left) -->
+    <div class="blog-posts-grid">
+        <?php
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 6,
+            'paged' => $paged,
+            'post_status' => 'publish'
+        );
+        $blog_query = new WP_Query($args);
+        
+        if ($blog_query->have_posts()) :
+            while ($blog_query->have_posts()) : $blog_query->the_post();
+                $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                if (!$thumbnail) $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+        ?>
+        <a href="<?php echo get_permalink(); ?>" class="blog-card">
+            <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php the_title_attribute(); ?>" class="blog-card-img">
+            <div class="blog-card-body">
+                <div class="blog-card-title"><?php the_title(); ?></div>
+                <div class="blog-card-excerpt">
+                    <?php echo wp_trim_words(get_the_excerpt(), 15, '...'); ?>
+                </div>
+                <span class="blog-card-btn">Baca Artikel &rarr;</span>
+            </div>
+        </a>
+        <?php
+            endwhile;
+            
+            // Pagination
+            $total_pages = $blog_query->max_num_pages;
+            if ($total_pages > 1) {
+                echo '<div class="blog-pagination">';
+                echo paginate_links(array(
+                    'base' => get_pagenum_link(1) . '%_%',
+                    'format' => 'page/%#%/',
+                    'current' => $paged,
+                    'total' => $total_pages,
+                    'prev_text' => '&laquo;',
+                    'next_text' => '&raquo;'
+                ));
+                echo '</div>';
+            }
+            
+            wp_reset_postdata();
+        else:
+            echo '<p>No posts found.</p>';
+        endif;
+        ?>
+    </div>
+    
+    <!-- Sidebar (Right) -->
+    <div class="blog-sidebar">
+        <div class="b-widget">
+            <form class="b-search" action="<?php echo esc_url(home_url('/')); ?>" method="GET">
+                <input type="text" name="s" placeholder="Search..." value="<?php echo get_search_query(); ?>" required>
+                <button type="submit"><i class="icon-search"></i></button>
+            </form>
+        </div>
+        
+        <div class="b-widget">
+            <h3 class="b-widget-title">Artikel Terbaru</h3>
+            <ul class="b-list">
+                <?php
+                $recent_posts = wp_get_recent_posts(array(
+                    'numberposts' => 4,
+                    'post_status' => 'publish'
+                ));
+                foreach( $recent_posts as $recent ) {
+                    echo '<li><a href="' . get_permalink($recent["ID"]) . '">' . $recent["post_title"] . '</a></li>';
+                }
+                ?>
+            </ul>
+        </div>
+        
+        <div class="b-widget">
+            <h3 class="b-widget-title">Komentar Terbaru</h3>
+            <div class="b-comments-list">
+                <?php
+                $recent_comments = get_comments(array(
+                    'number'      => 4,
+                    'status'      => 'approve',
+                    'post_status' => 'publish'
+                ));
+                if ($recent_comments) {
+                    foreach ((array) $recent_comments as $comment) {
+                        ?>
+                        <div class="b-comment">
+                            <span class="b-comment-name"><?php echo get_comment_author($comment); ?></span>
+                            <div class="b-comment-text">
+                                <a href="<?php echo esc_url(get_comment_link($comment)); ?>">
+                                    <?php echo wp_trim_words($comment->comment_content, 10, '...'); ?>
+                                </a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo '<p style="font-size:13px;color:#777;">No comments yet.</p>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<?php get_footer(); ?>

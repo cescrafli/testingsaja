@@ -186,6 +186,11 @@
                         
                         
                         <li class="header_nav-list_item">
+                            <a class="nav-item nav-link" href="<?php echo esc_url(home_url('/faq/')); ?>" data-page="faq" data-single="true">
+                                <span class="nav-item_text">FAQ</span>
+                            </a>
+                        </li>
+                        <li class="header_nav-list_item">
                             <a class="nav-item nav-link" href="<?php echo home_url('/contacts/'); ?>" data-page="contacts" data-single="true">
                                 <span class="nav-item_text">Kontak</span>
                             </a>

@@ -85,6 +85,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
                 <li><a href="<?php echo home_url('/projects/'); ?>">Proyek Kami</a></li>
                 <li><a href="<?php echo home_url('/blog/'); ?>">Blog</a></li>
                 <li><a href="<?php echo home_url('/warranty/'); ?>">Garansi</a></li>
+                <li><a href="<?php echo esc_url( home_url( '/faq/' ) ); ?>">FAQ Layanan</a></li>
                 <li><a href="<?php echo home_url('/contacts/'); ?>">Hubungi Kami</a></li>
             </ul>
         </div>

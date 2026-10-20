@@ -810,7 +810,7 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
 
 }
 
-// Route /product/interior/ and handle SEO 301 Permanent Redirects for 404 Prevention
+// SEO URL Routing & 301 Permanent Redirects for 404 & Orphan Prevention
 add_action('template_redirect', 'gjs_seo_template_redirects', 1);
 function gjs_seo_template_redirects() {
     if (is_admin()) return;
@@ -841,7 +841,27 @@ function gjs_seo_template_redirects() {
         exit;
     }
 
-    // 3. 301 Permanent Redirect for ?post_type=gjs_produk (including p=319, p=327) & /item/*
+    // 3. 301 Permanent Redirect all Author Archives (including /author/firbertt/) to Homepage
+    if (is_author() || $req_path === 'author' || strpos($req_path, 'author/') === 0) {
+        wp_safe_redirect(home_url('/'), 301);
+        exit;
+    }
+
+    // 4. 301 Permanent Redirect for unused demo/template pages (/single-project/, /gallery-masonry/, /gallery-grid/)
+    $unused_templates = array('single-project', 'gallery-masonry', 'gallery-grid');
+    if (in_array($req_path, $unused_templates, true) || is_page($unused_templates)) {
+        $target_page = get_page_by_path('projects');
+        if (!$target_page) {
+            $target_page = get_page_by_path('proyek');
+        }
+        $target_url = $target_page ? get_permalink($target_page->ID) : home_url('/');
+        if (trailingslashit(get_permalink()) !== trailingslashit($target_url)) {
+            wp_safe_redirect($target_url, 301);
+            exit;
+        }
+    }
+
+    // 5. 301 Permanent Redirect for ?post_type=gjs_produk (including p=319, p=327) & /item/*
     $post_type = $_GET['post_type'] ?? '';
     $post_id   = isset($_GET['p']) ? intval($_GET['p']) : 0;
     $is_item_path = ($req_path === 'item' || strpos($req_path, 'item/') === 0);
@@ -890,3 +910,122 @@ function gjs_seo_template_redirects() {
 // Load Dynamic Settings for Interior Page (WP Admin > Produk > Pengaturan Interior)
 require_once get_template_directory() . '/inc-interior-admin.php';
 
+
+// ============================================================================
+// PENANGANAN SEO ORPHAN PAGES & SITEMAP CLEANUP - GRIYA DJAYA SENTOSA
+// ============================================================================
+
+// 1. Set Meta Robots "noindex, nofollow, noarchive" untuk Halaman Internal (/griyadjayamasuk/, /detail-transaksi/)
+add_action('wp_head', 'gds_noindex_internal_system_pages', 1);
+function gds_noindex_internal_system_pages() {
+    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+    $is_internal = (
+        is_page(array('griyadjayamasuk', 'detail-transaksi', 'login', 'portal-karyawan')) ||
+        is_page_template(array('page-login.php', 'page-detail-transaksi.php', 'page-employee-dashboard.php')) ||
+        in_array($req_path, array('griyadjayamasuk', 'detail-transaksi', 'login'), true)
+    );
+    if ($is_internal) {
+        echo '<meta name="robots" content="noindex, nofollow, noarchive" />' . "\n";
+    }
+}
+
+// Kompatibilitas filter robots untuk Yoast SEO
+add_filter('wpseo_robots', 'gds_yoast_robots_override', 999);
+function gds_yoast_robots_override($robots) {
+    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
+        return 'noindex, nofollow';
+    }
+    return $robots;
+}
+
+// Kompatibilitas filter robots untuk Rank Math SEO
+add_filter('rank_math/frontend/robots', 'gds_rankmath_robots_override', 999);
+function gds_rankmath_robots_override($robots) {
+    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
+        if (is_array($robots)) {
+            $robots['index']  = 'noindex';
+            $robots['follow'] = 'nofollow';
+        } else {
+            $robots = 'noindex, nofollow';
+        }
+    }
+    return $robots;
+}
+
+// Tambahkan X-Robots-Tag pada HTTP Header untuk halaman internal
+add_action('send_headers', 'gds_send_noindex_headers');
+function gds_send_noindex_headers() {
+    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
+        header('X-Robots-Tag: noindex, nofollow', true);
+    }
+}
+
+// 2. Hapus Halaman Sistem & Demo dari XML Sitemap (Yoast, Rank Math, WP Core)
+function gds_get_excluded_sitemap_page_ids() {
+    $slugs_to_exclude = array(
+        'griyadjayamasuk',
+        'detail-transaksi',
+        'single-project',
+        'gallery-masonry',
+        'gallery-grid',
+    );
+
+    $excluded_ids = array();
+    foreach ($slugs_to_exclude as $slug) {
+        $page = get_page_by_path($slug);
+        if ($page && isset($page->ID)) {
+            $excluded_ids[] = (int) $page->ID;
+        }
+    }
+    return $excluded_ids;
+}
+
+add_filter('wpseo_exclude_from_sitemap_by_post_ids', 'gds_exclude_pages_from_yoast_sitemap');
+function gds_exclude_pages_from_yoast_sitemap($excluded_posts_ids) {
+    if (!is_array($excluded_posts_ids)) {
+        $excluded_posts_ids = array();
+    }
+    return array_unique(array_merge($excluded_posts_ids, gds_get_excluded_sitemap_page_ids()));
+}
+
+add_filter('rank_math/sitemap/entry', 'gds_exclude_pages_from_rankmath_sitemap', 10, 3);
+function gds_exclude_pages_from_rankmath_sitemap($url, $type, $object) {
+    if ($type === 'post' && isset($object->ID)) {
+        if (in_array((int) $object->ID, gds_get_excluded_sitemap_page_ids(), true)) {
+            return false;
+        }
+    }
+    return $url;
+}
+
+add_filter('wp_sitemaps_posts_query_args', 'gds_exclude_pages_from_wp_core_sitemap', 10, 2);
+function gds_exclude_pages_from_wp_core_sitemap($args, $post_type) {
+    if ($post_type === 'page') {
+        $excluded_ids = gds_get_excluded_sitemap_page_ids();
+        if (!empty($excluded_ids)) {
+            $args['post__not_in'] = isset($args['post__not_in'])
+                ? array_unique(array_merge($args['post__not_in'], $excluded_ids))
+                : $excluded_ids;
+        }
+    }
+    return $args;
+}
+
+// 3. Nonaktifkan Author Sitemap (author-sitemap.xml) secara menyeluruh
+add_filter('wp_sitemaps_add_provider', function($provider, $name) {
+    if ($name === 'users') {
+        return false;
+    }
+    return $provider;
+}, 10, 2);
+
+add_filter('wpseo_sitemap_exclude_author', '__return_empty_array');
+add_filter('wpseo_Idx_author_sitemap', '__return_false');
+add_filter('rank_math/sitemap/author/exclude', '__return_true');

@@ -23,10 +23,9 @@ if ( ! empty( $barcode_id ) ) {
             b.status, 
             b.date_transaction, 
             b.warranty_exp, 
-            c.customer_name, 
+            b.customer AS customer_name, 
             e.location 
         FROM wp_barcode b 
-        LEFT JOIN wp_customer c ON b.customer_id = c.customer_id 
         LEFT JOIN wp_employee e ON b.employee_id = e.employee_id 
         WHERE b.barcodeID = %s
     ", $barcode_id );
@@ -37,8 +36,7 @@ if ( ! empty( $barcode_id ) ) {
         $data_found = true;
     }
 }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -196,22 +194,19 @@ if ( ! empty( $barcode_id ) ) {
 </head>
 <body>
 
-    <?php if ( empty( $barcode_id ) ) : ?>
-        <div class="transaction-card">
+    <?php if ( empty( $barcode_id ) ) : ?><div class="transaction-card">
             <div class="not-found">
                 <h2>Parameter ID Kosong</h2>
                 <p>Silakan akses halaman ini menggunakan hasil scan QR Code yang valid.</p>
             </div>
         </div>
-    <?php elseif ( ! $data_found ) : ?>
-        <div class="transaction-card">
+    <?php elseif ( ! $data_found ) : ?><div class="transaction-card">
             <div class="not-found">
                 <h2>Data Transaksi Tidak Ditemukan</h2>
                 <p>Tidak ada data untuk transaksi dengan ID: <strong><?php echo esc_html($barcode_id); ?></strong></p>
             </div>
         </div>
-    <?php else : ?>
-        <div class="transaction-card">
+    <?php else : ?><div class="transaction-card">
             
             <!-- BAGIAN KIRI: QR CODE -->
             <div class="card-left">
@@ -273,7 +268,19 @@ if ( ! empty( $barcode_id ) ) {
                 correctLevel : QRCode.CorrectLevel.H
             });
         </script>
-    <?php endif; ?>
-
-</body>
+    <?php endif; ?></body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

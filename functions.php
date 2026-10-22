@@ -1361,6 +1361,29 @@ function gjs_cleanup_sitemap_caches_v4() {
     update_option('gjs_sitemap_cleaned_v4', 'yes');
 }
 
+// Exclude MailPoet system pages (subscription management/unsubscribe) from XML sitemaps
+add_filter('wpseo_sitemap_exclude_post_type', function($exclude, $post_type) {
+    return ($post_type === 'mailpoet_page') ? true : $exclude;
+}, 999, 2);
+add_filter('wp_sitemaps_post_types', function($post_types) {
+    unset($post_types['mailpoet_page']);
+    return $post_types;
+}, 999);
+add_filter('jetpack_sitemap_post_types', function($post_types) {
+    return is_array($post_types) ? array_values(array_diff($post_types, array('mailpoet_page'))) : $post_types;
+}, 999);
+add_filter('rank_math/sitemap/exclude_post_type', function($exclude, $type) {
+    return ($type === 'mailpoet_page') ? true : $exclude;
+}, 999, 2);
+
+// v6: flush Yoast sitemap cache after excluding mailpoet_page
+add_action('init', function() {
+    if (get_option('gjs_sitemap_cleaned_v6') === 'yes') return;
+    global $wpdb;
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%'");
+    update_option('gjs_sitemap_cleaned_v6', 'yes');
+}, 12);
+
 // v5: flush sitemap caches again after excluding employee-dashboard
 add_action('init', 'gjs_cleanup_sitemap_caches_v5', 11);
 function gjs_cleanup_sitemap_caches_v5() {

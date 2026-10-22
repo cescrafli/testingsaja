@@ -634,7 +634,7 @@ add_filter( 'jetpack_sitemap_skip_post', function( $skip, $post ) {
         return true;
     }
     if ( isset( $post->post_name ) ) {
-        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid', 'employee-dashboard', 'portal-karyawan' );
         if ( in_array( $post->post_name, $excluded_slugs, true ) ) {
             return true;
         }
@@ -671,7 +671,7 @@ add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function( $excluded_ids ) 
     if ( ! is_array( $excluded_ids ) ) {
         $excluded_ids = array();
     }
-    $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+    $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid', 'employee-dashboard', 'portal-karyawan' );
     foreach ( $excluded_slugs as $slug ) {
         $p = get_page_by_path( $slug );
         if ( $p ) {
@@ -684,7 +684,7 @@ add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function( $excluded_ids ) 
 // 6. Exclude system & noindex pages from WordPress Core XML Sitemaps
 add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
     if ( $post_type === 'page' ) {
-        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid', 'employee-dashboard', 'portal-karyawan' );
         $excluded_ids = array();
         foreach ( $excluded_slugs as $slug ) {
             $p = get_page_by_path( $slug );
@@ -901,6 +901,17 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
     }
     */
 
+}
+
+// Early redirect /news-sitemap.xml (served by Jetpack before template_redirect) to /sitemap_index.xml
+add_action('init', 'gjs_early_news_sitemap_redirect', 0);
+function gjs_early_news_sitemap_redirect() {
+    $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '', '/');
+    if (preg_match('#(^|/)news-sitemap(\.xml|\.xsl)?$#i', $path)) {
+        nocache_headers();
+        wp_redirect(home_url('/sitemap_index.xml'), 301);
+        exit;
+    }
 }
 
 // Ensure /product/interior/ is a published WordPress Page so it is natively picked up by XML Sitemaps
@@ -1195,6 +1206,8 @@ function gds_get_excluded_sitemap_page_ids() {
         'single-project',
         'gallery-masonry',
         'gallery-grid',
+        'employee-dashboard',
+        'portal-karyawan',
     );
 
     $excluded_ids = array();
@@ -1346,6 +1359,18 @@ function gjs_cleanup_sitemap_caches_v4() {
     $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
 
     update_option('gjs_sitemap_cleaned_v4', 'yes');
+}
+
+// v5: flush sitemap caches again after excluding employee-dashboard
+add_action('init', 'gjs_cleanup_sitemap_caches_v5', 11);
+function gjs_cleanup_sitemap_caches_v5() {
+    if (get_option('gjs_sitemap_cleaned_v5') === 'yes') {
+        return;
+    }
+    global $wpdb;
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
+    $wpdb->query("DELETE FROM $wpdb->posts WHERE post_type IN ('jp_sitemap', 'jp_sitemap_master', 'jp_img_sitemap', 'jp_news_sitemap')");
+    update_option('gjs_sitemap_cleaned_v5', 'yes');
 }
 
 

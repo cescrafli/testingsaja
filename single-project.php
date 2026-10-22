@@ -1,406 +1,129 @@
 <?php
 /* Template Name: Single Project */
 get_header();
+
+if ( have_posts() ) : while ( have_posts() ) : the_post();
+    $pid      = get_the_ID();
+    $client   = get_post_meta( $pid, '_project_client', true );
+    $location = get_post_meta( $pid, '_project_location', true );
+    $category = get_post_meta( $pid, '_project_category', true );
+    $thumb    = get_the_post_thumbnail_url( $pid, 'full' );
+    if ( ! $thumb ) $thumb = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+
+    $gallery = array();
+    for ( $i = 1; $i <= 24; $i++ ) {
+        $g = get_post_meta( $pid, '_project_gallery_' . $i, true );
+        if ( $g ) $gallery[] = $g;
+    }
+
+    // Jika Location berupa link Google Maps, jadikan tautan
+    $loc_is_url = $location && preg_match( '#^https?://#i', $location );
 ?>
 <main>
-            <div class="about section-nopb">
-                <div class="container">
-                    <div class="about_content">
-                        <article class="about_article">
-                            <div class="media">
-                                <picture>
-                                    <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                                    <img
-                                        class="lazy"
-                                        data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                        alt="Fresh Concept Construction Renovation"
-                                    />
-                                </picture>
+    <div class="about section-nopb" style="padding-top:140px;">
+        <div class="container">
+            <div class="about_content">
+                <article class="about_article">
+                    <h1 class="about_article-header" style="font-size:32px;margin-bottom:20px;"><?php the_title(); ?></h1>
+                    <div class="media">
+                        <picture>
+                            <img class="lazy" data-src="<?php echo esc_url( $thumb ); ?>" src="<?php echo esc_url( $thumb ); ?>" alt="<?php the_title_attribute(); ?>" />
+                        </picture>
+                    </div>
+                    <h3 class="about_article-header">Description</h3>
+                    <div class="about_article-text">
+                        <?php the_content(); ?>
+                    </div>
+                </article>
+                <div class="about_aside">
+                    <div class="about_info about_aside-item">
+                        <div class="wrapper">
+                            <div class="wrapper--helper">
+                                <h3 class="about_info-title title">Information About the Project</h3>
+                                <table class="about_info-table">
+                                    <tbody>
+                                        <?php if ( $client ) : ?>
+                                        <tr class="about_info-table_row">
+                                            <td class="property">Client</td>
+                                            <td class="value"><?php echo esc_html( $client ); ?></td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        <?php if ( $location ) : ?>
+                                        <tr class="about_info-table_row">
+                                            <td class="property">Location</td>
+                                            <td class="value">
+                                                <?php if ( $loc_is_url ) : ?>
+                                                    <a href="<?php echo esc_url( $location ); ?>" target="_blank" rel="noopener">Lihat di Maps</a>
+                                                <?php else : echo esc_html( $location ); endif; ?>
+                                            </td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        <?php if ( $category ) : ?>
+                                        <tr class="about_info-table_row">
+                                            <td class="property">Category</td>
+                                            <td class="value"><?php echo esc_html( $category ); ?></td>
+                                        </tr>
+                                        <?php endif; ?>
+                                        <tr class="about_info-table_row">
+                                            <td class="property">Date</td>
+                                            <td class="value"><?php echo esc_html( get_the_date() ); ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <h3 class="about_article-header">Description</h3>
-                            <p class="about_article-text">
-                                Congue eu consequat ac felis donec et odio pellentesque. Nullam ac tortor vitae purus. Bibendum neque
-                                egestas congue quisque egestas diam in arcu cursus. Sit amet purus gravida quis blandit turpis. Erat nam at
-                                lectus urna duis convallis convallis tellus. Turpis nunc eget lorem dolor sed. Dignissim cras tincidunt
-                                lobortis feugiat. Tempor nec feugiat nisl pretium fusce id velit. Blandit libero volutpat sed cras ornare
-                                arcu. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Purus semper eget
-                                duis at tellus at urna. Consequat ac felis donec et odio pellentesque diam volutpat
-                            </p>
-                            <h3 class="about_article-header">Building better development</h3>
-                            <p class="about_article-text">
-                                Aenean sed adipiscing diam donec adipiscing tristique risus. Nunc pulvinar sapien et ligula ullamcorper
-                                malesuada. Venenatis urna cursus eget nunc scelerisque viverra mauris in. A cras semper auctor neque vitae
-                                tempus.
-                            </p>
-                            <ul class="checklist">
-                                <li class="checklist_item"><i class="icon-check icon"></i> Building the future with ideas</li>
-                                <li class="checklist_item"><i class="icon-check icon"></i> Designing future with excellence</li>
-                                <li class="checklist_item"><i class="icon-check icon"></i> Discovering possibility in concrete</li>
-                                <li class="checklist_item"><i class="icon-check icon"></i> Engineering the better way</li>
+                            <a class="link link-arrow" href="<?php echo esc_url( home_url('/contacts/') ); ?>"> Order service <i class="icon-arrow_right icon"></i> </a>
+                        </div>
+                    </div>
+                    <div class="about_contact about_aside-item primary-bg">
+                        <div class="wrapper">
+                            <h3 class="about_contact-title title">Are You Going to Implement Project?</h3>
+                            <ul class="contact-info">
+                                <li class="contact-info_group">
+                                    <span class="name">Address</span>
+                                    <span class="content">Jl. Raya Transyogi No 8 Cileungsi, Bogor, Jawa Barat</span>
+                                </li>
+                                <li class="contact-info_group">
+                                    <span class="name">Email</span>
+                                    <span class="content d-inline-flex flex-column">
+                                        <a class="link" href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a>
+                                    </span>
+                                </li>
+                                <li class="contact-info_group">
+                                    <span class="name">Phone</span>
+                                    <span class="content d-inline-flex flex-column">
+                                        <a class="link" href="https://wa.me/628111021088" target="_blank">+6281-1102-1088</a>
+                                        <a class="link" href="tel:+622180476151">+6221 - 8047 6151</a>
+                                    </span>
+                                </li>
                             </ul>
-                            <h3 class="about_article-header">Engineering With Style</h3>
-                            <p class="about_article-text">
-                                Aliquet nec ullamcorper sit amet risus nullam eget felis. Ligula ullamcorper malesuada proin libero. Viverra
-                                mauris in aliquam sem. Sem viverra aliquet eget sit amet. Dignissim convallis aenean et tortor at. Velit
-                                scelerisque in dictum non consectetur a. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula
-                                ullamcorper.
-                            </p>
-                        </article>
-                        <div class="about_aside">
-                            <div class="about_info about_aside-item">
-                                <div class="wrapper">
-                                    <div class="wrapper--helper">
-                                        <h3 class="about_info-title title">Information About the Project</h3>
-                                        <table class="about_info-table">
-                                            <tbody>
-                                                <tr class="about_info-table_row">
-                                                    <td class="property">Location</td>
-                                                    <td class="value">California , US</td>
-                                                </tr>
-                                                <tr class="about_info-table_row">
-                                                    <td class="property">Sector</td>
-                                                    <td class="value">Buildings, civil</td>
-                                                </tr>
-                                                <tr class="about_info-table_row">
-                                                    <td class="property">Technology</td>
-                                                    <td class="value">Monolithic</td>
-                                                </tr>
-                                                <tr class="about_info-table_row">
-                                                    <td class="property">Scope of Work</td>
-                                                    <td class="value">12 000</td>
-                                                </tr>
-                                                <tr class="about_info-table_row">
-                                                    <td class="property">Completion Date</td>
-                                                    <td class="value">Jan 1, 2021</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a class="link link-arrow" href="<?php echo esc_url( home_url('/contacts/') ); ?>"> Order service <i class="icon-arrow_right icon"></i> </a>
-                                </div>
-                            </div>
-                            <div class="about_contact about_aside-item primary-bg">
-                                <div class="wrapper">
-                                    <h3 class="about_contact-title title">Are You Going to Implement Project?</h3>
-                                    <ul class="contact-info">
-                                        <li class="contact-info_group">
-                                            <span class="name">Address</span>
-                                            <span class="content">Jl. Raya Transyogi No 8 Cileungsi, Bogor, Jawa Barat</span>
-                                        </li>
-                                        <li class="contact-info_group">
-                                            <span class="name">Email</span>
-                                            <span class="content d-inline-flex flex-column">
-                                                <a class="link" href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a>
-                                            </span>
-                                        </li>
-                                        <li class="contact-info_group">
-                                            <span class="name">Phone</span>
-                                            <span class="content d-inline-flex flex-column">
-                                                <a class="link" href="https://wa.me/628111021088" target="_blank">+6281-1102-1088</a>
-                                                <a class="link" href="tel:+622180476151">+6221 - 8047 6151</a>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <ul class="socials">
-                                        <li class="socials_item">
-                                            <a
-                                                class="socials_item-link"
-                                                href="#"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label="Facebook"
-                                            >
-                                                <i class="icon-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="socials_item">
-                                            <a
-                                                class="socials_item-link"
-                                                href="#"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label="Instagram"
-                                            >
-                                                <i class="icon-instagram"></i>
-                                            </a>
-                                        </li>
-                                        <li class="socials_item">
-                                            <a
-                                                class="socials_item-link"
-                                                href="#"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label="Twitter"
-                                            >
-                                                <i class="icon-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="socials_item">
-                                            <a
-                                                class="socials_item-link"
-                                                href="#"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label="WhatsApp"
-                                            >
-                                                <i class="icon-whatsapp"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="gallery presentation" data-role="gallery">
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
+        </div>
+    </div>
 
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="gallery_item">
-                    <a
-                        class="media"
-                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                        data-caption="Fresh Concept Construction Renovation"
-                        data-role="gallery-link"
-                    >
-                        <picture>
-                            <source data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" type="image/webp" />
-                            <img class="lazy" data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg" alt="@@caption" />
-                        </picture>
-                        <div class="overlay">
-                            <div class="overlay_header section_header">
-                                <span class="subtitle">Our gallery</span>
-                            </div>
-
-                            <h4 class="overlay_caption">Fresh Concept Construction Renovation</h4>
-                            <span class="overlay_label">Special Projects</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <section class="feedback section">
-                <div class="container">
-                    <div class="feedback_header section_header">
-                        <span class="subtitle">Feedback</span>
-                        <h2 class="title">What <span class="highlight">Our Clients</span> Say About Us</h2>
-                        <p class="text">
-                            Non curabitur gravida arcu ac tortor dignissim convallis aenean. Dui id ornare arcu odio. Sodales ut eu sem
-                            integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam
-                        </p>
-                        <a class="btn" href="<?php echo esc_url( home_url('/contacts/') ); ?>">Consult now</a>
+    <?php if ( ! empty( $gallery ) ) : ?>
+    <div class="gallery presentation" data-role="gallery">
+        <?php foreach ( $gallery as $img ) : ?>
+        <div class="gallery_item">
+            <a class="media" href="<?php echo esc_url( $img ); ?>" data-caption="<?php the_title_attribute(); ?>" data-role="gallery-link">
+                <picture>
+                    <img class="lazy" data-src="<?php echo esc_url( $img ); ?>" src="<?php echo esc_url( $img ); ?>" alt="<?php the_title_attribute(); ?>" />
+                </picture>
+                <div class="overlay">
+                    <div class="overlay_header section_header">
+                        <span class="subtitle">Our gallery</span>
                     </div>
-                    <div class="feedback_slider swiper">
-                        <div class="swiper-wrapper">
-                            <div class="feedback_slider-slide swiper-slide">
-                                <p class="main">
-                                    Consequat nisl vel pretium lectus quam id leo. Mauris augue neque gravida in fermentum et sollicitudin
-                                    ac orci. Blandit libero volutpat sed cras ornare
-                                </p>
-                                <div class="media">
-                                    <div class="avatar">
-                                        <picture>
-                                            <source
-                                                data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                type="image/webp"
-                                            />
-                                            <img
-                                                class="lazy"
-                                                data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                alt="Rene Rodriguez"
-                                            />
-                                        </picture>
-                                    </div>
-                                    <div class="media_info">
-                                        <span class="name">Rene Rodriguez</span>
-                                        <span class="company">Acelerisque</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="feedback_slider-slide swiper-slide">
-                                <p class="main">
-                                    Consequat nisl vel pretium lectus quam id leo. Mauris augue neque gravida in fermentum et sollicitudin
-                                    ac orci. Blandit libero volutpat sed cras ornare
-                                </p>
-                                <div class="media">
-                                    <div class="avatar">
-                                        <picture>
-                                            <source
-                                                data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                type="image/webp"
-                                            />
-                                            <img
-                                                class="lazy"
-                                                data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                alt="John Smith"
-                                            />
-                                        </picture>
-                                    </div>
-                                    <div class="media_info">
-                                        <span class="name">John Smith</span>
-                                        <span class="company">Loremipsum</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="feedback_slider-slide swiper-slide">
-                                <p class="main">
-                                    Consequat nisl vel pretium lectus quam id leo. Mauris augue neque gravida in fermentum et sollicitudin
-                                    ac orci. Blandit libero volutpat sed cras ornare
-                                </p>
-                                <div class="media">
-                                    <div class="avatar">
-                                        <picture>
-                                            <source
-                                                data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                type="image/webp"
-                                            />
-                                            <img
-                                                class="lazy"
-                                                data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                alt="Marta Diaz"
-                                            />
-                                        </picture>
-                                    </div>
-                                    <div class="media_info">
-                                        <span class="name">Marta Diaz</span>
-                                        <span class="company">Qwerty</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="feedback_slider-slide swiper-slide">
-                                <p class="main">
-                                    Consequat nisl vel pretium lectus quam id leo. Mauris augue neque gravida in fermentum et sollicitudin
-                                    ac orci. Blandit libero volutpat sed cras ornare
-                                </p>
-                                <div class="media">
-                                    <div class="avatar">
-                                        <picture>
-                                            <source
-                                                data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                type="image/webp"
-                                            />
-                                            <img
-                                                class="lazy"
-                                                data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                alt="Victor Adams"
-                                            />
-                                        </picture>
-                                    </div>
-                                    <div class="media_info">
-                                        <span class="name">Victor Adams</span>
-                                        <span class="company">Dolorsitamet</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="feedback_slider-slide swiper-slide">
-                                <p class="main">
-                                    Consequat nisl vel pretium lectus quam id leo. Mauris augue neque gravida in fermentum et sollicitudin
-                                    ac orci. Blandit libero volutpat sed cras ornare
-                                </p>
-                                <div class="media">
-                                    <div class="avatar">
-                                        <picture>
-                                            <source
-                                                data-srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                srcset="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                type="image/webp"
-                                            />
-                                            <img
-                                                class="lazy"
-                                                data-src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                src="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
-                                                alt="Sarah Doe"
-                                            />
-                                        </picture>
-                                    </div>
-                                    <div class="media_info">
-                                        <span class="name">Sarah Doe</span>
-                                        <span class="company">Companyname</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feedback_slider-pagination swiper-pagination"></div>
-                    </div>
+                    <h4 class="overlay_caption"><?php the_title(); ?></h4>
+                    <?php if ( $category ) : ?><span class="overlay_label"><?php echo esc_html( $category ); ?></span><?php endif; ?>
                 </div>
-            </section>
-        </main>
+            </a>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+</main>
 <?php
+endwhile; endif;
 get_footer();
-?>

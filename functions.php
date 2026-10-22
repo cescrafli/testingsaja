@@ -628,10 +628,82 @@ add_filter( 'jetpack_sitemap_image_skip_post', function( $skip, $post ) {
     return false;
 }, 10, 2 );
 
-// 3. One-time DB cleanup and Jetpack sitemap cache invalidator
-add_action( 'init', 'gjs_cleanup_sitemap_attachments_v1' );
-function gjs_cleanup_sitemap_attachments_v1() {
-    if ( get_option( 'gjs_sitemap_cleaned_v1' ) === 'yes' ) {
+// 3. Exclude internal system pages & noindex pages from Jetpack sitemap (sitemap-1.xml)
+add_filter( 'jetpack_sitemap_skip_post', function( $skip, $post ) {
+    if ( $skip ) {
+        return true;
+    }
+    if ( isset( $post->post_name ) ) {
+        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+        if ( in_array( $post->post_name, $excluded_slugs, true ) ) {
+            return true;
+        }
+    }
+    // Also check post meta for explicit noindex
+    if ( isset( $post->ID ) ) {
+        $meta_robots = get_post_meta( $post->ID, '_yoast_wpseo_meta-robots-noindex', true );
+        if ( $meta_robots === '1' ) {
+            return true;
+        }
+        $rm_robots = get_post_meta( $post->ID, 'rank_math_robots', true );
+        if ( is_array( $rm_robots ) && in_array( 'noindex', $rm_robots, true ) ) {
+            return true;
+        }
+    }
+    return $skip;
+}, 10, 2 );
+
+// 4. Extra URL-level filter for Jetpack sitemap items
+add_filter( 'jetpack_sitemap_url', function( $url_data ) {
+    if ( ! empty( $url_data['url'] ) ) {
+        $excluded_paths = array( '/griyadjayamasuk/', '/detail-transaksi/', '/single-project/', '/gallery-masonry/', '/gallery-grid/' );
+        foreach ( $excluded_paths as $path ) {
+            if ( strpos( $url_data['url'], $path ) !== false ) {
+                return false;
+            }
+        }
+    }
+    return $url_data;
+}, 10, 1 );
+
+// 5. Exclude system & noindex pages from Yoast SEO sitemaps
+add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function( $excluded_ids ) {
+    if ( ! is_array( $excluded_ids ) ) {
+        $excluded_ids = array();
+    }
+    $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+    foreach ( $excluded_slugs as $slug ) {
+        $p = get_page_by_path( $slug );
+        if ( $p ) {
+            $excluded_ids[] = $p->ID;
+        }
+    }
+    return array_unique( $excluded_ids );
+} );
+
+// 6. Exclude system & noindex pages from WordPress Core XML Sitemaps
+add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
+    if ( $post_type === 'page' ) {
+        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid' );
+        $excluded_ids = array();
+        foreach ( $excluded_slugs as $slug ) {
+            $p = get_page_by_path( $slug );
+            if ( $p ) {
+                $excluded_ids[] = $p->ID;
+            }
+        }
+        if ( ! empty( $excluded_ids ) ) {
+            $post__not_in = isset( $args['post__not_in'] ) ? (array) $args['post__not_in'] : array();
+            $args['post__not_in'] = array_merge( $post__not_in, $excluded_ids );
+        }
+    }
+    return $args;
+}, 10, 2 );
+
+// 7. One-time DB cleanup and Jetpack sitemap cache invalidator (v2 for sitemap-1.xml refresh)
+add_action( 'init', 'gjs_cleanup_sitemap_attachments_v2' );
+function gjs_cleanup_sitemap_attachments_v2() {
+    if ( get_option( 'gjs_sitemap_cleaned_v2' ) === 'yes' ) {
         return;
     }
 
@@ -648,7 +720,7 @@ function gjs_cleanup_sitemap_attachments_v1() {
           )
     " );
 
-    // B. Delete cached Jetpack sitemap entries so image-sitemap-1.xml regenerates cleanly
+    // B. Delete cached Jetpack sitemap entries so both sitemap-1.xml and image-sitemap-1.xml regenerate cleanly
     $wpdb->query( "
         DELETE FROM {$wpdb->posts} 
         WHERE post_type IN ('jp_img_sitemap', 'jp_sitemap', 'jp_sitemap_master')
@@ -666,7 +738,7 @@ function gjs_cleanup_sitemap_attachments_v1() {
         wp_schedule_single_event( time(), 'jp_sitemap_cron_hook' );
     }
 
-    update_option( 'gjs_sitemap_cleaned_v1', 'yes' );
+    update_option( 'gjs_sitemap_cleaned_v2', 'yes' );
 }
 
 
@@ -814,6 +886,14 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
 add_action('template_redirect', 'gjs_seo_template_redirects', 1);
 function gjs_seo_template_redirects() {
     if (is_admin()) return;
+
+    // Direct 1-hop canonical redirect for www host requests to eliminate redirect chains
+    if ( isset( $_SERVER['HTTP_HOST'] ) && strpos( $_SERVER['HTTP_HOST'], 'www.' ) === 0 ) {
+        $canonical_host = preg_replace( '/^www\./i', '', $_SERVER['HTTP_HOST'] );
+        $canonical_url  = 'https://' . $canonical_host . ( $_SERVER['REQUEST_URI'] ?? '/' );
+        wp_safe_redirect( $canonical_url, 301 );
+        exit;
+    }
 
     $req_uri = $_SERVER['REQUEST_URI'] ?? '';
     $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');

@@ -185,20 +185,45 @@ $item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Structured Data (JSON-LD) for SEO & LocalBusiness -->
+<!-- Structured Data (JSON-LD) for SEO & Google Rich Results -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "ProfessionalService",
+      "@id": "https://griyadjayasentosa.id/#organization",
+      "name": "Griya Djaya Sentosa",
+      "url": "https://griyadjayasentosa.id",
+      "logo": "<?php echo esc_url( get_template_directory_uri() . '/svg/logo.svg' ); ?>",
+      "image": "<?php echo esc_url( get_template_directory_uri() . '/img/interior-hero.jpg' ); ?>",
+      "telephone": "+<?php echo esc_attr($wa_phone); ?>",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Raya Transyogi No 8",
+        "addressLocality": "Cileungsi, Bogor",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "16820",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -6.3983,
+        "longitude": 106.9687
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Jabodetabek"
+      }
+    },
+    {
       "@type": "Service",
+      "@id": "https://griyadjayasentosa.id/product/interior/#service",
       "name": "Interior Design & Turnkey Fitting Out Griya Djaya Sentosa",
       "serviceType": "Interior Architectural Design & Turnkey Contractor",
       "provider": {
-        "@type": "LocalBusiness",
-        "name": "Griya Djaya Sentosa",
-        "telephone": "+<?php echo esc_attr($wa_phone); ?>",
-        "url": "https://griyadjayasentosa.id"
+        "@id": "https://griyadjayasentosa.id/#organization"
       },
       "areaServed": "Jabodetabek, Indonesia",
       "description": "Layanan desain interior arsitektural 3D dan kontraktor fitting out terpadu dengan workshop mandiri untuk residensial mewah dan properti komersial."

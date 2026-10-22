@@ -137,7 +137,19 @@ global $custom_css; $custom_css = 'blog'; get_header();
                     'post_status' => 'publish'
                 ));
                 foreach( $recent_posts as $recent ) {
-                    echo '<li><a href="' . get_permalink($recent["ID"]) . '">' . $recent["post_title"] . '</a></li>';
+                    echo '<li><a href="' . get_permalink($recent["ID"]) . '">' . esc_html($recent["post_title"]) . '</a></li>';
+                }
+                ?>
+            </ul>
+        </div>
+        
+        <div class="b-widget">
+            <h3 class="b-widget-title">Kategori</h3>
+            <ul class="b-list">
+                <?php
+                $categories = get_categories(array('hide_empty' => true));
+                foreach( $categories as $cat ) {
+                    echo '<li><a href="' . esc_url(get_category_link($cat->term_id)) . '">' . esc_html($cat->name) . ' (' . $cat->count . ')</a></li>';
                 }
                 ?>
             </ul>

@@ -96,7 +96,7 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
                 <?php 
                 $categories = get_the_category();
                 if ( ! empty( $categories ) ) {
-                    echo esc_html( $categories[0]->name );   
+                    echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '" style="color: inherit; text-decoration: none;">' . esc_html( $categories[0]->name ) . '</a>';   
                 } else {
                     echo 'ALL';
                 }

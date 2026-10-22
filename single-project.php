@@ -22,20 +22,20 @@ body.admin-bar .header {
     }
 }
 .about {
-    padding-top: 150px !important;
+    padding-top: 180px !important;
 }
 body.admin-bar .about {
-    padding-top: 190px !important;
+    padding-top: 220px !important;
 }
 @media (max-width: 991px) {
     .header {
         padding: 14px 0 !important;
     }
     .about {
-        padding-top: 110px !important;
+        padding-top: 130px !important;
     }
     body.admin-bar .about {
-        padding-top: 150px !important;
+        padding-top: 170px !important;
     }
 }
 

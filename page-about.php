@@ -106,11 +106,13 @@ global $custom_css; $custom_css = 'about'; get_header();
                     array('file' => '5. Mesin Welding.jpg.jpeg', 'title' => 'Mesin Welding')
                 );
                 foreach($machines as $machine): 
-                    $img_url = get_template_directory_uri() . '/img/machines/' . $machine['file'];
+                    $raw_img = get_template_directory_uri() . '/img/machines/' . $machine['file'] . '?v=3';
+                    $display_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'medium_large') : $raw_img;
+                    $lightbox_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'lightbox') : $raw_img;
                 ?>
                 <div style="text-align: center;">
-                    <a class="faq-gallery-link" style="display: block; border: 4px solid #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 15px;" href="<?php echo esc_url($img_url); ?>" data-caption="<?php echo esc_attr($machine['title']); ?>">
-                        <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($machine['title']); ?>" style="object-fit: cover; width: 100%; aspect-ratio: 1/1; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+                    <a class="faq-gallery-link" style="display: block; border: 4px solid #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 15px;" href="<?php echo esc_url($lightbox_url); ?>" data-caption="<?php echo esc_attr($machine['title']); ?>">
+                        <img src="<?php echo esc_url($display_url); ?>" alt="<?php echo esc_attr($machine['title']); ?>" loading="lazy" decoding="async" style="object-fit: cover; width: 100%; aspect-ratio: 1/1; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
                     </a>
                     <h4 style="font-size: 16px; font-weight: 700; color: #1a202c; margin: 0; line-height: 1.4;"><?php echo esc_html($machine['title']); ?></h4>
                 </div>

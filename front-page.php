@@ -445,8 +445,8 @@ global $custom_css; $custom_css = 'index'; get_header();
               <img src="<?php echo get_template_directory_uri(); ?>/img/partners/img-logo-1-2.webp?v=4" alt="Product Support" class="brand-logo">
               <img src="<?php echo get_template_directory_uri(); ?>/img/partners/img-logo-1-3.webp?v=4" alt="Product Support" class="brand-logo">
               <img src="<?php echo get_template_directory_uri(); ?>/img/partners/img-logo-1-4.webp?v=4" alt="Product Support" class="brand-logo">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-custom-1.png?v=2" alt="Product Support" class="brand-logo">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-custom-2.png?v=2" alt="Product Support" class="brand-logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-custom-1.png?v=3" alt="Product Support" class="brand-logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-custom-2.png?v=3" alt="Product Support" class="brand-logo">
 </div>
             <style>
               .product-support-grid { grid-template-columns: repeat(5, 1fr); align-items: center; justify-items: center; }

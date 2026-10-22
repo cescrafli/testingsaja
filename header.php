@@ -9,6 +9,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
                 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="google-site-verification" content="50BcLNeSoj22qWvDxQDStuBl8lHJ9L2r6c-PgcIWStA" />
         
         <!-- SEO & Open Graph Meta Tags -->
         <?php $gjs_is_interior = (is_page('interior') || is_page_template('page-product-interior.php') || (isset($_SERVER['REQUEST_URI']) && preg_match('#/(product/)?interior/?(\?|$)#', $_SERVER['REQUEST_URI']))); ?>

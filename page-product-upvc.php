@@ -439,7 +439,7 @@ $pintu_items = [
             
             // If they still used featured image as fallback
             if (empty($user_images) && has_post_thumbnail($c_post->ID)) {
-                $user_images[] = get_the_post_thumbnail_url($c_post->ID, 'full');
+                $user_images[] = get_the_post_thumbnail_url($c_post->ID, 'large') ?: get_the_post_thumbnail_url($c_post->ID, 'full');
             }
             
             // Remove images and galleries from text content

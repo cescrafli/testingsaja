@@ -39,7 +39,7 @@ $blog_args = array(
 $blog_query = new WP_Query($blog_args);
 if (have_posts()) :
     while (have_posts()) : the_post();
-        $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        $thumbnail = (get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full'));
         if (!$thumbnail) {
             $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
         }
@@ -102,7 +102,7 @@ endif;
             ?>
             <li class="list-item">
                 <?php if ($hot_index === 1) : 
-                    $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $thumbnail = (get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full'));
                     if (!$thumbnail) {
                         $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                     }
@@ -134,7 +134,7 @@ endif;
             ?>
             <li class="list-item">
                 <?php if ($hot_index === 1) : 
-                    $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $thumbnail = (get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full'));
                     if (!$thumbnail) {
                         $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                     }

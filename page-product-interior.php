@@ -276,7 +276,7 @@ $item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
             $single_gallery = array_values(array_unique($img_matches[1]));
         }
         if (empty($single_gallery) && has_post_thumbnail($cp->ID)) {
-            $single_gallery[] = get_the_post_thumbnail_url($cp->ID, 'full');
+            $single_gallery[] = get_the_post_thumbnail_url($cp->ID, 'large') ?: get_the_post_thumbnail_url($cp->ID, 'full');
         }
 
         // Clean text content

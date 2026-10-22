@@ -34,7 +34,7 @@ global $custom_css; $custom_css = 'projects2'; get_header();
                     while ($project_query->have_posts()) : $project_query->the_post();
                         $location = get_post_meta(get_the_ID(), '_project_location', true);
                         if (empty($location)) $location = 'Location not set';
-                        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
                         if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                 ?>
                     <li class="projects_list-item">

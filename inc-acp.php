@@ -24,7 +24,7 @@ if ($cw_posts) {
     preg_match_all('/<img[^>]+src="([^">]+)"/', $cw_raw, $cw_m);
     if (!empty($cw_m[1])) { $cw_gallery = array_values(array_unique($cw_m[1])); }
     if (empty($cw_gallery) && has_post_thumbnail($cw_posts[0]->ID)) {
-        $cw_gallery[] = get_the_post_thumbnail_url($cw_posts[0]->ID, 'full');
+        $cw_gallery[] = get_the_post_thumbnail_url($cw_posts[0]->ID, 'large') ?: get_the_post_thumbnail_url($cw_posts[0]->ID, 'full');
     }
 }
 $cw_gal_count = count($cw_gallery);

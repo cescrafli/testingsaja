@@ -104,7 +104,7 @@ p:has(#subscribe_blog) {
 </style>
 
 <?php 
-$img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+$img_url = get_the_post_thumbnail_url(get_the_ID(), 'large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
 if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
 ?>
 <div class="single-hero" style="background-image: url('<?php echo esc_url($img_url); ?>');"></div>
@@ -201,7 +201,7 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
             $latest_query = new WP_Query($latest_args);
             if ($latest_query->have_posts()) :
                 while ($latest_query->have_posts()) : $latest_query->the_post();
-                    $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
                     if (!$thumbnail) $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                     $cat = get_the_category();
                     $cat_name = !empty($cat) ? esc_html($cat[0]->name) : 'Uncategorized';

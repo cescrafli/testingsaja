@@ -48,7 +48,7 @@ global $custom_css; $custom_css = 'projects'; get_header();
                         $category = get_post_meta(get_the_ID(), '_project_category', true);
                         $cat_slug = !empty($category) ? sanitize_title($category) : 'uncategorized';
                         
-                        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                        $img_url = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
                         if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                         
                         $photo_count = 1;

@@ -81,7 +81,7 @@ global $custom_css; $custom_css = 'blog'; get_header();
         
         if ($blog_query->have_posts()) :
             while ($blog_query->have_posts()) : $blog_query->the_post();
-                $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
                 if (!$thumbnail) $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
         ?>
         <a href="<?php echo get_permalink(); ?>" class="blog-card">

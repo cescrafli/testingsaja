@@ -1192,3 +1192,47 @@ add_filter('wp_sitemaps_add_provider', function($provider, $name) {
 add_filter('wpseo_sitemap_exclude_author', '__return_empty_array');
 add_filter('wpseo_Idx_author_sitemap', '__return_false');
 add_filter('rank_math/sitemap/author/exclude', '__return_true');
+
+
+// =========================================================================
+// WordPress Media Optimization & Scaling Settings
+// =========================================================================
+
+// Limit max dimensions of newly uploaded images to 1920px (down from default 2560px)
+add_filter( 'big_image_size_threshold', function() {
+    return 1920;
+} );
+
+// Enforce standard JPEG quality 82% for WordPress image generation
+add_filter( 'wp_editor_set_quality', function() {
+    return 82;
+} );
+add_filter( 'jpeg_quality', function() {
+    return 82;
+} );
+
+// Smart helper to serve optimized intermediate image URLs
+if ( ! function_exists( 'gjs_get_optimized_image_url' ) ) {
+    function gjs_get_optimized_image_url( $url, $size = 'large' ) {
+        if ( empty( $url ) ) {
+            return $url;
+        }
+
+        // 1. If Jetpack Photon / Site Accelerator is active, use it for on-the-fly cloud resize & WebP conversion
+        if ( function_exists( 'jetpack_photon_url' ) ) {
+            $target_width = ( $size === 'medium_large' ) ? 768 : 1024;
+            return jetpack_photon_url( $url, array( 'width' => $target_width, 'quality' => 82, 'strip' => 'all' ) );
+        }
+
+        // 2. Resolve WordPress attachment ID to get generated web size
+        $att_id = attachment_url_to_postid( $url );
+        if ( $att_id ) {
+            $sized_url = wp_get_attachment_image_url( $att_id, $size );
+            if ( $sized_url ) {
+                return $sized_url;
+            }
+        }
+
+        return $url;
+    }
+}

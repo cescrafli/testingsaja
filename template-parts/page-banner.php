@@ -3,7 +3,7 @@
     $banner_bg_url = '';
     $obj_id = get_queried_object_id();
     if ($obj_id) {
-        $banner_bg_url = get_the_post_thumbnail_url($obj_id, 'full');
+        $banner_bg_url = get_the_post_thumbnail_url($obj_id, 'large') ?: get_the_post_thumbnail_url($obj_id, 'full');
     }
     if (!$banner_bg_url) {
         $banner_bg_url = get_template_directory_uri() . '/img/placeholder.jpg?v=2';

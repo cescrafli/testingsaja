@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <!-- Favicon dipindahkan ke pengaturan bawaan WordPress (Site Icon) agar dibaca Google -->
+        <?php if ( function_exists('has_site_icon') && has_site_icon() ) : ?>
+        <link rel="shortcut icon" href="<?php echo esc_url( get_site_icon_url( 192 ) ); ?>" />
+        <?php endif; ?>
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />

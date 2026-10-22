@@ -1041,6 +1041,21 @@ function gjs_early_news_sitemap_redirect() {
     }
 }
 
+// Redirect /favicon.ico directly to the official uploaded WordPress Site Icon
+add_action('init', 'gjs_redirect_root_favicon_to_site_icon', 0);
+function gjs_redirect_root_favicon_to_site_icon() {
+    $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '', '/');
+    if ($path === 'favicon.ico') {
+        if (function_exists('has_site_icon') && has_site_icon()) {
+            $icon_url = get_site_icon_url(192);
+            if ($icon_url) {
+                wp_redirect($icon_url, 301);
+                exit;
+            }
+        }
+    }
+}
+
 // Ensure /product/interior/ is a published WordPress Page so it is natively picked up by XML Sitemaps
 add_action('init', 'gjs_ensure_interior_page_published', 5);
 function gjs_ensure_interior_page_published() {

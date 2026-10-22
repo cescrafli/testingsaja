@@ -133,12 +133,15 @@ global $custom_css; $custom_css = 'faq'; get_header();
             }
             ?>
             <div class="gallery presentation">
-                <?php foreach($faq_galleries as $item): ?>
+                <?php foreach($faq_galleries as $item): 
+                    $lightbox_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($item['url'], 'lightbox') : $item['url'];
+                    $display_url  = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($item['url'], 'large') : $item['url'];
+                ?>
                 <div class="gallery_item">
-                    <a class="media faq-gallery-link" href="<?php echo esc_url($item['url']); ?>" data-caption="<?php echo esc_attr($item['caption']); ?>">
+                    <a class="media faq-gallery-link" href="<?php echo esc_url($lightbox_url); ?>" data-caption="<?php echo esc_attr($item['caption']); ?>">
                         <picture>
-                            <source data-srcset="<?php echo esc_url($item['url']); ?>" srcset="<?php echo esc_url($item['url']); ?>"  />
-                            <img class="lazy" data-src="<?php echo esc_url($item['url']); ?>" src="<?php echo esc_url($item['url']); ?>" alt="<?php echo esc_attr($item['caption']); ?>" style="object-fit: cover; width: 100%; height: 100%;" />
+                            <source data-srcset="<?php echo esc_url($display_url); ?>" srcset="<?php echo esc_url($display_url); ?>"  />
+                            <img class="lazy" data-src="<?php echo esc_url($display_url); ?>" src="<?php echo esc_url($display_url); ?>" alt="<?php echo esc_attr($item['caption']); ?>" loading="lazy" decoding="async" style="object-fit: cover; width: 100%; height: 100%;" />
                         </picture>
                     </a>
                 </div>

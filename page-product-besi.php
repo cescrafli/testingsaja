@@ -110,7 +110,8 @@ $items = [
         <?php foreach($items as $item): ?>
             <a href="?view=single&item=<?php echo $item['id']; ?>" class="detail-card">
                 <div class="detail-card-img-wrapper">
-                    <img src="<?php echo $upload_dir . $item['img']; ?>" alt="<?php echo $item['title']; ?>" class="detail-card-img" onerror="this.src='<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg';">
+                    <?php $item_img_src = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($upload_dir . $item['img'], 'large') : $upload_dir . $item['img']; ?>
+                    <img src="<?php echo esc_url($item_img_src); ?>" alt="<?php echo esc_attr($item['title']); ?>" class="detail-card-img" loading="lazy" decoding="async" onerror="this.src='<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg';">
                     <div class="hover-banner">VIEW MORE</div>
 </div>
                 <div class="detail-card-text">
@@ -149,8 +150,10 @@ $items = [
                     <?php foreach($user_images as $index => $img): ?>
                         <img class="si-slide-img" onclick="openLightbox(this.src)" src="<?php echo $img; ?>" alt="Gallery Image" style="<?php echo ($index == 0) ? 'display:block;' : 'display:none;'; ?> width:100%; object-fit:contain; max-height:400px; mix-blend-mode: multiply; cursor: zoom-in;">
                     <?php endforeach; ?>
-                <?php else: ?>
-                    <img src="<?php echo $upload_dir . $fallback_img; ?>" alt="<?php echo $fallback_title; ?>" style="width:100%; object-fit:contain; mix-blend-mode: multiply; cursor:zoom-in;" onclick="openLightbox(this.src)">
+                <?php else: 
+                    $fallback_img_src = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($upload_dir . $fallback_img, 'large') : $upload_dir . $fallback_img;
+                ?>
+                    <img src="<?php echo esc_url($fallback_img_src); ?>" alt="<?php echo esc_attr($fallback_title); ?>" loading="lazy" decoding="async" style="width:100%; object-fit:contain; mix-blend-mode: multiply; cursor:zoom-in;" onclick="openLightbox(this.src)">
                 <?php endif; ?>
             </div>
         <div class="si-right">

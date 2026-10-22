@@ -110,7 +110,8 @@ $items = [
         <?php foreach($items as $item): ?>
             <a href="?view=single&item=<?php echo $item['id']; ?>" class="detail-card">
                 <div class="detail-card-img-wrapper">
-                    <img src="<?php echo $upload_dir . $item['img']; ?>" alt="<?php echo $item['title']; ?>" class="detail-card-img" onerror="this.src='<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg';">
+                    <?php $item_img_src = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($upload_dir . $item['img'], 'large') : $upload_dir . $item['img']; ?>
+                    <img src="<?php echo esc_url($item_img_src); ?>" alt="<?php echo esc_attr($item['title']); ?>" class="detail-card-img" loading="lazy" decoding="async" onerror="this.src='<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg';">
                     <div class="hover-banner">VIEW MORE</div>
 </div>
                 <div class="detail-card-text">

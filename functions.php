@@ -959,6 +959,15 @@ add_action( 'wp_enqueue_scripts', function() {
     wp_dequeue_style( 'jetpack_likes' );
 }, 999 );
 
+// Move Jetpack Related Posts below Gallery on Single Project pages
+add_action( 'wp', function() {
+    if ( is_singular( 'project' ) && class_exists( 'Jetpack_RelatedPosts' ) ) {
+        $jprp = Jetpack_RelatedPosts::init();
+        remove_filter( 'the_content', array( $jprp, 'filter_add_target_to_dom' ), 40 );
+    }
+}, 20 );
+
+
 
 // Load Dynamic Settings for Interior Page (WP Admin > Produk > Pengaturan Interior)
 require_once get_template_directory() . '/inc-interior-admin.php';

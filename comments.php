@@ -78,6 +78,26 @@ if ( post_password_required() ) {
 </section>
 
 <style>
+/* Hide Jetpack Comment & Post Subscription Checkboxes */
+.comment-subscription-form,
+.comment-form-subscriptions,
+#subscribe_comments,
+#subscribe_blog,
+#subscribe-label,
+#subscribe-blog-label,
+p.comment-subscription-form,
+p.comment-form-subscriptions,
+p:has(#subscribe_comments),
+p:has(#subscribe_blog) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 /* New Comment Card Styling */
 .post_comments .list-item {
     position: relative;
@@ -177,6 +197,12 @@ ul.children::before {
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove Jetpack comment subscription elements from DOM
+    var subEls = document.querySelectorAll('.comment-subscription-form, .comment-form-subscriptions, #subscribe_comments, #subscribe_blog');
+    subEls.forEach(function(el) {
+        var p = el.closest('p') || el;
+        if (p) p.remove();
+    });
 
 // Anonymous comment toggle logic
     var anonToggle = document.getElementById('anonymous-toggle');

@@ -741,6 +741,27 @@ function gjs_cleanup_sitemap_attachments_v2() {
     update_option( 'gjs_sitemap_cleaned_v2', 'yes' );
 }
 
+// =========================================================================
+// Jetpack Subscriptions Comment Form Cleaner
+// Disables "Notify me of follow-up comments by email" & "Notify me of new posts by email"
+// =========================================================================
+add_filter( 'jetpack_allow_comment_subscription', '__return_false', 999 );
+add_filter( 'jetpack_allow_post_subscription', '__return_false', 999 );
+add_filter( 'jetpack_allow_per_post_subscriptions', '__return_false', 999 );
+add_filter( 'jetpack_show_subscription_modal', '__return_false', 999 );
+
+add_action( 'init', 'gjs_disable_jetpack_comment_subscriptions', 99 );
+function gjs_disable_jetpack_comment_subscriptions() {
+    remove_action( 'comment_form', 'jetpack_comment_subscription_init' );
+    if ( class_exists( 'Jetpack_Subscriptions' ) ) {
+        $jp_subs = Jetpack_Subscriptions::init();
+        remove_action( 'comment_form', array( $jp_subs, 'comment_subscribe_init' ) );
+        remove_action( 'comment_form', array( $jp_subs, 'comment_form' ) );
+        remove_action( 'comment_form_after_fields', array( $jp_subs, 'comment_form' ) );
+        remove_action( 'comment_form_logged_in_after_fields', array( $jp_subs, 'comment_form' ) );
+    }
+}
+
 
 // --- GJS Database Migration ---
 add_action('init', 'gjs_migrate_customer_to_barcode');

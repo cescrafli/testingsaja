@@ -71,6 +71,26 @@ if (have_posts()) : while (have_posts()) : the_post();
 .single-meta-bottom span { font-weight: 600; color: #333; }
 .single-bottom-nav { max-width: 900px; margin: 0 auto; }
 
+/* Hide Jetpack Comment & Post Subscriptions */
+.comment-subscription-form,
+.comment-form-subscriptions,
+#subscribe_comments,
+#subscribe_blog,
+#subscribe-label,
+#subscribe-blog-label,
+p.comment-subscription-form,
+p.comment-form-subscriptions,
+p:has(#subscribe_comments),
+p:has(#subscribe_blog) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 /* Typography Spacing Fixes for Gutenberg Content - MAXIMUM STRICTNESS */
 .post_content_body p, .post_content_body .wp-block-paragraph { margin-bottom: 24px !important; line-height: 1.8 !important; }
 .post_content_body h1, .post_content_body h2, .post_content_body h3, .post_content_body h4, .post_content_body h5, .post_content_body h6, .post_content_body .wp-block-heading { margin-top: 40px !important; margin-bottom: 20px !important; line-height: 1.4 !important; font-weight: 700 !important; color: #111 !important; }

@@ -71,7 +71,7 @@ get_header();
                                 <p class="description">
                                     Senectus et netus et malesuada. Nunc pulvinar sapien et ligula ullamcorper malesuada proin
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -84,7 +84,7 @@ get_header();
                                 <p class="description">
                                     Donec adipiscing tristique risus nec feugiat in. Porttitor massa id neque aliquam vestibulum morbi
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -97,7 +97,7 @@ get_header();
                                 <p class="description">
                                     Morbi tincidunt ornare massa eget egestas purus viverra blandit elementum cursus risus.
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -110,7 +110,7 @@ get_header();
                                 <p class="description">
                                     Ac tortor vitae purus faucibus ornare suspendisse sed nisi lacus. Nam aliquam sem et tortor
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -123,7 +123,7 @@ get_header();
                                 <p class="description">
                                     Mollis nunc sed id semper. Sodales ut etiam sit amet nisl purus. Sed odio morbi quis commodo odio
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -137,7 +137,7 @@ get_header();
                                     Tellus elementum sagittis vitae et. Amet justo donec enim diam vulputate ut consequat id porta nibh
                                     venenatis
                                 </p>
-                                <a class="link link-arrow" href="single-service.html">
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/product/') ); ?>">
                                     Details
                                     <i class="icon-arrow_right icon"></i>
                                 </a>
@@ -176,7 +176,7 @@ get_header();
                                     </span>
                                     <a
                                         class="link link-arrow link-arrow--alt"
-                                        href="single-project.html"
+                                        href="<?php echo esc_url( home_url('/projects/') ); ?>"
                                         data-aos="fade-in"
                                         data-aos-delay="50"
                                     >
@@ -208,7 +208,7 @@ get_header();
                                     </span>
                                     <a
                                         class="link link-arrow link-arrow--alt"
-                                        href="single-project.html"
+                                        href="<?php echo esc_url( home_url('/projects/') ); ?>"
                                         data-aos="fade-in"
                                         data-aos-delay="50"
                                     >
@@ -240,7 +240,7 @@ get_header();
                                     </span>
                                     <a
                                         class="link link-arrow link-arrow--alt"
-                                        href="single-project.html"
+                                        href="<?php echo esc_url( home_url('/projects/') ); ?>"
                                         data-aos="fade-in"
                                         data-aos-delay="50"
                                     >
@@ -272,7 +272,7 @@ get_header();
                                     </span>
                                     <a
                                         class="link link-arrow link-arrow--alt"
-                                        href="single-project.html"
+                                        href="<?php echo esc_url( home_url('/projects/') ); ?>"
                                         data-aos="fade-in"
                                         data-aos-delay="50"
                                     >
@@ -314,7 +314,7 @@ get_header();
                                 <span class="label"> Building Control Approval Rate </span>
                             </div>
                         </div>
-                        <a class="spots_info-btn btn" href="about.html">About company</a>
+                        <a class="spots_info-btn btn" href="<?php echo esc_url( home_url('/about/') ); ?>">About company</a>
                     </div>
                 </div>
             </section>
@@ -589,7 +589,7 @@ get_header();
                             </h2>
                         </div>
                         <div data-aos="fade-up">
-                            <a class="btn team_btn" href="team.html">Our team</a>
+                            <a class="btn team_btn" href="<?php echo esc_url( home_url('/about/') ); ?>">Our team</a>
                         </div>
                     </div>
                     <div class="video" data-aos="zoom-in" data-aos-duration="600">
@@ -687,7 +687,7 @@ get_header();
                             eu augue ut lectus
                         </p>
                         <div class="wrapper">
-                            <a class="btn" href="contacts.html">Contact Us</a>
+                            <a class="btn" href="<?php echo esc_url( home_url('/contacts/') ); ?>">Contact Us</a>
                         </div>
                     </div>
                     <div class="faq_accordion" id="faq_accordion">
@@ -777,7 +777,7 @@ get_header();
                                 Latest From the <span class="highlight">Blog</span>
                             </h2>
                         </div>
-                        <a class="btn blog_btn" href="blog.html">Our blog</a>
+                        <a class="btn blog_btn" href="<?php echo esc_url( home_url('/blog/') ); ?>">Our blog</a>
                     </div>
                     <ul class="blog_feed">
                         <li class="blog_feed-item">
@@ -803,7 +803,7 @@ get_header();
                                     Non nisi est sit amet facilisis magna. Eget est lorem ipsum dolor sit amet consectetur. Et egestas quis
                                     ipsum suspendisse
                                 </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/blog/') ); ?>"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
                         <li class="blog_feed-item">
@@ -829,7 +829,7 @@ get_header();
                                     Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
                                     torto
                                 </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/blog/') ); ?>"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
                         <li class="blog_feed-item">
@@ -855,7 +855,7 @@ get_header();
                                     Consectetur adipiscing elit ut aliquam purus sit. Gravida arcu ac tortor dignissim convallis aenean et
                                     torto
                                 </p>
-                                <a class="link link-arrow" href="single-post.html"> Read post <i class="icon-arrow_right icon"></i> </a>
+                                <a class="link link-arrow" href="<?php echo esc_url( home_url('/blog/') ); ?>"> Read post <i class="icon-arrow_right icon"></i> </a>
                             </div>
                         </li>
                     </ul>
@@ -865,7 +865,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -887,7 +887,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -909,7 +909,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -931,7 +931,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >

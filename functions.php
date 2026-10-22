@@ -905,6 +905,42 @@ function gjs_seo_template_redirects() {
         wp_safe_redirect($target_url, 301);
         exit;
     }
+
+    // 6. 301 Permanent Redirect for Crawler/Historical requests to template demo links (*.html & */img/placeholder.jpg)
+    if (preg_match('#(?:^|/)img/placeholder\.jpg$#i', $req_path)) {
+        wp_safe_redirect(get_template_directory_uri() . '/img/placeholder.jpg', 301);
+        exit;
+    }
+
+    if (preg_match('#(?:^|/)(?:contacts|kontak)\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/contacts/'), 301);
+        exit;
+    }
+
+    if (preg_match('#(?:^|/)(?:about|tentang|team|tim)\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/about/'), 301);
+        exit;
+    }
+
+    if (preg_match('#(?:^|/)(?:blog|single-post)\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/blog/'), 301);
+        exit;
+    }
+
+    if (preg_match('#(?:^|/)(?:services|single-service)\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/product/'), 301);
+        exit;
+    }
+
+    if (preg_match('#(?:^|/)(?:projects|single-project)\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/projects/'), 301);
+        exit;
+    }
+
+    if (preg_match('#\.html$#i', $req_path)) {
+        wp_safe_redirect(home_url('/'), 301);
+        exit;
+    }
 }
 
 // Load Dynamic Settings for Interior Page (WP Admin > Produk > Pengaturan Interior)

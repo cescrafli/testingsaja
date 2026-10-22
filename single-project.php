@@ -77,7 +77,7 @@ get_header();
                                             </tbody>
                                         </table>
                                     </div>
-                                    <a class="link link-arrow" href="#"> Order service <i class="icon-arrow_right icon"></i> </a>
+                                    <a class="link link-arrow" href="<?php echo esc_url( home_url('/contacts/') ); ?>"> Order service <i class="icon-arrow_right icon"></i> </a>
                                 </div>
                             </div>
                             <div class="about_contact about_aside-item primary-bg">
@@ -86,20 +86,19 @@ get_header();
                                     <ul class="contact-info">
                                         <li class="contact-info_group">
                                             <span class="name">Address</span>
-                                            <span class="content">2047 Cyrus Viaduct East Jadynchester</span>
+                                            <span class="content">Jl. Raya Transyogi No 8 Cileungsi, Bogor, Jawa Barat</span>
                                         </li>
                                         <li class="contact-info_group">
                                             <span class="name">Email</span>
                                             <span class="content d-inline-flex flex-column">
-                                                <a class="link" href="mailto:example.com">info@construct.com</a>
-                                                <a class="link" href="mailto:example.com">support@construct.com</a>
+                                                <a class="link" href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a>
                                             </span>
                                         </li>
                                         <li class="contact-info_group">
                                             <span class="name">Phone</span>
                                             <span class="content d-inline-flex flex-column">
-                                                <a class="link" href="tel:+13136453395">1 - 313 - 645 - 3395</a>
-                                                <a class="link" href="tel:+14699702609">1 - 469 - 970 - 2609</a>
+                                                <a class="link" href="https://wa.me/628111021088" target="_blank">+6281-1102-1088</a>
+                                                <a class="link" href="tel:+622180476151">+6221 - 8047 6151</a>
                                             </span>
                                         </li>
                                     </ul>
@@ -159,7 +158,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -181,7 +180,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -203,7 +202,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -225,7 +224,7 @@ get_header();
                 <div class="gallery_item">
                     <a
                         class="media"
-                        href="img/placeholder.jpg"
+                        href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                         data-caption="Fresh Concept Construction Renovation"
                         data-role="gallery-link"
                     >
@@ -253,7 +252,7 @@ get_header();
                             Non curabitur gravida arcu ac tortor dignissim convallis aenean. Dui id ornare arcu odio. Sodales ut eu sem
                             integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam
                         </p>
-                        <a class="btn" href="contacts.html">Consult now</a>
+                        <a class="btn" href="<?php echo esc_url( home_url('/contacts/') ); ?>">Consult now</a>
                     </div>
                     <div class="feedback_slider swiper">
                         <div class="swiper-wrapper">

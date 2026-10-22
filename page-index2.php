@@ -18,7 +18,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Chemistry and Metallurgy</h2>
@@ -26,7 +26,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Electrical Engineering</h2>
@@ -34,7 +34,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Specialty Services</h2>
@@ -42,7 +42,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Renovation Services</h2>
@@ -50,7 +50,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Process Engineering</h2>
@@ -58,7 +58,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Chemistry and Metallurgy</h2>
@@ -66,7 +66,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Electrical Engineering</h2>
@@ -74,7 +74,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Specialty Services</h2>
@@ -82,7 +82,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                                 <div class="service swiper-slide" data-bg="img/placeholder.jpg">
                                     <h2 class="title h1">Renovation Services</h2>
@@ -90,7 +90,7 @@ get_header();
                                         Varius morbi enim nunc faucibus a. Pretium quam vulputate dignissim suspendisse. Tortor vitae purus
                                         faucibus ornare. Viverra mauris in aliquam sem fringilla ut morbi
                                     </p>
-                                    <a class="btn" href="single-service.html">service details</a>
+                                    <a class="btn" href="<?php echo esc_url( home_url('/product/') ); ?>">service details</a>
                                 </div>
                             </div>
                         </div>
@@ -376,7 +376,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -398,7 +398,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -420,7 +420,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -442,7 +442,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -464,7 +464,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -486,7 +486,7 @@ get_header();
                         <li class="gallery_item" data-aos="fade-up">
                             <a
                                 class="media"
-                                href="img/placeholder.jpg"
+                                href="<?php echo get_template_directory_uri(); ?>/img/placeholder.jpg"
                                 data-caption="Fresh Concept Construction Renovation"
                                 data-role="gallery-link"
                             >
@@ -579,7 +579,7 @@ get_header();
                             Non curabitur gravida arcu ac tortor dignissim convallis aenean. Dui id ornare arcu odio. Sodales ut eu sem
                             integer vitae justo eget magna. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam
                         </p>
-                        <a class="btn" href="contacts.html">Consult now</a>
+                        <a class="btn" href="<?php echo esc_url( home_url('/contacts/') ); ?>">Consult now</a>
                     </div>
                     <div class="feedback_slider swiper">
                         <div class="swiper-wrapper">

@@ -1,7 +1,27 @@
 <?php
 /* Template Name: Single Project */
+global $custom_css; $custom_css = 'single-project';
 get_header();
-
+?>
+<style>
+/* Solid Dark Blue Header for Single Project */
+.header {
+    background-color: #041e3a !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+}
+.about {
+    padding-top: 130px !important;
+}
+@media (max-width: 991px) {
+    .about {
+        padding-top: 90px !important;
+    }
+}
+</style>
+<?php
 if ( have_posts() ) : while ( have_posts() ) : the_post();
     $pid      = get_the_ID();
     $client   = get_post_meta( $pid, '_project_client', true );
@@ -20,7 +40,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
     $loc_is_url = $location && preg_match( '#^https?://#i', $location );
 ?>
 <main>
-    <div class="about section-nopb" style="padding-top:140px;">
+    <div class="about section-nopb">
         <div class="container">
             <div class="about_content">
                 <article class="about_article">

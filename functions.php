@@ -943,6 +943,23 @@ function gjs_seo_template_redirects() {
     }
 }
 
+// ============================================================================
+// DISABLE JETPACK NOTIFICATIONS & LIKES COOKIE-CHECK (Fix 403 & atob error)
+// ============================================================================
+add_filter( 'wpl_is_likes_enabled', '__return_false', 999 );
+add_action( 'wp_before_admin_bar_render', function() {
+    global $wp_admin_bar;
+    if ( is_object( $wp_admin_bar ) ) {
+        $wp_admin_bar->remove_node( 'notes' );
+    }
+}, 999 );
+add_action( 'wp_enqueue_scripts', function() {
+    wp_dequeue_script( 'wpcom-notes-admin-bar' );
+    wp_dequeue_script( 'jetpack-notes-cookie-check' );
+    wp_dequeue_style( 'jetpack_likes' );
+}, 999 );
+
+
 // Load Dynamic Settings for Interior Page (WP Admin > Produk > Pengaturan Interior)
 require_once get_template_directory() . '/inc-interior-admin.php';
 

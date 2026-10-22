@@ -17,15 +17,7 @@
         <!-- description managed via wp_head() -->
         <?php endif; ?>
         
-        <meta property="og:site_name" content="Griya Djaya Sentosa" />
-        <meta property="og:title" content="Griya Djaya Sentosa | Kontraktor Kusen, Fasad, Besi & Kaca" />
-        <meta property="og:description" content="<?php echo esc_attr(function_exists('gjs_get_fallback_meta_description') ? gjs_get_fallback_meta_description() : 'Satu Mitra Fabrikasi untuk Seluruh Kebutuhan Kusen Aluminium, UPVC, Fasad, Besi & Kaca Proyek Anda.'); ?>" />
-        <meta property="og:image" content="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Screenshot-2026-08-06-135320.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://griyadjayasentosa.id/" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <?php // Open Graph and Twitter Card meta tags are dynamically managed by Yoast SEO / wp_head ?>
         
         <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/preload2.min.css" />
         <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3" />

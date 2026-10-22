@@ -89,16 +89,50 @@ function gjs_filter_seo_plugin_title( $title ) {
 		return $title;
 	}
 
-	// Capitalize Alumunium
-	$title = preg_replace('/^alumunium\b/i', 'Alumunium', $title);
+	// 1. Slug-based concise overrides for articles and projects that exceed 60 chars even without brand suffix
+	$req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+	$req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+	
+	$concise_title_map = array(
+		'apa-itu-curtain-wall-kenali-fungsi-dan-kapan-proyek-anda-membutuhkannya' => 'Apa itu Curtain Wall? Fungsi & Kapan Proyek Butuh',
+		'kusen-aluminium-ykk-stainless-steel-kantor-pt-djarum'                   => 'Kusen Aluminium YKK Stainless Kantor PT Djarum',
+		'project-tempat-padel-bandung-kusen-aluminium-pintu-kaca-shower'         => 'Tempat Padel Bandung: Kusen Aluminium & Kaca Shower',
+	);
+	
+	foreach ($concise_title_map as $slug_part => $concise_title) {
+		if (strpos($req_path, $slug_part) !== false || (is_singular() && isset($GLOBALS['post']->post_name) && $GLOBALS['post']->post_name === $slug_part)) {
+			return $concise_title;
+		}
+	}
 
-	// Remove redundant trailing brand if brand already in title
+	// 2. Capitalize Alumunium
+	$title = preg_replace('/^alumunium/i', 'Alumunium', $title);
+
+	// 3. Remove redundant trailing brand if brand already in title
 	if ( preg_match('/Griya Djaya Sentosa.+[\-\|]\s*Griya Djaya Sentosa$/i', $title) ) {
 		$title = preg_replace('/\s*[\-\|]\s*Griya Djaya Sentosa$/i', '', $title);
 	}
 
-	// Trim dangling separators (e.g. "Griya Djaya Sentosa -")
+	// 4. Adaptive brand suffix removal: If total length exceeds 60 characters, strip " - Griya Djaya Sentosa"
+	if ( mb_strlen($title) > 60 ) {
+		$stripped = preg_replace('/\s*[\-\|]\s*Griya Djaya Sentosa\s*$/i', '', $title);
+		if (!empty($stripped)) {
+			$title = $stripped;
+		}
+	}
+
+	// 5. Trim dangling separators (e.g. "Griya Djaya Sentosa -")
 	$title = preg_replace('/\s*[\-\|]\s*$/', '', $title);
+
+	// 6. Final safety check: If still > 60 characters, smartly truncate to word boundary
+	if ( mb_strlen($title) > 60 && !is_front_page() ) {
+		$trimmed = mb_substr($title, 0, 57);
+		$last_space = mb_strrpos($trimmed, ' ');
+		if ($last_space !== false && $last_space > 40) {
+			$trimmed = mb_substr($trimmed, 0, $last_space);
+		}
+		$title = rtrim($trimmed, '.,- ') . '...';
+	}
 
 	return trim($title);
 }
@@ -117,7 +151,7 @@ function gjs_get_fallback_meta_description() {
 		$req_path = trim(substr($req_path, strlen($home_path)), '/');
 	}
 
-	// 1. Interior Page
+	// 1. Interior Page (Optimized to 138 chars, well within 120-155 range)
 	$is_interior = (
 		is_page('interior') ||
 		is_page_template('page-product-interior.php') ||
@@ -126,7 +160,7 @@ function gjs_get_fallback_meta_description() {
 		(!empty($req_uri) && preg_match('#/(product/)?interior/?(\?|$)#', $req_uri))
 	);
 	if ($is_interior) {
-		return 'Jasa interior design dan fitting out turnkey: partisi kaca, wall panel kayu, kitchen set dan custom cabinetry dengan workshop sendiri. Konsultasi dan survey lokasi via WhatsApp.';
+		return 'Jasa interior & fitting out turnkey: partisi kaca, wall panel, kitchen set, dan custom cabinetry dari workshop sendiri. Konsultasi gratis.';
 	}
 
 	// 2. Homepage
@@ -191,18 +225,111 @@ function gjs_get_fallback_meta_description() {
 		}
 	}
 
-	return 'Satu Mitra Fabrikasi untuk Seluruh Kebutuhan Kusen Aluminium, UPVC, Fasad, Besi & Kaca Proyek Anda.';
+	// 6. Category and Taxonomy Archives (137-148 chars, preventing too short warnings)
+	if (is_category() || is_tax() || is_archive() || strpos($req_path, 'category/') === 0) {
+		$term_desc = category_description();
+		if (!empty($term_desc)) {
+			$clean_term_desc = wp_strip_all_tags($term_desc);
+			if (mb_strlen($clean_term_desc) >= 120 && mb_strlen($clean_term_desc) <= 155) {
+				return $clean_term_desc;
+			}
+		}
+		$cat_title = single_cat_title('', false);
+		if (empty($cat_title)) {
+			$cat_title = 'Artikel & Panduan';
+		}
+		return 'Kumpulan artikel ' . $cat_title . ' dari Griya Djaya Sentosa: panduan fabrikasi kusen UPVC, aluminium, fasad gedung, kaca tempered, dan interior.';
+	}
+
+	return 'Satu mitra fabrikasi terpercaya untuk kebutuhan kusen aluminium, UPVC, fasad gedung, kaca, dan interior proyek Anda. Konsultasi dan survei gratis.';
 }
 
 // Hook into SEO plugins (Yoast SEO & Rank Math)
 add_filter( 'wpseo_metadesc', 'gjs_filter_seo_plugin_metadesc', 99 );
 add_filter( 'rank_math/frontend/description', 'gjs_filter_seo_plugin_metadesc', 99 );
 function gjs_filter_seo_plugin_metadesc( $desc ) {
+	$req_uri = $_SERVER['REQUEST_URI'] ?? '';
+	// Force optimal 138-character description on Interior page
+	if ( preg_match('#/(product/)?interior/?(\?|$)#', $req_uri) ) {
+		return 'Jasa interior & fitting out turnkey: partisi kaca, wall panel, kitchen set, dan custom cabinetry dari workshop sendiri. Konsultasi gratis.';
+	}
+
 	if ( !empty($desc) ) {
-		return $desc; // Keep custom description entered in plugin
+		// If description contains default WordPress dummy text, replace with tailored description
+		if ( strpos($desc, 'This is an example of a page') !== false ) {
+			return gjs_get_fallback_meta_description();
+		}
+		// If category description is too short (< 120 chars), upgrade to detailed fallback
+		if ( (is_category() || is_archive() || strpos($req_uri, '/category/') !== false) && mb_strlen($desc) < 120 ) {
+			return gjs_get_fallback_meta_description();
+		}
+		// If description is too long (> 155 chars), smartly truncate to word boundary
+		if ( mb_strlen($desc) > 155 ) {
+			$trimmed = mb_substr($desc, 0, 152);
+			$last_space = mb_strrpos($trimmed, ' ');
+			if ($last_space !== false && $last_space > 100) {
+				$trimmed = mb_substr($trimmed, 0, $last_space);
+			}
+			return rtrim($trimmed, '.,- ') . '...';
+		}
+		return $desc;
 	}
 	$fallback = gjs_get_fallback_meta_description();
 	return !empty($fallback) ? $fallback : $desc;
+}
+
+// =========================================================================
+// Open Graph Harmonization Filters (Prevent OG URL & Description Mismatch)
+// =========================================================================
+
+// 1. Ensure og:url matches canonical URL exactly (especially for /product/interior/)
+add_filter( 'wpseo_opengraph_url', 'gjs_harmonize_yoast_og_url', 99 );
+function gjs_harmonize_yoast_og_url( $url ) {
+	$req_uri = $_SERVER['REQUEST_URI'] ?? '';
+	if ( preg_match( '#/(product/)?interior/?(\?|$)#', $req_uri ) ) {
+		return home_url( '/product/interior/' );
+	}
+	return $url;
+}
+
+// 2. Harmonize og:title with our optimized titles
+add_filter( 'wpseo_opengraph_title', 'gjs_filter_seo_plugin_title', 99 );
+
+// 3. Harmonize og:description and remove dummy placeholder text
+add_filter( 'wpseo_opengraph_desc', 'gjs_harmonize_yoast_og_desc', 99 );
+function gjs_harmonize_yoast_og_desc( $desc ) {
+	if ( empty( $desc ) || strpos( $desc, 'This is an example of a page' ) !== false ) {
+		return gjs_get_fallback_meta_description();
+	}
+	return $desc;
+}
+
+// 4. Dynamic Open Graph fallback: only outputs if Yoast SEO or Rank Math is NOT active
+add_action( 'wp_head', 'gjs_fallback_open_graph_tags', 2 );
+function gjs_fallback_open_graph_tags() {
+	if ( defined('WPSEO_VERSION') || class_exists('WPSEO_Frontend') || class_exists('RankMath') ) {
+		return;
+	}
+
+	$canonical_url = wp_get_canonical_url();
+	if ( !$canonical_url ) {
+		$canonical_url = home_url( $_SERVER['REQUEST_URI'] ?? '/' );
+	}
+	$title = wp_get_document_title();
+	$desc  = function_exists('gjs_get_fallback_meta_description') ? gjs_get_fallback_meta_description() : get_bloginfo('description');
+	$image = 'https://griyadjayasentosa.id/wp-content/uploads/2026/08/Screenshot-2026-08-06-135320.png';
+	if ( is_singular() && has_post_thumbnail() ) {
+		$thumb = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+		if ( $thumb ) $image = $thumb;
+	}
+
+	echo '<meta property="og:site_name" content="Griya Djaya Sentosa" />' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr($title) . '" />' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr($desc) . '" />' . "\n";
+	echo '<meta property="og:url" content="' . esc_url($canonical_url) . '" />' . "\n";
+	echo '<meta property="og:type" content="' . (is_singular('post') ? 'article' : 'website') . '" />' . "\n";
+	echo '<meta property="og:image" content="' . esc_url($image) . '" />' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
 }
 
 // Hook into wp_head buffer to ensure exactly ONE <meta name="description"> tag is printed

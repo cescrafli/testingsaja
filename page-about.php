@@ -9,7 +9,7 @@ global $custom_css; $custom_css = 'about'; get_header();
                     <div style="margin-bottom: 40px;">
                         <img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg" alt="Griya Djaya Sentosa" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                     </div>
-                    <h2 style="font-size: 32px; font-weight: 700; color: #1a202c; margin-bottom: 25px;">PT Griya Djaya Sentosa</h2>
+                    <h1 style="font-size: 32px; font-weight: 700; color: #1a202c; margin-bottom: 25px;">PT Griya Djaya Sentosa</h1>
                     
                     <div style="font-size: 15px; line-height: 1.8; color: #4a5568; margin-bottom: 50px;">
                         <p style="margin-bottom: 15px;"><strong>PT Griya Djaya Sentosa (GJS)</strong> merupakan Supplier dan juga Sub Kontraktor dalam menyediakan kebutuhan <strong>Kusen Pintu dan Jendela berbahan dasar UPVC, Alumunium, Kaca, dan Besi</strong>. Kegiatan usaha fabrikasi dan konstruksi kami dimulai sejak tahun 2011. Berawal dari fasilitas sederhana di kawasan Kapuk, Jakarta, komitmen kami terhadap presisi dan kualitas membawa GJS terus berkembang pesat. Kini, kami telah dipercaya menjadi mitra strategis dan aplikator resmi untuk berbagai material standar global, termasuk UPVC Conch di Indonesia.</p>

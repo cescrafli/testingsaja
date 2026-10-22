@@ -11,13 +11,31 @@ get_header();
     top: 0 !important;
     width: 100% !important;
     z-index: 9999 !important;
+    padding: 18px 0 !important;
+}
+body.admin-bar .header {
+    top: 32px !important;
+}
+@media (max-width: 782px) {
+    body.admin-bar .header {
+        top: 46px !important;
+    }
 }
 .about {
-    padding-top: 130px !important;
+    padding-top: 150px !important;
+}
+body.admin-bar .about {
+    padding-top: 190px !important;
 }
 @media (max-width: 991px) {
+    .header {
+        padding: 14px 0 !important;
+    }
     .about {
-        padding-top: 90px !important;
+        padding-top: 110px !important;
+    }
+    body.admin-bar .about {
+        padding-top: 150px !important;
     }
 }
 

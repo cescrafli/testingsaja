@@ -903,16 +903,67 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
 
 }
 
+// Ensure /product/interior/ is a published WordPress Page so it is natively picked up by XML Sitemaps
+add_action('init', 'gjs_ensure_interior_page_published', 5);
+function gjs_ensure_interior_page_published() {
+    if (get_option('gjs_interior_page_registered_v3') === 'yes') {
+        return;
+    }
+
+    $parent_id = 0;
+    $product_page = get_page_by_path('product');
+    if ($product_page && isset($product_page->ID)) {
+        $parent_id = (int) $product_page->ID;
+    }
+
+    $interior_page = get_page_by_path('product/interior');
+    if (!$interior_page) {
+        $interior_page = get_page_by_path('interior');
+    }
+
+    if (!$interior_page) {
+        $new_id = wp_insert_post(array(
+            'post_title'     => 'Interior Design & Fitting Out Jakarta',
+            'post_name'      => 'interior',
+            'post_status'    => 'publish',
+            'post_type'      => 'page',
+            'post_parent'    => $parent_id,
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed',
+        ));
+        if ($new_id && !is_wp_error($new_id)) {
+            update_post_meta($new_id, '_wp_page_template', 'page-product-interior.php');
+        }
+    } else {
+        $update_args = array('ID' => $interior_page->ID, 'post_status' => 'publish');
+        if ($parent_id && (int) $interior_page->post_parent !== $parent_id) {
+            $update_args['post_parent'] = $parent_id;
+        }
+        wp_update_post($update_args);
+        update_post_meta($interior_page->ID, '_wp_page_template', 'page-product-interior.php');
+    }
+
+    update_option('gjs_interior_page_registered_v3', 'yes');
+}
+
 // SEO URL Routing & 301 Permanent Redirects for 404 & Orphan Prevention
-add_action('template_redirect', 'gjs_seo_template_redirects', 1);
+add_action('template_redirect', 'gjs_seo_template_redirects', 0);
 function gjs_seo_template_redirects() {
     if (is_admin()) return;
 
-    // Direct 1-hop canonical redirect for www host requests to eliminate redirect chains
-    if ( isset( $_SERVER['HTTP_HOST'] ) && strpos( $_SERVER['HTTP_HOST'], 'www.' ) === 0 ) {
-        $canonical_host = preg_replace( '/^www\./i', '', $_SERVER['HTTP_HOST'] );
-        $canonical_url  = 'https://' . $canonical_host . ( $_SERVER['REQUEST_URI'] ?? '/' );
-        wp_safe_redirect( $canonical_url, 301 );
+    // Direct 1-hop canonical redirect: eliminate redirect chains for WWW host and HTTP protocol
+    $req_host = $_SERVER['HTTP_HOST'] ?? '';
+    $is_www   = (stripos($req_host, 'www.') === 0);
+    $is_http  = (!is_ssl() && (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) !== 'https'));
+
+    if ($is_www || $is_http) {
+        $canonical_host = preg_replace('/^www\./i', '', $req_host);
+        if (empty($canonical_host)) {
+            $canonical_host = 'griyadjayasentosa.id';
+        }
+        $req_uri = $_SERVER['REQUEST_URI'] ?? '/';
+        $canonical_url = 'https://' . $canonical_host . $req_uri;
+        wp_safe_redirect($canonical_url, 301);
         exit;
     }
 
@@ -921,6 +972,12 @@ function gjs_seo_template_redirects() {
     $home_path = trim(parse_url(home_url(), PHP_URL_PATH) ?? '', '/');
     if (!empty($home_path) && strpos($req_path, $home_path) === 0) {
         $req_path = trim(substr($req_path, strlen($home_path)), '/');
+    }
+
+    // 0. Redirect /news-sitemap.xml directly to /sitemap_index.xml (GJS bukan portal berita)
+    if ($req_path === 'news-sitemap.xml') {
+        wp_safe_redirect(home_url('/sitemap_index.xml'), 301);
+        exit;
     }
 
     // 1. Route /product/interior/ and /interior/ automatically to page-product-interior.php with HTTP 200 OK
@@ -1192,6 +1249,104 @@ add_filter('wp_sitemaps_add_provider', function($provider, $name) {
 add_filter('wpseo_sitemap_exclude_author', '__return_empty_array');
 add_filter('wpseo_Idx_author_sitemap', '__return_false');
 add_filter('rank_math/sitemap/author/exclude', '__return_true');
+
+// 4. Deduplikasi Homepage dari Multiple Sitemaps (news-sitemap.xml & post-sitemap.xml)
+// Homepage HANYA boleh berada di page-sitemap.xml!
+
+// A. Hapus Homepage dari post-sitemap.xml Yoast SEO (Hapus Post Type Archive Link untuk 'post')
+add_filter('wpseo_sitemap_post_type_archive_link', 'gds_remove_post_archive_link_from_yoast', 999, 2);
+function gds_remove_post_archive_link_from_yoast($link, $post_type) {
+    if ($post_type === 'post') {
+        return false; // Menghilangkan baris homepage dari post-sitemap.xml
+    }
+    return $link;
+}
+
+// B. Filter entry Yoast SEO: Pastikan Homepage hanya tampil jika tipe sitemap adalah 'page'
+add_filter('wpseo_sitemap_entry', 'gds_dedup_homepage_from_yoast_sitemaps', 999, 3);
+function gds_dedup_homepage_from_yoast_sitemaps($url, $type, $post) {
+    if (empty($url) || !is_array($url)) {
+        return $url;
+    }
+    $home_clean = untrailingslashit(home_url());
+    $loc_clean  = untrailingslashit($url['loc'] ?? '');
+    if ($loc_clean === $home_clean && $type !== 'page') {
+        return false; // Hapus homepage dari post-sitemap.xml, news-sitemap.xml, dsb.
+    }
+    return $url;
+}
+
+add_filter('wpseo_sitemap_url', 'gds_filter_yoast_sitemap_url', 999, 2);
+function gds_filter_yoast_sitemap_url($url, $type) {
+    $home_clean = untrailingslashit(home_url());
+    $loc_clean  = untrailingslashit(is_array($url) ? ($url['loc'] ?? '') : (string) $url);
+    if ($loc_clean === $home_clean && $type !== 'page') {
+        return false;
+    }
+    return $url;
+}
+
+// C. Nonaktifkan XML News Sitemap dari Jetpack sepenuhnya (karena GJS bukan portal berita)
+add_filter('jetpack_sitemap_news_sitemap_post_types', '__return_empty_array', 999);
+add_filter('jetpack_news_sitemap_include_in_robotstxt', '__return_false', 999);
+
+// D. Hapus referensi news-sitemap.xml dari output robots.txt
+add_filter('robots_txt', 'gds_clean_news_sitemap_from_robots_txt', 999, 2);
+function gds_clean_news_sitemap_from_robots_txt($output, $public) {
+    $output = preg_replace('#Sitemap:\s*https?://[^\s]+/news-sitemap\.xml\r?\n?#i', '', $output);
+    return $output;
+}
+
+// E. Deduplikasi homepage untuk Google News & Rank Math & WP Core
+add_filter('wpseo_news_sitemap_entry', '__return_false', 999);
+add_filter('xmlsf_news_sitemap_urls', '__return_empty_array', 999);
+
+add_filter('rank_math/sitemap/entry', 'gds_dedup_homepage_from_rankmath_sitemaps', 999, 3);
+function gds_dedup_homepage_from_rankmath_sitemaps($url, $type, $object) {
+    if (empty($url) || !is_array($url)) {
+        return $url;
+    }
+    $home_clean = untrailingslashit(home_url());
+    $loc_clean  = untrailingslashit($url['loc'] ?? '');
+    if ($loc_clean === $home_clean && $type !== 'page') {
+        return false;
+    }
+    return $url;
+}
+
+add_filter('wp_sitemaps_posts_entry', 'gds_dedup_homepage_from_core_sitemaps', 999, 3);
+function gds_dedup_homepage_from_core_sitemaps($entry, $post, $post_type) {
+    if (empty($entry) || !is_array($entry)) {
+        return $entry;
+    }
+    $home_clean = untrailingslashit(home_url());
+    $loc_clean  = untrailingslashit($entry['loc'] ?? '');
+    if ($loc_clean === $home_clean && $post_type !== 'page') {
+        return false;
+    }
+    return $entry;
+}
+
+// 5. Pembersihan Cache Sitemap Transients (Yoast, Rank Math, Jetpack v4)
+add_action('init', 'gjs_cleanup_sitemap_caches_v4', 10);
+function gjs_cleanup_sitemap_caches_v4() {
+    if (get_option('gjs_sitemap_cleaned_v4') === 'yes') {
+        return;
+    }
+    global $wpdb;
+
+    // Bersihkan transient Yoast SEO sitemap agar langsung ter-generate ulang
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%'");
+
+    // Bersihkan transient Rank Math
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%rank_math_sitemap_%'");
+
+    // Bersihkan sitemap Jetpack (termasuk news sitemap)
+    $wpdb->query("DELETE FROM $wpdb->posts WHERE post_type IN ('jp_img_sitemap', 'jp_sitemap', 'jp_sitemap_master', 'jp_news_sitemap')");
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
+
+    update_option('gjs_sitemap_cleaned_v4', 'yes');
+}
 
 
 // =========================================================================

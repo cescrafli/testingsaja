@@ -1220,14 +1220,21 @@ if ( ! function_exists( 'gjs_get_optimized_image_url' ) ) {
 
         // 1. If Jetpack Photon / Site Accelerator is active, use it for on-the-fly cloud resize & WebP conversion
         if ( function_exists( 'jetpack_photon_url' ) ) {
-            $target_width = ( $size === 'medium_large' ) ? 768 : 1024;
+            if ( $size === 'medium_large' ) {
+                $target_width = 768;
+            } elseif ( $size === 'full_hd' || $size === 'lightbox' ) {
+                $target_width = 1920;
+            } else {
+                $target_width = 1024;
+            }
             return jetpack_photon_url( $url, array( 'width' => $target_width, 'quality' => 82, 'strip' => 'all' ) );
         }
 
         // 2. Resolve WordPress attachment ID to get generated web size
         $att_id = attachment_url_to_postid( $url );
         if ( $att_id ) {
-            $sized_url = wp_get_attachment_image_url( $att_id, $size );
+            $wp_size = ( $size === 'full_hd' || $size === 'lightbox' ) ? 'large' : $size;
+            $sized_url = wp_get_attachment_image_url( $att_id, $wp_size );
             if ( $sized_url ) {
                 return $sized_url;
             }
@@ -1235,4 +1242,29 @@ if ( ! function_exists( 'gjs_get_optimized_image_url' ) ) {
 
         return $url;
     }
+}
+
+// Automatically optimize any inline images in post/page content
+add_filter( 'the_content', 'gjs_filter_content_images_for_speed', 99 );
+function gjs_filter_content_images_for_speed( $content ) {
+    if ( empty( $content ) || ! function_exists( 'gjs_get_optimized_image_url' ) ) {
+        return $content;
+    }
+
+    return preg_replace_callback( '#<img\s+([^>]*?)src=["\']([^"\']+)["\']([^>]*?)>#i', function( $matches ) {
+        $before = $matches[1];
+        $src    = $matches[2];
+        $after  = $matches[3];
+
+        if ( strpos( $src, '.svg' ) !== false || strpos( $src, 'data:image' ) !== false || strpos( $src, 'i0.wp.com' ) !== false || strpos( $src, 'i1.wp.com' ) !== false || strpos( $src, 'i2.wp.com' ) !== false ) {
+            return $matches[0];
+        }
+
+        if ( strpos( $src, 'wp-content/uploads' ) !== false ) {
+            $opt_src = gjs_get_optimized_image_url( $src, 'large' );
+            return '<img ' . $before . 'src="' . esc_url( $opt_src ) . '" loading="lazy" decoding="async"' . $after . '>';
+        }
+
+        return $matches[0];
+    }, $content );
 }

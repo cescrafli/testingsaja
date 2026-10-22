@@ -110,7 +110,11 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
     $location = get_post_meta( $pid, '_project_location', true );
     $category = get_post_meta( $pid, '_project_category', true );
     $thumb    = get_the_post_thumbnail_url( $pid, 'large' ) ?: get_the_post_thumbnail_url( $pid, 'full' );
-    if ( ! $thumb ) $thumb = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+    if ( ! $thumb ) {
+        $thumb = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+    } else {
+        $thumb = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($thumb, 'large') : $thumb;
+    }
 
     $gallery = array();
     for ( $i = 1; $i <= 24; $i++ ) {
@@ -222,10 +226,11 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
         </div>
         <div class="gallery presentation" data-role="gallery">
             <?php foreach ( $gallery as $img ) : 
-                $display_img = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($img, 'large') : $img;
+                $lightbox_img = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($img, 'lightbox') : $img;
+                $display_img  = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($img, 'large') : $img;
             ?>
             <div class="gallery_item">
-                <a class="media" href="<?php echo esc_url( $img ); ?>" data-caption="<?php the_title_attribute(); ?>" data-role="gallery-link">
+                <a class="media" href="<?php echo esc_url( $lightbox_img ); ?>" data-caption="<?php the_title_attribute(); ?>" data-role="gallery-link">
                     <picture>
                         <img class="lazy" data-src="<?php echo esc_url( $display_img ); ?>" src="<?php echo esc_url( $display_img ); ?>" alt="<?php the_title_attribute(); ?>" />
                     </picture>

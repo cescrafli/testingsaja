@@ -101,7 +101,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
             fputcsv($output, array(
                 $row['BarcodeID'],
                 $row['no_penawaran'],
-                $row['SPKID'],
+                $row['no_penawaran'],
                 $row['customer'],
                 $row['material_description'],
                 $row['date_transaction'],
@@ -188,26 +188,8 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
                         $r_war_ts = strtotime($norm_war);
                         if ($r_war_ts) $r_war = date('Y-m-d', $r_war_ts);
                         
-                        // DETERMINE SPKID FOR THIS ROW (Works for both INSERT and UPDATE)
-                        if (!empty($r_noproject)) {
-                            $final_spk = $r_noproject;
-                        } else {
-                            // If they left it blank, check if existing record already has one
-                            $existing_spk = $r_barcode ? $wpdb->get_var($wpdb->prepare("SELECT SPKID FROM wp_barcode WHERE BarcodeID = %s", $r_barcode)) : null;
-                            if (!empty($existing_spk)) {
-                                $final_spk = $existing_spk;
-                            } else {
-                                // Auto-generate new SPKID
-                                $trx_year = date('Y', strtotime($r_date));
-                                $last_spk = $wpdb->get_var($wpdb->prepare("SELECT SPKID FROM wp_barcode WHERE YEAR(date_transaction) = %s AND SPKID LIKE 'P %' ORDER BY CAST(SUBSTRING(SPKID, 3) AS UNSIGNED) DESC LIMIT 1", $trx_year));
-                                $last_num = $last_spk ? (int) preg_replace('/[^0-9]/', '', $last_spk) : 0;
-                                $final_spk = 'P ' . str_pad($last_num + 1, 4, '0', STR_PAD_LEFT);
-                                
-                                // To prevent duplicate SPKIDs in a single bulk upload loop, we must trick the system
-                                // by fetching the absolute highest including the one we just assigned if any.
-                                // But wpdb->get_var hits the DB directly, so as long as we insert/update immediately, the next loop sees it.
-                            }
-                        }
+                        // Gunakan Nomor Penawaran sebagai pengidentifikasi proyek/penawaran
+                        $final_spk = !empty($r_nopen) ? $r_nopen : (!empty($r_noproject) ? $r_noproject : '-');
                         
                         if (empty($r_barcode)) {
                             // GENERATE NEW BARCODE
@@ -332,18 +314,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         $barcodeID = $prefix . $nomor_urut;
         // --- END LOGIKA BARCODE ---
         
-        // Generate SPK
-        $trx_year = date('Y', strtotime($date_trx));
-        $last_spk = $wpdb->get_var($wpdb->prepare("SELECT SPKID FROM wp_barcode WHERE YEAR(date_transaction) = %s AND SPKID LIKE 'P %' ORDER BY CAST(SUBSTRING(SPKID, 3) AS UNSIGNED) DESC LIMIT 1", $trx_year));
-        if ($last_spk) {
-            // Extracts numbers after 'P '
-            $last_num = (int) preg_replace('/[^0-9]/', '', $last_spk);
-            $new_num = $last_num + 1;
-        } else {
-            $new_num = 1;
-        }
-        $new_spk = 'P ' . str_pad($new_num, 4, '0', STR_PAD_LEFT);
-
+        // Nomor SPK digantikan sepenuhnya oleh Nomor Penawaran
         $inserted = $wpdb->insert(
             $table_barcode,
             array(
@@ -362,7 +333,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
                 'kode_pos' => $b_kodepos,
                 'nilai_project' => $nilai_project,
                 'employee_id' => $marketing_id,
-                'SPKID' => $new_spk
+                'SPKID' => $no_penawaran
             )
         );
         
@@ -649,7 +620,7 @@ $end_date = isset($_GET['end_date']) ? sanitize_text_field($_GET['end_date']) : 
         SELECT 
               r.id,
               r.barcodeid, 
-              b.SPKID as spk_id,
+              COALESCE(NULLIF(b.no_penawaran, ''), b.SPKID) as spk_id,
               b.customer as customer_nama, 
               b.phone_customer as cust_phone,
               b.material_description as material, 
@@ -1457,7 +1428,7 @@ if ( $role === 1 ) {
                                     </td>
                                     <td style="font-weight: 700;"><?php echo esc_html($trx->BarcodeID); ?></td>
                                     <td><?php echo esc_html($trx->no_penawaran); ?></td>
-                                    <td><?php echo esc_html(($trx->SPKID ? $trx->SPKID . " - " : "") . $trx->customer_nama); ?></td>
+                                    <td><?php $nopen_pfx = !empty($trx->no_penawaran) ? $trx->no_penawaran : $trx->SPKID; echo esc_html(($nopen_pfx ? $nopen_pfx . " - " : "") . $trx->customer_nama); ?></td>
                                     <td><?php echo esc_html($trx->material_description); ?></td>
                                     <td><?php echo esc_html($trx->date_transaction); ?></td>
                                     <td><?php echo esc_html($trx->warranty_exp); ?></td>
@@ -1774,7 +1745,7 @@ if ( $role === 1 ) {
         });
         var barcodeDataUrl = qrCanvas.toDataURL();
 
-        var noSpk = info.SPKID || "-";
+        var noPenawaran = info.no_penawaran || info.SPKID || "-";
         var tgl = "-";
         if (info.date_transaction && info.date_transaction !== "0000-00-00") {
             var dateObj = new Date(info.date_transaction);
@@ -1855,7 +1826,7 @@ if ( $role === 1 ) {
         <div class="toolbar-title">
             <span>Pratinjau Kartu Garansi</span>
             <span class="toolbar-badge">${badgeLabel}</span>
-            <span style="color:#94a3b8; font-size:13px;">ID: ${barcodeId} | SPK: ${noSpk}</span>
+            <span style="color:#94a3b8; font-size:13px;">ID: ${barcodeId} | No. Penawaran: ${noPenawaran}</span>
         </div>
         <div class="toolbar-actions">
             <button onclick="window.print();" class="btn-tb btn-tb-print">🖨 Cetak / Simpan PDF</button>
@@ -1867,7 +1838,7 @@ if ( $role === 1 ) {
     <div class="preview-wrapper" id="printArea">
         <!-- HALAMAN MUKA (FRONT) -->
         <div class="page" style="background-image: url('${imgFront}');">
-            <div class="text-val val-spk">${noSpk}</div>
+            <div class="text-val val-spk">${noPenawaran}</div>
             <div class="text-val val-merk">${merk}</div>
             <div class="text-val val-tgl">${tgl}</div>
             <div class="text-val val-nama">${nama}</div>
@@ -1986,7 +1957,7 @@ if ( $role === 1 ) {
             });
             var barcodeDataUrl = qrCanvas.toDataURL();
 
-            var noSpk = info.SPKID || "-";
+            var noPenawaran = info.no_penawaran || info.SPKID || "-";
             var tgl = "-";
             if (info.date_transaction && info.date_transaction !== "0000-00-00") {
                 var dateObj = new Date(info.date_transaction);
@@ -2007,7 +1978,7 @@ if ( $role === 1 ) {
             pagesHtml += `
             <!-- KARTU #${index + 1}: ${barcodeId} FRONT -->
             <div class="page" style="background-image: url('${imgFront}');">
-                <div class="text-val val-spk">${noSpk}</div>
+                <div class="text-val val-spk">${noPenawaran}</div>
                 <div class="text-val val-merk">${merk}</div>
                 <div class="text-val val-tgl">${tgl}</div>
                 <div class="text-val val-nama">${nama}</div>

@@ -1802,7 +1802,7 @@ if ( $role === 1 ) {
 <head>
     <meta charset="UTF-8">
     <title>Kartu Garansi ${badgeLabel} - ${barcodeId}</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    ` + '<scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></scr' + 'ipt>' + `
     <style>
         @page { size: 1024px 721px landscape; margin: 0; }
         * { box-sizing: border-box; }
@@ -1892,7 +1892,7 @@ if ( $role === 1 ) {
         <div class="page" style="background-image: url('${imgBack}');"></div>
     </div>
 
-    <script>
+    ` + '<scr' + 'ipt>' + `
         function downloadPdf() {
             var btn = document.getElementById('btnDlPdf');
             var orig = btn.innerHTML;
@@ -1922,7 +1922,7 @@ if ( $role === 1 ) {
             window.focus();
             window.print();
         }, 900);
-    </script>
+    ` + '</scr' + 'ipt>' + `
 </body>
 </html>`;
 
@@ -2039,7 +2039,7 @@ if ( $role === 1 ) {
 <head>
     <meta charset="UTF-8">
     <title>Bulk Cetak ${count} Kartu Garansi - Griya Djaya Sentosa</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    ` + '<scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></scr' + 'ipt>' + `
     <style>
         @page { size: 1024px 721px landscape; margin: 0; }
         * { box-sizing: border-box; }
@@ -2105,7 +2105,7 @@ if ( $role === 1 ) {
         ${pagesHtml}
     </div>
 
-    <script>
+    ` + '<scr' + 'ipt>' + `
         function downloadBulkPdf() {
             var btn = document.getElementById('btnDlBulkPdf');
             var orig = btn.innerHTML;
@@ -2135,7 +2135,7 @@ if ( $role === 1 ) {
             window.focus();
             window.print();
         }, 1100);
-    </script>
+    ` + '</scr' + 'ipt>' + `
 </body>
 </html>`;
 

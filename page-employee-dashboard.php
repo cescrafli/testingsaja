@@ -1364,12 +1364,12 @@ if ( $role === 1 ) {
                       <div style="display: flex; gap: 10px; flex: 1; min-width: 300px;">
                           <!-- Search Box with Icon -->
                           <div style="position: relative; flex: 1;">
-                              <input type="text" id="searchTransaksi" class="form-control" placeholder="Cari transaksi (Nama, ID, dll)..." onkeyup="filterTableMulti('searchTransaksi', 'sliceTransaksi', 'tableTransaksi', 5)" style="width: 100%; border: 1px solid #d4b572; padding-right: 30px; border-radius: 6px; font-size: 13px;">
+                              <input type="text" id="searchTransaksi" class="form-control" placeholder="Cari transaksi (Nama, ID, dll)..." onkeyup="filterTableMulti('searchTransaksi', 'sliceTransaksi', 'tableTransaksi', 7)" style="width: 100%; border: 1px solid #d4b572; padding-right: 30px; border-radius: 6px; font-size: 13px;">
                               <i class="fa fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #d4b572; font-size: 14px;"></i>
                           </div>
                           
                           <!-- Status Dropdown -->
-                          <select id="sliceTransaksi" class="form-control" style="width: 180px; border: 1px solid #1e293b; color: #1e293b; border-radius: 6px; font-size: 13px; font-weight: 500;" onchange="filterTableMulti('searchTransaksi', 'sliceTransaksi', 'tableTransaksi', 5)">
+                          <select id="sliceTransaksi" class="form-control" style="width: 180px; border: 1px solid #1e293b; color: #1e293b; border-radius: 6px; font-size: 13px; font-weight: 500;" onchange="filterTableMulti('searchTransaksi', 'sliceTransaksi', 'tableTransaksi', 7)">
                               <option value="">Semua Status</option>
                               <option value="1 - ">Belum ada pengajuan</option>
                               <option value="2 - ">Dalam permintaan</option>
@@ -1382,6 +1382,11 @@ if ( $role === 1 ) {
                       <!-- Right side: Actions -->
                       <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                           
+                          <!-- Bulk Print / Download Kartu Button -->
+                          <button type="button" id="btnBulkPrintWarranty" onclick="bulkPrintWarrantyCards()" class="btn" style="background:#0f172a; color:#d4b572; border:1px solid #d4b572; padding: 10px 18px; font-size:13px; font-weight:600; border-radius: 6px; cursor:pointer; font-family: 'Outfit', sans-serif; display:inline-flex; align-items:center; gap:6px; transition: all 0.2s ease;">
+                              🖨 Bulk Print / Download (<span id="selectedWarrantyCount">0</span>)
+                          </button>
+
                           <!-- Bulk Upload Form -->
                           <form method="POST" enctype="multipart/form-data" style="margin:0; display:flex; gap:10px; align-items: center;">
                               <input type="hidden" name="action" value="import_csv">
@@ -1401,6 +1406,7 @@ if ( $role === 1 ) {
                     <table id="tableTransaksi">
                         <thead>
                             <tr>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllWarranty" onchange="toggleSelectAllWarranty(this)" title="Pilih Semua Kartu Garansi (UPVC & CW)" style="cursor:pointer; transform: scale(1.15);"></th>
                                 <th>Barcode ID</th>
                                 <th>No Penawaran</th>
                                 <th>Nama Customer</th>
@@ -1422,7 +1428,7 @@ if ( $role === 1 ) {
                         </thead>
                         <tbody>
                             <?php if(empty($transactions_list)): ?>
-                                <tr><td colspan="17">Belum ada transaksi.</td></tr>
+                                <tr><td colspan="18">Belum ada transaksi.</td></tr>
                             <?php else: ?>
                                 <?php 
                                 $status_map = [
@@ -1432,8 +1438,23 @@ if ( $role === 1 ) {
                                     4 => '4 - Penolakan',
                                     5 => '5 - Sudah selesai'
                                 ];
-                                foreach($transactions_list as $trx) : ?>
+                                foreach($transactions_list as $trx) : 
+                                    $mat_desc = trim($trx->material_description ?? '');
+                                    $card_type = '';
+                                    if (stripos($mat_desc, 'UPVC_') === 0) {
+                                        $card_type = 'upvc';
+                                    } elseif (stripos($mat_desc, 'CW_') === 0) {
+                                        $card_type = 'cw';
+                                    }
+                                ?>
                                 <tr id="view-<?php echo esc_attr($trx->BarcodeID); ?>">
+                                    <td style="text-align: center;">
+                                        <?php if (!empty($card_type)): ?>
+                                            <input type="checkbox" class="warranty-cb" data-card-type="<?php echo esc_attr($card_type); ?>" data-info="<?php echo esc_attr(json_encode($trx)); ?>" style="cursor:pointer; transform: scale(1.15);" onchange="updateSelectedWarrantyCount();">
+                                        <?php else: ?>
+                                            <span style="color:#cbd5e1; font-size: 14px;">-</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td style="font-weight: 700;"><?php echo esc_html($trx->BarcodeID); ?></td>
                                     <td><?php echo esc_html($trx->no_penawaran); ?></td>
                                     <td><?php echo esc_html(($trx->SPKID ? $trx->SPKID . " - " : "") . $trx->customer_nama); ?></td>
@@ -1452,7 +1473,9 @@ if ( $role === 1 ) {
                                     <td><?php $np = trim($trx->nilai_project); echo preg_match('/^[0-9]+(?:\.[0-9]{1,2})?$/', $np) ? number_format((float)$np, 0, ',', '.') : esc_html($np); ?></td>
                                     <td style="white-space: nowrap;">
                                         <button type="button" class="btn-outline" onclick="document.getElementById('view-<?php echo esc_attr($trx->BarcodeID); ?>').style.display='none'; document.getElementById('edit-<?php echo esc_attr($trx->BarcodeID); ?>').style.display='table-row';">Edit</button>
-                                        <button type="button" class="btn-outline" data-info='<?php echo esc_attr(json_encode($trx)); ?>' onclick="printBarcode(this.dataset.info)">Print Kartu</button>
+                                        <?php if (!empty($card_type)): ?>
+                                            <button type="button" class="btn-outline btn-print-warranty" data-card-type="<?php echo esc_attr($card_type); ?>" data-info='<?php echo esc_attr(json_encode($trx)); ?>' onclick="printWarrantyCard(this.dataset.info, this.dataset.cardType)">Print Kartu</button>
+                                        <?php endif; ?>
                                         <form action="" method="POST" onsubmit="return confirm('Hapus transaksi ini secara permanen?');" style="display:inline-block;">
                                             <input type="hidden" name="action" value="delete_transaction">
                                             <input type="hidden" name="barcodeID" value="<?php echo esc_attr($trx->BarcodeID); ?>">
@@ -1461,7 +1484,7 @@ if ( $role === 1 ) {
                                     </td>
                                 </tr>
                                 <tr id="edit-<?php echo esc_attr($trx->BarcodeID); ?>" style="display:none;">
-                                    <td colspan="10" style="padding:0; border:none;">
+                                    <td colspan="18" style="padding:0; border:none;">
                                         <div style="background-color: #f8fafc; padding: 15px; border-bottom: 1px solid #f1f5f9;">
                                             <form action="" method="POST" class="inline-edit-form">
     <input type="hidden" name="action" value="edit_transaction">
@@ -1712,90 +1735,280 @@ if ( $role === 1 ) {
     <canvas id="hiddenBarcodeCanvas" style="display:none;"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <script>
     
 
     
 
-        function printBarcode(infoStr) {
-    function toTitleCase(str) {
-        if(!str) return "-";
+        function toTitleCase(str) {
+        if (!str) return "-";
         return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
-        var info = JSON.parse(infoStr);
-        var barcodeId = info.BarcodeID;
+
+    // Single Warranty Card Print & PDF Generator
+    function printWarrantyCard(infoStr, cardTypeArg) {
+        var info = (typeof infoStr === 'string') ? JSON.parse(infoStr) : infoStr;
+        var barcodeId = info.BarcodeID || "";
         
-        // Buat QR Code yang mengarah ke link warranty
+        var rawMerk = info.material_description || "";
+        var cardType = (cardTypeArg || '').toLowerCase();
+        if (!cardType) {
+            if (/^UPVC_/i.test(rawMerk)) cardType = 'upvc';
+            else if (/^CW_/i.test(rawMerk)) cardType = 'cw';
+            else cardType = 'upvc';
+        }
+
+        // Bersihkan prefix teknis UPVC_ atau CW_ pada tampilan kartu garansi
+        var cleanMerk = rawMerk.replace(/^(UPVC_|CW_)/i, '').trim();
+        var merk = toTitleCase(cleanMerk);
+
+        // Generate QR Code mengarah ke validasi warranty
         var qrCanvas = document.createElement('canvas');
         var qr = new QRious({
             element: qrCanvas,
-            value: 'https://griyadjayasentosa.id/warranty/?id=' + barcodeId,
-            size: 250,
+            value: 'https://griyadjayasentosa.id/warranty/?id=' + encodeURIComponent(barcodeId),
+            size: 300,
             level: 'M'
         });
         var barcodeDataUrl = qrCanvas.toDataURL();
-        
+
         var noSpk = info.SPKID || "-";
-        var merk = toTitleCase(info.material_description);
-        
         var tgl = "-";
         if (info.date_transaction && info.date_transaction !== "0000-00-00") {
             var dateObj = new Date(info.date_transaction);
             var months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             tgl = dateObj.getDate() + ' ' + months[dateObj.getMonth()] + ' ' + dateObj.getFullYear();
         }
-        
+
         var nama = toTitleCase(info.customer_nama);
         var alamat = toTitleCase(info.lokasi);
-        
-        var kotaPart = toTitleCase([info.kota, info.provinsi, info.kodepos].filter(Boolean).join(" / "));
-        if (!kotaPart) kotaPart = "-";
-        
+        var kotaPart = toTitleCase([info.kota, info.provinsi, info.kodepos].filter(Boolean).join(" / ")) || "-";
         var telp = info.customer_phone || "-";
         var email = info.customer_email || "-";
         var marketing = toTitleCase(info.marketing_nama);
         var telpMark = info.marketing_phone || "-";
-        
+
         var siteUrl = "<?php echo get_template_directory_uri(); ?>";
-        var imgFront = siteUrl + "/img/warranty_front.png?v=" + new Date().getTime();
-        var imgBack = siteUrl + "/img/warranty_back.png?v=" + new Date().getTime();
+        var imgFront = siteUrl + "/img/warranty_card_front.jpg?v=" + new Date().getTime();
+        var imgBackUpvc = siteUrl + "/img/warranty_card_upvc_back.jpg?v=" + new Date().getTime();
+        var imgBackCw = siteUrl + "/img/warranty_card_cw_back.jpg?v=" + new Date().getTime();
+        var imgBack = (cardType === 'cw') ? imgBackCw : imgBackUpvc;
+        var badgeLabel = (cardType === 'cw') ? 'CURTAIN WALL' : 'UPVC';
+
+        var html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kartu Garansi ${badgeLabel} - ${barcodeId}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @page { size: 1024px 721px landscape; margin: 0; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background: #0f172a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .top-toolbar { position: sticky; top: 0; left: 0; right: 0; z-index: 99999; background: #1e293b; border-bottom: 2px solid #d4b572; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .toolbar-title { color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .toolbar-badge { background: #d4b572; color: #0f172a; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+        .toolbar-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-tb { border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
+        .btn-tb-print { background: #d4b572; color: #0f172a; }
+        .btn-tb-print:hover { background: #e0c88b; }
+        .btn-tb-download { background: #2563eb; color: #fff; }
+        .btn-tb-download:hover { background: #1d4ed8; }
+        .btn-tb-close { background: #475569; color: #fff; }
+        .btn-tb-close:hover { background: #334155; }
         
-        var html = `<html>
-        <head>
-            <title>Print Kartu Garansi - ${barcodeId}</title>
-            <style>
-                @page { size: 1024px 721px landscape; margin: 0; }
-                body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-                .page { width: 1024px; height: 721px; position: relative; background-size: cover; background-repeat: no-repeat; page-break-after: always; overflow: hidden; }
-                .text-val { position: absolute; font-size: 19px; color: #000; font-weight: 500; }
-                  .capitalize { text-transform: capitalize; }
-                  .lowercase { text-transform: lowercase; }
-                
-                /* Specific positions based on the 1024x721 image */
-                .val-spk { top: 148px; left: 225px; font-weight: bold; }
-                .val-merk { top: 185px; left: 225px; }
-                
-                .val-tgl { top: 231px; left: 270px; }
-                .val-nama { top: 269px; left: 270px; }
-                .val-alamat { top: 307px; left: 270px; width: 730px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-                .val-kota { top: 346px; left: 270px; }
-                .val-telp { top: 382px; left: 270px; }
-                .val-email { top: 419px; left: 270px; }
-                .val-marketing { top: 455px; left: 270px; }
-                .val-telpmark { top: 491px; left: 270px; }
-                
-                .barcode-container { position: absolute; bottom: 90px; left: 38px; width: 100px; height: 100px; background: transparent; border: none; padding: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
-                .barcode-container img { width: 100px; height: 100px; object-fit: contain; border: 2px solid #a68a3f; padding: 3px; background: white; box-sizing: border-box; }
-                  .signature-line { position: absolute; bottom: 95px; right: 35px; width: 190px; border-top: 1px solid #000; }
-              </style>
-        </head>
-        <body>
-            <!-- FRONT PAGE -->
+        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; }
+        .page { width: 1024px; height: 721px; position: relative; background-size: cover; background-repeat: no-repeat; background-position: center; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.5); background-color: #fff; }
+        
+        .text-val { position: absolute; font-size: 19px; color: #000; font-weight: 500; font-family: 'Arial', sans-serif; }
+        .capitalize { text-transform: capitalize; }
+        .lowercase { text-transform: lowercase; }
+        
+        .val-spk { top: 148px; left: 225px; font-weight: bold; }
+        .val-merk { top: 185px; left: 225px; }
+        .val-tgl { top: 231px; left: 270px; }
+        .val-nama { top: 269px; left: 270px; }
+        .val-alamat { top: 307px; left: 270px; width: 730px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .val-kota { top: 346px; left: 270px; }
+        .val-telp { top: 382px; left: 270px; }
+        .val-email { top: 419px; left: 270px; }
+        .val-marketing { top: 455px; left: 270px; }
+        .val-telpmark { top: 491px; left: 270px; }
+        
+        .barcode-container { position: absolute; bottom: 90px; left: 38px; width: 100px; height: 100px; background: transparent; border: none; padding: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+        .barcode-container img { width: 100px; height: 100px; object-fit: contain; border: 2px solid #a68a3f; padding: 3px; background: white; box-sizing: border-box; }
+        .signature-line { position: absolute; bottom: 95px; right: 35px; width: 190px; border-top: 1px solid #000; }
+        .footer-contacts { position: absolute; bottom: 35px; left: 38px; font-size: 12px; font-family: 'Arial', sans-serif; line-height: 1.4; color: #333; background: #ffffff; padding-right: 15px; }
+
+        @media print {
+            body { background: transparent !important; }
+            .top-toolbar { display: none !important; }
+            .preview-wrapper { padding: 0 !important; gap: 0 !important; }
+            .page { box-shadow: none !important; page-break-after: always !important; page-break-inside: avoid !important; margin: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar">
+        <div class="toolbar-title">
+            <span>Pratinjau Kartu Garansi</span>
+            <span class="toolbar-badge">${badgeLabel}</span>
+            <span style="color:#94a3b8; font-size:13px;">ID: ${barcodeId} | SPK: ${noSpk}</span>
+        </div>
+        <div class="toolbar-actions">
+            <button onclick="window.print();" class="btn-tb btn-tb-print">🖨 Cetak / Simpan PDF</button>
+            <button id="btnDlPdf" onclick="downloadPdf();" class="btn-tb btn-tb-download">⬇ Download PDF Langsung</button>
+            <button onclick="window.close();" class="btn-tb btn-tb-close">✕ Tutup</button>
+        </div>
+    </div>
+
+    <div class="preview-wrapper" id="printArea">
+        <!-- HALAMAN MUKA (FRONT) -->
+        <div class="page" style="background-image: url('${imgFront}');">
+            <div class="text-val val-spk">${noSpk}</div>
+            <div class="text-val val-merk">${merk}</div>
+            <div class="text-val val-tgl">${tgl}</div>
+            <div class="text-val val-nama">${nama}</div>
+            <div class="text-val val-alamat">${alamat}</div>
+            <div class="text-val val-kota">${kotaPart}</div>
+            <div class="text-val val-telp">${telp}</div>
+            <div class="text-val val-email lowercase">${email}</div>
+            <div class="text-val val-marketing">${marketing}</div>
+            <div class="text-val val-telpmark">${telpMark}</div>
+            <div class="signature-line"></div>
+            <div class="barcode-container"><img src="${barcodeDataUrl}" alt="QR Code" /></div>
+            <div class="footer-contacts">
+                <table style="border:none; border-collapse: collapse; margin: 0; padding: 0;">
+                    <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Telp</td><td style="padding:0; border:none; font-style:italic;">: 08111021088</td></tr>
+                    <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: https://griyadjayasentosa.id/</td></tr>
+                    <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Email</td><td style="padding:0; border:none; font-style:italic;">: griyadjayaupvc@gmail.com</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- HALAMAN BELAKANG (BACK) -->
+        <div class="page" style="background-image: url('${imgBack}');"></div>
+    </div>
+
+    <script>
+        function downloadPdf() {
+            var btn = document.getElementById('btnDlPdf');
+            var orig = btn.innerHTML;
+            btn.innerHTML = '⏳ Menyiapkan PDF...';
+            btn.disabled = true;
+
+            var element = document.getElementById('printArea');
+            var opt = {
+                margin: 0,
+                filename: 'Kartu_Garansi_${badgeLabel}_${barcodeId}.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'px', format: [1024, 721], orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(function() {
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }).catch(function(err) {
+                alert('Gagal mendownload otomatis: ' + err + '\nSilakan gunakan tombol "Cetak / Simpan PDF".');
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            });
+        }
+
+        setTimeout(function() {
+            window.focus();
+            window.print();
+        }, 900);
+    </script>
+</body>
+</html>`;
+
+        var printWindow = window.open('', '_blank', 'width=1100,height=850');
+        if (!printWindow) {
+            alert('Pop-up window diblokir browser. Harap izinkan pop-up untuk mencetak kartu garansi.');
+            return;
+        }
+        printWindow.document.write(html);
+        printWindow.document.close();
+    }
+
+    // Bulk Warranty Cards Print & PDF Generator
+    function bulkPrintWarrantyCards() {
+        var checkedBoxes = Array.from(document.querySelectorAll('.warranty-cb:checked'));
+
+        if (checkedBoxes.length === 0) {
+            var visibleBoxes = Array.from(document.querySelectorAll('#tableTransaksi tbody tr:not([style*="display: none"]) .warranty-cb'));
+            if (visibleBoxes.length === 0) {
+                alert('Tidak ada transaksi bertipe UPVC atau CW yang dapat dicetak.');
+                return;
+            }
+            if (confirm('Belum ada kartu yang dicentang.\n\nApakah Anda ingin mencetak SEMUA (' + visibleBoxes.length + ' kartu) UPVC & CW yang tampil di halaman ini?')) {
+                visibleBoxes.forEach(function(cb) { cb.checked = true; });
+                updateSelectedWarrantyCount();
+                checkedBoxes = visibleBoxes;
+            } else {
+                return;
+            }
+        }
+
+        var siteUrl = "<?php echo get_template_directory_uri(); ?>";
+        var imgFront = siteUrl + "/img/warranty_card_front.jpg?v=" + new Date().getTime();
+        var imgBackUpvc = siteUrl + "/img/warranty_card_upvc_back.jpg?v=" + new Date().getTime();
+        var imgBackCw = siteUrl + "/img/warranty_card_cw_back.jpg?v=" + new Date().getTime();
+
+        var pagesHtml = '';
+
+        checkedBoxes.forEach(function(cb, index) {
+            var info = JSON.parse(cb.dataset.info);
+            var cardType = (cb.dataset.cardType || '').toLowerCase();
+            var barcodeId = info.BarcodeID || "";
+            var rawMerk = info.material_description || "";
+
+            if (!cardType) {
+                if (/^UPVC_/i.test(rawMerk)) cardType = 'upvc';
+                else if (/^CW_/i.test(rawMerk)) cardType = 'cw';
+                else cardType = 'upvc';
+            }
+
+            var cleanMerk = rawMerk.replace(/^(UPVC_|CW_)/i, '').trim();
+            var merk = toTitleCase(cleanMerk);
+
+            // Generate QR Code
+            var qrCanvas = document.createElement('canvas');
+            var qr = new QRious({
+                element: qrCanvas,
+                value: 'https://griyadjayasentosa.id/warranty/?id=' + encodeURIComponent(barcodeId),
+                size: 300,
+                level: 'M'
+            });
+            var barcodeDataUrl = qrCanvas.toDataURL();
+
+            var noSpk = info.SPKID || "-";
+            var tgl = "-";
+            if (info.date_transaction && info.date_transaction !== "0000-00-00") {
+                var dateObj = new Date(info.date_transaction);
+                var months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                tgl = dateObj.getDate() + ' ' + months[dateObj.getMonth()] + ' ' + dateObj.getFullYear();
+            }
+
+            var nama = toTitleCase(info.customer_nama);
+            var alamat = toTitleCase(info.lokasi);
+            var kotaPart = toTitleCase([info.kota, info.provinsi, info.kodepos].filter(Boolean).join(" / ")) || "-";
+            var telp = info.customer_phone || "-";
+            var email = info.customer_email || "-";
+            var marketing = toTitleCase(info.marketing_nama);
+            var telpMark = info.marketing_phone || "-";
+
+            var imgBack = (cardType === 'cw') ? imgBackCw : imgBackUpvc;
+
+            pagesHtml += `
+            <!-- KARTU #${index + 1}: ${barcodeId} FRONT -->
             <div class="page" style="background-image: url('${imgFront}');">
                 <div class="text-val val-spk">${noSpk}</div>
                 <div class="text-val val-merk">${merk}</div>
-                
                 <div class="text-val val-tgl">${tgl}</div>
                 <div class="text-val val-nama">${nama}</div>
                 <div class="text-val val-alamat">${alamat}</div>
@@ -1804,34 +2017,171 @@ if ( $role === 1 ) {
                 <div class="text-val val-email lowercase">${email}</div>
                 <div class="text-val val-marketing">${marketing}</div>
                 <div class="text-val val-telpmark">${telpMark}</div>
-                  <div class="signature-line"></div>
-                  <div class="barcode-container"><img src="${barcodeDataUrl}" /></div>
-                  <div style="position: absolute; bottom: 35px; left: 38px; font-size: 12px; font-family: 'Arial', sans-serif; line-height: 1.4; color: #333;">
-                      <table style="border:none; border-collapse: collapse; margin: 0; padding: 0;">
-                          <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Telp</td><td style="padding:0; border:none; font-style:italic;">: 08111021088</td></tr>
-                          <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: https://griyadjayasentosa.id/</td></tr>
-                          <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Email</td><td style="padding:0; border:none; font-style:italic;">: griyadjayaupvc@gmail.com</td></tr>
-                      </table>
-                  </div>
+                <div class="signature-line"></div>
+                <div class="barcode-container"><img src="${barcodeDataUrl}" alt="QR Code" /></div>
+                <div class="footer-contacts">
+                    <table style="border:none; border-collapse: collapse; margin: 0; padding: 0;">
+                        <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Telp</td><td style="padding:0; border:none; font-style:italic;">: 08111021088</td></tr>
+                        <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: https://griyadjayasentosa.id/</td></tr>
+                        <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Email</td><td style="padding:0; border:none; font-style:italic;">: griyadjayaupvc@gmail.com</td></tr>
+                    </table>
+                </div>
             </div>
-            
-            <!-- BACK PAGE -->
+
+            <!-- KARTU #${index + 1}: ${barcodeId} BACK -->
             <div class="page" style="background-image: url('${imgBack}');"></div>
+            `;
+        });
+
+        var count = checkedBoxes.length;
+        var html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bulk Cetak ${count} Kartu Garansi - Griya Djaya Sentosa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @page { size: 1024px 721px landscape; margin: 0; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background: #0f172a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .top-toolbar { position: sticky; top: 0; left: 0; right: 0; z-index: 99999; background: #1e293b; border-bottom: 2px solid #d4b572; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .toolbar-title { color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .toolbar-badge { background: #d4b572; color: #0f172a; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+        .toolbar-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-tb { border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
+        .btn-tb-print { background: #d4b572; color: #0f172a; }
+        .btn-tb-print:hover { background: #e0c88b; }
+        .btn-tb-download { background: #2563eb; color: #fff; }
+        .btn-tb-download:hover { background: #1d4ed8; }
+        .btn-tb-close { background: #475569; color: #fff; }
+        .btn-tb-close:hover { background: #334155; }
         
+        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; }
+        .page { width: 1024px; height: 721px; position: relative; background-size: cover; background-repeat: no-repeat; background-position: center; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.5); background-color: #fff; }
+        
+        .text-val { position: absolute; font-size: 19px; color: #000; font-weight: 500; font-family: 'Arial', sans-serif; }
+        .capitalize { text-transform: capitalize; }
+        .lowercase { text-transform: lowercase; }
+        
+        .val-spk { top: 148px; left: 225px; font-weight: bold; }
+        .val-merk { top: 185px; left: 225px; }
+        .val-tgl { top: 231px; left: 270px; }
+        .val-nama { top: 269px; left: 270px; }
+        .val-alamat { top: 307px; left: 270px; width: 730px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .val-kota { top: 346px; left: 270px; }
+        .val-telp { top: 382px; left: 270px; }
+        .val-email { top: 419px; left: 270px; }
+        .val-marketing { top: 455px; left: 270px; }
+        .val-telpmark { top: 491px; left: 270px; }
+        
+        .barcode-container { position: absolute; bottom: 90px; left: 38px; width: 100px; height: 100px; background: transparent; border: none; padding: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+        .barcode-container img { width: 100px; height: 100px; object-fit: contain; border: 2px solid #a68a3f; padding: 3px; background: white; box-sizing: border-box; }
+        .signature-line { position: absolute; bottom: 95px; right: 35px; width: 190px; border-top: 1px solid #000; }
+        .footer-contacts { position: absolute; bottom: 35px; left: 38px; font-size: 12px; font-family: 'Arial', sans-serif; line-height: 1.4; color: #333; background: #ffffff; padding-right: 15px; }
+
+        @media print {
+            body { background: transparent !important; }
+            .top-toolbar { display: none !important; }
+            .preview-wrapper { padding: 0 !important; gap: 0 !important; }
+            .page { box-shadow: none !important; page-break-after: always !important; page-break-inside: avoid !important; margin: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar">
+        <div class="toolbar-title">
+            <span>Pratinjau Bulk Kartu Garansi</span>
+            <span class="toolbar-badge">${count} KARTU</span>
+            <span style="color:#94a3b8; font-size:13px;">Total ${count * 2} Halaman (Muka & Belakang)</span>
+        </div>
+        <div class="toolbar-actions">
+            <button onclick="window.print();" class="btn-tb btn-tb-print">🖨 Cetak Semua (${count}) / Simpan PDF</button>
+            <button id="btnDlBulkPdf" onclick="downloadBulkPdf();" class="btn-tb btn-tb-download">⬇ Download PDF Gabungan</button>
+            <button onclick="window.close();" class="btn-tb btn-tb-close">✕ Tutup</button>
+        </div>
+    </div>
+
+    <div class="preview-wrapper" id="printArea">
+        ${pagesHtml}
+    </div>
+
+    <script>
+        function downloadBulkPdf() {
+            var btn = document.getElementById('btnDlBulkPdf');
+            var orig = btn.innerHTML;
+            btn.innerHTML = '⏳ Menyiapkan PDF (${count} kartu)...';
+            btn.disabled = true;
+
+            var element = document.getElementById('printArea');
+            var opt = {
+                margin: 0,
+                filename: 'Kartu_Garansi_Bulk_${count}_Cards.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 1.5, useCORS: true, logging: false },
+                jsPDF: { unit: 'px', format: [1024, 721], orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(function() {
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }).catch(function(err) {
+                alert('Gagal mendownload otomatis: ' + err + '\nSilakan gunakan tombol "Cetak Semua / Simpan PDF".');
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            });
+        }
+
+        setTimeout(function() {
+            window.focus();
+            window.print();
+        }, 1100);
+    </script>
 </body>
-        </html>`;
-        
-        var printWindow = window.open('', '_blank', 'width=1050,height=750');
+</html>`;
+
+        var printWindow = window.open('', '_blank', 'width=1100,height=850');
+        if (!printWindow) {
+            alert('Pop-up window diblokir browser. Harap izinkan pop-up untuk mencetak kartu garansi.');
+            return;
+        }
         printWindow.document.write(html);
         printWindow.document.close();
-        
-        setTimeout(function() {
-            printWindow.focus();
-            printWindow.print();
-        }, 800);
     }
 
-    
+    // Checkbox and Selection State Handlers
+    function toggleSelectAllWarranty(masterCheckbox) {
+        var visibleBoxes = document.querySelectorAll('#tableTransaksi tbody tr:not([style*="display: none"]) .warranty-cb');
+        visibleBoxes.forEach(function(cb) {
+            cb.checked = masterCheckbox.checked;
+        });
+        updateSelectedWarrantyCount();
+    }
+
+    function updateSelectedWarrantyCount() {
+        var checkedCount = document.querySelectorAll('.warranty-cb:checked').length;
+        var countSpan = document.getElementById('selectedWarrantyCount');
+        if (countSpan) countSpan.textContent = checkedCount;
+
+        var btn = document.getElementById('btnBulkPrintWarranty');
+        if (btn) {
+            if (checkedCount > 0) {
+                btn.style.background = '#d4b572';
+                btn.style.color = '#0f172a';
+                btn.style.borderColor = '#d4b572';
+            } else {
+                btn.style.background = '#0f172a';
+                btn.style.color = '#d4b572';
+                btn.style.borderColor = '#d4b572';
+            }
+        }
+    }
+
+    // Backward compatibility alias
+    function printBarcode(infoStr) {
+        printWarrantyCard(infoStr);
+    }
+
+
     // Pagination and Filtering Logic
     const configRowsPerPage = 10;
     const tableStates = {};

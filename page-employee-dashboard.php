@@ -360,6 +360,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         $upd_data = array(
             'BarcodeID' => $old_barcode, // Barcode ID is NOT allowed to change per user request, so we force old_barcode
             'no_penawaran' => sanitize_text_field($_POST['no_penawaran'] ?? ''),
+            'SPKID' => sanitize_text_field($_POST['no_penawaran'] ?? ''),
             'material_description' => sanitize_text_field($_POST['material_description'] ?? ''),
             'date_transaction' => sanitize_text_field($_POST['date_transaction'] ?? ''),
             'warranty_exp' => sanitize_text_field($_POST['warranty_exp'] ?? ''),

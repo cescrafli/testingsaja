@@ -61,7 +61,8 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
             <h4 class="footer-new-title">Informasi Kontak</h4>
             <ul class="footer-new-list">
                 <li><i class="icon-whatsapp"></i> <a href="https://wa.me/628111021088" target="_blank">+6281-1102-1088</a></li>
-                                <li><i class="icon-call"></i> <a href="tel:+622180476151">+6221 - 8047 6151</a></li>
+                <li><i class="icon-call"></i> <a href="tel:+622180476151">+6221 - 8047 6151</a></li>
+                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <a href="mailto:info@griyadjayasentosa.id">info@griyadjayasentosa.id</a></li>
                 <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <a href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a></li>
             </ul>
         </div>
@@ -105,6 +106,44 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         </div>
     </div>
     
+    <!-- Global SEO Internal Link Directory for 100% Project & Blog Indexing -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 20px; border-top: 1px solid #1e3a5f; font-size: 12px; color: #94a3b8;">
+        <div style="margin-bottom: 12px;">
+            <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Portofolio Proyek:</strong>
+            <?php
+            $footer_projects = get_posts(array(
+                'post_type'      => 'project',
+                'posts_per_page' => 30,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC'
+            ));
+            $p_links = array();
+            foreach ($footer_projects as $fp) {
+                $p_links[] = '<a href="' . esc_url(get_permalink($fp->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fp->post_title) . '</a>';
+            }
+            echo implode(' &bull; ', $p_links);
+            ?>
+        </div>
+        <div>
+            <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Artikel &amp; Panduan:</strong>
+            <?php
+            $footer_posts = get_posts(array(
+                'post_type'      => 'post',
+                'posts_per_page' => 20,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC'
+            ));
+            $b_links = array();
+            foreach ($footer_posts as $fb) {
+                $b_links[] = '<a href="' . esc_url(get_permalink($fb->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fb->post_title) . '</a>';
+            }
+            echo implode(' &bull; ', $b_links);
+            ?>
+        </div>
+    </div>
+
     <div class="footer-new-bottom">
         Copyright 2026 &copy; All Rights Reserved. Developed by <a href="https://website-mrmp.vercel.app/" target="_blank" rel="noopener noreferrer">cescrafli</a>
     </div>

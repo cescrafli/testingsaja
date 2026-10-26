@@ -70,12 +70,12 @@ global $custom_css; $custom_css = 'blog'; get_header();
     <!-- Posts Grid (Left) -->
     <div class="blog-posts-grid">
         <?php
-        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $paged = max( 1, get_query_var('paged'), get_query_var('page') );
         $args = array(
-            'post_type' => 'post',
-            'posts_per_page' => 6,
-            'paged' => $paged,
-            'post_status' => 'publish'
+            'post_type'      => 'post',
+            'posts_per_page' => 24,
+            'paged'          => $paged,
+            'post_status'    => 'publish'
         );
         $blog_query = new WP_Query($args);
         
@@ -85,9 +85,9 @@ global $custom_css; $custom_css = 'blog'; get_header();
                 if (!$thumbnail) $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
         ?>
         <a href="<?php echo get_permalink(); ?>" class="blog-card">
-            <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php the_title_attribute(); ?>" class="blog-card-img">
+            <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr(get_the_title() . ' - Griya Djaya Sentosa'); ?>" class="blog-card-img" loading="lazy">
             <div class="blog-card-body">
-                <div class="blog-card-title"><?php the_title(); ?></div>
+                <h2 class="blog-card-title" style="margin-top:0;"><?php the_title(); ?></h2>
                 <div class="blog-card-excerpt">
                     <?php echo wp_trim_words(get_the_excerpt(), 15, '...'); ?>
                 </div>
@@ -133,11 +133,27 @@ global $custom_css; $custom_css = 'blog'; get_header();
             <ul class="b-list">
                 <?php
                 $recent_posts = wp_get_recent_posts(array(
-                    'numberposts' => 4,
+                    'numberposts' => 10,
                     'post_status' => 'publish'
                 ));
                 foreach( $recent_posts as $recent ) {
-                    echo '<li><a href="' . get_permalink($recent["ID"]) . '">' . esc_html($recent["post_title"]) . '</a></li>';
+                    echo '<li><a href="' . esc_url(get_permalink($recent["ID"])) . '">' . esc_html($recent["post_title"]) . '</a></li>';
+                }
+                ?>
+            </ul>
+        </div>
+
+        <div class="b-widget">
+            <h3 class="b-widget-title">Proyek Terbaru</h3>
+            <ul class="b-list">
+                <?php
+                $recent_projects = get_posts(array(
+                    'post_type'      => 'project',
+                    'posts_per_page' => 6,
+                    'post_status'    => 'publish'
+                ));
+                foreach( $recent_projects as $rproj ) {
+                    echo '<li><a href="' . esc_url(get_permalink($rproj->ID)) . '">' . esc_html($rproj->post_title) . '</a></li>';
                 }
                 ?>
             </ul>

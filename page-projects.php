@@ -38,12 +38,24 @@ global $custom_css; $custom_css = 'projects'; get_header();
                 <!-- Grid -->
                 <div class="projects-grid">
                 <?php
-                $args = array('post_type' => 'project', 'posts_per_page' => -1);
+                $args = array(
+                    'post_type'      => 'project',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC'
+                );
                 $project_query = new WP_Query($args);
                 if ($project_query->have_posts()) :
                     while ($project_query->have_posts()) : $project_query->the_post();
                         $location = get_post_meta(get_the_ID(), '_project_location', true);
-                        if (empty($location)) $location = 'Location not set';
+                        if (empty($location)) {
+                            $display_location = 'Indonesia';
+                        } elseif (preg_match('#^https?://#i', $location)) {
+                            $display_location = 'Lokasi Terverifikasi (Google Maps)';
+                        } else {
+                            $display_location = $location;
+                        }
                         
                         $category = get_post_meta(get_the_ID(), '_project_category', true);
                         $cat_slug = !empty($category) ? sanitize_title($category) : 'uncategorized';
@@ -60,20 +72,21 @@ global $custom_css; $custom_css = 'projects'; get_header();
                         if ($photo_count == 1) {
                             $photo_count = abs(crc32(get_the_title())) % 20 + 5;
                         }
+                        $alt_text = get_the_title() . (!empty($category) ? ' - Proyek ' . $category : '') . ' | Griya Djaya Sentosa';
                 ?>
                     <a href="<?php the_permalink(); ?>" class="project-card" data-category="<?php echo esc_attr($cat_slug); ?>">
                         <div class="project-card-image">
-                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
+                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($alt_text); ?>" loading="lazy" />
                             <span class="photo-count">
                                 <?php echo $photo_count; ?> 
                                 <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                             </span>
                         </div>
                         <div class="project-card-body">
-                            <h4 class="project-card-title"><?php the_title(); ?></h4>
+                            <h2 class="project-card-title"><?php the_title(); ?></h2>
                             <span class="project-card-location">
                                 <svg viewBox="0 0 24 24" width="14" height="14" stroke="#e31837" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                <?php echo esc_html($location); ?>
+                                <?php echo esc_html($display_location); ?>
                             </span>
                             <span class="project-card-btn">Lihat Proyek &rarr;</span>
                         </div>
@@ -126,7 +139,7 @@ global $custom_css; $custom_css = 'projects'; get_header();
                 var filters = document.querySelectorAll('.projects-filters li');
                 var cards = Array.from(document.querySelectorAll('.project-card'));
                 var paginationContainer = document.getElementById('pagination-container');
-                var itemsPerPage = 20; // 4 columns x 5 rows
+                var itemsPerPage = 48; // Tampilkan hingga 48 proyek per halaman agar seluruh kartu terindeks Google
                 var currentPage = 1;
                 var currentFilter = 'all';
                 

@@ -112,22 +112,27 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
 <main class="single-main-wrapper">
     <div class="container">
         <article class="single-article-box">
+            <nav aria-label="Breadcrumb" style="font-size:13px; color:#64748b; margin-bottom:14px;">
+                <a href="<?php echo esc_url(home_url('/')); ?>" style="color:#64748b; text-decoration:none;">Beranda</a> &nbsp;/&nbsp;
+                <a href="<?php echo esc_url(home_url('/blog/')); ?>" style="color:#64748b; text-decoration:none;">Blog</a> &nbsp;/&nbsp;
+                <span style="color:#cba85d; font-weight:600;"><?php the_title(); ?></span>
+            </nav>
             <div class="single-meta-top">
                 <?php 
                 $categories = get_the_category();
                 if ( ! empty( $categories ) ) {
                     echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '" style="color: inherit; text-decoration: none;">' . esc_html( $categories[0]->name ) . '</a>';   
                 } else {
-                    echo 'ALL';
+                    echo 'ARTIKEL';
                 }
                 ?>
             </div>
             
             <h1 class="single-title"><?php the_title(); ?></h1>
             
-            <!-- <div class="single-meta-bottom">
-                <?php echo get_the_date(); ?>
-            </div> -->
+            <div class="single-meta-bottom">
+                Dipublikasikan pada <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time> &bull; <span>Griya Djaya Sentosa</span>
+            </div>
             
             <div class="post_content_body" style="font-size: 16px; line-height: 1.8; color: #333;">
                 <?php the_content(); ?>
@@ -192,30 +197,32 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
 <aside class="latest section" style="background: #fff;">
     <div class="container">
         <div class="blog_header section_header" style="text-align: center; margin-bottom: 50px;">
-            <span class="subtitle">Our blog</span>
-            <h2 class="title">Latest Posts</h2>
+            <span class="subtitle">Referensi &amp; Panduan</span>
+            <h2 class="title">Artikel Lainnya</h2>
         </div>
-        <ul class="blog_feed" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+        <ul class="blog_feed" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
             <?php
-            $latest_args = array('post_type' => 'post', 'posts_per_page' => 3, 'post__not_in' => array(get_the_ID()));
+            $latest_args = array('post_type' => 'post', 'posts_per_page' => 6, 'post__not_in' => array(get_the_ID()), 'post_status' => 'publish');
             $latest_query = new WP_Query($latest_args);
             if ($latest_query->have_posts()) :
                 while ($latest_query->have_posts()) : $latest_query->the_post();
                     $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
                     if (!$thumbnail) $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
                     $cat = get_the_category();
-                    $cat_name = !empty($cat) ? esc_html($cat[0]->name) : 'Uncategorized';
+                    $cat_name = !empty($cat) ? esc_html($cat[0]->name) : 'Artikel';
             ?>
             <li class="blog_feed-item" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; background: #fafafa;">
                 <div class="media" style="width: 100%; height: 200px;">
-                    <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: 100%; object-fit: cover;" />
+                    <a href="<?php the_permalink(); ?>" style="display:block;width:100%;height:100%;">
+                        <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr(get_the_title() . ' - Griya Djaya Sentosa'); ?>" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+                    </a>
                 </div>
                 <div class="main" style="padding: 20px;">
                     <div class="metadata" style="margin-bottom: 10px; font-size: 12px; color: #eab308; text-transform: uppercase;">
                         <?php echo $cat_name; ?>
                     </div>
-                    <h4 class="main_title" style="font-size: 18px; margin-bottom: 15px; line-height: 1.4;"><a href="<?php the_permalink(); ?>" style="color: #111;"><?php the_title(); ?></a></h4>
-                    <a class="link link-arrow" href="<?php the_permalink(); ?>" style="font-size: 14px;"> Read post <i class="icon-arrow_right icon"></i> </a>
+                    <h3 class="main_title" style="font-size: 18px; margin-bottom: 15px; line-height: 1.4;"><a href="<?php the_permalink(); ?>" style="color: #111; text-decoration: none;"><?php the_title(); ?></a></h3>
+                    <a class="link link-arrow" href="<?php the_permalink(); ?>" style="font-size: 14px;"> Baca Artikel <i class="icon-arrow_right icon"></i> </a>
                 </div>
             </li>
             <?php

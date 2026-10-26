@@ -136,6 +136,11 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
         <div class="container">
             <div class="about_content">
                 <article class="about_article">
+                    <nav aria-label="Breadcrumb" style="font-size:13px; color:#64748b; margin-bottom:14px;">
+                        <a href="<?php echo esc_url( home_url('/') ); ?>" style="color:#64748b; text-decoration:none;">Beranda</a> &nbsp;/&nbsp;
+                        <a href="<?php echo esc_url( home_url('/projects/') ); ?>" style="color:#64748b; text-decoration:none;">Proyek</a> &nbsp;/&nbsp;
+                        <span style="color:#cba85d; font-weight:600;"><?php the_title(); ?></span>
+                    </nav>
                     <h1 class="about_article-header" style="font-size:32px;margin-bottom:20px;"><?php the_title(); ?></h1>
                     <div class="media">
                         <picture>
@@ -197,6 +202,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
                                 <li class="contact-info_group">
                                     <span class="name">Email</span>
                                     <span class="content d-inline-flex flex-column">
+                                        <a class="link" href="mailto:info@griyadjayasentosa.id">info@griyadjayasentosa.id</a>
                                         <a class="link" href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a>
                                     </span>
                                 </li>
@@ -248,14 +254,76 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
     </section>
     <?php endif; ?>
 
-    <!-- 2. RELATED POSTS: Ditampilkan DI BAWAH Foto Project -->
-    <?php if ( class_exists( 'Jetpack_RelatedPosts' ) ) : ?>
-    <section class="related-projects-section" style="border-top:1px solid #f0f0f0;">
-        <div class="container related-projects-container">
-            <?php echo do_shortcode( '[jetpack-related-posts]' ); ?>
+    <!-- 2. RELATED PROJECTS & INTERNAL NAVIGATION (Server-Rendered HTML for 100% Google Indexing) -->
+    <section class="related-projects-section" style="padding: 60px 0 80px; background: #ffffff; border-top: 1px solid #f0f0f0;">
+        <div class="container">
+            <?php
+            $prev_proj = get_previous_post();
+            $next_proj = get_next_post();
+            if ( $prev_proj || $next_proj ) :
+            ?>
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; padding-bottom:45px; margin-bottom:45px; border-bottom:1px solid #eaeaea;">
+                <div>
+                    <?php if ( $prev_proj ) : ?>
+                    <span style="display:block; font-size:12px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">&larr; Proyek Sebelumnya</span>
+                    <a href="<?php echo esc_url( get_permalink( $prev_proj->ID ) ); ?>" style="font-size:16px; font-weight:700; color:#041e3a; text-decoration:none;"><?php echo esc_html( get_the_title( $prev_proj->ID ) ); ?></a>
+                    <?php endif; ?>
+                </div>
+                <div style="text-align:right;">
+                    <?php if ( $next_proj ) : ?>
+                    <span style="display:block; font-size:12px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Proyek Selanjutnya &rarr;</span>
+                    <a href="<?php echo esc_url( get_permalink( $next_proj->ID ) ); ?>" style="font-size:16px; font-weight:700; color:#041e3a; text-decoration:none;"><?php echo esc_html( get_the_title( $next_proj->ID ) ); ?></a>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <div class="section_header" style="margin-bottom: 35px; text-align:center;">
+                <span class="subtitle" style="color:#cba85d; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; font-size:13px;">Portofolio Lainnya</span>
+                <h2 class="title" style="font-size:28px; color:#041e3a; margin-top:8px;">Proyek Terkait <span class="highlight">Griya Djaya Sentosa</span></h2>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:25px;">
+                <?php
+                $rel_args = array(
+                    'post_type'      => 'project',
+                    'posts_per_page' => 4,
+                    'post__not_in'   => array( $pid ),
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                );
+                $rel_query = new WP_Query( $rel_args );
+                if ( $rel_query->have_posts() ) :
+                    while ( $rel_query->have_posts() ) : $rel_query->the_post();
+                        $r_thumb = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) ?: get_the_post_thumbnail_url( get_the_ID(), 'full' );
+                        if ( ! $r_thumb ) {
+                            $r_thumb = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+                        }
+                        $r_cat = get_post_meta( get_the_ID(), '_project_category', true );
+                ?>
+                <a href="<?php the_permalink(); ?>" style="display:flex; flex-direction:column; background:#fff; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.03); transition:transform 0.3s;">
+                    <div style="width:100%; aspect-ratio:4/3; overflow:hidden; background:#f1f5f9;">
+                        <img src="<?php echo esc_url( $r_thumb ); ?>" alt="<?php echo esc_attr( get_the_title() . ' - Griya Djaya Sentosa' ); ?>" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+                    </div>
+                    <div style="padding:18px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <?php if ( $r_cat ) : ?>
+                            <span style="display:inline-block; font-size:11px; font-weight:700; color:#cba85d; text-transform:uppercase; margin-bottom:6px;"><?php echo esc_html( $r_cat ); ?></span>
+                            <?php endif; ?>
+                            <h3 style="font-size:16px; font-weight:700; color:#0f172a; line-height:1.4; margin:0 0 12px;"><?php the_title(); ?></h3>
+                        </div>
+                        <span style="font-size:13px; font-weight:700; color:#cba85d;">Lihat Detail Proyek &rarr;</span>
+                    </div>
+                </a>
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+                endif;
+                ?>
+            </div>
         </div>
     </section>
-    <?php endif; ?>
 </main>
 <?php
 endwhile; endif;

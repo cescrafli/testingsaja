@@ -28,7 +28,49 @@ add_action( 'after_setup_theme', 'cobain_setup' );
  * and handles edge-cases for Homepage, Interior page, and title normalization.
  */
 function gjs_get_custom_document_title() {
-	$req_uri = $_SERVER['REQUEST_URI'] ?? '';
+	$req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+	$req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
+
+	// Dynamic titles for product sub-item detail views (?view=single&item=...)
+	if (isset($_GET['view']) && $_GET['view'] === 'single' && !empty($_GET['item'])) {
+		$item_slug = sanitize_title($_GET['item']);
+		$item_titles = array(
+			'jendela-lipat'            => 'Jendela Lipat UPVC Kedap Suara | Griya Djaya Sentosa',
+			'jendela-jungkit'          => 'Jendela Jungkit UPVC Presisi | Griya Djaya Sentosa',
+			'jendela-pivot'            => 'Jendela Pivot UPVC Modern | Griya Djaya Sentosa',
+			'jendela-sliding'          => 'Jendela Sliding UPVC Geser | Griya Djaya Sentosa',
+			'jendela-sliding-vertikal' => 'Jendela Sliding Vertikal UPVC | Griya Djaya Sentosa',
+			'jendela-swing'            => 'Jendela Swing UPVC Kedap Suara | Griya Djaya Sentosa',
+			'kacamati'                 => 'Kaca Mati UPVC Frameless & Partisi | Griya Djaya Sentosa',
+			'pintu-ekonomis'           => 'Pintu UPVC Ekonomis Kamar Mandi | Griya Djaya Sentosa',
+			'pintu-garasi'             => 'Pintu Garasi UPVC Kokoh & Awet | Griya Djaya Sentosa',
+			'pintu-lipat'              => 'Pintu Lipat UPVC Bukaan Lebar | Griya Djaya Sentosa',
+			'pintu-sliding'            => 'Pintu Sliding UPVC Geser | Griya Djaya Sentosa',
+			'pintu-swing'              => 'Pintu Swing UPVC Utama & Kamar | Griya Djaya Sentosa',
+			'alumunium-jendela-jungkit'=> 'Jendela Jungkit Aluminium YKK & Alexindo | GJS',
+			'alumunium-jendela-sliding'=> 'Jendela Sliding Aluminium Presisi | Griya Djaya Sentosa',
+			'alumunium-jendela-swing'  => 'Jendela Swing Aluminium Modern | Griya Djaya Sentosa',
+			'alumunium-kacamati'       => 'Kaca Mati Kusen Aluminium Gedung & Rumah | GJS',
+			'alumunium-kisi-kisi'      => 'Kisi-Kisi & Louver Aluminium Eksterior | GJS',
+			'alumunium-pintu-lipat'    => 'Pintu Lipat Aluminium Bi-Fold | Griya Djaya Sentosa',
+			'alumunium-pintu-sliding'  => 'Pintu Sliding Aluminium Geser | Griya Djaya Sentosa',
+			'alumunium-pintu-swing'    => 'Pintu Swing Aluminium Kantor & Rumah | GJS',
+			'fasad-acp'                => 'Jasa Pasang ACP Gedung & Ruko | Griya Djaya Sentosa',
+			'fasad-curtain-wall'       => 'Kontraktor Curtain Wall Kaca Gedung | Griya Djaya Sentosa',
+			'kaca-frameless-tempered'  => 'Partisi & Pintu Kaca Frameless Tempered | GJS',
+			'kanopi-kaca'              => 'Jasa Pasang Kanopi Kaca Tempered & Laminated | GJS',
+			'railing-kaca'             => 'Railing Tangga & Balkon Kaca Tempered | GJS',
+			'shower-glass'             => 'Partisi Kaca Kamar Mandi & Shower Box | GJS',
+			'besi-kanopi'              => 'Fabrikasi Kanopi Besi Hollow & Baja | Griya Djaya Sentosa',
+			'besi-pintu-besi'          => 'Fabrikasi Pintu Besi Tempa & Minimalis | GJS',
+			'besi-pintu-garasi'        => 'Pintu Garasi Besi Lipat & Sliding | Griya Djaya Sentosa',
+			'besi-railling'            => 'Railing Tangga & Balkon Besi Stainless | GJS',
+		);
+		if (isset($item_titles[$item_slug])) {
+			return $item_titles[$item_slug];
+		}
+	}
+
 	$is_interior = (
 		is_page('interior') ||
 		is_page_template('page-product-interior.php') ||
@@ -40,6 +82,31 @@ function gjs_get_custom_document_title() {
 
 	if (is_front_page() || is_home()) {
 		return 'Griya Djaya Sentosa | Spesialis Fabrikasi Kusen, Fasad, Besi & Kaca';
+	}
+
+	if (is_page('upvc') || is_page_template('page-product-upvc.php') || $req_path === 'product/upvc') {
+		return 'Kusen, Pintu & Jendela UPVC Conch | Griya Djaya Sentosa';
+	}
+	if (is_page('alumunium') || is_page_template('page-product-alumunium.php') || $req_path === 'product/alumunium') {
+		return 'Fabrikasi Kusen Aluminium YKK & Alexindo | GJS';
+	}
+	if (is_page('fasad') || is_page_template('page-product-fasad.php') || $req_path === 'product/fasad') {
+		return 'Kontraktor Fasad Curtain Wall & ACP Gedung | GJS';
+	}
+	if (is_page('kaca') || is_page_template('page-product-kaca.php') || $req_path === 'product/kaca') {
+		return 'Spesialis Partisi Kaca Tempered, Kanopi & Shower | GJS';
+	}
+	if (is_page('besi-stainless') || is_page_template('page-product-besi.php') || $req_path === 'product/besi-stainless') {
+		return 'Fabrikasi Kanopi, Railing & Pintu Besi Stainless | GJS';
+	}
+	if (is_page('product') || is_page_template('page-product.php') || $req_path === 'product') {
+		return 'Katalog Produk Kusen UPVC, Aluminium, Fasad & Kaca | GJS';
+	}
+	if (is_page('projects') || is_page_template('page-projects.php') || $req_path === 'projects') {
+		return 'Portofolio Proyek Kusen UPVC, Aluminium & Fasad | GJS';
+	}
+	if (is_page('blog') || is_page_template('page-blog.php') || $req_path === 'blog') {
+		return 'Blog & Panduan Kusen UPVC, Aluminium & Fasad | GJS';
 	}
 
 	return null;
@@ -497,10 +564,10 @@ function cobain_set_post_views($postID) {
 }
 
 
-// Restrict search results to blog posts only
+// Include blog posts, projects, and pages in site search results
 function cobain_search_filter($query) {
     if ($query->is_search && !is_admin() && $query->is_main_query()) {
-        $query->set('post_type', 'post');
+        $query->set('post_type', array('post', 'project', 'page'));
     }
     return $query;
 }
@@ -519,10 +586,13 @@ function cobain_register_projects_cpt() {
     $args = array(
         'label'                 => __( 'Project', 'cobain' ),
         'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'thumbnail' ),
+        'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
         'public'                => true,
+        'publicly_queryable'    => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
+        'show_in_rest'          => true,
+        'exclude_from_search'   => false,
         'menu_position'         => 20,
         'menu_icon'             => 'dashicons-building',
         'show_in_nav_menus'     => true,
@@ -714,16 +784,20 @@ add_filter( 'wp_sitemaps_taxonomies', function( $taxonomies ) {
 // Jetpack & Image Sitemap Filters (Fix 4XX and 3XX entries in image sitemap)
 // =========================================================================
 
-// 1. Ensure Jetpack sitemap only includes post, page, project (exclude gjs_produk)
+// 1. Ensure Jetpack sitemap explicitly includes post, page, AND project (exclude gjs_produk)
 add_filter( 'jetpack_sitemap_post_types', function( $post_types ) {
-    if ( is_array( $post_types ) ) {
-        $key = array_search( 'gjs_produk', $post_types, true );
-        if ( false !== $key ) {
-            unset( $post_types[ $key ] );
-        }
+    if ( ! is_array( $post_types ) ) {
+        $post_types = array( 'post', 'page' );
     }
-    return $post_types;
-} );
+    if ( ! in_array( 'project', $post_types, true ) ) {
+        $post_types[] = 'project';
+    }
+    $key = array_search( 'gjs_produk', $post_types, true );
+    if ( false !== $key ) {
+        unset( $post_types[ $key ] );
+    }
+    return array_values( $post_types );
+}, 99 );
 
 // 2. Filter image attachments in Jetpack image-sitemap-1.xml
 // Excludes unattached media (post_parent == 0) and attachments linked to non-public/invalid parents
@@ -1030,11 +1104,11 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
 
 }
 
-// Early redirect /news-sitemap.xml (served by Jetpack before template_redirect) to /sitemap_index.xml
+// Early redirect /news-sitemap.xml and /sitemap.xml (served by Jetpack before template_redirect) to /sitemap_index.xml
 add_action('init', 'gjs_early_news_sitemap_redirect', 0);
 function gjs_early_news_sitemap_redirect() {
     $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '', '/');
-    if (preg_match('#(^|/)news-sitemap(\.xml|\.xsl)?$#i', $path)) {
+    if (preg_match('#(^|/)(news-sitemap|sitemap)(\.xml|\.xsl)?$#i', $path)) {
         nocache_headers();
         wp_redirect(home_url('/sitemap_index.xml'), 301);
         exit;
@@ -1445,11 +1519,14 @@ function gds_filter_yoast_sitemap_url($url, $type) {
 add_filter('jetpack_sitemap_news_sitemap_post_types', '__return_empty_array', 999);
 add_filter('jetpack_news_sitemap_include_in_robotstxt', '__return_false', 999);
 
-// D. Hapus referensi news-sitemap.xml dari output robots.txt
+// D. Hapus referensi news-sitemap.xml & sitemap.xml (Jetpack) dari output robots.txt agar fokus 100% ke sitemap_index.xml
 add_filter('robots_txt', 'gds_clean_news_sitemap_from_robots_txt', 999, 2);
 function gds_clean_news_sitemap_from_robots_txt($output, $public) {
-    $output = preg_replace('#Sitemap:\s*https?://[^\s]+/news-sitemap\.xml\r?\n?#i', '', $output);
-    return $output;
+    $output = preg_replace('#Sitemap:\s*https?://[^\s]+/(news-sitemap|sitemap)\.xml\r?\n?#i', '', $output);
+    if (stripos($output, 'sitemap_index.xml') === false) {
+        $output .= "\nSitemap: " . home_url('/sitemap_index.xml') . "\n";
+    }
+    return trim($output) . "\n";
 }
 
 // E. Deduplikasi homepage untuk Google News & Rank Math & WP Core
@@ -1613,3 +1690,495 @@ function gjs_filter_content_images_for_speed( $content ) {
         return $matches[0];
     }, $content );
 }
+
+// =========================================================================
+// MASTER SEO, AUTO-INDEXING SITEMAP ENGINE & SCHEMA.ORG JSON-LD (v1.9)
+// Ensures 100% of Projects, Blogs, Products & Pages are indexed in Google
+// =========================================================================
+
+// 1. Force Indonesian Locale (id_ID / id-ID) for Yoast SEO, Rank Math & Open Graph
+add_filter( 'wpseo_locale', function() { return 'id_ID'; }, 999 );
+add_filter( 'wpseo_og_locale', function() { return 'id_ID'; }, 999 );
+add_filter( 'rank_math/opengraph/facebook/og_locale', function() { return 'id_ID'; }, 999 );
+
+// 2. Real-Time Sitemap Cache Invalidation & Search Engine Auto-Ping whenever any Project, Blog Post, or Page is published/updated
+function gjs_flush_all_seo_sitemap_caches( $post_id = 0 ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( $post_id > 0 ) {
+        $ptype = get_post_type( $post_id );
+        if ( ! in_array( $ptype, array( 'post', 'project', 'page' ), true ) ) {
+            return;
+        }
+    }
+
+    global $wpdb;
+    // Clear Yoast SEO, Rank Math, and Jetpack sitemap transients immediately
+    $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%rank_math_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'" );
+
+    if ( class_exists( 'WPSEO_Sitemaps_Cache' ) && method_exists( 'WPSEO_Sitemaps_Cache', 'clear' ) ) {
+        WPSEO_Sitemaps_Cache::clear();
+    }
+
+    // Trigger WordPress generic ping & Jetpack sitemap cron
+    if ( function_exists( 'wp_schedule_single_event' ) && ! wp_next_scheduled( 'do_pings' ) ) {
+        wp_schedule_single_event( time(), 'do_pings' );
+    }
+}
+add_action( 'save_post', 'gjs_flush_all_seo_sitemap_caches', 99 );
+add_action( 'deleted_post', 'gjs_flush_all_seo_sitemap_caches', 99 );
+add_action( 'transition_post_status', function( $new_status, $old_status, $post ) {
+    if ( $new_status === 'publish' || $old_status === 'publish' ) {
+        if ( isset( $post->ID ) ) {
+            gjs_flush_all_seo_sitemap_caches( $post->ID );
+        }
+    }
+}, 99, 3 );
+
+// One-time v7 flush on deployment to ensure project-sitemap.xml, post-sitemap.xml, and page-sitemap.xml are 100% fresh
+add_action( 'init', function() {
+    if ( get_option( 'gjs_sitemap_cleaned_v7' ) === 'yes' ) {
+        return;
+    }
+    gjs_flush_all_seo_sitemap_caches( 0 );
+    flush_rewrite_rules( false );
+    update_option( 'gjs_sitemap_cleaned_v7', 'yes' );
+}, 20 );
+
+// 3. Ensure 'project' CPT is always included in Yoast SEO & Rank Math XML Sitemaps
+add_filter( 'wpseo_sitemap_exclude_post_type', function( $exclude, $post_type ) {
+    if ( in_array( $post_type, array( 'project', 'post', 'page' ), true ) ) {
+        return false;
+    }
+    return $exclude;
+}, 999, 2 );
+
+add_filter( 'rank_math/sitemap/exclude_post_type', function( $exclude, $post_type ) {
+    if ( in_array( $post_type, array( 'project', 'post', 'page' ), true ) ) {
+        return false;
+    }
+    return $exclude;
+}, 999, 2 );
+
+// 4. Include all Project Gallery Images (_project_gallery_1..24) in Yoast XML Sitemap <image:image> tags!
+add_filter( 'wpseo_sitemap_urlimages', function( $images, $post_id ) {
+    if ( get_post_type( $post_id ) === 'project' ) {
+        $existing_urls = array();
+        if ( is_array( $images ) ) {
+            foreach ( $images as $img_item ) {
+                if ( ! empty( $img_item['src'] ) ) {
+                    $existing_urls[] = $img_item['src'];
+                }
+            }
+        } else {
+            $images = array();
+        }
+
+        $title = get_the_title( $post_id );
+        for ( $i = 1; $i <= 24; $i++ ) {
+            $g_url = get_post_meta( $post_id, '_project_gallery_' . $i, true );
+            if ( ! empty( $g_url ) && ! in_array( $g_url, $existing_urls, true ) ) {
+                $images[] = array(
+                    'src'   => $g_url,
+                    'title' => $title . ' - Dokumentasi Proyek ' . $i,
+                    'alt'   => $title . ' - Griya Djaya Sentosa',
+                );
+                $existing_urls[] = $g_url;
+            }
+        }
+    }
+    return $images;
+}, 99, 2 );
+
+// 5. Comprehensive Site-Wide Schema.org JSON-LD Structured Data Engine
+add_action( 'wp_head', 'gjs_output_comprehensive_seo_schema', 30 );
+function gjs_output_comprehensive_seo_schema() {
+    if ( is_admin() ) {
+        return;
+    }
+
+    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
+    $req_path = trim( parse_url( $req_uri, PHP_URL_PATH ) ?? '', '/' );
+    if ( in_array( $req_path, array( 'griyadjayamasuk', 'detail-transaksi', 'employee-dashboard', 'portal-karyawan', 'login' ), true ) ) {
+        return;
+    }
+
+    $site_url  = home_url( '/' );
+    $logo_url  = get_template_directory_uri() . '/svg/logo.svg';
+    $hero_img  = 'https://griyadjayasentosa.id/wp-content/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg';
+
+    $graph = array();
+
+    // A. Organization & HomeAndConstructionBusiness (Site-Wide Entity Authority)
+    $graph[] = array(
+        '@type'       => array( 'Organization', 'HomeAndConstructionBusiness', 'LocalBusiness' ),
+        '@id'         => $site_url . '#organization',
+        'name'        => 'PT Griya Djaya Sentosa',
+        'alternateName' => array( 'Griya Djaya Sentosa', 'GJS', 'Griya Djaya UPVC' ),
+        'url'         => $site_url,
+        'logo'        => array(
+            '@type' => 'ImageObject',
+            'url'   => $logo_url,
+        ),
+        'image'       => $hero_img,
+        'description' => 'Spesialis fabrikasi dan aplikator Kusen UPVC Conch, Kusen Aluminium YKK & Alexindo, Fasad Curtain Wall & ACP, Partisi Kaca Tempered, Railing Kanopi Besi Stainless, serta Interior Fitting Out dengan fasilitas workshop mandiri sejak 2011.',
+        'telephone'   => '+62-811-1021-088',
+        'email'       => 'info@griyadjayasentosa.id',
+        'priceRange'  => '$$',
+        'foundingDate'=> '2011',
+        'address'     => array(
+            '@type'           => 'PostalAddress',
+            'streetAddress'   => 'Jl. Raya Transyogi No 8, Cileungsi',
+            'addressLocality' => 'Bogor',
+            'addressRegion'   => 'Jawa Barat',
+            'postalCode'      => '16820',
+            'addressCountry'  => 'ID',
+        ),
+        'department'  => array(
+            array(
+                '@type'     => 'LocalBusiness',
+                'name'      => 'Griya Djaya Sentosa - Head Office & Workshop I Cileungsi',
+                'telephone' => '+62-811-1021-088',
+                'address'   => array(
+                    '@type'           => 'PostalAddress',
+                    'streetAddress'   => 'Jl. Raya Transyogi No 8, Cileungsi',
+                    'addressLocality' => 'Bogor',
+                    'addressRegion'   => 'Jawa Barat',
+                    'addressCountry'  => 'ID',
+                ),
+            ),
+            array(
+                '@type'     => 'LocalBusiness',
+                'name'      => 'Griya Djaya Sentosa - Workshop II Bekasi',
+                'telephone' => '+62-21-8047-6151',
+                'address'   => array(
+                    '@type'           => 'PostalAddress',
+                    'streetAddress'   => 'Jl. Raya Jati Asih No 3, RT 06 RW 05, Jati Asih',
+                    'addressLocality' => 'Bekasi',
+                    'addressRegion'   => 'Jawa Barat',
+                    'addressCountry'  => 'ID',
+                ),
+            ),
+            array(
+                '@type'     => 'LocalBusiness',
+                'name'      => 'Griya Djaya Sentosa - Material Warehouse Jakarta Barat',
+                'telephone' => '+62-811-1021-088',
+                'address'   => array(
+                    '@type'           => 'PostalAddress',
+                    'streetAddress'   => 'Jl. Raya Kapuk Cengkareng Gudang No 10, Cengkareng',
+                    'addressLocality' => 'Jakarta Barat',
+                    'addressRegion'   => 'DKI Jakarta',
+                    'addressCountry'  => 'ID',
+                ),
+            ),
+        ),
+        'areaServed'  => array(
+            array( '@type' => 'City', 'name' => 'Jakarta' ),
+            array( '@type' => 'City', 'name' => 'Bogor' ),
+            array( '@type' => 'City', 'name' => 'Depok' ),
+            array( '@type' => 'City', 'name' => 'Tangerang' ),
+            array( '@type' => 'City', 'name' => 'Bekasi' ),
+            array( '@type' => 'City', 'name' => 'Bandung' ),
+            array( '@type' => 'Country', 'name' => 'Indonesia' ),
+        ),
+        'sameAs'      => array(
+            'https://www.instagram.com/griyajayaupvc/',
+            'https://www.tiktok.com/@griyadjayaupvc',
+            'https://www.youtube.com/@GRIYAJAYAUPVC',
+        ),
+        'hasOfferCatalog' => array(
+            '@type' => 'OfferCatalog',
+            'name'  => 'Layanan Fabrikasi & Konstruksi Griya Djaya Sentosa',
+            'itemListElement' => array(
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Fabrikasi & Pasang Kusen, Pintu, dan Jendela UPVC (Conch & Falken)',
+                        'url'   => home_url( '/product/upvc/' ),
+                    ),
+                ),
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Fabrikasi & Pasang Kusen Aluminium (YKK AP, Alexindo & Finished Goods)',
+                        'url'   => home_url( '/product/alumunium/' ),
+                    ),
+                ),
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Kontraktor Fasad Curtain Wall & ACP (Aluminium Composite Panel)',
+                        'url'   => home_url( '/product/fasad/' ),
+                    ),
+                ),
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Partisi Kaca Tempered, Kanopi Kaca, Railing Kaca & Shower Box',
+                        'url'   => home_url( '/product/kaca/' ),
+                    ),
+                ),
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Fabrikasi Kanopi Besi, Pintu Garasi, Pagar & Railing Stainless Steel',
+                        'url'   => home_url( '/product/besi-stainless/' ),
+                    ),
+                ),
+                array(
+                    '@type' => 'Offer',
+                    'itemOffered' => array(
+                        '@type' => 'Service',
+                        'name'  => 'Jasa Desain Interior 3D, Custom Cabinetry & Turnkey Fitting Out',
+                        'url'   => home_url( '/product/interior/' ),
+                    ),
+                ),
+            ),
+        ),
+    );
+
+    // B. Product Category Pages Schema (UPVC, Aluminium, Fasad, Kaca, Besi)
+    $product_schemas = array(
+        'product/upvc' => array(
+            'name'        => 'Kusen, Pintu & Jendela UPVC Conch Bergaransi 10 Tahun',
+            'serviceType' => 'Fabrikasi & Pemasangan Kusen Pintu Jendela UPVC',
+            'description' => 'Fabrikasi dan pemasangan kusen, pintu lipat, pintu sliding, jendela jungkit, dan jendela swing UPVC profil Conch & Falken dengan tulangan besi galvanis, kedap suara, anti rayap, dan garansi 10 tahun.',
+            'brand'       => array( 'Conch', 'Falken', 'Kinlong', 'Griya Djaya Sentosa' ),
+        ),
+        'product/alumunium' => array(
+            'name'        => 'Fabrikasi Kusen, Pintu & Jendela Aluminium YKK AP & Alexindo',
+            'serviceType' => 'Fabrikasi & Pemasangan Kusen Aluminium',
+            'description' => 'Spesialis fabrikasi dan instalasi kusen aluminium YKK AP, Alexindo, pintu lipat aluminium, jendela sliding, jendela jungkit, dan kisi-kisi louver untuk rumah mewah, ruko, dan gedung perkantoran.',
+            'brand'       => array( 'YKK AP', 'Alexindo', 'Global Aluminium Asia', 'Griya Djaya Sentosa' ),
+        ),
+        'product/fasad' => array(
+            'name'        => 'Kontraktor Fasad Curtain Wall & ACP (Aluminium Composite Panel) Gedung',
+            'serviceType' => 'Kontraktor Fasad Bangunan, Curtain Wall & ACP',
+            'description' => 'Jasa fabrikasi dan pemasangan fasad kaca Curtain Wall (Stick System & Unitized) serta cladding Aluminium Composite Panel (ACP Seven, Marks, Alcopan) presisi tinggi untuk gedung bertingkat, kantor, hotel, dan rumah sakit.',
+            'brand'       => array( 'Seven ACP', 'Marks ACP', 'YKK AP', 'Asahimas', 'Griya Djaya Sentosa' ),
+        ),
+        'product/kaca' => array(
+            'name'        => 'Spesialis Partisi Kaca Tempered, Kanopi Kaca, Railing & Shower Box',
+            'serviceType' => 'Instalasi Kaca Arsitektural Tempered & Laminated',
+            'description' => 'Penyedia dan aplikator pintu kaca frameless tempered, partisi kaca kantor, kanopi kaca laminated/tempered, railing tangga kaca balkon, dan kaca shower box kamar mandi.',
+            'brand'       => array( 'Asahimas', 'Mulia Glass', 'Dekson', 'Griya Djaya Sentosa' ),
+        ),
+        'product/besi-stainless' => array(
+            'name'        => 'Fabrikasi Kanopi Besi, Pintu Garasi, Pintu Besi & Railing Stainless Steel',
+            'serviceType' => 'Fabrikasi Konstruksi Besi & Stainless Steel',
+            'description' => 'Bengkel fabrikasi kanopi besi hollow/WF, pintu besi pengaman, pintu garasi besi lipat/sliding, dan railing tangga balkon besi & stainless steel anti karat.',
+            'brand'       => array( 'Griya Djaya Sentosa' ),
+        ),
+    );
+
+    if ( isset( $product_schemas[ $req_path ] ) ) {
+        $ps = $product_schemas[ $req_path ];
+        $graph[] = array(
+            '@type'       => 'Service',
+            '@id'         => home_url( '/' . $req_path . '/#service' ),
+            'name'        => $ps['name'],
+            'serviceType' => $ps['serviceType'],
+            'description' => $ps['description'],
+            'provider'    => array( '@id' => $site_url . '#organization' ),
+            'areaServed'  => 'Indonesia',
+            'url'         => home_url( '/' . $req_path . '/' ),
+        );
+    }
+
+    // C. Projects Archive Page (/projects/): Output ItemList of ALL Published Projects in WordPress!
+    if ( is_page( 'projects' ) || is_page_template( 'page-projects.php' ) || $req_path === 'projects' ) {
+        $all_projects = get_posts( array(
+            'post_type'      => 'project',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ) );
+        $item_elements = array();
+        $pos = 1;
+        foreach ( $all_projects as $proj ) {
+            $p_thumb = get_the_post_thumbnail_url( $proj->ID, 'large' ) ?: $hero_img;
+            $p_loc   = get_post_meta( $proj->ID, '_project_location', true );
+            $p_cat   = get_post_meta( $proj->ID, '_project_category', true );
+            $item_elements[] = array(
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'url'      => get_permalink( $proj->ID ),
+                'name'     => $proj->post_title,
+                'item'     => array(
+                    '@type'         => 'CreativeWork',
+                    '@id'           => get_permalink( $proj->ID ) . '#project',
+                    'name'          => $proj->post_title,
+                    'url'           => get_permalink( $proj->ID ),
+                    'image'         => $p_thumb,
+                    'datePublished' => get_the_date( 'c', $proj->ID ),
+                    'genre'         => ! empty( $p_cat ) ? $p_cat : 'Konstruksi & Fabrikasi',
+                    'contentLocation' => ( ! empty( $p_loc ) && strpos( $p_loc, 'http' ) !== 0 ) ? $p_loc : 'Indonesia',
+                ),
+            );
+        }
+        $graph[] = array(
+            '@type'           => 'CollectionPage',
+            '@id'             => home_url( '/projects/#collection' ),
+            'name'            => 'Portofolio Proyek Kusen UPVC, Aluminium, Fasad Curtain Wall & Kaca - Griya Djaya Sentosa',
+            'url'             => home_url( '/projects/' ),
+            'description'     => 'Daftar lengkap dokumentasi proyek pemasangan kusen UPVC, kusen aluminium YKK/Alexindo, fasad curtain wall, ACP, kaca tempered, dan interior oleh PT Griya Djaya Sentosa.',
+            'mainEntity'      => array(
+                '@type'           => 'ItemList',
+                'numberOfItems'   => count( $item_elements ),
+                'itemListElement' => $item_elements,
+            ),
+        );
+    }
+
+    // D. Blog Archive Page (/blog/): Output ItemList of ALL Published Blog Posts in WordPress!
+    if ( is_page( 'blog' ) || is_page_template( 'page-blog.php' ) || $req_path === 'blog' ) {
+        $all_posts = get_posts( array(
+            'post_type'      => 'post',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ) );
+        $post_elements = array();
+        $pos = 1;
+        foreach ( $all_posts as $bpost ) {
+            $b_thumb = get_the_post_thumbnail_url( $bpost->ID, 'large' ) ?: $hero_img;
+            $post_elements[] = array(
+                '@type'    => 'ListItem',
+                'position' => $pos++,
+                'url'      => get_permalink( $bpost->ID ),
+                'name'     => $bpost->post_title,
+                'item'     => array(
+                    '@type'         => 'BlogPosting',
+                    '@id'           => get_permalink( $bpost->ID ) . '#article',
+                    'headline'      => $bpost->post_title,
+                    'url'           => get_permalink( $bpost->ID ),
+                    'image'         => $b_thumb,
+                    'datePublished' => get_the_date( 'c', $bpost->ID ),
+                    'dateModified'  => get_the_modified_date( 'c', $bpost->ID ),
+                    'author'        => array( '@id' => $site_url . '#organization' ),
+                    'publisher'     => array( '@id' => $site_url . '#organization' ),
+                ),
+            );
+        }
+        $graph[] = array(
+            '@type'           => 'CollectionPage',
+            '@id'             => home_url( '/blog/#collection' ),
+            'name'            => 'Blog, Artikel & Panduan Kusen UPVC, Aluminium, Fasad & Kaca - Griya Djaya Sentosa',
+            'url'             => home_url( '/blog/' ),
+            'mainEntity'      => array(
+                '@type'           => 'ItemList',
+                'numberOfItems'   => count( $post_elements ),
+                'itemListElement' => $post_elements,
+            ),
+        );
+    }
+
+    // E. Single Project Page (is_singular('project'))
+    if ( is_singular( 'project' ) ) {
+        $pid    = get_the_ID();
+        $p_url  = get_permalink( $pid );
+        $client = get_post_meta( $pid, '_project_client', true );
+        $loc    = get_post_meta( $pid, '_project_location', true );
+        $cat    = get_post_meta( $pid, '_project_category', true );
+        $images = array();
+        $thumb  = get_the_post_thumbnail_url( $pid, 'full' );
+        if ( $thumb ) {
+            $images[] = $thumb;
+        }
+        for ( $i = 1; $i <= 24; $i++ ) {
+            $g = get_post_meta( $pid, '_project_gallery_' . $i, true );
+            if ( $g && ! in_array( $g, $images, true ) ) {
+                $images[] = $g;
+            }
+        }
+        if ( empty( $images ) ) {
+            $images[] = $hero_img;
+        }
+
+        $graph[] = array(
+            '@type'         => 'CreativeWork',
+            '@id'           => $p_url . '#project',
+            'name'          => get_the_title( $pid ),
+            'headline'      => get_the_title( $pid ),
+            'description'   => gjs_get_fallback_meta_description(),
+            'url'           => $p_url,
+            'image'         => $images,
+            'datePublished' => get_the_date( 'c', $pid ),
+            'dateModified'  => get_the_modified_date( 'c', $pid ),
+            'creator'       => array( '@id' => $site_url . '#organization' ),
+            'provider'      => array( '@id' => $site_url . '#organization' ),
+            'genre'         => ! empty( $cat ) ? $cat : 'Proyek Fabrikasi & Konstruksi',
+            'keywords'      => implode( ', ', array_filter( array( get_the_title( $pid ), $cat, $client, ( strpos( (string) $loc, 'http' ) !== 0 ? $loc : '' ), 'Griya Djaya Sentosa', 'Kusen UPVC', 'Kusen Aluminium', 'Curtain Wall' ) ) ),
+        );
+
+        $graph[] = array(
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $p_url . '#project-breadcrumb',
+            'itemListElement' => array(
+                array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => $site_url ),
+                array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Proyek', 'item' => home_url( '/projects/' ) ),
+                array( '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title( $pid ), 'item' => $p_url ),
+            ),
+        );
+    }
+
+    // F. FAQ Page (/faq/): Rich FAQPage Schema for Google Search Dropdown Snippets
+    if ( is_page( 'faq' ) || is_page_template( 'page-faq.php' ) || $req_path === 'faq' ) {
+        $graph[] = array(
+            '@type'      => 'FAQPage',
+            '@id'        => home_url( '/faq/#faqpage' ),
+            'mainEntity' => array(
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Berapa lama estimasi pengerjaan untuk proyek kusen atau fasad?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Estimasi waktu pengerjaan bergantung pada volume pesanan dan tingkat kerumitan desain. Kirimkan gambar kerja atau kebutuhan Anda, dan tim Griya Djaya Sentosa akan menyampaikan estimasi waktu yang jelas bersama penawaran.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Apakah produk UPVC dari Griya Djaya Sentosa bergaransi?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Ya. Produk kusen, pintu, dan jendela UPVC kami dilindungi garansi resmi hingga 10 tahun dan dapat dicek secara online melalui sistem Barcode Garansi di website Griya Djaya Sentosa.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Di wilayah mana saja Griya Djaya Sentosa beroperasi?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Kami melayani fabrikasi dan pemasangan di Jakarta, Bogor, Depok, Tangerang, Bekasi (Jabodetabek), Bandung, Bali, hingga pengiriman dan instalasi proyek ke seluruh wilayah Indonesia.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Apakah saya bisa memesan desain atau spesifikasi kusen, kaca, dan fasad secara custom?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Bisa. Kami mengerjakan desain custom sesuai gambar kerja (shop drawing) atau spesifikasi dari arsitek, kontraktor, maupun pemilik rumah, mulai dari pilihan profil UPVC/Aluminium, warna, ketebalan kaca, hingga tipe sistem bukaan.',
+                    ),
+                ),
+            ),
+        );
+    }
+
+    if ( ! empty( $graph ) ) {
+        $schema_payload = array(
+            '@context' => 'https://schema.org',
+            '@graph'   => $graph,
+        );
+        echo "\n<!-- Griya Djaya Sentosa Master SEO Schema -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $schema_payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+    }
+}
+

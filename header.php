@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id-ID">
     <head>
         <!-- Favicon dipindahkan ke pengaturan bawaan WordPress (Site Icon) agar dibaca Google -->
         <?php if ( function_exists('has_site_icon') && has_site_icon() ) : ?>

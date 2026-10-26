@@ -207,45 +207,45 @@ global $custom_css; $custom_css = 'index'; get_header();
         </style>
 
         <div class="po-grid">
-            <div class="po-card">
+            <a href="<?php echo esc_url(home_url('/product/alumunium/')); ?>" class="po-card" style="text-decoration: none;">
                 <div class="po-icon-wrap">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                 </div>
-                <h4 class="po-title">Kusen Aluminium<br><span style="font-size: 14px; font-weight: 600;">Jendela &amp; Pintu</span></h4>
+                <h3 class="po-title">Kusen Aluminium<br><span style="font-size: 14px; font-weight: 600;">Jendela &amp; Pintu</span></h3>
                 <p class="po-desc">Solusi kusen aluminium untuk kebutuhan volume besar maupun desain custom, dengan pilihan profil dan finishing yang mengikuti spesifikasi arsitek.</p>
-            </div>
+            </a>
             
-            <div class="po-card">
+            <a href="<?php echo esc_url(home_url('/product/upvc/')); ?>" class="po-card" style="text-decoration: none;">
                 <div class="po-icon-wrap">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h4 class="po-title">Kusen UPVC<br><span style="font-size: 14px; font-weight: 600;">Jendela &amp; Pintu</span></h4>
+                <h3 class="po-title">Kusen UPVC<br><span style="font-size: 14px; font-weight: 600;">Jendela &amp; Pintu</span></h3>
                 <p class="po-desc">Profil UPVC teruji untuk iklim tropis: anti rayap, anti karat, kedap suara, dan hemat perawatan jangka panjang.</p>
-            </div>
+            </a>
 
-            <div class="po-card">
+            <a href="<?php echo esc_url(home_url('/product/fasad/')); ?>" class="po-card" style="text-decoration: none;">
                 <div class="po-icon-wrap">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg>
                 </div>
-                <h4 class="po-title">Fasad<br><span style="font-size: 14px; font-weight: 600;">Curtain Wall &amp; ACP</span></h4>
+                <h3 class="po-title">Fasad<br><span style="font-size: 14px; font-weight: 600;">Curtain Wall &amp; ACP</span></h3>
                 <p class="po-desc">Sistem fasad untuk bangunan bertingkat dan komersial, dirancang untuk ketahanan struktural sekaligus nilai estetika.</p>
-            </div>
+            </a>
 
-            <div class="po-card">
+            <a href="<?php echo esc_url(home_url('/product/besi-stainless/')); ?>" class="po-card" style="text-decoration: none;">
                 <div class="po-icon-wrap">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                 </div>
-                <h4 class="po-title">Konstruksi Besi<br><span style="font-size: 14px; font-weight: 600;">Railing &amp; Kanopi</span></h4>
+                <h3 class="po-title">Konstruksi Besi<br><span style="font-size: 14px; font-weight: 600;">Railing &amp; Kanopi</span></h3>
                 <p class="po-desc">Fabrikasi railing dan kanopi besi dengan pengelasan presisi dan finishing anti karat, disesuaikan dengan beban struktur.</p>
-            </div>
+            </a>
 
-            <div class="po-card">
+            <a href="<?php echo esc_url(home_url('/product/kaca/')); ?>" class="po-card" style="text-decoration: none;">
                 <div class="po-icon-wrap">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
-                <h4 class="po-title">Kaca<br><span style="font-size: 14px; font-weight: 600;">Shower, Kubikel &amp; Frameless</span></h4>
+                <h3 class="po-title">Kaca<br><span style="font-size: 14px; font-weight: 600;">Shower, Kubikel &amp; Frameless</span></h3>
                 <p class="po-desc">Pemasangan kaca shower, partisi kubikel, dan sistem frameless dengan pemotongan presisi dan hardware berkualitas.</p>
-            </div>
+            </a>
         </div>
     </div>
 </section>
@@ -564,9 +564,9 @@ global $custom_css; $custom_css = 'index'; get_header();
                     <ul class="blog_feed">
 <?php
 $blog_args = array(
-    'post_type' => 'project',
-    'posts_per_page' => 3,
-    'post_status' => 'publish'
+    'post_type'      => 'project',
+    'posts_per_page' => 6,
+    'post_status'    => 'publish'
 );
 $blog_query = new WP_Query($blog_args);
 if ($blog_query->have_posts()) :
@@ -575,24 +575,88 @@ if ($blog_query->have_posts()) :
         if (!$thumbnail) {
             $thumbnail = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
         }
-        $categories = get_the_category();
-        $category_name = !empty($categories) ? esc_html($categories[0]->name) : 'Uncategorized';
-        $category_link = !empty($categories) ? esc_url(get_category_link($categories[0]->term_id)) : '#';
+        $proj_cat = get_post_meta(get_the_ID(), '_project_category', true);
 ?>
         <li class="blog_feed-item">
             <div class="media">
-                <picture>
-                    <source data-srcset="<?php echo esc_url($thumbnail); ?>" srcset="<?php echo esc_url($thumbnail); ?>"  />
-                    <img class="lazy" data-src="<?php echo esc_url($thumbnail); ?>" src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
-                </picture>
+                <a href="<?php the_permalink(); ?>" style="display:block;width:100%;height:100%;">
+                    <picture>
+                        <source data-srcset="<?php echo esc_url($thumbnail); ?>" srcset="<?php echo esc_url($thumbnail); ?>" />
+                        <img class="lazy" data-src="<?php echo esc_url($thumbnail); ?>" src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr(get_the_title() . ' - Proyek Griya Djaya Sentosa'); ?>" />
+                    </picture>
+                </a>
             </div>
             <div class="main">
                 <div class="metadata">
-                    
+                    <?php if (!empty($proj_cat)) : ?>
+                    <span class="category" style="color:#cba85d;font-weight:700;text-transform:uppercase;font-size:12px;"><?php echo esc_html($proj_cat); ?></span>
+                    <i class="icon icon-dot"></i>
+                    <?php endif; ?>
+                    <span class="date"><?php echo get_the_date(); ?></span>
+                </div>
+                <h3 class="main_title" style="font-size:20px;"><a href="<?php the_permalink(); ?>" style="color:inherit;text-decoration:none;"><?php the_title(); ?></a></h3>
+                <p class="main_text"><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
+                <a class="link link-arrow" href="<?php the_permalink(); ?>"> Lihat Proyek <i class="icon-arrow_right icon"></i> </a>
+            </div>
+        </li>
+<?php
+    endwhile;
+    wp_reset_postdata();
+endif;
+?>
+</ul>
+                </div>
+            </section>
+
+            <!-- Seksi Artikel & Panduan Blog Terbaru di Homepage untuk Indexing & SEO -->
+            <section class="blog section" style="padding-top: 20px; background-color: #f8fafc;">
+                <div class="container">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="height: 2px; width: 40px; background: #cba85d;"></div>
+                                <span style="font-size: 14px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">Edukasi &amp; Referensi Konstruksi</span>
+                            </div>
+                            <h2 style="font-size: 42px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.15; font-family: 'Outfit', sans-serif;">
+                                Artikel &amp; Panduan <span style="color: #cba85d;">Terbaru</span>
+                            </h2>
+                        </div>
+                        <a href="<?php echo esc_url(home_url('/blog/')); ?>" style="background: #041e3a; color: #ffffff; padding: 14px 32px; font-weight: 700; font-size: 15px; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.3s;">Semua Artikel</a>
+                    </div>
+
+                    <ul class="blog_feed">
+<?php
+$post_args = array(
+    'post_type'      => 'post',
+    'posts_per_page' => 6,
+    'post_status'    => 'publish'
+);
+$post_query = new WP_Query($post_args);
+if ($post_query->have_posts()) :
+    while ($post_query->have_posts()) : $post_query->the_post();
+        $b_thumb = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: get_the_post_thumbnail_url(get_the_ID(), 'full');
+        if (!$b_thumb) {
+            $b_thumb = get_template_directory_uri() . '/img/placeholder.jpg?v=2';
+        }
+        $b_cats = get_the_category();
+        $b_cat_name = !empty($b_cats) ? esc_html($b_cats[0]->name) : 'Artikel';
+?>
+        <li class="blog_feed-item">
+            <div class="media">
+                <a href="<?php the_permalink(); ?>" style="display:block;width:100%;height:100%;">
+                    <picture>
+                        <source data-srcset="<?php echo esc_url($b_thumb); ?>" srcset="<?php echo esc_url($b_thumb); ?>" />
+                        <img class="lazy" data-src="<?php echo esc_url($b_thumb); ?>" src="<?php echo esc_url($b_thumb); ?>" alt="<?php echo esc_attr(get_the_title() . ' - Griya Djaya Sentosa'); ?>" />
+                    </picture>
+                </a>
+            </div>
+            <div class="main">
+                <div class="metadata">
+                    <span class="category" style="color:#cba85d;font-weight:700;text-transform:uppercase;font-size:12px;"><?php echo $b_cat_name; ?></span>
                     <i class="icon icon-dot"></i>
                     <span class="date"><?php echo get_the_date(); ?></span>
                 </div>
-                <h4 class="main_title"><?php the_title(); ?></h4>
+                <h3 class="main_title" style="font-size:20px;"><a href="<?php the_permalink(); ?>" style="color:inherit;text-decoration:none;"><?php the_title(); ?></a></h3>
                 <p class="main_text"><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
                 <a class="link link-arrow" href="<?php the_permalink(); ?>"> Baca Artikel <i class="icon-arrow_right icon"></i> </a>
             </div>
@@ -602,7 +666,7 @@ if ($blog_query->have_posts()) :
     wp_reset_postdata();
 endif;
 ?>
-</ul>
+                    </ul>
                 </div>
             </section>
             <section class="section cta-project" style="background-color: #041e3a; padding: 80px 0; text-align: center; margin-bottom: 0 !important;">

@@ -349,14 +349,44 @@ function gjs_filter_seo_plugin_metadesc( $desc ) {
 // Open Graph Harmonization Filters (Prevent OG URL & Description Mismatch)
 // =========================================================================
 
-// 1. Ensure og:url matches canonical URL exactly (especially for /product/interior/)
+// 1a. Ensure product sub-items (?view=single&item=...) have self-referencing canonical tags (Option A for GSC)
+add_filter( 'wpseo_canonical', 'gjs_filter_canonical_for_product_subitems', 99 );
+add_filter( 'wp_get_canonical_url', 'gjs_filter_canonical_for_product_subitems', 99 );
+add_filter( 'rank_math/canonical', 'gjs_filter_canonical_for_product_subitems', 99 );
+function gjs_filter_canonical_for_product_subitems( $canonical ) {
+	if ( isset($_GET['view']) && $_GET['view'] === 'single' && !empty($_GET['item']) ) {
+		$clean_item = sanitize_title($_GET['item']);
+		$req_uri = $_SERVER['REQUEST_URI'] ?? '';
+		$req_path = parse_url($req_uri, PHP_URL_PATH);
+		if (empty($req_path)) {
+			$req_path = parse_url($canonical, PHP_URL_PATH);
+		}
+		$clean_path = '/' . trim($req_path, '/') . '/';
+		return home_url($clean_path . '?view=single&item=' . $clean_item);
+	}
+	return $canonical;
+}
+
+// 1b. Ensure og:url matches canonical URL exactly (especially for /product/interior/ & product sub-items)
 add_filter( 'wpseo_opengraph_url', 'gjs_harmonize_yoast_og_url', 99 );
 function gjs_harmonize_yoast_og_url( $url ) {
+	if ( isset($_GET['view']) && $_GET['view'] === 'single' && !empty($_GET['item']) ) {
+		return gjs_filter_canonical_for_product_subitems( $url );
+	}
 	$req_uri = $_SERVER['REQUEST_URI'] ?? '';
 	if ( preg_match( '#/(product/)?interior/?(\?|$)#', $req_uri ) ) {
 		return home_url( '/product/interior/' );
 	}
 	return $url;
+}
+
+// 1c. Ensure product sub-items are fully indexable in Google (never noindexed by SEO plugins)
+add_filter( 'wpseo_robots', 'gjs_allow_indexing_for_product_subitems', 99 );
+function gjs_allow_indexing_for_product_subitems( $robots ) {
+	if ( isset($_GET['view']) && $_GET['view'] === 'single' && !empty($_GET['item']) ) {
+		return 'index, follow';
+	}
+	return $robots;
 }
 
 // 2. Harmonize og:title with our optimized titles
@@ -1226,6 +1256,40 @@ function gjs_seo_template_redirects() {
         exit;
     }
 
+    // 2a. 301 Permanent Redirect for deleted 404 URLs reported in Google Search Console
+    // - Deleted Hello World post -> /blog/
+    if (strpos($req_path, 'hello-world') !== false) {
+        wp_safe_redirect(home_url('/blog/'), 301);
+        exit;
+    }
+    // - Base /project or /project/ -> /projects/
+    if ($req_path === 'project' || $req_path === 'project/') {
+        wp_safe_redirect(home_url('/projects/'), 301);
+        exit;
+    }
+    // - Deleted test project /project/kentut/ & pagination /project/page-2/ -> /projects/
+    if (strpos($req_path, 'project/') === 0) {
+        $project_slug = basename($req_path);
+        if (in_array($project_slug, array('kentut', 'page-2'), true) || preg_match('#^page(?:-[0-9]+|/[0-9]+)#i', $project_slug)) {
+            wp_safe_redirect(home_url('/projects/'), 301);
+            exit;
+        }
+        // Auto-safeguard: if single project post does not exist or is not published, redirect to /projects/ archive
+        $check_proj = get_page_by_path($project_slug, OBJECT, 'project');
+        if (!$check_proj || $check_proj->post_status !== 'publish') {
+            wp_safe_redirect(home_url('/projects/'), 301);
+            exit;
+        }
+    }
+
+    // 2b. 301 Permanent Redirect for RSS Feed URLs (solves GSC 'Dikecualikan oleh tag noindex')
+    if (preg_match('#^(.*)/feed(?:/.*)?$#i', $req_path, $feed_matches)) {
+        $parent_slug = trim($feed_matches[1], '/');
+        $clean_target = !empty($parent_slug) ? home_url('/' . $parent_slug . '/') : home_url('/');
+        wp_safe_redirect($clean_target, 301);
+        exit;
+    }
+
     // 3. 301 Permanent Redirect all Author Archives (including /author/firbertt/) to Homepage
     if (is_author() || $req_path === 'author' || strpos($req_path, 'author/') === 0) {
         wp_safe_redirect(home_url('/'), 301);
@@ -1326,6 +1390,23 @@ function gjs_seo_template_redirects() {
         wp_safe_redirect(home_url('/'), 301);
         exit;
     }
+}
+
+// Global 301 Redirect for WordPress core feed handlers (do_feed) to eliminate noindex warnings
+add_action('do_feed', 'gjs_redirect_feeds_to_post', 1);
+add_action('do_feed_rdf', 'gjs_redirect_feeds_to_post', 1);
+add_action('do_feed_rss', 'gjs_redirect_feeds_to_post', 1);
+add_action('do_feed_rss2', 'gjs_redirect_feeds_to_post', 1);
+add_action('do_feed_atom', 'gjs_redirect_feeds_to_post', 1);
+function gjs_redirect_feeds_to_post() {
+    $req_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $clean_url = preg_replace('#/feed/?(\?.*)?$#i', '/', $req_uri);
+    if (!empty($clean_url) && $clean_url !== $req_uri) {
+        wp_safe_redirect(home_url($clean_url), 301);
+        exit;
+    }
+    wp_safe_redirect(home_url('/blog/'), 301);
+    exit;
 }
 
 // ============================================================================

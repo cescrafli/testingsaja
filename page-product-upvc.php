@@ -599,12 +599,176 @@ $pintu_items = [
     box-shadow: 0 12px 30px rgba(4, 30, 58, 0.25) !important;
 }
 
-/* Lightbox Modal */
-.lightbox { display: none; position: fixed; z-index: 999999; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(4, 30, 58, 0.95); backdrop-filter: blur(8px); }
-.lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; object-fit: contain; animation: zoomIn 0.3s; border-radius: 8px; }
-.lightbox-close { position: absolute; top: 20px; right: 35px; color: #ffffff; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.lightbox-close:hover { color: #cba85d; }
-@keyframes zoomIn { from {transform:scale(0.9); opacity:0;} to {transform:scale(1); opacity:1;} }
+/* Deep Zoom Lightbox Modal */
+.zoom-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(4, 25, 48, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.zoom-top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    background: linear-gradient(180deg, rgba(4, 25, 48, 0.95) 0%, rgba(4, 25, 48, 0) 100%);
+    box-sizing: border-box;
+}
+.zoom-title-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.zoom-brand-tag {
+    background: #cba85d;
+    color: #041e3a;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.zoom-color-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: 0.3px;
+}
+.zoom-close-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.zoom-close-btn:hover {
+    background: #cba85d;
+    color: #041e3a;
+    border-color: #cba85d;
+    transform: rotate(90deg);
+}
+.zoom-viewport {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    position: relative;
+    overflow: hidden;
+}
+.zoom-viewport.is-dragging {
+    cursor: grabbing !important;
+}
+.zoom-canvas {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center center;
+    transition: transform 0.05s linear;
+}
+.zoom-canvas.animate-reset {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+.zoom-img {
+    max-width: 80vw;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+.zoom-toolbar {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 40px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.zoom-tool-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #f8fafc;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.zoom-tool-btn:hover {
+    background: #cba85d;
+    color: #041e3a;
+    border-color: #cba85d;
+    transform: scale(1.1);
+}
+.zoom-level-badge {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 52px;
+    text-align: center;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: 0.2s;
+}
+.zoom-level-badge:hover {
+    color: #cba85d;
+    background: rgba(203, 168, 93, 0.15);
+}
+.zoom-toolbar-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+}
+.zoom-hint-text {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 500;
+    padding-left: 4px;
+    display: none;
+    white-space: nowrap;
+}
+@media (min-width: 768px) {
+    .zoom-hint-text {
+        display: block;
+    }
+}
 
 /* Card Hover Banner */
 .hover-banner {
@@ -843,7 +1007,7 @@ $pintu_items = [
                             <div id="conf-color-name" class="conf-mekanisme">
                                 <span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> <span style="color:#041e3a; font-weight:700;">CONCH</span> Black
                             </div>
-                            <div class="conf-zoom-hint" onclick="document.querySelector('.product-color-target').click();" title="Klik untuk memperbesar gambar">
+                            <div class="conf-zoom-hint" onclick="openCurrentProductLightbox();" title="Klik untuk memperbesar gambar">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                                 <span>Perbesar</span>
                             </div>
@@ -998,25 +1162,6 @@ function setSlider(index) {
     showSlide(index);
 }
 
-function openLightbox(src) {
-    document.getElementById('lightboxImg').src = src;
-    
-    const mainImg = document.querySelector('.product-color-target');
-    const lightboxImg = document.getElementById('lightboxImg');
-    if(mainImg && lightboxImg) {
-        const filterClassMatch = mainImg.className.match(/filter-[a-zA-Z-]+/);
-        lightboxImg.className = 'lightbox-content'; 
-        if (filterClassMatch) {
-            lightboxImg.classList.add(filterClassMatch[0]);
-        }
-    }
-    
-    document.getElementById('imageLightbox').style.display = 'block';
-}
-function closeLightbox() {
-    document.getElementById('imageLightbox').style.display = 'none';
-}
-
 function resetToWhite() {
     let activeBtn = document.querySelector('.conf-brand-btn.active');
     let activeBrand = activeBtn ? activeBtn.id.replace('btn-', '') : 'conch';
@@ -1040,13 +1185,306 @@ function resetToWhite() {
 }
 </script>
 
-<!-- Lightbox Modal -->
-<div id="imageLightbox" class="lightbox" onclick="if(event.target !== document.getElementById('lightboxImg')) closeLightbox()">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" class="lightbox-content" alt="Lightbox Preview">
+<!-- Deep Zoom Lightbox Modal -->
+<div id="imageLightbox" class="zoom-modal" role="dialog" aria-modal="true">
+    <!-- Top Bar: Color Info & Close Button -->
+    <div class="zoom-top-bar">
+        <div class="zoom-title-info">
+            <span class="zoom-brand-tag" id="zoomBrandTag">CONCH</span>
+            <span class="zoom-color-title" id="zoomColorTitle">Hitam / Black</span>
+        </div>
+        <button type="button" class="zoom-close-btn" onclick="closeLightbox()" title="Tutup Viewer (Esc)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+
+    <!-- Viewport Area (Captures Drag and Scroll) -->
+    <div class="zoom-viewport" id="zoomViewport">
+        <div class="zoom-canvas" id="zoomCanvas">
+            <img id="lightboxImg" class="zoom-img" alt="Product Detail Preview" draggable="false">
+        </div>
+    </div>
+
+    <!-- Bottom Floating Control Toolbar -->
+    <div class="zoom-toolbar">
+        <button type="button" class="zoom-tool-btn" onclick="applyZoom(-0.5)" title="Perkecil (-)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <span class="zoom-level-badge" id="zoomLevelBadge" onclick="resetZoom()" title="Klik untuk Reset (100%)">100%</span>
+        <button type="button" class="zoom-tool-btn" onclick="applyZoom(0.5)" title="Perbesar (+)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="zoom-toolbar-divider"></div>
+        <button type="button" class="zoom-tool-btn" onclick="resetZoom()" title="Reset Ukuran (⟲)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <div class="zoom-hint-text">
+            <span>Scroll roda mouse atau geser untuk melihat detail</span>
+        </div>
+    </div>
 </div>
 
 <script>
+// --- DEEP ZOOM & PAN ENGINE ---
+let zoomScale = 1.0;
+const MIN_ZOOM = 1.0;
+const MAX_ZOOM = 5.0;
+const ZOOM_STEP = 0.5;
+let zoomX = 0;
+let zoomY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let pinchDist = 0;
+
+function openCurrentProductLightbox() {
+    const targets = document.querySelectorAll('.product-color-target');
+    let visibleTarget = null;
+    for (let i = 0; i < targets.length; i++) {
+        const img = targets[i];
+        if (img.offsetParent !== null && window.getComputedStyle(img).display !== 'none') {
+            visibleTarget = img;
+            break;
+        }
+    }
+    if (!visibleTarget && targets.length > 0) visibleTarget = targets[0];
+    if (visibleTarget) {
+        openLightbox(visibleTarget.src);
+    }
+}
+
+function openLightbox(src) {
+    const modal = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    const brandTag = document.getElementById('zoomBrandTag');
+    const colorTitle = document.getElementById('zoomColorTitle');
+    
+    if(!modal || !img) return;
+    
+    img.src = src;
+    
+    // Extract current color & brand information
+    const nameLabel = document.getElementById('conf-color-name');
+    let brand = 'CONCH';
+    let colorName = 'White / Putih';
+    
+    if (nameLabel) {
+        let text = nameLabel.innerText.replace(/Warna:\s*/i, '').trim();
+        if (text.startsWith('FALKEN')) {
+            brand = 'FALKEN';
+            colorName = text.replace(/^FALKEN\s*/, '').trim();
+        } else if (text.startsWith('CONCH')) {
+            brand = 'CONCH';
+            colorName = text.replace(/^CONCH\s*/, '').trim();
+        } else {
+            colorName = text;
+        }
+    }
+    
+    if(brandTag) brandTag.innerText = brand;
+    if(colorTitle) colorTitle.innerText = colorName;
+    
+    resetZoom(false);
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const modal = document.getElementById('imageLightbox');
+    if(modal) modal.style.display = 'none';
+    document.body.style.overflow = '';
+    resetZoom(false);
+}
+
+function updateTransform(clamp = true) {
+    const canvas = document.getElementById('zoomCanvas');
+    const viewport = document.getElementById('zoomViewport');
+    const badge = document.getElementById('zoomLevelBadge');
+    
+    if(!canvas || !viewport) return;
+    
+    if (clamp && zoomScale > 1) {
+        const vpRect = viewport.getBoundingClientRect();
+        const maxPanX = (vpRect.width * (zoomScale - 1)) / 2 + 100;
+        const maxPanY = (vpRect.height * (zoomScale - 1)) / 2 + 100;
+        zoomX = Math.max(-maxPanX, Math.min(maxPanX, zoomX));
+        zoomY = Math.max(-maxPanY, Math.min(maxPanY, zoomY));
+    } else if (zoomScale <= 1) {
+        zoomX = 0;
+        zoomY = 0;
+    }
+    
+    canvas.style.transform = `translate3d(${zoomX}px, ${zoomY}px, 0) scale3d(${zoomScale}, ${zoomScale}, 1)`;
+    if(badge) badge.innerText = Math.round(zoomScale * 100) + '%';
+    
+    if(zoomScale > 1) {
+        viewport.style.cursor = 'grab';
+    } else {
+        viewport.style.cursor = 'zoom-in';
+    }
+}
+
+function applyZoom(delta, originX, originY) {
+    const prevScale = zoomScale;
+    let newScale = Math.round((zoomScale + delta) * 10) / 10;
+    newScale = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, newScale));
+    
+    if (newScale === prevScale) return;
+    
+    const viewport = document.getElementById('zoomViewport');
+    if (viewport && originX !== undefined && originY !== undefined) {
+        const vpRect = viewport.getBoundingClientRect();
+        const mouseX = originX - vpRect.left - vpRect.width / 2;
+        const mouseY = originY - vpRect.top - vpRect.height / 2;
+        
+        const scaleRatio = newScale / prevScale;
+        zoomX = mouseX - (mouseX - zoomX) * scaleRatio;
+        zoomY = mouseY - (mouseY - zoomY) * scaleRatio;
+    }
+    
+    zoomScale = newScale;
+    updateTransform();
+}
+
+function resetZoom(animate = true) {
+    const canvas = document.getElementById('zoomCanvas');
+    zoomScale = 1.0;
+    zoomX = 0;
+    zoomY = 0;
+    
+    if(canvas && animate) {
+        canvas.classList.add('animate-reset');
+        setTimeout(() => canvas.classList.remove('animate-reset'), 300);
+    }
+    updateTransform(false);
+}
+
+// Event Listeners for Pan & Zoom (Mouse, Wheel, Touch)
+document.addEventListener('DOMContentLoaded', function() {
+    const viewport = document.getElementById('zoomViewport');
+    const canvas = document.getElementById('zoomCanvas');
+    if(!viewport || !canvas) return;
+    
+    // 1. Mouse Drag / Pan
+    viewport.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.zoom-toolbar') || e.target.closest('.zoom-top-bar')) return;
+        if (zoomScale <= 1.0) return;
+        isDragging = true;
+        startX = e.clientX - zoomX;
+        startY = e.clientY - zoomY;
+        viewport.classList.add('is-dragging');
+        e.preventDefault();
+    });
+    
+    window.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        zoomX = e.clientX - startX;
+        zoomY = e.clientY - startY;
+        updateTransform();
+    });
+    
+    window.addEventListener('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            viewport.classList.remove('is-dragging');
+        }
+    });
+
+    // Close on backdrop click when not zoomed in
+    viewport.addEventListener('click', function(e) {
+        if (e.target.closest('.zoom-toolbar') || e.target.closest('.zoom-top-bar')) return;
+        if (zoomScale <= 1.0 && (e.target === viewport || e.target === canvas)) {
+            closeLightbox();
+        }
+    });
+    
+    // 2. Wheel Zoom
+    viewport.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP;
+        applyZoom(delta, e.clientX, e.clientY);
+    }, { passive: false });
+    
+    // 3. Double-Click Quick Toggle Zoom
+    viewport.addEventListener('dblclick', function(e) {
+        if (e.target.closest('.zoom-toolbar') || e.target.closest('.zoom-top-bar')) return;
+        e.preventDefault();
+        if (zoomScale > 1.2) {
+            resetZoom(true);
+        } else {
+            zoomScale = 2.5;
+            applyZoom(0, e.clientX, e.clientY);
+        }
+    });
+    
+    // 4. Touch Gestures (Mobile & Tablet)
+    viewport.addEventListener('touchstart', function(e) {
+        if (e.target.closest('.zoom-toolbar') || e.target.closest('.zoom-top-bar')) return;
+        if (e.touches.length === 1) {
+            if (zoomScale > 1.0) {
+                isDragging = true;
+                startX = e.touches[0].clientX - zoomX;
+                startY = e.touches[0].clientY - zoomY;
+            }
+        } else if (e.touches.length === 2) {
+            isDragging = false;
+            pinchDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+        }
+    }, { passive: true });
+    
+    viewport.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 1 && isDragging) {
+            zoomX = e.touches[0].clientX - startX;
+            zoomY = e.touches[0].clientY - startY;
+            updateTransform();
+        } else if (e.touches.length === 2) {
+            const currentDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            const deltaDist = currentDist - pinchDist;
+            if (Math.abs(deltaDist) > 5) {
+                const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                const deltaScale = deltaDist > 0 ? 0.15 : -0.15;
+                applyZoom(deltaScale, midX, midY);
+                pinchDist = currentDist;
+            }
+        }
+    }, { passive: true });
+    
+    viewport.addEventListener('touchend', function() {
+        isDragging = false;
+    });
+    
+    // 5. Keyboard Navigation
+    window.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('imageLightbox');
+        if(!modal || modal.style.display !== 'block') return;
+        
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === '+' || e.key === '=') {
+            applyZoom(ZOOM_STEP);
+        } else if (e.key === '-' || e.key === '_') {
+            applyZoom(-ZOOM_STEP);
+        } else if (e.key === '0') {
+            resetZoom();
+        } else if (e.key === 'ArrowUp') {
+            zoomY += 40; updateTransform();
+        } else if (e.key === 'ArrowDown') {
+            zoomY -= 40; updateTransform();
+        } else if (e.key === 'ArrowLeft') {
+            zoomX += 40; updateTransform();
+        } else if (e.key === 'ArrowRight') {
+            zoomX -= 40; updateTransform();
+        }
+    });
+});
+
 function changeColor(colorName, btnElement, colorTextLabel, brand) {
     brand = brand || 'conch';
     

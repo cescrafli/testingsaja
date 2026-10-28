@@ -7,7 +7,7 @@ global $custom_css; $custom_css = 'about'; get_header();
                 <div class="container">
                     
                     <div style="margin-bottom: 40px;">
-                        <img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg" alt="Griya Djaya Sentosa" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" alt="Griya Djaya Sentosa" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                     </div>
                     <h1 style="font-size: 32px; font-weight: 700; color: #1a202c; margin-bottom: 25px;">PT Griya Djaya Sentosa</h1>
                     
@@ -206,27 +206,27 @@ global $custom_css; $custom_css = 'about'; get_header();
                             <div class="native-slider" id="certSlider" style="display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth;  -ms-overflow-style: none; scrollbar-width: none; padding: 10px 0;">
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Verification-of-Compliance-768x1087-1.jpg" class="faq-gallery-link" data-caption="Verification of Compliance" style="display:block;"><img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Verification-of-Compliance-768x1087-1.jpg" alt="Verification of Compliance" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" class="faq-gallery-link" data-caption="Verification of Compliance" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" alt="Verification of Compliance" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
                                     <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">Verification of Compliance</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="https://griyadjayasentosa.id/wp-content/uploads/2026/08/ZSBC-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC" style="display:block;"><img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/ZSBC-768x1087-1.jpg" alt="ZSBC" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" alt="ZSBC" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
                                     <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">ZSBC</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="https://griyadjayasentosa.id/wp-content/uploads/2026/08/ZSBC-2-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC 2" style="display:block;"><img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/ZSBC-2-768x1087-1.jpg" alt="ZSBC 2" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC 2" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" alt="ZSBC 2" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
                                     <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">ZSBC 2</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="https://griyadjayasentosa.id/wp-content/uploads/2026/08/CONCH-768x1087-1.jpg" class="faq-gallery-link" data-caption="CONCH" style="display:block;"><img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/CONCH-768x1087-1.jpg" alt="CONCH" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" class="faq-gallery-link" data-caption="CONCH" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" alt="CONCH" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
                                     <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">CONCH</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="https://griyadjayasentosa.id/wp-content/uploads/2026/08/KIN-LONG-768x1087-1.jpg" class="faq-gallery-link" data-caption="KIN LONG" style="display:block;"><img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/KIN-LONG-768x1087-1.jpg" alt="KIN LONG" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" class="faq-gallery-link" data-caption="KIN LONG" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" alt="KIN LONG" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
                                     <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">KIN LONG</p>
                                 </div>
                                 

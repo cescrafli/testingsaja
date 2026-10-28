@@ -1740,7 +1740,7 @@ if ( $role === 1 ) {
         var qrCanvas = document.createElement('canvas');
         var qr = new QRious({
             element: qrCanvas,
-            value: 'https://griyadjayasentosa.id/warranty/?id=' + encodeURIComponent(barcodeId),
+            value: '<?php echo esc_url( home_url('/warranty/?id=') ); ?>' + encodeURIComponent(barcodeId),
             size: 300,
             level: 'M'
         });
@@ -1791,7 +1791,7 @@ if ( $role === 1 ) {
         .btn-tb-close { background: #475569; color: #fff; }
         .btn-tb-close:hover { background: #334155; }
         
-        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; }
+        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
         .page { width: 1024px; height: 721px; position: relative; background-size: cover; background-repeat: no-repeat; background-position: center; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.5); background-color: #fff; }
         
         .text-val { position: absolute; font-size: 19px; color: #000; font-weight: 500; font-family: 'Arial', sans-serif; }
@@ -1854,7 +1854,7 @@ if ( $role === 1 ) {
             <div class="footer-contacts">
                 <table style="border:none; border-collapse: collapse; margin: 0; padding: 0;">
                     <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Telp</td><td style="padding:0; border:none; font-style:italic;">: 08111021088</td></tr>
-                    <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: https://griyadjayasentosa.id/</td></tr>
+                    <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: <?php echo home_url('/'); ?></td></tr>
                     <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Email</td><td style="padding:0; border:none; font-style:italic;">: griyadjayaupvc@gmail.com</td></tr>
                 </table>
             </div>
@@ -1952,7 +1952,7 @@ if ( $role === 1 ) {
             var qrCanvas = document.createElement('canvas');
             var qr = new QRious({
                 element: qrCanvas,
-                value: 'https://griyadjayasentosa.id/warranty/?id=' + encodeURIComponent(barcodeId),
+                value: '<?php echo esc_url( home_url('/warranty/?id=') ); ?>' + encodeURIComponent(barcodeId),
                 size: 300,
                 level: 'M'
             });
@@ -1994,7 +1994,7 @@ if ( $role === 1 ) {
                 <div class="footer-contacts">
                     <table style="border:none; border-collapse: collapse; margin: 0; padding: 0;">
                         <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Telp</td><td style="padding:0; border:none; font-style:italic;">: 08111021088</td></tr>
-                        <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: https://griyadjayasentosa.id/</td></tr>
+                        <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Website</td><td style="padding:0; border:none; font-style:italic;">: <?php echo home_url('/'); ?></td></tr>
                         <tr><td style="padding:0 8px 0 0; border:none; font-style:italic;">Email</td><td style="padding:0; border:none; font-style:italic;">: griyadjayaupvc@gmail.com</td></tr>
                     </table>
                 </div>
@@ -2028,7 +2028,7 @@ if ( $role === 1 ) {
         .btn-tb-close { background: #475569; color: #fff; }
         .btn-tb-close:hover { background: #334155; }
         
-        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; }
+        .preview-wrapper { display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 30px; overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
         .page { width: 1024px; height: 721px; position: relative; background-size: cover; background-repeat: no-repeat; background-position: center; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.5); background-color: #fff; }
         
         .text-val { position: absolute; font-size: 19px; color: #000; font-weight: 500; font-family: 'Arial', sans-serif; }

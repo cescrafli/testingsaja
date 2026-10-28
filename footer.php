@@ -1,10 +1,10 @@
 
         <!--  homepage content end  -->
         <style>
-.footer-new { background-color: #041e3a; padding: 60px 0 0; color: #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; }
-.footer-new-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px; padding: 0 20px 40px; justify-content: space-between; }
-.footer-new-col { flex: 1; min-width: 120px; }
-.footer-new-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-new { background-color: #041e3a; padding: 60px 0 0; color: #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; width: 100%; box-sizing: border-box; }
+.footer-new-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px 20px; padding: 0 20px 40px; justify-content: space-between; box-sizing: border-box; }
+.footer-new-col { flex: 1; min-width: 130px; box-sizing: border-box; }
+.footer-new-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 .footer-new-list { list-style: none; padding: 0; margin: 0; }
 .footer-new-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
 .footer-new-list li i, .footer-new-list li svg { color: #cba85d; margin-top: 3px; flex-shrink: 0; }
@@ -13,7 +13,25 @@
 .footer-new-bottom { background-color: #021224; padding: 20px; text-align: center; font-size: 13px; color: #94a3b8; border-top: 1px solid #1e3a5f; }
 .footer-new-bottom a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-new-bottom a:hover { color: #cba85d; }
-@media(max-width: 767px) { .footer-new-container { flex-direction: column; } }
+
+/* Tablet (iPad portrait & small laptop) */
+@media(min-width: 768px) and (max-width: 991px) {
+    .footer-new-container {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 35px 25px !important;
+    }
+    .footer-new-col {
+        max-width: 100% !important;
+    }
+}
+
+/* Mobile */
+@media(max-width: 767px) {
+    .footer-new { padding-top: 45px; }
+    .footer-new-container { flex-direction: column; gap: 30px; padding: 0 16px 30px; }
+    .footer-new-col { max-width: 100% !important; }
+}
 
 html, body { min-height: 100%; }
 body { display: flex; flex-direction: column; min-height: 100vh; }

@@ -179,11 +179,42 @@ if ( ! empty( $barcode_id ) ) {
         }
 
         /* Tampilan Jika Data Tidak Ditemukan */
-        .not-found {
-            text-align: center;
-            padding: 4rem;
-            width: 100%;
+        @media(max-width: 576px) {
+            body {
+                padding: 1.5rem 0.75rem;
+            }
+            .transaction-card {
+                border-radius: 12px;
+            }
+            .card-left {
+                padding: 1.75rem 1rem !important;
+            }
+            .qr-container {
+                width: 100% !important;
+                max-width: 200px !important;
+                height: auto !important;
+                aspect-ratio: 1/1 !important;
+                padding: 12px !important;
+                margin-bottom: 1rem !important;
+            }
+            .qr-container svg, .qr-container img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
+            }
+            .card-right {
+                padding: 1.75rem 1.25rem !important;
+            }
+            .card-right h2 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+            .detail-item {
+                font-size: 0.95rem !important;
+            }
         }
+
+        .not-found {
         .not-found h2 { color: #ef4444; margin-bottom: 1rem; }
         .not-found p { color: #64748b; }
         

@@ -192,9 +192,9 @@ $item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
   "@graph": [
     {
       "@type": "ProfessionalService",
-      "@id": "https://griyadjayasentosa.id/#organization",
+      "@id": "<?php echo esc_url( home_url('/#organization') ); ?>",
       "name": "Griya Djaya Sentosa",
-      "url": "https://griyadjayasentosa.id",
+      "url": "<?php echo esc_url( home_url('/') ); ?>",
       "logo": "<?php echo esc_url( get_template_directory_uri() . '/svg/logo.svg' ); ?>",
       "image": "<?php echo esc_url( get_template_directory_uri() . '/img/interior-hero.jpg' ); ?>",
       "telephone": "+<?php echo esc_attr($wa_phone); ?>",
@@ -219,11 +219,11 @@ $item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
     },
     {
       "@type": "Service",
-      "@id": "https://griyadjayasentosa.id/product/interior/#service",
+      "@id": "<?php echo esc_url( home_url('/product/interior/#service') ); ?>",
       "name": "Interior Design & Turnkey Fitting Out Griya Djaya Sentosa",
       "serviceType": "Interior Architectural Design & Turnkey Contractor",
       "provider": {
-        "@id": "https://griyadjayasentosa.id/#organization"
+        "@id": "<?php echo esc_url( home_url('/#organization') ); ?>"
       },
       "areaServed": "Jabodetabek, Indonesia",
       "description": "Layanan desain interior arsitektural 3D dan kontraktor fitting out terpadu dengan workshop mandiri untuk residensial mewah dan properti komersial."

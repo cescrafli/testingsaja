@@ -280,7 +280,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 25px;
             text-align: center;
         }
-    </style>
+    
+        @media (max-width: 480px), (max-height: 650px) {
+            body {
+                min-height: 100vh;
+                height: auto;
+                padding: 30px 16px 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            .login-container {
+                padding: 35px 22px;
+                max-width: 100%;
+                margin: auto 0;
+            }
+            .page-title {
+                font-size: 26px;
+            }
+            .footer {
+                position: relative;
+                bottom: auto;
+                margin-top: 30px;
+                padding-bottom: 10px;
+            }
+        }
+</style>
 </head>
 <body>
     <div class="login-container">

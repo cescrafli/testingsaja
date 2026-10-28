@@ -204,12 +204,12 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
 }
 </style>'; ?>
 
-<div class="container" style="background-color: #fafbfc; min-height: 100vh; padding: 140px 20px 80px; font-family: 'Outfit', sans-serif; width: 100%; max-width: 100%; overflow: hidden;">
+<div class="container" style="background-color: #fafbfc; min-height: 100vh; padding: clamp(90px, 12vw, 140px) 16px 60px; font-family: 'Outfit', sans-serif; width: 100%; max-width: 100%; overflow: hidden;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 60px; align-items: center;">
         
         <!-- Kiri: Judul -->
         <div style="flex: 1; min-width: 280px;">
-            <h1 style="color: #0f172a; font-weight: 800; font-size: 54px; margin-bottom: 20px; line-height: 1.1;">Pusat Klaim Garansi</h1>
+            <h1 style="color: #0f172a; font-weight: 800; font-size: clamp(30px, 5vw, 54px); margin-bottom: 20px; line-height: 1.15;">Pusat Klaim Garansi</h1>
             <p style="color: #334155; font-size: 18px; line-height: 1.6; max-width: 450px;">
                 Produk Anda butuh perhatian? Masukkan Barcode ID transaksi Anda di bawah ini, lalu kami bantu dari sini.
             </p>

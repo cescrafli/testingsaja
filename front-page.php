@@ -40,9 +40,9 @@ global $custom_css; $custom_css = 'index'; get_header();
             Mitra Fabrikasi Terpercaya untuk Pemilik Rumah, Kontraktor & Perusahaan Besar
         </h1>
         
-        <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 70px;">
-            <a href="https://griyadjayasentosa.id/projects/" style="padding: 16px 36px; border: 1px solid #fff; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='#fff';">Lihat Proyek Kami</a>
-            <a href="https://griyadjayasentosa.id/contacts/" style="padding: 16px 36px; background: #cda25b; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease; border: 1px solid #cda25b;" onmouseover="this.style.background='#a87b32'; this.style.borderColor='#a87b32';" onmouseout="this.style.background='#cda25b'; this.style.borderColor='#cda25b';">Minta Penawaran Gratis</a>
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 70px; padding: 0 15px;">
+            <a href="<?php echo home_url('/projects/'); ?>" style="padding: 16px 36px; border: 1px solid #fff; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='#fff';">Lihat Proyek Kami</a>
+            <a href="<?php echo home_url('/contacts/'); ?>" style="padding: 16px 36px; background: #cda25b; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease; border: 1px solid #cda25b;" onmouseover="this.style.background='#a87b32'; this.style.borderColor='#a87b32';" onmouseout="this.style.background='#cda25b'; this.style.borderColor='#cda25b';">Minta Penawaran Gratis</a>
         </div>
         
 
@@ -81,7 +81,7 @@ global $custom_css; $custom_css = 'index'; get_header();
         <!-- Top Row: Image & Text -->
         <div style="display: flex; flex-wrap: wrap; gap: 50px; align-items: center; margin-bottom: 80px;">
             <div style="flex: 1; min-width: 320px;">
-                <img src="https://griyadjayasentosa.id/wp-content/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg" alt="Why Choose UPVC" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
+                <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" alt="Why Choose UPVC" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
             </div>
             <div style="flex: 1; min-width: 320px;">
                 <span style="color: #cda25b; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">MENGAPA PEMILIK RUMAH, KONTRAKTOR &amp; PERUSAHAAN MEMILIH GJS</span>
@@ -106,7 +106,7 @@ global $custom_css; $custom_css = 'index'; get_header();
                     .gjs-stat-col { flex: 1; text-align: center; padding: 0 20px; }
                     .gjs-stat-divider { width: 1px; background: #e2e8f0; margin: 0 40px; }
                     .gjs-stat-num {
-                        font-size: 140px;
+                        font-size: clamp(60px, 14vw, 140px);
                         font-weight: 700;
                         font-family: 'Outfit', sans-serif;
                         line-height: 1;
@@ -117,17 +117,18 @@ global $custom_css; $custom_css = 'index'; get_header();
                         display: inline-block;
                         margin: 0;
                     }
-                    .gjs-stat-num small { font-size: 80px; font-weight: 600; margin-left: 2px; }
+                    .gjs-stat-num small { font-size: clamp(34px, 8vw, 80px); font-weight: 600; margin-left: 2px; }
                     .gjs-stat-text {
-                        font-size: 20px;
+                        font-size: clamp(15px, 2.5vw, 20px);
                         color: #1a202c;
                         line-height: 1.4;
                         margin: 0;
                         font-weight: 400;
                     }
                     @media (max-width: 768px) {
-                        .gjs-stats-wrapper { flex-direction: column; gap: 40px; }
+                        .gjs-stats-wrapper { flex-direction: column; gap: 35px; }
                         .gjs-stat-divider { width: 100%; height: 1px; margin: 0; }
+                        .gjs-stat-col { padding: 0 10px; }
                     }
                 </style>
 

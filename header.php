@@ -124,7 +124,7 @@
             }
 </style>
 </head>
-    <body>
+    <body <?php body_class(); ?>>
         <?php 
         $data_page = ($css_name === "index") ? "home" : $css_name; 
         if (is_page('warranty') || is_page_template('page-warranty.php')) {

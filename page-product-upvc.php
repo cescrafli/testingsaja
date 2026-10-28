@@ -394,6 +394,19 @@ $pintu_items = [
 .c-wood-golden { background: #b8860b; }
 .c-wood-dark { background: #4a3c31; }
 
+/* Falken Custom Swatches */
+.f-white { background: #f8fafc; border: 2px solid #cbd5e1; }
+.f-black { background: #18181b; }
+.f-grey { background: #71717a; }
+.f-ivory { background: #f5f5dc; border: 2px solid #e2e8f0; }
+.f-bronze { background: #5c4033; }
+.f-glitter { background: radial-gradient(circle, #3f3f46 0%, #18181b 100%); border: 1px solid #71717a; }
+.f-stainless { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%); }
+.f-walnut { background: #4a2c11; }
+.f-japanese-oak { background: #c2a688; }
+.f-golden-oak { background: #b47d44; }
+.f-dark-oak { background: #38220f; }
+
 .conf-swatches-reset {
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
@@ -823,12 +836,12 @@ $pintu_items = [
                                 <img class="si-slide-img product-color-target" onclick="openLightbox(this.src)" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($data['title']); ?>" style="<?php echo ($index == 0) ? 'display:block;' : 'display:none;'; ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <img src="<?php echo esc_url($upload_dir . $data['img']); ?>" alt="<?php echo esc_attr($data['title']); ?>" class="product-color-target" onclick="openLightbox(this.src)">
+                            <img src="<?php echo esc_url($upload_dir . $data['img']); ?>" alt="<?php echo esc_attr($data['title']); ?>" class="product-color-target" onclick="openLightbox(this.src)" data-base-src="<?php echo esc_url($upload_dir . $data['img']); ?>" data-item-id="<?php echo esc_attr($item_id); ?>">
                         <?php endif; ?>
 
                         <div class="conf-stage-footer">
                             <div id="conf-color-name" class="conf-mekanisme">
-                                <span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> Black
+                                <span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> <span style="color:#041e3a; font-weight:700;">CONCH</span> Black
                             </div>
                             <div class="conf-zoom-hint" onclick="document.querySelector('.product-color-target').click();" title="Klik untuk memperbesar gambar">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -842,15 +855,31 @@ $pintu_items = [
                         <div class="conf-swatches-left">
                             <span class="conf-swatches-title">Pilihan Warna:</span>
                             <div id="colors-conch" class="conf-swatches-list">
-                                <div class="cp-btn c-hitam active" onclick="changeColor('hitam', this, 'Black')" title="Hitam / Black"></div>
-                                <div class="cp-btn c-putih" onclick="changeColor('putih', this, 'White')" title="Putih / White"></div>
-                                <div class="cp-btn c-coklat" onclick="changeColor('coklat', this, 'Brown')" title="Coklat / Brown"></div>
-                                <div class="cp-btn c-wood-golden" onclick="changeColor('wood-golden', this, 'Golden Wood')" title="Kayu Golden / Golden Wood"></div>
-                                <div class="cp-btn c-wood-dark" onclick="changeColor('wood-dark', this, 'Dark Wood')" title="Kayu Gelap / Dark Wood"></div>
+                                <div class="cp-btn c-hitam active" onclick="changeColor('hitam', this, 'Black', 'conch')" title="CONCH Hitam / Black"></div>
+                                <div class="cp-btn c-putih" onclick="changeColor('putih', this, 'White', 'conch')" title="CONCH Putih / White"></div>
+                                <div class="cp-btn c-coklat" onclick="changeColor('coklat', this, 'Brown', 'conch')" title="CONCH Coklat / Brown"></div>
+                                <div class="cp-btn c-wood-golden" onclick="changeColor('wood-golden', this, 'Golden Wood', 'conch')" title="CONCH Kayu Golden / Golden Wood"></div>
+                                <div class="cp-btn c-wood-dark" onclick="changeColor('wood-dark', this, 'Dark Wood', 'conch')" title="CONCH Kayu Gelap / Dark Wood"></div>
                             </div>
+                            <?php if ($item_id === 'jendela-jungkit'): ?>
+                            <div id="colors-falken" class="conf-swatches-list" style="display:none; flex-wrap:wrap; gap:8px;">
+                                <div class="cp-btn f-white active" onclick="changeColor('standard-white', this, 'Standard White', 'falken')" title="FALKEN Standard White"></div>
+                                <div class="cp-btn f-black" onclick="changeColor('standard-black', this, 'Standard Black', 'falken')" title="FALKEN Standard Black"></div>
+                                <div class="cp-btn f-grey" onclick="changeColor('laminate-grey', this, 'Laminate Grey', 'falken')" title="FALKEN Laminate Grey"></div>
+                                <div class="cp-btn f-ivory" onclick="changeColor('laminate-ivory-white', this, 'Laminate Ivory White', 'falken')" title="FALKEN Laminate Ivory White"></div>
+                                <div class="cp-btn f-bronze" onclick="changeColor('laminate-bronze', this, 'Laminate Bronze', 'falken')" title="FALKEN Laminate Bronze"></div>
+                                <div class="cp-btn f-glitter" onclick="changeColor('laminate-black-glitter', this, 'Laminate Black Glitter', 'falken')" title="FALKEN Laminate Black Glitter"></div>
+                                <div class="cp-btn f-stainless" onclick="changeColor('laminate-stainless-lux', this, 'Laminate Stainless Lux', 'falken')" title="FALKEN Laminate Stainless Lux"></div>
+                                <div class="cp-btn f-walnut" onclick="changeColor('laminate-walnut', this, 'Laminate Walnut', 'falken')" title="FALKEN Laminate Walnut"></div>
+                                <div class="cp-btn f-japanese-oak" onclick="changeColor('laminate-japanese-oak', this, 'Laminate Japanese Oak', 'falken')" title="FALKEN Laminate Japanese Oak"></div>
+                                <div class="cp-btn f-golden-oak" onclick="changeColor('laminate-golden-oak', this, 'Laminate Golden Oak', 'falken')" title="FALKEN Laminate Golden Oak"></div>
+                                <div class="cp-btn f-dark-oak" onclick="changeColor('laminate-dark-oak', this, 'Laminate Dark Oak', 'falken')" title="FALKEN Laminate Dark Oak"></div>
+                            </div>
+                            <?php else: ?>
                             <div id="colors-falken" class="conf-swatches-list" style="display:none;">
-                                <span style="font-size:12px; color:#94a3b8; font-style:italic;">Menunggu katalog warna FALKEN</span>
+                                <span style="font-size:12px; color:#94a3b8; font-style:italic;">Katalog warna FALKEN segera hadir</span>
                             </div>
+                            <?php endif; ?>
                         </div>
                         <button type="button" class="conf-swatches-reset" onclick="resetToWhite()" title="Kembalikan ke warna Putih">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
@@ -992,11 +1021,21 @@ function resetToWhite() {
     let activeBtn = document.querySelector('.conf-brand-btn.active');
     let activeBrand = activeBtn ? activeBtn.id.replace('btn-', '') : 'conch';
     
-    let whiteBtn = document.querySelector('#colors-' + activeBrand + ' .c-putih');
-    if(whiteBtn) {
-        whiteBtn.click();
+    if(activeBrand === 'falken') {
+        let whiteBtn = document.querySelector('#colors-falken .f-white');
+        if(whiteBtn) {
+            whiteBtn.click();
+        } else {
+            let firstFalken = document.querySelector('#colors-falken .cp-btn:first-child');
+            if(firstFalken) firstFalken.click();
+        }
     } else {
-        changeColor('putih', null, 'White');
+        let whiteBtn = document.querySelector('#colors-conch .c-putih');
+        if(whiteBtn) {
+            whiteBtn.click();
+        } else {
+            changeColor('putih', null, 'White', 'conch');
+        }
     }
 }
 </script>
@@ -1008,38 +1047,45 @@ function resetToWhite() {
 </div>
 
 <script>
-function changeColor(colorName, btnElement, colorTextLabel) {
-    document.querySelectorAll('.cp-btn').forEach(btn => btn.classList.remove('active'));
+function changeColor(colorName, btnElement, colorTextLabel, brand) {
+    brand = brand || 'conch';
+    
+    // Deselect other buttons in same group
+    const brandContainer = document.getElementById('colors-' + brand);
+    if(brandContainer) {
+        brandContainer.querySelectorAll('.cp-btn').forEach(btn => btn.classList.remove('active'));
+    } else {
+        document.querySelectorAll('.cp-btn').forEach(btn => btn.classList.remove('active'));
+    }
     
     if(btnElement) btnElement.classList.add('active');
+    
     let nameLabel = document.getElementById('conf-color-name');
     if(nameLabel && colorTextLabel) {
-        nameLabel.innerHTML = '<span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> ' + colorTextLabel;
+        const brandBadge = brand === 'falken' ? '<span style="color:#041e3a; font-weight:700;">FALKEN</span> ' : '<span style="color:#041e3a; font-weight:700;">CONCH</span> ';
+        nameLabel.innerHTML = '<span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> ' + brandBadge + colorTextLabel;
     }
     
     const mainImg = document.querySelector('.product-color-target');
     if(!mainImg) return;
     
-    // Get the base src (e.g. Jendela-Jungkit-2.png)
-    let currentSrc = mainImg.getAttribute('data-base-src');
-    if(!currentSrc) {
-        currentSrc = mainImg.src;
-        mainImg.setAttribute('data-base-src', currentSrc);
-    }
-    
-    // Extract base filename without extension
-    let fileName = currentSrc.substring(currentSrc.lastIndexOf('/') + 1);
-    let baseName = fileName.replace(/\.[^/.]+$/, "");
-    
-    // In case the base src somehow already has a suffix, clean it
-    baseName = baseName.replace(/-putih|-hitam|-coklat|-wood-dark|-wood-golden/g, "");
-    
-    // Determine extension
-    let ext = '.png';
-    
-    // Construct new src pointing to the theme directory
     const themeUrl = "<?php echo get_template_directory_uri(); ?>";
-    let newSrc = themeUrl + '/img/upvc-colors/' + baseName + '-' + colorName + ext;
+    let newSrc = '';
+    
+    if(brand === 'falken') {
+        const itemId = mainImg.getAttribute('data-item-id') || 'jendela-jungkit';
+        newSrc = themeUrl + '/img/falken/' + itemId + '/' + colorName + '.jpg';
+    } else {
+        let currentSrc = mainImg.getAttribute('data-base-src');
+        if(!currentSrc) {
+            currentSrc = mainImg.src;
+            mainImg.setAttribute('data-base-src', currentSrc);
+        }
+        let fileName = currentSrc.substring(currentSrc.lastIndexOf('/') + 1);
+        let baseName = fileName.replace(/\.[^/.]+$/, "");
+        baseName = baseName.replace(/-putih|-hitam|-coklat|-wood-dark|-wood-golden/g, "");
+        newSrc = themeUrl + '/img/upvc-colors/' + baseName + '-' + colorName + '.png';
+    }
     
     // Smooth Crossfade Animation
     const clone = mainImg.cloneNode();
@@ -1082,10 +1128,13 @@ function switchBrand(brand) {
         activeGroup.style.display = 'flex';
     }
     
-    // Auto click first color of the selected brand
-    let firstBtn = document.querySelector('#colors-' + brand + ' .cp-btn:first-child');
-    if(firstBtn) {
-        firstBtn.click();
+    // Auto click first active or first color of the selected brand
+    let activeSwatch = document.querySelector('#colors-' + brand + ' .cp-btn.active');
+    if(!activeSwatch) {
+        activeSwatch = document.querySelector('#colors-' + brand + ' .cp-btn:first-child');
+    }
+    if(activeSwatch) {
+        activeSwatch.click();
     }
 }
 </script>

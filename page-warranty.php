@@ -21,17 +21,27 @@ if (isset($_POST['action']) && $_POST['action'] === 'submit_claim') {
         $deskripsi = sanitize_textarea_field(isset($_POST['deskripsi']) ? $_POST['deskripsi'] : '');
         $whatsapp = sanitize_text_field(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : '');
         $alamat = sanitize_textarea_field(isset($_POST['alamat']) ? $_POST['alamat'] : '');
-        
-        // Upload File Multiple
-        $uploaded_urls = [];
-        $uploaded_paths = [];
-        if (!empty($_FILES['bukti_file']['name'][0])) {
-            $file_count = count($_FILES['bukti_file']['name']);
-            if ($file_count < 3) {
-                $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video.";
-            } elseif ($file_count > 5) {
-                $error_msg = "Pengajuan Gagal: Maksimal 5 file foto/video yang diperbolehkan.";
-            } else {
+
+        // Server-Side Validation: Ensure barcode exists, not expired, and not already in progress
+        $barcode_record = $wpdb->get_row($wpdb->prepare("SELECT BarcodeID, status, warranty_exp FROM wp_barcode WHERE BarcodeID = %s", $claim_barcode));
+
+        if (!$barcode_record) {
+            $error_msg = "Pengajuan Gagal: Barcode ID tidak ditemukan dalam sistem.";
+        } elseif (in_array((int)$barcode_record->status, [2, 3], true)) {
+            $error_msg = "Pengajuan Gagal: Pengajuan untuk Barcode ID ini sedang dalam proses review/pengerjaan.";
+        } elseif (!empty($barcode_record->warranty_exp) && $barcode_record->warranty_exp !== '0000-00-00' && strtotime($barcode_record->warranty_exp) < strtotime(current_time('Y-m-d'))) {
+            $error_msg = "Pengajuan Gagal: Masa garansi untuk Barcode ID ini telah berakhir pada " . date('d M Y', strtotime($barcode_record->warranty_exp)) . ".";
+        } else {
+            // Upload File Multiple
+            $uploaded_urls = [];
+            $uploaded_paths = [];
+            if (!empty($_FILES['bukti_file']['name'][0])) {
+                $file_count = count($_FILES['bukti_file']['name']);
+                if ($file_count < 3) {
+                    $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video.";
+                } elseif ($file_count > 5) {
+                    $error_msg = "Pengajuan Gagal: Maksimal 5 file foto/video yang diperbolehkan.";
+                } else {
                 for ($i = 0; $i < $file_count; $i++) {
                     if (!empty($_FILES['bukti_file']['name'][$i])) {
                         $uploadedfile = array(
@@ -170,6 +180,7 @@ Tim Griya Djaya Sentosa";
         } else {
             $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video bukti kerusakan.";
         }
+        } // End of server-side barcode validation else block
     }
 }
 
@@ -250,13 +261,13 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
                 
                 <?php if ($success_msg): ?>
                     <div style="margin-bottom: 25px; padding: 15px; background-color: #d1fae5; border-radius: 10px; color: #065f46; text-align: center; font-weight: 600;">
-                        <?php echo $success_msg; ?>
+                        <?php echo esc_html($success_msg); ?>
                     </div>
                 <?php endif; ?>
                 
                 <?php if ($error_msg): ?>
                     <div style="margin-bottom: 25px; padding: 15px; background-color: #fee2e2; border-radius: 10px; color: #b91c1c; text-align: center; font-weight: 600;">
-                        <?php echo $error_msg; ?>
+                        <?php echo esc_html($error_msg); ?>
                     </div>
                 <?php endif; ?>
 

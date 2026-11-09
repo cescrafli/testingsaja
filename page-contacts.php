@@ -54,6 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
                         } else {
                             $message_status = 'error';
                             $error_msg = isset($res['error']) ? $res['error'] : 'Gagal mengunggah file blueprint.';
+                            // Clean up partially uploaded attachments on error
+                            foreach ($attachments as $att) {
+                                if (file_exists($att)) {
+                                    @unlink($att);
+                                }
+                            }
+                            $attachments = [];
                             break;
                         }
                     }
@@ -212,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><polyline points="9 15 12 12 15 15"></polyline></svg>
                 </div>
                 <h3 class="bp-upload-title">TARIK BLUEPRINT KE SINI (OPSIONAL)</h3>
-                <p class="bp-upload-desc">Mendukung format DWG, DXF, PDF, atau STEP.<br>Ukuran maks file: 150MB per lembar.</p>
+                <p class="bp-upload-desc">Mendukung format DWG, DXF, PDF, atau STEP.<br>Ukuran maks file: 10MB per lembar (Maks. 5 file).</p>
                 <div class="bp-upload-btn-fake">PILIH DARI PENYIMPANAN LOKAL</div>
                 <div id="bp-preview-container" class="bp-preview-container"></div>
             </div>
@@ -233,6 +240,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
     fileInput.addEventListener('change', function(e) {
         for (let i = 0; i < this.files.length; i++) {
+            if (this.files[i].size > 10 * 1024 * 1024) {
+                alert('File "' + this.files[i].name + '" melebihi ukuran maksimal 10MB.');
+                continue;
+            }
+            if (dt.items.length >= 5) {
+                alert('Maksimal 5 file blueprint yang diperbolehkan.');
+                break;
+            }
             dt.items.add(this.files[i]);
         }
         updatePreview();
@@ -290,6 +305,14 @@ document.addEventListener("DOMContentLoaded", function() {
     dropZone.addEventListener('drop', function(e) {
         const droppedFiles = e.dataTransfer.files;
         for (let i = 0; i < droppedFiles.length; i++) {
+            if (droppedFiles[i].size > 10 * 1024 * 1024) {
+                alert('File "' + droppedFiles[i].name + '" melebihi ukuran maksimal 10MB.');
+                continue;
+            }
+            if (dt.items.length >= 5) {
+                alert('Maksimal 5 file blueprint yang diperbolehkan.');
+                break;
+            }
             dt.items.add(droppedFiles[i]);
         }
         updatePreview();

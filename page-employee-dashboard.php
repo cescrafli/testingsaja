@@ -323,7 +323,8 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         if($inserted) {
             $message = "Transaksi $barcodeID berhasil ditambahkan!";
         } else {
-            $message = "Gagal menambahkan transaksi. Error: " . $wpdb->last_error;
+            error_log("Failed to insert transaction: " . $wpdb->last_error);
+            $message = "Gagal menambahkan transaksi. Terjadi kesalahan pada database.";
             $message_type = 'error';
         }
     }
@@ -365,7 +366,8 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         if ($updated !== false) {
             $message = "Transaksi $old_barcode berhasil diperbarui!";
         } else {
-            $message = "Gagal memperbarui transaksi. Error: " . $wpdb->last_error;
+            error_log("Failed to update transaction: " . $wpdb->last_error);
+            $message = "Gagal memperbarui transaksi. Terjadi kesalahan pada database.";
             $message_type = 'error';
         }
     }
@@ -381,6 +383,10 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         
         // Upload Photos
         $uploaded_urls = [];
+        $uploaded_files_for_cleanup = [];
+        $upload_has_error = false;
+        $upload_error_msg = '';
+
         if (!empty($_FILES['selesai_foto']['name'][0])) {
             require_once(ABSPATH . 'wp-admin/includes/file.php');
             require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -400,44 +406,56 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
                         : wp_handle_upload($file, array('test_form' => false));
                     if ($movefile && !isset($movefile['error']) && !empty($movefile['url'])) {
                         $uploaded_urls[] = $movefile['url'];
+                        if (!empty($movefile['file'])) {
+                            $uploaded_files_for_cleanup[] = $movefile['file'];
+                        }
+                    } else {
+                        $upload_has_error = true;
+                        $upload_error_msg = isset($movefile['error']) ? $movefile['error'] : 'Gagal mengunggah foto.';
+                        break;
                     }
                 }
             }
         }
-        
-        $p1 = isset($uploaded_urls[0]) ? $uploaded_urls[0] : '';
-        $p2 = isset($uploaded_urls[1]) ? $uploaded_urls[1] : '';
-        $p3 = isset($uploaded_urls[2]) ? $uploaded_urls[2] : '';
-        $p4 = isset($uploaded_urls[3]) ? $uploaded_urls[3] : '';
-        $p5 = isset($uploaded_urls[4]) ? $uploaded_urls[4] : '';
-        
-        // Update request
-        // Get the current max claim_warranty for this barcode
-        // Columns ensured via schema migration
-        
-        $current_claim = $wpdb->get_var($wpdb->prepare("SELECT MAX(claim_warranty) FROM `wp_request` WHERE barcodeid = %s", $barcode_id));
-        $new_claim_number = $current_claim ? (int)$current_claim + 1 : 1;
 
-        $request_id = isset($_POST['request_id']) ? (int)$_POST['request_id'] : 0;
-        if ($request_id > 0) {
-            $wpdb->update('wp_request', array(
-                'description_warranty' => $deskripsi,
-                'date_repaired' => $tanggal,
-                'proof_warranty_1' => $p1,
-                'proof_warranty_2' => $p2,
-                'proof_warranty_3' => $p3,
-                'proof_warranty_4' => $p4,
-                'proof_warranty_5' => $p5,
-                'claim_warranty' => $new_claim_number
-            ), array('id' => $request_id));
+        if ($upload_has_error || count($uploaded_urls) < 3 || count($uploaded_urls) > 5) {
+            foreach ($uploaded_files_for_cleanup as $fp) {
+                if (file_exists($fp)) {
+                    @unlink($fp);
+                }
+            }
+            $message = $upload_has_error ? "Gagal menyelesaikan pekerjaan: " . $upload_error_msg : "Mohon unggah minimal 3 dan maksimal 5 foto bukti pengerjaan.";
+            $message_type = 'error';
         } else {
-            $wpdb->update('wp_request', array('description_warranty' => $deskripsi, 'date_repaired' => $tanggal, 'proof_warranty_1' => $p1, 'proof_warranty_2' => $p2, 'proof_warranty_3' => $p3, 'proof_warranty_4' => $p4, 'proof_warranty_5' => $p5, 'claim_warranty' => $new_claim_number), array('barcodeid' => $barcode_id));
-        }
-        
-        // Update status back to 1 (Reset) so they can claim again
-        $wpdb->update('wp_barcode', array('status' => 1), array('BarcodeID' => $barcode_id));
-        
-        $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.description_warranty, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE r.id = %d", $request_id));
+            $p1 = isset($uploaded_urls[0]) ? $uploaded_urls[0] : '';
+            $p2 = isset($uploaded_urls[1]) ? $uploaded_urls[1] : '';
+            $p3 = isset($uploaded_urls[2]) ? $uploaded_urls[2] : '';
+            $p4 = isset($uploaded_urls[3]) ? $uploaded_urls[3] : '';
+            $p5 = isset($uploaded_urls[4]) ? $uploaded_urls[4] : '';
+            
+            $current_claim = $wpdb->get_var($wpdb->prepare("SELECT MAX(claim_warranty) FROM `wp_request` WHERE barcodeid = %s", $barcode_id));
+            $new_claim_number = $current_claim ? (int)$current_claim + 1 : 1;
+
+            $request_id = isset($_POST['request_id']) ? (int)$_POST['request_id'] : 0;
+            if ($request_id > 0) {
+                $wpdb->update('wp_request', array(
+                    'description_warranty' => $deskripsi,
+                    'date_repaired' => $tanggal,
+                    'proof_warranty_1' => $p1,
+                    'proof_warranty_2' => $p2,
+                    'proof_warranty_3' => $p3,
+                    'proof_warranty_4' => $p4,
+                    'proof_warranty_5' => $p5,
+                    'claim_warranty' => $new_claim_number
+                ), array('id' => $request_id));
+            } else {
+                $wpdb->update('wp_request', array('description_warranty' => $deskripsi, 'date_repaired' => $tanggal, 'proof_warranty_1' => $p1, 'proof_warranty_2' => $p2, 'proof_warranty_3' => $p3, 'proof_warranty_4' => $p4, 'proof_warranty_5' => $p5, 'claim_warranty' => $new_claim_number), array('barcodeid' => $barcode_id));
+            }
+            
+            // Update status back to 1 (Reset) so they can claim again
+            $wpdb->update('wp_barcode', array('status' => 1), array('BarcodeID' => $barcode_id));
+            
+            $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.description_warranty, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE " . ($request_id > 0 ? "r.id = %d" : "b.BarcodeID = %s ORDER BY r.id DESC LIMIT 1"), $request_id > 0 ? $request_id : $barcode_id));
         $target_phone = ($wa_data && !empty($wa_data->alt_phone)) ? $wa_data->alt_phone : ($wa_data ? $wa_data->phone_customer : '');
         if ($wa_data && !empty($target_phone)) {
             $kategori = 'Pengajuan';
@@ -458,6 +476,7 @@ Terima kasih telah mempercayakan layanan Anda kepada Griya Djaya Sentosa. Semoga
         }
         
         $message = "Pekerjaan untuk Barcode ID $barcode_id telah diselesaikan!";
+        } // End of selesai_request upload validation else block
     }
 
     // APPROVE REQUEST
@@ -502,7 +521,7 @@ Terima kasih atas kepercayaannya!";
         }
         $wpdb->update('wp_barcode', array('status' => 4), array('BarcodeID' => $barcode_id));
         
-        $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.description_decline, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE r.id = %d", $request_id));
+        $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.description_decline, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE " . ($request_id > 0 ? "r.id = %d" : "b.BarcodeID = %s ORDER BY r.id DESC LIMIT 1"), $request_id > 0 ? $request_id : $barcode_id));
         $target_phone = ($wa_data && !empty($wa_data->alt_phone)) ? $wa_data->alt_phone : ($wa_data ? $wa_data->phone_customer : '');
         if ($wa_data && !empty($target_phone)) {
             $kategori = 'Pengajuan';
@@ -519,6 +538,16 @@ _{$wa_data->description_decline}_
 
 Apabila ada pertanyaan lebih lanjut, silakan balas pesan ini. Terima kasih atas pengertiannya.";
             gjs_send_whatsapp($target_phone, $wa_msg);
+        }
+        if ( ! empty( $cust_email ) && is_email( $cust_email ) ) {
+            $cust_name = $wa_data ? $wa_data->customer : 'Pelanggan';
+            $subject = "Pemberitahuan Status Pengajuan Garansi (ID: $barcode_id)";
+            $email_body = "Halo Bapak/Ibu $cust_name,\n\n"
+                        . "Kami informasikan bahwa pengajuan klaim/servis Anda untuk Barcode ID: $barcode_id saat ini belum dapat disetujui.\n\n"
+                        . "Alasan / Keterangan Penolakan:\n$alasan\n\n"
+                        . "Jika ada pertanyaan atau dokumen tambahan yang ingin disertakan, silakan hubungi tim kami.\n\n"
+                        . "Salam hormat,\nPT. Griya Djaya Sentosa";
+            wp_mail( $cust_email, $subject, $email_body );
         }
         $message = "Permintaan garansi $barcode_id berhasil ditolak.";
     }
@@ -541,7 +570,7 @@ Apabila ada pertanyaan lebih lanjut, silakan balas pesan ini. Terima kasih atas 
         $emp_address = sanitize_textarea_field($_POST['emp_address']);
         $emp_role = (int) $_POST['emp_role'];
         
-        $existing = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$table_employee} WHERE username = %s OR (email = %s AND email != '') LIMIT 1", $emp_username, $emp_email));
+        $existing = $wpdb->get_var($wpdb->prepare("SELECT employee_id FROM {$table_employee} WHERE username = %s OR (email = %s AND email != '') LIMIT 1", $emp_username, $emp_email));
         if ($existing) {
             $message = "Gagal! Username atau Email sudah terdaftar dalam sistem.";
             $message_type = "error";
@@ -672,10 +701,14 @@ if ( $role === 1 ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
     <title>Employee Dashboard | Griya Djaya Sentosa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
         
 
@@ -1072,10 +1105,14 @@ if ( $role === 1 ) {
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script>
                 document.addEventListener("DOMContentLoaded", function() {
-    if(jQuery().select2) {
-        $('#customer_id_select').select2({tags: true});
-        $('#marketing_id_select').select2();
-    }
+                    try {
+                        if (typeof window.jQuery !== 'undefined' && jQuery.fn && jQuery.fn.select2) {
+                            $('#customer_id_select').select2({tags: true});
+                            $('#marketing_id_select').select2();
+                        }
+                    } catch(e) {
+                        console.warn('Select2 init failed:', e);
+                    }
                     const ctx = document.getElementById('analyticsChart').getContext('2d');
                   new Chart(ctx, {
                       type: 'line',
@@ -1659,17 +1696,23 @@ if ( $role === 1 ) {
                                             <span style="color:#10b981; font-weight:600; font-size:12px;">Selesai</span>
                                         <?php elseif (!empty($req->description_decline)): ?>
                                             <span style="color:#ef4444; font-weight:600; font-size:12px;">Ditolak</span>
-                                        <?php elseif ($req->barcode_status == 3): ?>
-                                            <button type="button" class="btn-outline" style="background-color: #3b82f6; color: white; border: none; padding: 5px 10px;" onclick="openSelesaiModal('<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->id); ?>')">Selesai</button>
+                                        <?php elseif (in_array((int)$role, [1, 2], true)): ?>
+                                            <?php if ($req->barcode_status == 3): ?>
+                                                <button type="button" class="btn-outline" style="background-color: #3b82f6; color: white; border: none; padding: 5px 10px;" onclick="openSelesaiModal('<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->id); ?>')">Selesai</button>
+                                            <?php else: ?>
+                                                <button type="button" class="btn-outline" style="background-color: #10b981; color: white; border: none; padding: 5px 10px;" onclick="approveRequest('<?php echo esc_js($req->id); ?>', '<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->customer_nama); ?>', '<?php echo esc_js($req->material); ?>', '<?php echo esc_js(date('d M Y H:i', strtotime($req->created_at))); ?>', '<?php echo esc_js($cat_text); ?>', '<?php echo esc_js($req->phone); ?>', '<?php echo esc_js($req->lokasi); ?>', '<?php echo esc_js($req->deskripsi); ?>', '<?php echo esc_js(implode(', ', array_filter([$req->proof_1, $req->proof_2, $req->proof_3, $req->proof_4, $req->proof_5]))); ?>')">Approve</button>
+                                                <button type="button" class="btn-outline" style="background-color: #ef4444; color: white; border: none; padding: 5px 10px;" onclick="openDeclineModal('<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->phone ? $req->phone : $req->cust_phone); ?>', '<?php echo esc_js($req->customer_email); ?>', '<?php echo esc_js($req->customer_nama); ?>', '<?php echo esc_js($req->id); ?>')">Decline</button>
+                                            <?php endif; ?>
+                                            
+                                            <form id="form_approve_<?php echo esc_attr($req->id); ?>" method="POST" style="display:none;">
+                                                <?php wp_nonce_field('gjs_emp_dash_action', 'gjs_emp_dash_nonce'); ?>
+                                                <input type="hidden" name="action" value="approve_request">
+                                                <input type="hidden" name="barcode_id" value="<?php echo esc_attr($req->barcodeid); ?>">
+                                                <input type="hidden" name="request_id" value="<?php echo esc_attr($req->id); ?>">
+                                            </form>
                                         <?php else: ?>
-                                            <button type="button" class="btn-outline" style="background-color: #10b981; color: white; border: none; padding: 5px 10px;" onclick="approveRequest('<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->customer_nama); ?>', '<?php echo esc_js($req->material); ?>', '<?php echo esc_js(date('d M Y H:i', strtotime($req->created_at))); ?>', '<?php echo esc_js($cat_text); ?>', '<?php echo esc_js($req->phone); ?>', '<?php echo esc_js($req->lokasi); ?>', '<?php echo esc_js($req->deskripsi); ?>', '<?php echo esc_js(implode(', ', array_filter([$req->proof_1, $req->proof_2, $req->proof_3, $req->proof_4, $req->proof_5]))); ?>')">Approve</button>
-                                            <button type="button" class="btn-outline" style="background-color: #ef4444; color: white; border: none; padding: 5px 10px;" onclick="openDeclineModal('<?php echo esc_js($req->barcodeid); ?>', '<?php echo esc_js($req->phone ? $req->phone : $req->cust_phone); ?>', '<?php echo esc_js($req->customer_email); ?>', '<?php echo esc_js($req->customer_nama); ?>', '<?php echo esc_js($req->id); ?>')">Decline</button>
+                                            <span style="color:#64748b; font-size:12px;">Menunggu Review</span>
                                         <?php endif; ?>
-                                        
-                                        <form id="form_approve_<?php echo esc_attr($req->barcodeid); ?>" method="POST" style="display:none;">
-                                            <input type="hidden" name="action" value="approve_request">
-                                            <input type="hidden" name="barcode_id" value="<?php echo esc_attr($req->barcodeid); ?>">
-                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -2347,10 +2390,14 @@ if ( $role === 1 ) {
 
     // Initialize all tables on load
     document.addEventListener("DOMContentLoaded", function() {
-    if(jQuery().select2) {
-        $('#customer_id_select').select2({tags: true});
-        $('#marketing_id_select').select2();
-    }
+        try {
+            if (typeof window.jQuery !== 'undefined' && jQuery.fn && jQuery.fn.select2) {
+                $('#customer_id_select').select2({tags: true});
+                $('#marketing_id_select').select2();
+            }
+        } catch(e) {
+            console.warn('Select2 init failed:', e);
+        }
         initTablePagination('tableKaryawan');
         initTablePagination('tableTransaksi');
         initTablePagination('tablePengajuan');
@@ -2437,7 +2484,6 @@ function approveRequest(reqId, barcodeId, customerName, material, dateReq, typeR
         }
     }
 }
-}
 
 function openDeclineModal(barcodeId, custPhone, custEmail, custName, reqId) {
     document.getElementById('decline_barcode_id').value = barcodeId;
@@ -2496,52 +2542,65 @@ function handleDeclineSubmit() {
 </div>
 
 <script>
-function openSelesaiModal(barcodeId, reqId) {
-    document.getElementById('selesai_barcode_id').value = barcodeId;
-    document.getElementById('selesai_request_id').value = reqId;
-    document.getElementById('selesaiModal').style.display = 'flex';
-}
+let dtSelesai = new DataTransfer();
 
-// JS to handle image previews and deletion
-const dt = new DataTransfer(); // Allows manipulating FileList
-
-document.getElementById('selesai_foto_input').addEventListener('change', function(e) {
+function renderSelesaiPreviews() {
     const container = document.getElementById('selesai_preview_container');
     const realInput = document.getElementById('selesai_foto_real');
+    container.innerHTML = '';
     
-    for(let i = 0; i < this.files.length; i++) {
+    Array.from(dtSelesai.files).forEach((file, index) => {
         let fileBlock = document.createElement('div');
         fileBlock.style = 'position:relative; width:80px; height:80px; border:1px solid #ddd; border-radius:4px; overflow:hidden;';
         
         let img = document.createElement('img');
-        img.src = URL.createObjectURL(this.files[i]);
+        img.src = URL.createObjectURL(file);
         img.style = 'width:100%; height:100%; object-fit:cover;';
         
         let delBtn = document.createElement('button');
+        delBtn.type = 'button';
         delBtn.innerHTML = '&times;';
         delBtn.style = 'position:absolute; top:2px; right:2px; background:red; color:white; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; font-size:12px; line-height:1; padding:0;';
         
-        // Add to DataTransfer
-        dt.items.add(this.files[i]);
-        let fileIndex = dt.items.length - 1;
-        
         delBtn.onclick = function() {
-            container.removeChild(fileBlock);
-            dt.items.remove(fileIndex);
-            realInput.files = dt.files; // update real input
+            const newDt = new DataTransfer();
+            Array.from(dtSelesai.files).forEach((f, i) => {
+                if (i !== index) newDt.items.add(f);
+            });
+            dtSelesai = newDt;
+            realInput.files = dtSelesai.files;
+            renderSelesaiPreviews();
         };
         
         fileBlock.appendChild(img);
         fileBlock.appendChild(delBtn);
         container.appendChild(fileBlock);
+    });
+    realInput.files = dtSelesai.files;
+}
+
+function openSelesaiModal(barcodeId, reqId) {
+    document.getElementById('selesai_barcode_id').value = barcodeId;
+    document.getElementById('selesai_request_id').value = reqId;
+    dtSelesai = new DataTransfer();
+    renderSelesaiPreviews();
+    document.getElementById('selesaiModal').style.display = 'flex';
+}
+
+document.getElementById('selesai_foto_input').addEventListener('change', function(e) {
+    for (let i = 0; i < this.files.length; i++) {
+        if (dtSelesai.items.length >= 5) {
+            alert('Maksimal 5 foto bukti pengerjaan.');
+            break;
+        }
+        dtSelesai.items.add(this.files[i]);
     }
-    
-    realInput.files = dt.files;
-    this.value = ''; // clear visual input so same files can be selected again
+    renderSelesaiPreviews();
+    this.value = '';
 });
 
 document.getElementById('selesaiForm').addEventListener('submit', function(e) {
-    if (dt.files.length < 3 || dt.files.length > 5) {
+    if (dtSelesai.files.length < 3 || dtSelesai.files.length > 5) {
         e.preventDefault();
         alert('Mohon upload minimal 3 foto dan maksimal 5 foto pengerjaan.');
     }

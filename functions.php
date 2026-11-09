@@ -513,7 +513,7 @@ function cobain_custom_comment($comment, $args, $depth) {
                 </div>
                 <div class="comment-footer" style="display: flex; justify-content: flex-end; align-items: center; margin-top: 10px;">
                     <?php comment_reply_link(array_merge($args, array(
-                        'reply_text' => '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> REPLY',
+                        'reply_text' => '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> BALAS',
                         'depth'      => $depth,
                         'max_depth'  => $args['max_depth'],
                         'add_below'  => 'comment',
@@ -554,7 +554,7 @@ function cobain_pagination($query = null) {
     if ($links) {
         foreach ($links as $link) {
             $link = str_replace('page-numbers', 'pagination_list-item_link', $link);
-            $link = str_replace('<span aria-current="page"', '<a href="#"', $link);
+            $link = str_replace('<span aria-current="page"', '<a href="javascript:void(0)" aria-current="page"', $link);
             $link = str_replace('</span>', '</a>', $link);
             echo '<li class="pagination_list-item">' . $link . '</li>';
         }
@@ -947,6 +947,8 @@ function gjs_secure_handle_upload( $file, $allowed_types = array('image'), $max_
         $mimes['pdf']          = 'application/pdf';
         $mimes['zip']          = 'application/zip';
         $mimes['dwg']          = 'image/vnd.dwg';
+        $mimes['dxf']          = 'image/vnd.dxf';
+        $mimes['step|stp']     = 'application/step';
     }
     if ( in_array( 'video', $types, true ) || in_array( 'videos', $types, true ) ) {
         $mimes['mp4']          = 'video/mp4';
@@ -968,7 +970,30 @@ function gjs_secure_handle_upload( $file, $allowed_types = array('image'), $max_
         'mimes'     => $mimes,
     );
 
+    // Support CAD files (.dwg, .dxf, .step, .stp) that finfo_file classifies as application/octet-stream or text/plain
+    $cad_filter = function($data, $file_tmp, $filename, $mimes_param) {
+        if (!empty($data['ext']) && !empty($data['type'])) {
+            return $data;
+        }
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $cad_types = array(
+            'dwg'  => 'image/vnd.dwg',
+            'dxf'  => 'image/vnd.dxf',
+            'step' => 'application/step',
+            'stp'  => 'application/step',
+            'pdf'  => 'application/pdf',
+            'zip'  => 'application/zip',
+        );
+        if (isset($cad_types[$ext])) {
+            $data['ext'] = $ext;
+            $data['type'] = $cad_types[$ext];
+            $data['proper_filename'] = $filename;
+        }
+        return $data;
+    };
+    add_filter('wp_check_filetype_and_ext', $cad_filter, 10, 4);
     $movefile = wp_handle_upload( $file, $upload_overrides );
+    remove_filter('wp_check_filetype_and_ext', $cad_filter, 10);
     return $movefile;
 }
 
@@ -1161,6 +1186,12 @@ function gjs_send_whatsapp($target, $message, $urls = []) {
 // Early redirect /news-sitemap.xml and /sitemap.xml (served by Jetpack before template_redirect) to /sitemap_index.xml
 add_action('init', 'gjs_early_news_sitemap_redirect', 0);
 function gjs_early_news_sitemap_redirect() {
+    // Block standalone debug/backdoor scripts
+    if (preg_match('#(test_wa\.php|search_phone\.php)#i', $_SERVER['REQUEST_URI'] ?? '')) {
+        status_header(404);
+        nocache_headers();
+        exit;
+    }
     $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '', '/');
     if (preg_match('#(^|/)(news-sitemap|sitemap)(\.xml|\.xsl)?$#i', $path)) {
         nocache_headers();
@@ -1258,6 +1289,16 @@ function gjs_seo_template_redirects() {
     $home_path = trim(parse_url(home_url(), PHP_URL_PATH) ?? '', '/');
     if (!empty($home_path) && strpos($req_path, $home_path) === 0) {
         $req_path = trim(substr($req_path, strlen($home_path)), '/');
+    }
+
+    // Block standalone debug/backdoor scripts
+    if (preg_match('#(test_wa\.php|search_phone\.php)#i', $req_uri)) {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        nocache_headers();
+        include get_query_template('404');
+        exit;
     }
 
     // 0. Redirect /news-sitemap.xml directly to /sitemap_index.xml (GJS bukan portal berita)
@@ -1839,6 +1880,10 @@ function gjs_flush_all_seo_sitemap_caches( $post_id = 0 ) {
     // Clear cached footer SEO links
     delete_transient( 'gjs_footer_seo_links_html_v1' );
 
+    // Clear cached schema ItemList transients (PERF-08)
+    delete_transient( 'gjs_schema_projects_items_v1' );
+    delete_transient( 'gjs_schema_blog_items_v1' );
+
     global $wpdb;
     // Clear Yoast SEO, Rank Math, and Jetpack sitemap transients immediately
     $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%rank_math_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'" );
@@ -2109,37 +2154,42 @@ function gjs_output_comprehensive_seo_schema() {
         );
     }
 
-    // C. Projects Archive Page (/projects/): Output ItemList of ALL Published Projects in WordPress!
+    // C. Projects Archive Page (/projects/): Output ItemList of ALL Published Projects in WordPress! (Transient-Cached)
     if ( is_page( 'projects' ) || is_page_template( 'page-projects.php' ) || $req_path === 'projects' ) {
-        $all_projects = get_posts( array(
-            'post_type'      => 'project',
-            'posts_per_page' => -1,
-            'post_status'    => 'publish',
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-        ) );
-        $item_elements = array();
-        $pos = 1;
-        foreach ( $all_projects as $proj ) {
-            $p_thumb = get_the_post_thumbnail_url( $proj->ID, 'large' ) ?: $hero_img;
-            $p_loc   = get_post_meta( $proj->ID, '_project_location', true );
-            $p_cat   = get_post_meta( $proj->ID, '_project_category', true );
-            $item_elements[] = array(
-                '@type'    => 'ListItem',
-                'position' => $pos++,
-                'url'      => get_permalink( $proj->ID ),
-                'name'     => $proj->post_title,
-                'item'     => array(
-                    '@type'         => 'CreativeWork',
-                    '@id'           => get_permalink( $proj->ID ) . '#project',
-                    'name'          => $proj->post_title,
-                    'url'           => get_permalink( $proj->ID ),
-                    'image'         => $p_thumb,
-                    'datePublished' => get_the_date( 'c', $proj->ID ),
-                    'genre'         => ! empty( $p_cat ) ? $p_cat : 'Konstruksi & Fabrikasi',
-                    'contentLocation' => ( ! empty( $p_loc ) && strpos( $p_loc, 'http' ) !== 0 ) ? $p_loc : 'Indonesia',
-                ),
-            );
+        $item_elements = get_transient( 'gjs_schema_projects_items_v1' );
+        if ( false === $item_elements ) {
+            $all_projects = get_posts( array(
+                'post_type'      => 'project',
+                'posts_per_page' => -1,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+                'no_found_rows'  => true,
+            ) );
+            $item_elements = array();
+            $pos = 1;
+            foreach ( $all_projects as $proj ) {
+                $p_thumb = get_the_post_thumbnail_url( $proj->ID, 'large' ) ?: $hero_img;
+                $p_loc   = get_post_meta( $proj->ID, '_project_location', true );
+                $p_cat   = get_post_meta( $proj->ID, '_project_category', true );
+                $item_elements[] = array(
+                    '@type'    => 'ListItem',
+                    'position' => $pos++,
+                    'url'      => get_permalink( $proj->ID ),
+                    'name'     => $proj->post_title,
+                    'item'     => array(
+                        '@type'         => 'CreativeWork',
+                        '@id'           => get_permalink( $proj->ID ) . '#project',
+                        'name'          => $proj->post_title,
+                        'url'           => get_permalink( $proj->ID ),
+                        'image'         => $p_thumb,
+                        'datePublished' => get_the_date( 'c', $proj->ID ),
+                        'genre'         => ! empty( $p_cat ) ? $p_cat : 'Konstruksi & Fabrikasi',
+                        'contentLocation' => ( ! empty( $p_loc ) && strpos( $p_loc, 'http' ) !== 0 ) ? $p_loc : 'Indonesia',
+                    ),
+                );
+            }
+            set_transient( 'gjs_schema_projects_items_v1', $item_elements, 12 * HOUR_IN_SECONDS );
         }
         $graph[] = array(
             '@type'           => 'CollectionPage',
@@ -2155,36 +2205,41 @@ function gjs_output_comprehensive_seo_schema() {
         );
     }
 
-    // D. Blog Archive Page (/blog/): Output ItemList of ALL Published Blog Posts in WordPress!
+    // D. Blog Archive Page (/blog/): Output ItemList of ALL Published Blog Posts in WordPress! (Transient-Cached)
     if ( is_page( 'blog' ) || is_page_template( 'page-blog.php' ) || $req_path === 'blog' ) {
-        $all_posts = get_posts( array(
-            'post_type'      => 'post',
-            'posts_per_page' => -1,
-            'post_status'    => 'publish',
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-        ) );
-        $post_elements = array();
-        $pos = 1;
-        foreach ( $all_posts as $bpost ) {
-            $b_thumb = get_the_post_thumbnail_url( $bpost->ID, 'large' ) ?: $hero_img;
-            $post_elements[] = array(
-                '@type'    => 'ListItem',
-                'position' => $pos++,
-                'url'      => get_permalink( $bpost->ID ),
-                'name'     => $bpost->post_title,
-                'item'     => array(
-                    '@type'         => 'BlogPosting',
-                    '@id'           => get_permalink( $bpost->ID ) . '#article',
-                    'headline'      => $bpost->post_title,
-                    'url'           => get_permalink( $bpost->ID ),
-                    'image'         => $b_thumb,
-                    'datePublished' => get_the_date( 'c', $bpost->ID ),
-                    'dateModified'  => get_the_modified_date( 'c', $bpost->ID ),
-                    'author'        => array( '@id' => $site_url . '#organization' ),
-                    'publisher'     => array( '@id' => $site_url . '#organization' ),
-                ),
-            );
+        $post_elements = get_transient( 'gjs_schema_blog_items_v1' );
+        if ( false === $post_elements ) {
+            $all_posts = get_posts( array(
+                'post_type'      => 'post',
+                'posts_per_page' => -1,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+                'no_found_rows'  => true,
+            ) );
+            $post_elements = array();
+            $pos = 1;
+            foreach ( $all_posts as $bpost ) {
+                $b_thumb = get_the_post_thumbnail_url( $bpost->ID, 'large' ) ?: $hero_img;
+                $post_elements[] = array(
+                    '@type'    => 'ListItem',
+                    'position' => $pos++,
+                    'url'      => get_permalink( $bpost->ID ),
+                    'name'     => $bpost->post_title,
+                    'item'     => array(
+                        '@type'         => 'BlogPosting',
+                        '@id'           => get_permalink( $bpost->ID ) . '#article',
+                        'headline'      => $bpost->post_title,
+                        'url'           => get_permalink( $bpost->ID ),
+                        'image'         => $b_thumb,
+                        'datePublished' => get_the_date( 'c', $bpost->ID ),
+                        'dateModified'  => get_the_modified_date( 'c', $bpost->ID ),
+                        'author'        => array( '@id' => $site_url . '#organization' ),
+                        'publisher'     => array( '@id' => $site_url . '#organization' ),
+                    ),
+                );
+            }
+            set_transient( 'gjs_schema_blog_items_v1', $post_elements, 12 * HOUR_IN_SECONDS );
         }
         $graph[] = array(
             '@type'           => 'CollectionPage',

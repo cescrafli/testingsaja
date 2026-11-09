@@ -10,9 +10,9 @@ if ( post_password_required() ) {
             <?php
             $comment_count = get_comments_number();
             if ( '1' === $comment_count ) {
-                printf( '1 Comment' );
+                printf( '1 Komentar' );
             } else {
-                printf( '%s Comments', esc_html( $comment_count ) );
+                printf( '%s Komentar', esc_html( $comment_count ) );
             }
             ?>
         </h2>
@@ -32,16 +32,13 @@ if ( post_password_required() ) {
         
         <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
         <nav class="comment-navigation" style="margin: 30px 0; display: flex; justify-content: space-between; font-weight: 600; text-transform: uppercase; font-size: 14px;">
-            <div class="nav-previous"><?php previous_comments_link( '&larr; Older Comments' ); ?></div>
-            <div class="nav-next"><?php next_comments_link( 'Newer Comments &rarr;' ); ?></div>
+            <div class="nav-previous"><?php previous_comments_link( '&larr; Komentar Sebelumnya' ); ?></div>
+            <div class="nav-next"><?php next_comments_link( 'Komentar Selanjutnya &rarr;' ); ?></div>
         </nav>
         <?php endif; ?>
 
-
-        <?php the_comments_navigation(); ?>
-
         <?php if ( ! comments_open() ) : ?>
-            <p class="no-comments">Comments are closed.</p>
+            <p class="no-comments">Kolom komentar telah ditutup.</p>
         <?php endif; ?>
     <?php endif; ?>
 </section>
@@ -54,23 +51,23 @@ if ( post_password_required() ) {
 
     $fields =  array(
         'author' =>
-            '<div class="main"><input class="field required" data-type="name" type="text" name="author" id="author" value="' . esc_attr( $commenter['comment_author'] ) . '" placeholder="Full name"' . $aria_req . ' />',
+            '<div class="main"><input class="field required" data-type="name" type="text" name="author" id="author" value="' . esc_attr( $commenter['comment_author'] ) . '" placeholder="Nama Lengkap"' . $aria_req . ' />',
         'email' =>
-            '<input class="field required" name="email" id="email" data-type="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" placeholder="Email"' . $aria_req . ' /></div>',
+            '<input class="field required" name="email" id="email" data-type="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" placeholder="Alamat Email"' . $aria_req . ' /></div>',
     );
 
     $comments_args = array(
-        'title_reply'          => 'Leave a Comment',
+        'title_reply'          => 'Tinggalkan Komentar',
         'title_reply_before'   => '<h3 class="title">',
         'title_reply_after'    => '</h3>',
         'fields'               => $fields,
-        'comment_field'        => '<div class="main"><textarea class="field required" data-type="message" name="comment" id="comment" placeholder="Comment" aria-required="true"></textarea></div>',
+        'comment_field'        => '<div class="main"><textarea class="field required" data-type="message" name="comment" id="comment" placeholder="Tulis komentar Anda di sini..." aria-required="true"></textarea></div>',
         'class_form'           => 'form',
         'class_submit'         => 'btn',
         'name_submit'          => 'submit',
-        'submit_button'        => '<button class="btn" type="submit">Post comment</button>',
+        'submit_button'        => '<button class="btn" type="submit">Kirim Komentar</button>',
         'submit_field'         => '<div class="form-submit">%1$s %2$s</div>',
-        'comment_notes_before' => '<label style="display: flex !important; align-items: center; cursor: pointer; margin-bottom: 15px; font-weight: 500;"><input type="checkbox" id="anonymous-toggle" style="margin-right: 10px; width: 18px; height: 18px;"> Post as Anonymous</label>',
+        'comment_notes_before' => '<label style="display: flex !important; align-items: center; cursor: pointer; margin-bottom: 15px; font-weight: 500;"><input type="checkbox" id="anonymous-toggle" style="margin-right: 10px; width: 18px; height: 18px;"> Kirim sebagai Anonim</label>',
     );
 
     comment_form($comments_args);
@@ -179,19 +176,19 @@ ul.children::before {
     padding: 0;
 }
 
-/* Reduce font size for replies by 5px (from 14px to 9px) */
+/* Replies font styling */
 .post_comments .list-item[data-type="reply"] .comment-content {
-    font-size: 9px !important;
+    font-size: 13px !important;
 }
 .post_comments .list-item[data-type="reply"] .author-name {
-    font-size: 12px !important;
+    font-size: 13px !important;
 }
 .post_comments .list-item[data-type="reply"] .comment-date {
-    font-size: 9px !important;
+    font-size: 11px !important;
 }
 .post_comments .list-item[data-type="reply"] .like-button,
 .post_comments .list-item[data-type="reply"] .reply-button {
-    font-size: 10px !important;
+    font-size: 11px !important;
 }
 
 </style>

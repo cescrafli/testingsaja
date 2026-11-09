@@ -3,8 +3,8 @@
 get_header();
 
 $upload_dir = get_template_directory_uri() . '/img/';
-$view = isset($_GET['view']) ? $_GET['view'] : 'main';
-$item_id = isset($_GET['item']) ? $_GET['item'] : '';
+$view = isset($_GET['view']) ? sanitize_key($_GET['view']) : 'main';
+$item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
 
 $items = [
     ['id' => 'alumunium-jendela-jungkit', 'title' => 'Jendela Jungkit', 'img' => 'Jendela-Jungkit-2.png'],
@@ -18,9 +18,10 @@ $items = [
 ?>
 <style>
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-.prod-sub-container { padding: clamp(100px, 12vw, 180px) 16px clamp(40px, 8vw, 100px); max-width: 1200px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+.prod-sub-container { padding: 100px 20px 44px !important; max-width: 1200px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+@media (max-width: 768px) { .prod-sub-container { padding: 84px 16px 32px !important; } }
 .prod-sub-subtitle { font-size: 13px; font-weight: 700; color: #cba85d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
-.prod-sub-title { font-size: clamp(28px, 5vw, 46px); font-weight: 800; color: #1a202c; margin-bottom: clamp(30px, 6vw, 70px); font-family: 'Outfit', sans-serif; line-height: 1.2; }
+.prod-sub-title { font-size: clamp(28px, 5vw, 46px); font-weight: 800; color: #1a202c; margin-bottom: 28px !important; font-family: 'Outfit', sans-serif; line-height: 1.2; }
 
 /* Grid */
 .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 40px; text-align: left; }

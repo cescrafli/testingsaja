@@ -22,20 +22,22 @@ body.admin-bar .header {
     }
 }
 .about {
-    padding-top: 180px !important;
+    padding-top: 104px !important;
+    padding-bottom: 36px !important;
 }
 body.admin-bar .about {
-    padding-top: 220px !important;
+    padding-top: 136px !important;
 }
 @media (max-width: 991px) {
     .header {
         padding: 14px 0 !important;
     }
     .about {
-        padding-top: 130px !important;
+        padding-top: 88px !important;
+        padding-bottom: 24px !important;
     }
     body.admin-bar .about {
-        padding-top: 170px !important;
+        padding-top: 124px !important;
     }
 }
 
@@ -521,7 +523,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
                 <h2 class="title" style="font-size:26px;margin-bottom:0;">Foto <span class="highlight">Project</span></h2>
             </div>
         </div>
-        <div class="gallery presentation" id="gjsGalleryGrid">
+        <div class="gallery presentation" id="gjsGalleryGrid" style="padding-bottom: 36px;">
             <?php foreach ( $gallery as $g_index => $img ) : 
                 $lightbox_img = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($img, 'lightbox') : $img;
                 $display_img  = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($img, 'large') : $img;
@@ -546,14 +548,14 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
     <?php endif; ?>
 
     <!-- 2. RELATED PROJECTS & INTERNAL NAVIGATION (Server-Rendered HTML for 100% Google Indexing) -->
-    <section class="related-projects-section" style="padding: 60px 0 80px; background: #ffffff; border-top: 1px solid #f0f0f0;">
+    <section class="related-projects-section" style="padding: 44px 0 48px; background: #ffffff; border-top: 1px solid #f0f0f0;">
         <div class="container">
             <?php
             $prev_proj = get_previous_post();
             $next_proj = get_next_post();
             if ( $prev_proj || $next_proj ) :
             ?>
-            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; padding-bottom:45px; margin-bottom:45px; border-bottom:1px solid #eaeaea;">
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; padding-bottom:28px; margin-bottom:32px; border-bottom:1px solid #eaeaea;">
                 <div>
                     <?php if ( $prev_proj ) : ?>
                     <span style="display:block; font-size:12px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">&larr; Proyek Sebelumnya</span>

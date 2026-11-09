@@ -16,11 +16,19 @@ if (have_posts()) : while (have_posts()) : the_post();
 }
 /* Push Hero down below the header */
 .single-hero {
-    margin-top: 110px;
-
+    margin-top: 72px;
     width: 100%;
-    height: 65vh;
-    min-height: 400px;
+    height: 420px;
+    min-height: 280px;
+}
+@media (max-width: 768px) {
+    .single-hero {
+        margin-top: 60px;
+        height: 300px;
+        min-height: 220px;
+    }
+}
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,13 +38,13 @@ if (have_posts()) : while (have_posts()) : the_post();
 /* Main Content Wrapper */
 .single-main-wrapper {
     background-color: #f7f9fa;
-    padding-bottom: 80px;
+    padding-bottom: 40px;
 }
 /* Article Box */
 .single-article-box {
     background: #fff;
-    padding: 60px 80px;
-    margin: -150px auto 50px auto;
+    padding: 48px 60px;
+    margin: -100px auto 36px auto;
     position: relative;
     z-index: 10;
     max-width: 900px;
@@ -44,7 +52,7 @@ if (have_posts()) : while (have_posts()) : the_post();
     box-shadow: 0 15px 40px rgba(0,0,0,0.05);
 }
 @media (max-width: 768px) {
-    .single-article-box { padding: 40px 30px; margin-top: -100px; }
+    .single-article-box { padding: 32px 20px; margin-top: -60px; margin-bottom: 24px; }
 }
 .single-meta-top {
     text-transform: uppercase;
@@ -194,7 +202,7 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
     </div>
 </main>
 
-<aside class="latest section" style="background: #fff;">
+<aside class="latest section" style="background: #fff; padding: 44px 0 48px !important;">
     <div class="container">
         <div class="blog_header section_header" style="text-align: center; margin-bottom: 50px;">
             <span class="subtitle">Referensi &amp; Panduan</span>

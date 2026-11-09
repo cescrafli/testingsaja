@@ -5,7 +5,7 @@
 
 /* Root page container padding to offset fixed theme header */
 .gjs-interior-wrapper {
-    padding-top: 90px;
+    padding-top: 72px;
     background-color: #ffffff;
     color: #1e293b;
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -20,7 +20,7 @@
 }
 @media (max-width: 768px) {
     .gjs-interior-wrapper {
-        padding-top: 75px;
+        padding-top: 62px;
         padding-bottom: 70px; /* Space for mobile sticky CTA */
     }
 }
@@ -93,7 +93,7 @@
 /* 2. Hero Section */
 .gjs-int-hero-sec {
     background: #ffffff;
-    padding: 50px 0 70px;
+    padding: 36px 0 44px;
 }
 .gjs-int-hero-grid {
     display: grid;
@@ -1252,7 +1252,7 @@
 
 /* ===== Single Product View Styles (?view=single&item=...) ===== */
 .gjs-int-single-wrap {
-    padding: 60px 0 100px;
+    padding: 44px 0 48px;
 }
 .gjs-int-back-link {
     display: inline-flex;

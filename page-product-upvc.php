@@ -2,8 +2,8 @@
 /* Template Name: Product - UPVC */
 
 // Handle Routing via Query Parameters
-$view = isset($_GET['view']) ? $_GET['view'] : 'main';
-$item_id = isset($_GET['item']) ? $_GET['item'] : '';
+$view = isset($_GET['view']) ? sanitize_key($_GET['view']) : 'main';
+$item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
 
 // Redirect removed item 'kacamati' back to jendela view
 if ($item_id === 'kacamati') {
@@ -102,7 +102,12 @@ $pintu_items = [
 
 /* Sub Container */
 .prod-sub-container {
-    padding: 140px 20px 80px !important;
+    padding: 100px 20px 44px !important;
+}
+@media (max-width: 768px) {
+    .prod-sub-container { padding: 84px 16px 32px !important; }
+}
+
     max-width: 1240px !important;
     margin: 0 auto !important;
     text-align: left !important;
@@ -122,7 +127,7 @@ $pintu_items = [
     font-size: 42px;
     font-weight: 800;
     color: #041e3a;
-    margin-bottom: 50px;
+    margin-bottom: 28px !important;
     font-family: 'Outfit', sans-serif;
     text-align: center;
 }
@@ -179,7 +184,7 @@ $pintu_items = [
     grid-template-columns: minmax(350px, 480px) minmax(360px, 1fr) !important;
     gap: 45px !important;
     align-items: start !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 12px !important;
     box-sizing: border-box !important;
     text-align: left !important;
 }
@@ -808,7 +813,7 @@ $pintu_items = [
     </div>
     <!-- Main Options -->
     <div>
-        <div style="position: relative; max-width: 700px; margin: 0 auto 60px; text-align:center;">
+        <div style="position: relative; max-width: 700px; margin: 0 auto 36px; text-align:center;">
             <img src="<?php echo get_template_directory_uri(); ?>/img/badge_warranty.png?v=1787832010" alt="10 Year Warranty" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 120px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); z-index: 10;">
             <div class="prod-sub-subtitle">PRODUK ARSITEKTURAL</div>
             <h1 class="prod-sub-title" style="margin-bottom: 0;">Sistem Kusen & Pintu Jendela uPVC</h1>
@@ -873,7 +878,7 @@ $pintu_items = [
     </div>
     
     <?php elseif ($view == 'single'): 
-        $parent = isset($_GET['parent']) ? $_GET['parent'] : 'jendela';
+        $parent = isset($_GET['parent']) ? sanitize_key($_GET['parent']) : 'jendela';
         
         // Find generic fallback data
         $fallback_title = ucwords(str_replace('-', ' ', $item_id));

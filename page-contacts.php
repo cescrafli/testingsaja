@@ -95,7 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
 /* Header spacing */
-.blueprint-container { padding: 160px 24px 80px; max-width: 1000px; margin: 0 auto; }
+.blueprint-container { padding: 104px 24px 44px; max-width: 1000px; margin: 0 auto; }
+@media (max-width: 768px) { .blueprint-container { padding: 84px 16px 32px; } }
 
 .blueprint-wrapper { display: flex; flex-wrap: wrap; gap: 50px; }
 .bp-left { flex: 1 1 55%; min-width: 280px; }

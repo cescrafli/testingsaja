@@ -10,7 +10,8 @@ get_header();
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
 /* Header Layout */
-.blog-header-custom { padding: 180px 0 50px; text-align: center; background: #fff; }
+.blog-header-custom { padding: 104px 0 32px; text-align: center; background: #fff; }
+@media (max-width: 768px) { .blog-header-custom { padding: 84px 0 24px; } }
 .bh-title { color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif; }
 .bh-breadcrumbs { font-size: 15px; font-weight: 500; color: #111; margin-top: 5px; }
 .bh-breadcrumbs a { color: #111; text-decoration: none; }
@@ -18,7 +19,7 @@ get_header();
 .bh-breadcrumbs span { color: #eab308; }
 
 /* Main Wrapper */
-.blog-main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 80px; }
+.blog-main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 44px; }
 .blog-posts-grid { flex: 1 1 70%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
 .blog-sidebar { flex: 1 1 25%; min-width: 250px; }
 @media (max-width: 991px) { .blog-posts-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -111,7 +112,7 @@ get_header();
     <div class="blog-sidebar">
         <div class="b-widget">
             <form class="b-search" action="<?php echo esc_url(home_url('/')); ?>" method="GET">
-                <input type="text" name="s" placeholder="Search..." value="<?php echo get_search_query(); ?>" required>
+                <input type="text" name="s" placeholder="Cari artikel..." value="<?php echo get_search_query(); ?>" required>
                 <button type="submit"><i class="icon-search"></i></button>
             </form>
         </div>

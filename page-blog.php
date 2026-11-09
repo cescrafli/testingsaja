@@ -7,13 +7,14 @@ global $custom_css; $custom_css = 'blog'; get_header();
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
 /* Header Layout */
-.blog-header-custom { padding: 180px 0 50px; text-align: center; background: #fff; }
+.blog-header-custom { padding: 104px 0 32px; text-align: center; background: #fff; }
+@media (max-width: 768px) { .blog-header-custom { padding: 84px 0 24px; } }
 .bh-title { color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif; }
 .bh-breadcrumbs { font-size: 15px; font-weight: 500; color: #111; }
 .bh-breadcrumbs span { color: #eab308; }
 
 /* Main Wrapper */
-.blog-main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 80px; }
+.blog-main-wrapper { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 44px; }
 .blog-posts-grid { flex: 1 1 70%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-content: start; }
 .blog-sidebar { flex: 1 1 25%; min-width: 250px; }
 @media (max-width: 991px) { .blog-posts-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -114,7 +115,7 @@ global $custom_css; $custom_css = 'blog'; get_header();
             
             wp_reset_postdata();
         else:
-            echo '<p>No posts found.</p>';
+            echo '<p>Tidak ada artikel ditemukan.</p>';
         endif;
         ?>
     </div>
@@ -123,7 +124,7 @@ global $custom_css; $custom_css = 'blog'; get_header();
     <div class="blog-sidebar">
         <div class="b-widget">
             <form class="b-search" action="<?php echo esc_url(home_url('/')); ?>" method="GET">
-                <input type="text" name="s" placeholder="Search..." value="<?php echo get_search_query(); ?>" required>
+                <input type="text" name="s" placeholder="Cari artikel..." value="<?php echo get_search_query(); ?>" required>
                 <button type="submit"><i class="icon-search"></i></button>
             </form>
         </div>
@@ -184,17 +185,17 @@ global $custom_css; $custom_css = 'blog'; get_header();
                     foreach ((array) $recent_comments as $comment) {
                         ?>
                         <div class="b-comment">
-                            <span class="b-comment-name"><?php echo get_comment_author($comment); ?></span>
+                            <span class="b-comment-name"><?php echo esc_html(get_comment_author($comment)); ?></span>
                             <div class="b-comment-text">
                                 <a href="<?php echo esc_url(get_comment_link($comment)); ?>">
-                                    <?php echo wp_trim_words($comment->comment_content, 10, '...'); ?>
+                                    <?php echo esc_html(wp_trim_words(wp_strip_all_tags($comment->comment_content), 10, '...')); ?>
                                 </a>
                             </div>
                         </div>
                         <?php
                     }
                 } else {
-                    echo '<p style="font-size:13px;color:#777;">No comments yet.</p>';
+                    echo '<p style="font-size:13px;color:#777;">Belum ada komentar.</p>';
                 }
                 ?>
             </div>

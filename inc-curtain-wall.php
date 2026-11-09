@@ -104,7 +104,8 @@ $cw_faq = array(
 .cw-btn-gold:hover::after { left: 130%; }
 
 /* Hero */
-.cw-hero { background: #041e3a; color: #fff; padding: 150px 0 64px; position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.cw-hero { background: #041e3a; color: #fff; padding: 104px 0 48px; position: relative; min-height: 75vh; display: flex; align-items: center; overflow: hidden; }
+@media (max-width: 768px) { .cw-hero { padding: 84px 0 36px !important; min-height: auto !important; } }
 .cw-hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; z-index: 0; pointer-events: none; }
 .cw-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(4,30,58,.92) 0%, rgba(4,30,58,.70) 50%, rgba(4,30,58,.45) 100%); pointer-events: none; }
 .cw-hero > .cw-wrap { position: relative; z-index: 2; width: 100%; }

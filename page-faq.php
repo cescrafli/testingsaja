@@ -2,7 +2,7 @@
 /* Template Name: Faq */
 global $custom_css; $custom_css = 'faq'; get_header();
 ?><?php get_template_part("template-parts/page-banner"); ?>
-            <section class="faq section">
+            <section class="faq section" style="padding: 44px 0 48px !important;">
                 <div class="container">
                     <div class="faq_header section_header">
                         <span class="subtitle">Pertanyaan yang Sering Diajukan</span>
@@ -132,7 +132,7 @@ global $custom_css; $custom_css = 'faq'; get_header();
                 );
             }
             ?>
-            <div class="gallery presentation">
+            <div class="gallery presentation" style="padding-bottom: 36px;">
                 <?php foreach($faq_galleries as $item): 
                     $lightbox_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($item['url'], 'lightbox') : $item['url'];
                     $display_url  = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($item['url'], 'large') : $item['url'];

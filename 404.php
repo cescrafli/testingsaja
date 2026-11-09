@@ -3,7 +3,8 @@
 global $custom_css; $custom_css = 'error'; get_header();
 ?>
 <!-- page 404 content start -->
-<main class="error">
+<main class="error" style="padding: 120px 0 60px !important; min-height: calc(100vh - 350px); display: flex; align-items: center;">
+<style>@media (max-width: 768px) { .error { padding: 90px 0 40px !important; } }</style>
     <div class="container">
         <span class="error_number">404</span>
         <div class="error_message">

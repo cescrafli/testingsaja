@@ -4,10 +4,11 @@ global $custom_css; $custom_css = 'projects'; get_header();
 ?><?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }</style>'; ?>
 
         <!-- projects2 main content start  -->
-        <main class="projects section" style="padding: 160px 0 60px; background: #fff;">
+        <main class="projects section" style="padding: 104px 0 44px !important; background: #fff;">
+<style>@media (max-width: 768px) { .projects.section { padding: 84px 0 32px !important; } }</style>
             <div class="container">
                 
-                <div style="text-align: center; margin-bottom: 50px;">
+                <div style="text-align: center; margin-bottom: 32px;">
                     <h1 style="color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
                     <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 20px; display: block;">
                         <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>

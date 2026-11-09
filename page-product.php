@@ -7,7 +7,8 @@ global $custom_css; $custom_css = 'product'; get_header();
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
 /* Global reset for product page */
-.prod-page { font-family: 'Inter', sans-serif; color: #1e293b; background-color: #f3f4f6; padding-top: 80px; }
+.prod-page { font-family: 'Inter', sans-serif; color: #1e293b; background-color: #f3f4f6; padding-top: 72px; }
+@media (max-width: 768px) { .prod-page { padding-top: 62px; } }
 .prod-container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
 
 /* Colors */
@@ -24,7 +25,7 @@ global $custom_css; $custom_css = 'product'; get_header();
     background-image: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.7)), url('<?php echo get_template_directory_uri(); ?>/img/Screenshot-2024-10-30-at-11.20.40.png');
     background-size: cover;
     background-position: center;
-    padding: 100px 20px;
+    padding: 64px 20px;
     text-align: center;
     color: white;
 }
@@ -32,7 +33,7 @@ global $custom_css; $custom_css = 'product'; get_header();
 .hero-subtitle { font-size: 16px; font-weight: 400; color: #cbd5e1; }
 
 /* SECTION 1: CARDS (From Image 2) */
-.s1-wrap { padding: 80px 24px 40px; }
+.s1-wrap { padding: 48px 24px 32px; }
 .s1-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
 @media(max-width: 1024px) { .s1-grid { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width: 600px) { .s1-grid { grid-template-columns: 1fr; } }
@@ -59,7 +60,7 @@ global $custom_css; $custom_css = 'product'; get_header();
 }
 
 /* SECTION 2: SPLIT LAYOUT (From Image 2) */
-.s2-wrap { padding: 80px 20px; background-color: #f3f4f6; }
+.s2-wrap { padding: 44px 20px; background-color: #f3f4f6; }
 .s2-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
 @media(max-width: 900px) { .s2-grid { grid-template-columns: 1fr; gap: 40px; } }
 
@@ -92,7 +93,7 @@ global $custom_css; $custom_css = 'product'; get_header();
 .s2-quote-author { font-size: 13px; font-weight: 700; color: var(--dark-blue); }
 
 /* SECTION 3: BOTTOM GRID (From Image 2) */
-.s3-wrap { padding: 60px 24px 100px; background-color: transparent; }
+.s3-wrap { padding: 40px 24px 48px; background-color: transparent; }
 .s3-grid { display: grid; grid-template-columns: 1.2fr 3fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: start; }
 @media(max-width: 1024px) { .s3-grid { grid-template-columns: 1fr; gap: 40px; } }
 

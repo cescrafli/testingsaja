@@ -16,8 +16,8 @@
         <?php // Open Graph and Twitter Card meta tags are dynamically managed by Yoast SEO / wp_head ?>
         
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/preload2.min.css" />
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3" />
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3.2" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3.2.2" />
 
                         <?php
                 global $custom_css; $css_name = isset($custom_css) && !empty($custom_css) ? $custom_css : '';
@@ -38,12 +38,52 @@
         
         if ($css_name !== '') {
         ?>
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/<?php echo $css_name; ?>.min.css?v=3" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/<?php echo $css_name; ?>.min.css?v=3.2" />
         <?php } ?>
                 <style>
-              /* DYNAMIC FLUID LAYOUT */
+              /* DYNAMIC FLUID LAYOUT & STANDARISASI HEADER GLOBAL (v3.2) */
               .brand { font-size: clamp(20px, 2.5vw, 30px) !important; gap: clamp(8px, 1vw, 15px) !important; white-space: nowrap; }
               .brand_logo { width: clamp(35px, 4vw, 55px) !important; height: auto !important; }
+              
+              /* Standarisasi Navbar Header di Seluruh Halaman */
+              .header {
+                  width: 100% !important;
+                  left: 0;
+                  z-index: 9999;
+                  transition: background-color 0.25s ease, padding 0.25s ease;
+              }
+              body:not(.home) .header,
+              .header.sticky {
+                  position: fixed !important;
+                  top: 0 !important;
+                  background-color: #041e3a !important;
+                  padding: 14px 0 !important;
+                  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+              }
+              .home .header:not(.sticky) {
+                  position: absolute;
+                  top: 0;
+                  padding: 20px 0 !important;
+                  background: transparent;
+              }
+              body.admin-bar .header {
+                  top: 32px !important;
+              }
+              @media screen and (max-width: 782px) {
+                  body.admin-bar .header {
+                      top: 46px !important;
+                  }
+              }
+
+              /* Override Global Section & Page Spacing (Mengeliminasi Gap 180px/200px) */
+              @media screen and (min-width: 1024px) {
+                  .section { padding: 56px 0; }
+                  .page { padding: 104px 0 40px; }
+              }
+              @media screen and (max-width: 1023.98px) {
+                  .section { padding: 44px 0; }
+                  .page { padding: 92px 0 32px; }
+              }
               
               @media screen and (min-width: 992px) {
                   .header_nav-list { gap: clamp(10px, 2vw, 40px) !important; }
@@ -54,15 +94,24 @@
                   .brand_logo { width: 40px !important; }
                   .brand { font-size: 22px !important; gap: 10px !important; }
                   
+                  body:not(.home) .header,
+                  .header.sticky {
+                      padding: 10px 0 !important;
+                  }
+
                   /* GLOBAL MOBILE ANTI-CRAMP / GA SUMPEK */
                   body { overflow-x: hidden; }
-                  .container { padding-left: 24px !important; padding-right: 24px !important; }
-                  section, .section { padding-top: 50px !important; padding-bottom: 50px !important; padding-left: 24px !important; padding-right: 24px !important; }
+                  .container { padding-left: 20px !important; padding-right: 20px !important; }
+                  section:not(.hero):not(:first-of-type), .section:not(.hero):not(:first-of-type) {
+                      padding-top: 40px !important;
+                      padding-bottom: 40px !important;
+                  }
+                  section, .section { padding-left: 20px !important; padding-right: 20px !important; }
                   p { line-height: 1.7 !important; margin-bottom: 20px !important; }
                   h1, h2, h3 { line-height: 1.4 !important; margin-bottom: 15px !important; }
                   img { max-width: 100%; height: auto; }
-                  .row { margin-left: -12px !important; margin-right: -12px !important; }
-                  .col, [class*="col-"] { padding-left: 12px !important; padding-right: 12px !important; }
+                  .row { margin-left: -10px !important; margin-right: -10px !important; }
+                  .col, [class*="col-"] { padding-left: 10px !important; padding-right: 10px !important; }
               }
 </style>
         <?php wp_head(); ?>

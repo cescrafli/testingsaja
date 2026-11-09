@@ -241,7 +241,8 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
 }
 </style>'; ?>
 
-<div class="container" style="background-color: #fafbfc; min-height: 100vh; padding: clamp(90px, 12vw, 140px) 16px 60px; font-family: 'Outfit', sans-serif; width: 100%; max-width: 100%; overflow: hidden;">
+<div class="container" style="background-color: #fafbfc; padding: 104px 20px 44px; font-family: 'Outfit', sans-serif; width: 100%; max-width: 100%; overflow: hidden;"
+<style>@media (max-width: 768px) { .container[style*="padding: 104px"] { padding: 84px 16px 32px !important; } }</style>>
     <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 60px; align-items: center;">
         
         <!-- Kiri: Judul -->
@@ -592,7 +593,7 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
     </div>
     
     <!-- PANDUAN KLAIM GAMBAR -->
-    <div style="max-width: 1200px; margin: 80px auto 0; text-align: center;">
+    <div style="max-width: 1200px; margin: 44px auto 0; text-align: center;">
         <img src="<?php echo get_template_directory_uri(); ?>/img/warranty-steps.png" alt="Panduan Klaim Garansi" style="width: 100%; max-width: 1100px; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
     </div>
 </div>

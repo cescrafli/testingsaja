@@ -1,8 +1,8 @@
 
         <!--  homepage content end  -->
         <style>
-.footer-new { background-color: #041e3a; padding: 60px 0 0; color: #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; width: 100%; box-sizing: border-box; }
-.footer-new-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px 20px; padding: 0 20px 40px; justify-content: space-between; box-sizing: border-box; }
+.footer-new { background-color: #041e3a; padding: 48px 0 0; color: #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; width: 100%; box-sizing: border-box; }
+.footer-new-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px 20px; padding: 0 20px 32px; justify-content: space-between; box-sizing: border-box; }
 .footer-new-col { flex: 1; min-width: 130px; box-sizing: border-box; }
 .footer-new-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 .footer-new-list { list-style: none; padding: 0; margin: 0; }
@@ -28,8 +28,8 @@
 
 /* Mobile */
 @media(max-width: 767px) {
-    .footer-new { padding-top: 45px; }
-    .footer-new-container { flex-direction: column; gap: 30px; padding: 0 16px 30px; }
+    .footer-new { padding-top: 36px; }
+    .footer-new-container { flex-direction: column; gap: 24px; padding: 0 16px 24px; }
     .footer-new-col { max-width: 100% !important; }
 }
 
@@ -180,7 +180,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         <button id="scrollTrigger" type="button">
             <i class="icon icon-arrow_right"></i>
         </button>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js?v=4"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js?v=3.2.2"></script>
                         <?php
                 global $custom_js; $script_name = isset($custom_js) && !empty($custom_js) ? $custom_js : '';
         if (is_front_page() || is_page_template('front-page.php')) { $script_name = 'index'; }
@@ -193,7 +193,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         
         if ($script_name !== '') {
         ?>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/<?php echo $script_name; ?>.min.js?v=3"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/<?php echo $script_name; ?>.min.js?v=3.2"></script>
         <?php } ?>
         <?php wp_footer(); ?>
 <video class="video_content" style="display:none;"></video><a class="video_btn" style="display:none;" href="#"></a>

@@ -3,7 +3,7 @@
 global $custom_css; $custom_css = 'about'; get_header();
 ?><?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }</style>'; ?>
 
-            <section class="company-profile section" style="padding-top: 160px; padding-bottom: 60px;">
+            <section class="company-profile section" style="padding-top: 104px !important; padding-bottom: 44px !important;">
                 <div class="container">
                     
                     <div style="margin-bottom: 40px;">
@@ -191,7 +191,7 @@ global $custom_css; $custom_css = 'about'; get_header();
                 });
             });
             </script>
-            <section class="certificates section" style="padding-top: 80px; padding-bottom: 80px; overflow: hidden;">
+            <section class="certificates section" style="padding-top: 44px !important; padding-bottom: 40px !important; overflow: hidden;">
                 <div class="container">
                     <div>
                         <div class="certificates_text" style="text-align: center; margin-bottom: 40px;">
@@ -244,37 +244,37 @@ global $custom_css; $custom_css = 'about'; get_header();
                             const next = document.getElementById('certNext');
                             
                             if (prev && next && slider) {
-                                prev.addEventListener('click', () => {
-                                    const slideWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                                    slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
-                                });
-                                
-                                next.addEventListener('click', () => {
-                                    const slideWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                                    slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-                                });
-                                
-                                // Automatic sliding
-                                let slideInterval = setInterval(() => {
-                                    const slideWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-                                        slider.scrollTo({ left: 0, behavior: 'smooth' }); // loop back
+                                function getSlideStep() {
+                                    const firstSlide = slider.querySelector('.native-slide');
+                                    return firstSlide ? (firstSlide.offsetWidth + 20) : 280;
+                                }
+
+                                function slideNext() {
+                                    const step = getSlideStep();
+                                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 15) {
+                                        slider.scrollTo({ left: 0, behavior: 'smooth' });
                                     } else {
-                                        slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+                                        slider.scrollBy({ left: step, behavior: 'smooth' });
                                     }
-                                }, 3000);
+                                }
+
+                                function slidePrev() {
+                                    const step = getSlideStep();
+                                    if (slider.scrollLeft <= 15) {
+                                        slider.scrollTo({ left: slider.scrollWidth, behavior: 'smooth' });
+                                    } else {
+                                        slider.scrollBy({ left: -step, behavior: 'smooth' });
+                                    }
+                                }
+
+                                next.addEventListener('click', slideNext);
+                                prev.addEventListener('click', slidePrev);
                                 
-                                // Pause on hover
+                                let slideInterval = setInterval(slideNext, 3500);
                                 slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
                                 slider.addEventListener('mouseleave', () => {
-                                    slideInterval = setInterval(() => {
-                                        const slideWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-                                            slider.scrollTo({ left: 0, behavior: 'smooth' });
-                                        } else {
-                                            slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-                                        }
-                                    }, 3000);
+                                    clearInterval(slideInterval);
+                                    slideInterval = setInterval(slideNext, 3500);
                                 });
                             }
                         });
@@ -290,6 +290,7 @@ global $custom_css; $custom_css = 'about'; get_header();
                 .native-slide { flex: 0 0 calc(33.333% - 14px) !important; }
             }
             @media (max-width: 768px) {
+                .company-profile.section { padding-top: 84px !important; padding-bottom: 32px !important; }
                 .native-slide { flex: 0 0 calc(50% - 10px) !important; }
                 #certPrev { left: -10px !important; }
                 #certNext { right: -10px !important; }
@@ -298,36 +299,6 @@ global $custom_css; $custom_css = 'about'; get_header();
                 .native-slide { flex: 0 0 100% !important; }
             }
             </style>
-            
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var slider = document.getElementById('certSlider');
-                var prev = document.getElementById('certPrev');
-                var next = document.getElementById('certNext');
-                
-                if(prev && next && slider) {
-                    prev.addEventListener('click', function() {
-                        if (slider.scrollLeft <= 10) {
-                            // At start, rewind to end
-                            slider.scrollTo({ left: slider.scrollWidth, behavior: 'smooth' });
-                        } else {
-                            var itemWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                            slider.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-                        }
-                    });
-                    
-                    next.addEventListener('click', function() {
-                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-                            // At end, rewind to start
-                            slider.scrollTo({ left: 0, behavior: 'smooth' });
-                        } else {
-                            var itemWidth = slider.querySelector('.native-slide').offsetWidth + 20;
-                            slider.scrollBy({ left: itemWidth, behavior: 'smooth' });
-                        }
-                    });
-                }
-            });
-            </script>
             
             
             

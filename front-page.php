@@ -75,7 +75,7 @@ global $custom_css; $custom_css = 'index'; get_header();
             
             
             
-            <section class="section why-choose-us" style="padding: 80px 0;">
+            <section class="section why-choose-us" style="padding: 56px 0 36px;">
     <div class="container">
         <div>
         <!-- Top Row: Image & Text -->
@@ -98,7 +98,7 @@ global $custom_css; $custom_css = 'index'; get_header();
           </div>
 
                         <!-- Statistics Section -->
-            <div style="background: #fff; padding: 60px 40px; max-width: 900px; margin: 0 auto 40px;">
+            <div style="background: #fff; padding: 40px 32px; max-width: 900px; margin: 0 auto 10px;">
                 <h3 style="text-align: center; color: #a88235; font-size: 24px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 60px; font-family: 'Outfit', sans-serif;">STATISTIK GRIYA DJAYA SENTOSA</h3>
                 
                 <style>
@@ -154,7 +154,7 @@ global $custom_css; $custom_css = 'index'; get_header();
           </div> <!-- Closes my custom margin-top wrapper -->
     </div>
 </section>
-<section class="section product-overview" style="background-color: #fff; padding: 40px 0 100px 0;">
+<section class="section product-overview" style="background-color: #fff; padding: 36px 0 56px 0;">
     <div class="container" style="max-width: 1300px;">
         <div style="text-align: center; margin-bottom: 70px;">
             <div style="width: 80px; height: 2px; background-color: #cda25b; margin: 0 auto 25px;"></div>
@@ -250,7 +250,7 @@ global $custom_css; $custom_css = 'index'; get_header();
         </div>
     </div>
 </section>
-<section class="team section integrated-reviews-section" style="padding: 100px 0; background: #ffffff;">
+<section class="team section integrated-reviews-section" style="padding: 56px 0 40px; background: #ffffff;">
     <div class="container" style="max-width: 1300px; margin: 0 auto; text-align: center;">
         
         <!-- Header -->
@@ -546,7 +546,7 @@ global $custom_css; $custom_css = 'index'; get_header();
         </style>
     </div>
 </section>
-<section class="blog section">
+<section class="blog section" style="padding: 52px 0 44px !important;">
                 <div class="container">
                     
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px;">
@@ -610,7 +610,7 @@ endif;
             </section>
 
             <!-- Seksi Artikel & Panduan Blog Terbaru di Homepage untuk Indexing & SEO -->
-            <section class="blog section" style="padding-top: 20px; background-color: #f8fafc;">
+            <section class="blog section" style="padding: 44px 0 52px !important; background-color: #f8fafc;">
                 <div class="container">
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 20px;">
                         <div>
@@ -670,7 +670,7 @@ endif;
                     </ul>
                 </div>
             </section>
-            <section class="section cta-project" style="background-color: #041e3a; padding: 80px 0; text-align: center; margin-bottom: 0 !important;">
+            <section class="section cta-project" style="background-color: #041e3a; padding: 56px 0 !important; text-align: center; margin-bottom: 0 !important;">
     <div class="container" style="max-width: 800px; margin: 0 auto;">
         <span style="color: #cba85d; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">Wujudkan Visi Bangunan Anda Bersama Kami</span>
         <h2 style="font-size: 38px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 25px;">Sedang Merancang Rumah Impian atau Menyiapkan Tender Proyek?</h2>
@@ -734,7 +734,7 @@ div[style*="white-space: nowrap"] { min-width: 0 !important; }
 
 
 <!-- Seksi Internal Link Kontekstual ke Halaman FAQ di front-page.php -->
-<section class="faq-cta-section section" style="padding: 70px 0; background: linear-gradient(135deg, #041e3a 0%, #082d54 100%); color: #ffffff; position: relative; overflow: hidden; border-top: 1px solid rgba(203,168,93,0.3);">
+<section class="faq-cta-section section" style="padding: 48px 0 !important; background: linear-gradient(135deg, #041e3a 0%, #082d54 100%); color: #ffffff; position: relative; overflow: hidden; border-top: 1px solid rgba(203,168,93,0.3);">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px;">
         <div class="faq-cta-content" style="flex: 1 1 650px;">
             <span class="subtitle" style="display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #cba85d; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">

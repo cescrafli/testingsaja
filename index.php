@@ -18,7 +18,7 @@ get_header();
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
 /* Page Banner */
-.gjs-archive-header { padding: 160px 0 40px; text-align: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+.gjs-archive-header { padding: 104px 0 28px; text-align: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
 .gjs-archive-title { color: #041e3a; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; font-family: 'Times New Roman', Times, serif; }
 .gjs-breadcrumbs { font-size: 14px; font-weight: 500; color: #64748b; }
 .gjs-breadcrumbs a { color: #041e3a; text-decoration: none; font-weight: 600; }
@@ -26,16 +26,16 @@ get_header();
 .gjs-breadcrumbs span { color: #cba85d; }
 
 /* Layout Wrapper */
-.gjs-content-wrapper { max-width: 1200px; margin: 0 auto; padding: 50px 20px 80px; display: flex; flex-wrap: wrap; gap: 40px; }
+.gjs-content-wrapper { max-width: 1200px; margin: 0 auto; padding: 36px 20px 44px; display: flex; flex-wrap: wrap; gap: 40px; }
 .gjs-main-content { flex: 1 1 68%; min-width: 0; }
 .gjs-sidebar { flex: 1 1 28%; min-width: 280px; }
 
 /* Grid of Cards */
 .gjs-posts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 @media (max-width: 768px) {
-    .gjs-archive-header { padding: 130px 15px 30px; }
+    .gjs-archive-header { padding: 84px 15px 20px; }
     .gjs-archive-title { font-size: 28px; }
-    .gjs-content-wrapper { flex-direction: column; padding: 30px 15px 60px; gap: 30px; }
+    .gjs-content-wrapper { flex-direction: column; padding: 24px 15px 36px; gap: 24px; }
     .gjs-posts-grid { grid-template-columns: 1fr; }
 }
 

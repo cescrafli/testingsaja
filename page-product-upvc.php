@@ -1003,7 +1003,7 @@ $pintu_items = [
                             <?php endif; ?>
                             
                             <?php foreach($user_images as $index => $img): ?>
-                                <img class="si-slide-img product-color-target" onclick="openLightbox(this.src)" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($data['title']); ?>" style="<?php echo ($index == 0) ? 'display:block;' : 'display:none;'; ?>">
+                                <img class="si-slide-img product-color-target" onclick="openLightbox(this.src)" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($data['title']); ?>" style="<?php echo ($index == 0) ? 'display:block;' : 'display:none;'; ?>" data-base-src="<?php echo esc_url($upload_dir . $data['img']); ?>" data-item-id="<?php echo esc_attr($item_id); ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <img src="<?php echo esc_url($upload_dir . $data['img']); ?>" alt="<?php echo esc_attr($data['title']); ?>" class="product-color-target" onclick="openLightbox(this.src)" data-base-src="<?php echo esc_url($upload_dir . $data['img']); ?>" data-item-id="<?php echo esc_attr($item_id); ?>">
@@ -1031,7 +1031,17 @@ $pintu_items = [
                                 <div class="cp-btn c-wood-golden" onclick="changeColor('wood-golden', this, 'Golden Wood', 'conch')" title="CONCH Kayu Golden / Golden Wood"></div>
                                 <div class="cp-btn c-wood-dark" onclick="changeColor('wood-dark', this, 'Dark Wood', 'conch')" title="CONCH Kayu Gelap / Dark Wood"></div>
                             </div>
-                            <?php if ($item_id === 'jendela-jungkit'): ?>
+                            <?php 
+                            $falken_supported_items = [
+                                'jendela-jungkit',
+                                'jendela-lipat',
+                                'jendela-pivot',
+                                'jendela-sliding',
+                                'jendela-sliding-vertikal',
+                                'jendela-swing'
+                            ];
+                            if (in_array($item_id, $falken_supported_items, true)): 
+                            ?>
                             <div id="colors-falken" class="conf-swatches-list" style="display:none; flex-wrap:wrap; gap:8px;">
                                 <div class="cp-btn f-white active" onclick="changeColor('standard-white', this, 'Standard White', 'falken')" title="FALKEN Standard White"></div>
                                 <div class="cp-btn f-black" onclick="changeColor('standard-black', this, 'Standard Black', 'falken')" title="FALKEN Standard Black"></div>
@@ -1517,7 +1527,7 @@ function changeColor(colorName, btnElement, colorTextLabel, brand) {
     let newSrc = '';
     
     if(brand === 'falken') {
-        const itemId = mainImg.getAttribute('data-item-id') || 'jendela-jungkit';
+        const itemId = mainImg.getAttribute('data-item-id') || '<?php echo esc_js($item_id); ?>';
         newSrc = themeUrl + '/img/falken/' + itemId + '/' + colorName + '.jpg';
     } else {
         let currentSrc = mainImg.getAttribute('data-base-src');

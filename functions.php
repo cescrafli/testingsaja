@@ -461,17 +461,9 @@ function gjs_end_head_buffer() {
  * Enqueue scripts and styles.
  */
 function cobain_scripts() {
-	// CSS
-	wp_enqueue_style( 'cobain-preload', get_template_directory_uri() . '/css/preload2.min.css', array(), '4.0.0' );
-	wp_enqueue_style( 'cobain-icomoon', get_template_directory_uri() . '/css/icomoon.css', array(), '4.0.0' );
-	wp_enqueue_style( 'cobain-libs', get_template_directory_uri() . '/css/libs.min.css', array(), '4.0.0' );
-		
 	// Theme stylesheet
 	wp_enqueue_style( 'cobain-style', get_stylesheet_uri(), array(), '4.0.0' );
 
-	// JS
-	wp_enqueue_script( 'cobain-common', get_template_directory_uri() . '/js/common.min.js', array(), '4.0.0', true );
-	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -895,39 +887,7 @@ add_filter( 'jetpack_sitemap_url', function( $url_data ) {
     return $url_data;
 }, 10, 1 );
 
-// 5. Exclude system & noindex pages from Yoast SEO sitemaps
-add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function( $excluded_ids ) {
-    if ( ! is_array( $excluded_ids ) ) {
-        $excluded_ids = array();
-    }
-    $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid', 'employee-dashboard', 'portal-karyawan' );
-    foreach ( $excluded_slugs as $slug ) {
-        $p = get_page_by_path( $slug );
-        if ( $p ) {
-            $excluded_ids[] = $p->ID;
-        }
-    }
-    return array_unique( $excluded_ids );
-} );
-
-// 6. Exclude system & noindex pages from WordPress Core XML Sitemaps
-add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
-    if ( $post_type === 'page' ) {
-        $excluded_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'single-project', 'gallery-masonry', 'gallery-grid', 'employee-dashboard', 'portal-karyawan' );
-        $excluded_ids = array();
-        foreach ( $excluded_slugs as $slug ) {
-            $p = get_page_by_path( $slug );
-            if ( $p ) {
-                $excluded_ids[] = $p->ID;
-            }
-        }
-        if ( ! empty( $excluded_ids ) ) {
-            $post__not_in = isset( $args['post__not_in'] ) ? (array) $args['post__not_in'] : array();
-            $args['post__not_in'] = array_merge( $post__not_in, $excluded_ids );
-        }
-    }
-    return $args;
-}, 10, 2 );
+// System sitemap exclusion filters consolidated below in gds_get_excluded_sitemap_page_ids()
 
 // Sitemap cleanup consolidated into gjs_cleanup_sitemap_caches_v2_9
 
@@ -1272,20 +1232,25 @@ add_action('template_redirect', 'gjs_seo_template_redirects', 0);
 function gjs_seo_template_redirects() {
     if (is_admin()) return;
 
-    // Direct 1-hop canonical redirect: eliminate redirect chains for WWW host and HTTP protocol
-    $req_host = $_SERVER['HTTP_HOST'] ?? '';
-    $is_www   = (stripos($req_host, 'www.') === 0);
-    $is_http  = (!is_ssl() && (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) !== 'https'));
+    // Direct 1-hop canonical redirect: eliminate redirect chains for WWW host and HTTP protocol (production only)
+    $site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+    $is_local  = in_array( $site_host, array( 'localhost', '127.0.0.1' ), true ) || preg_match( '/\.(local|test)$/i', (string) $site_host );
 
-    if ($is_www || $is_http) {
-        $canonical_host = preg_replace('/^www\./i', '', $req_host);
-        if (empty($canonical_host)) {
-            $canonical_host = 'griyadjayasentosa.id';
+    if ( ! $is_local ) {
+        $req_host = $_SERVER['HTTP_HOST'] ?? '';
+        $is_www   = ( stripos( $req_host, 'www.' ) === 0 );
+        $is_http  = ( ! is_ssl() && ( ! isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) || strtolower( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) !== 'https' ) );
+
+        if ( $is_www || $is_http ) {
+            $canonical_host = preg_replace( '/^www\./i', '', $req_host );
+            if ( empty( $canonical_host ) || $canonical_host !== $site_host ) {
+                $canonical_host = ! empty( $site_host ) ? $site_host : 'griyadjayasentosa.id';
+            }
+            $req_uri = $_SERVER['REQUEST_URI'] ?? '/';
+            $canonical_url = 'https://' . $canonical_host . $req_uri;
+            wp_safe_redirect( $canonical_url, 301 );
+            exit;
         }
-        $req_uri = $_SERVER['REQUEST_URI'] ?? '/';
-        $canonical_url = 'https://' . $canonical_host . $req_uri;
-        wp_safe_redirect($canonical_url, 301);
-        exit;
     }
 
     $req_uri = $_SERVER['REQUEST_URI'] ?? '';
@@ -1360,16 +1325,22 @@ function gjs_seo_template_redirects() {
         exit;
     }
 
-    // 4. 301 Permanent Redirect for unused demo/template pages (/single-project/, /gallery-masonry/, /gallery-grid/)
-    $unused_templates = array('single-project', 'gallery-masonry', 'gallery-grid');
-    if (in_array($req_path, $unused_templates, true) || is_page($unused_templates)) {
-        $target_page = get_page_by_path('projects');
-        if (!$target_page) {
-            $target_page = get_page_by_path('proyek');
+    // 4. 301 Permanent Redirect for unused demo/template pages (/single-project/, /gallery-masonry/, /gallery-grid/, etc.)
+    $unused_templates = array(
+        'single-project', 'gallery-masonry', 'gallery-grid',
+        'page-contacts2', 'page-index2', 'page-blog2', 'page-projects2',
+        'page-services', 'single-service', 'page-team', 'contacts2', 'index2', 'blog2', 'projects2', 'services', 'team'
+    );
+    if ( in_array( $req_path, $unused_templates, true ) || is_page( $unused_templates ) || is_page_template( array(
+        'page-contacts2.php', 'page-index2.php', 'page-blog2.php', 'page-projects2.php', 'page-services.php', 'single-service.php', 'page-team.php'
+    ) ) ) {
+        $target_page = get_page_by_path( 'projects' );
+        if ( ! $target_page ) {
+            $target_page = get_page_by_path( 'proyek' );
         }
-        $target_url = $target_page ? get_permalink($target_page->ID) : home_url('/');
-        if (trailingslashit(get_permalink()) !== trailingslashit($target_url)) {
-            wp_safe_redirect($target_url, 301);
+        $target_url = $target_page ? get_permalink( $target_page->ID ) : home_url( '/' );
+        if ( trailingslashit( get_permalink() ) !== trailingslashit( $target_url ) ) {
+            wp_safe_redirect( $target_url, 301 );
             exit;
         }
     }
@@ -1512,34 +1483,49 @@ add_action('wp_head', 'gds_noindex_internal_system_pages', 1);
 function gds_noindex_internal_system_pages() {
     $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
     $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
-    $is_internal = (
-        is_page(array('griyadjayamasuk', 'detail-transaksi', 'login', 'portal-karyawan')) ||
-        is_page_template(array('page-login.php', 'page-detail-transaksi.php', 'page-employee-dashboard.php')) ||
-        in_array($req_path, array('griyadjayamasuk', 'detail-transaksi', 'login'), true)
-    );
-    if ($is_internal) {
+    if ( gjs_is_internal_system_page() ) {
         echo '<meta name="robots" content="noindex, nofollow, noarchive" />' . "\n";
     }
 }
 
-// Kompatibilitas filter robots untuk Yoast SEO
-add_filter('wpseo_robots', 'gds_yoast_robots_override', 999);
-function gds_yoast_robots_override($robots) {
+// Helper untuk mendeteksi halaman sistem / portal internal yang wajib berstatus noindex
+function gjs_is_internal_system_page() {
+    $internal_slugs = array( 'griyadjayamasuk', 'detail-transaksi', 'employee-dashboard', 'portal-karyawan', 'login' );
+    $internal_templates = array( 'page-employee-dashboard.php', 'page-login.php', 'page-detail-transaksi.php' );
+    
+    if ( is_page( $internal_slugs ) || is_page_template( $internal_templates ) ) {
+        return true;
+    }
+    
     $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
-    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
-    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
+    $req_path = trim( parse_url( $req_uri, PHP_URL_PATH ) ?? '', '/' );
+    $home_path = trim( parse_url( home_url(), PHP_URL_PATH ) ?? '', '/' );
+    if ( ! empty( $home_path ) && strpos( $req_path, $home_path ) === 0 ) {
+        $req_path = trim( substr( $req_path, strlen( $home_path ) ), '/' );
+    }
+    
+    foreach ( $internal_slugs as $slug ) {
+        if ( $req_path === $slug || strpos( $req_path, $slug . '/' ) === 0 ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Kompatibilitas filter robots untuk Yoast SEO
+add_filter( 'wpseo_robots', 'gds_yoast_robots_override', 999 );
+function gds_yoast_robots_override( $robots ) {
+    if ( gjs_is_internal_system_page() ) {
         return 'noindex, nofollow';
     }
     return $robots;
 }
 
 // Kompatibilitas filter robots untuk Rank Math SEO
-add_filter('rank_math/frontend/robots', 'gds_rankmath_robots_override', 999);
-function gds_rankmath_robots_override($robots) {
-    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
-    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
-    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
-        if (is_array($robots)) {
+add_filter( 'rank_math/frontend/robots', 'gds_rankmath_robots_override', 999 );
+function gds_rankmath_robots_override( $robots ) {
+    if ( gjs_is_internal_system_page() ) {
+        if ( is_array( $robots ) ) {
             $robots['index']  = 'noindex';
             $robots['follow'] = 'nofollow';
         } else {
@@ -1550,17 +1536,20 @@ function gds_rankmath_robots_override($robots) {
 }
 
 // Tambahkan X-Robots-Tag pada HTTP Header untuk halaman internal
-add_action('send_headers', 'gds_send_noindex_headers');
+add_action( 'send_headers', 'gds_send_noindex_headers' );
 function gds_send_noindex_headers() {
-    $req_uri  = $_SERVER['REQUEST_URI'] ?? '';
-    $req_path = trim(parse_url($req_uri, PHP_URL_PATH) ?? '', '/');
-    if (is_page(array('griyadjayamasuk', 'detail-transaksi')) || in_array($req_path, array('griyadjayamasuk', 'detail-transaksi'), true)) {
-        header('X-Robots-Tag: noindex, nofollow', true);
+    if ( gjs_is_internal_system_page() ) {
+        header( 'X-Robots-Tag: noindex, nofollow', true );
     }
 }
 
 // 2. Hapus Halaman Sistem & Demo dari XML Sitemap (Yoast, Rank Math, WP Core)
 function gds_get_excluded_sitemap_page_ids() {
+    static $excluded_ids = null;
+    if ( null !== $excluded_ids ) {
+        return $excluded_ids;
+    }
+
     $slugs_to_exclude = array(
         'griyadjayamasuk',
         'detail-transaksi',
@@ -1569,12 +1558,13 @@ function gds_get_excluded_sitemap_page_ids() {
         'gallery-grid',
         'employee-dashboard',
         'portal-karyawan',
+        'login',
     );
 
     $excluded_ids = array();
-    foreach ($slugs_to_exclude as $slug) {
-        $page = get_page_by_path($slug);
-        if ($page && isset($page->ID)) {
+    foreach ( $slugs_to_exclude as $slug ) {
+        $page = get_page_by_path( $slug );
+        if ( $page && isset( $page->ID ) ) {
             $excluded_ids[] = (int) $page->ID;
         }
     }
@@ -1846,6 +1836,9 @@ function gjs_flush_all_seo_sitemap_caches( $post_id = 0 ) {
         }
     }
 
+    // Clear cached footer SEO links
+    delete_transient( 'gjs_footer_seo_links_html_v1' );
+
     global $wpdb;
     // Clear Yoast SEO, Rank Math, and Jetpack sitemap transients immediately
     $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%rank_math_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'" );
@@ -1869,15 +1862,7 @@ add_action( 'transition_post_status', function( $new_status, $old_status, $post 
     }
 }, 99, 3 );
 
-// One-time v7 flush on deployment to ensure project-sitemap.xml, post-sitemap.xml, and page-sitemap.xml are 100% fresh
-add_action( 'init', function() {
-    if ( get_option( 'gjs_sitemap_cleaned_v7' ) === 'yes' ) {
-        return;
-    }
-    gjs_flush_all_seo_sitemap_caches( 0 );
-    flush_rewrite_rules( false );
-    update_option( 'gjs_sitemap_cleaned_v7', 'yes' );
-}, 20 );
+// Legacy v7 sitemap flush merged into gjs_cleanup_sitemap_caches_v2_9()
 
 // 3. Ensure 'project' CPT is always included in Yoast SEO & Rank Math XML Sitemaps
 add_filter( 'wpseo_sitemap_exclude_post_type', function( $exclude, $post_type ) {

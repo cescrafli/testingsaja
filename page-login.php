@@ -3,7 +3,9 @@
  * Template Name: Employee Login
  */
 
-session_start();
+if ( session_status() === PHP_SESSION_NONE ) {
+    session_start();
+}
 
 // Redirect logged-in users directly to dashboard without adding to history
 if (isset($_SESSION['emp_id']) && isset($_SESSION['emp_role'])) {
@@ -51,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     $wpdb->query( $wpdb->prepare( "UPDATE {$table_name} SET last_login = NOW() WHERE username = %s", $username ) );
                     
+                    session_regenerate_id( true );
                     $_SESSION['emp_id'] = isset($user->employee_id) ? $user->employee_id : $user->id;
                     $_SESSION['emp_username'] = $user->username;
                     $_SESSION['emp_role'] = (int) $user->role;

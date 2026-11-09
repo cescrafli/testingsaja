@@ -3,7 +3,9 @@
  * Template Name: Employee Dashboard
  */
 
-session_start();
+if ( session_status() === PHP_SESSION_NONE ) {
+    session_start();
+}
 
 // Helper to make Google Maps links clickable
 function gjs_render_location($loc) {
@@ -49,8 +51,10 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
         // Verify CSRF Nonce for all POST modifications in dashboard
         if ( ! empty( $action ) && ( ! isset( $_POST['gjs_emp_dash_nonce'] ) || ! wp_verify_nonce( $_POST['gjs_emp_dash_nonce'], 'gjs_emp_dash_action' ) ) ) {
-            $error = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman.';
+            $message = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman dan coba lagi.';
+            $message_type = 'error';
             $action = '';
+            unset( $_POST['action'] );
         }
 
     // EXPORT CSV
@@ -368,7 +372,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
         
     // SELESAI REQUEST
-    if (isset($_POST['action']) && $_POST['action'] === 'selesai_request' && ($role === 1 || $role === 2)) {
+    if ( $action === 'selesai_request' && ( $role === 1 || $role === 2 ) ) {
         $barcode_id = sanitize_text_field($_POST['barcode_id']);
         $deskripsi = sanitize_textarea_field($_POST['selesai_deskripsi']);
         $tanggal = sanitize_text_field($_POST['selesai_tanggal']);
@@ -459,9 +463,10 @@ Terima kasih telah mempercayakan layanan Anda kepada Griya Djaya Sentosa. Semoga
     // APPROVE REQUEST
     if ( $action === 'approve_request' && ( $role === 1 || $role === 2 ) ) {
         $barcode_id = sanitize_text_field($_POST['barcode_id']);
+        $request_id = isset($_POST['request_id']) ? (int)$_POST['request_id'] : 0;
         $wpdb->update('wp_barcode', array('status' => 3), array('BarcodeID' => $barcode_id));
         
-        $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE b.BarcodeID = %s ORDER BY r.id DESC LIMIT 1", $barcode_id));
+        $wa_data = $wpdb->get_row($wpdb->prepare("SELECT b.customer, b.phone_customer, b.material_description, r.category, r.phone as alt_phone FROM wp_barcode b LEFT JOIN wp_request r ON b.BarcodeID = r.barcodeid WHERE " . ($request_id > 0 ? "r.id = %d" : "b.BarcodeID = %s ORDER BY r.id DESC LIMIT 1"), $request_id > 0 ? $request_id : $barcode_id));
         $target_phone = ($wa_data && !empty($wa_data->alt_phone)) ? $wa_data->alt_phone : ($wa_data ? $wa_data->phone_customer : '');
         if ($wa_data && !empty($target_phone)) {
             $kategori = 'Pengajuan';
@@ -530,36 +535,42 @@ Apabila ada pertanyaan lebih lanjut, silakan balas pesan ini. Terima kasih atas 
     if ( $action === 'add_employee_account' && $role === 1 ) {
         $emp_name = sanitize_text_field($_POST['emp_name']);
         $emp_username = sanitize_text_field($_POST['emp_username']);
-        $emp_password = sanitize_text_field($_POST['emp_password']);
+        $emp_password = (string) $_POST['emp_password'];
         $emp_phone = sanitize_text_field($_POST['emp_phone']);
         $emp_email = sanitize_email($_POST['emp_email']);
         $emp_address = sanitize_textarea_field($_POST['emp_address']);
         $emp_role = (int) $_POST['emp_role'];
         
-        // Auto-migrate table if needed
-        // Columns ensured via schema migration
-        
-        $random_emp_id = 'EMP-' . mt_rand(10000, 99999);
-        $inserted = $wpdb->insert(
-            $table_employee,
-            [
-                'employee_id' => $random_emp_id,
-                'name' => $emp_name,
-                'username' => $emp_username,
-                'password' => $emp_password,
-                'phone' => $emp_phone,
-                'email' => $emp_email,
-                'address' => $emp_address,
-                'role' => $emp_role,
-                'status' => 1
-            ]
-        );
-        
-        if ($inserted) {
-            $message = "Berhasil! Akun karyawan baru (".$emp_username.") telah ditambahkan.";
-        } else {
-            $message = "Gagal! Username mungkin sudah digunakan.";
+        $existing = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$table_employee} WHERE username = %s OR (email = %s AND email != '') LIMIT 1", $emp_username, $emp_email));
+        if ($existing) {
+            $message = "Gagal! Username atau Email sudah terdaftar dalam sistem.";
             $message_type = "error";
+        } elseif (empty($emp_password) || strlen($emp_password) < 6) {
+            $message = "Gagal! Password minimal 6 karakter.";
+            $message_type = "error";
+        } else {
+            $hashed_password = wp_hash_password($emp_password);
+            $random_emp_id = 'EMP-' . mt_rand(10000, 99999);
+            $inserted = $wpdb->insert(
+                $table_employee,
+                [
+                    'employee_id' => $random_emp_id,
+                    'name' => $emp_name,
+                    'username' => $emp_username,
+                    'password' => $hashed_password,
+                    'phone' => $emp_phone,
+                    'email' => $emp_email,
+                    'address' => $emp_address,
+                    'role' => $emp_role,
+                    'status' => 1
+                ]
+            );
+            if ($inserted) {
+                $message = "Berhasil! Akun karyawan baru (".$emp_username.") telah ditambahkan.";
+            } else {
+                $message = "Gagal menyimpan akun karyawan baru ke database.";
+                $message_type = "error";
+            }
         }
     }
 
@@ -587,7 +598,8 @@ $end_date = isset($_GET['end_date']) ? sanitize_text_field($_GET['end_date']) : 
               r.id,
               r.barcodeid, 
               COALESCE(NULLIF(b.no_penawaran, ''), b.SPKID) as spk_id,
-              b.customer as customer_nama, 
+              b.customer as customer_nama,
+              b.email as customer_email, 
               b.phone_customer as cust_phone,
               b.material_description as material, 
               b.location as cust_location,
@@ -1692,6 +1704,16 @@ if ( $role === 1 ) {
     }
 
     // Single Warranty Card Print & PDF Generator
+        function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
     function printWarrantyCard(infoStr, cardTypeArg) {
         var info = (typeof infoStr === 'string') ? JSON.parse(infoStr) : infoStr;
         var barcodeId = info.BarcodeID || "";
@@ -1733,6 +1755,17 @@ if ( $role === 1 ) {
         var email = info.customer_email || "-";
         var marketing = toTitleCase(info.marketing_nama);
         var telpMark = info.marketing_phone || "-";
+
+        var noPenawaranEsc = escapeHtml(noPenawaran);
+        var merkEsc = escapeHtml(merk);
+        var tglEsc = escapeHtml(tgl);
+        var namaEsc = escapeHtml(nama);
+        var alamatEsc = escapeHtml(alamat);
+        var kotaPartEsc = escapeHtml(kotaPart);
+        var telpEsc = escapeHtml(telp);
+        var emailEsc = escapeHtml(email);
+        var marketingEsc = escapeHtml(marketing);
+        var telpMarkEsc = escapeHtml(telpMark);
 
         var siteUrl = "<?php echo get_template_directory_uri(); ?>";
         var imgFront = siteUrl + "/img/warranty_card_front.jpg?v=" + new Date().getTime();
@@ -1799,7 +1832,7 @@ if ( $role === 1 ) {
         <div class="toolbar-title">
             <span>Pratinjau Kartu Garansi</span>
             <span class="toolbar-badge">${badgeLabel}</span>
-            <span style="color:#94a3b8; font-size:13px;">ID: ${barcodeId} | No. Penawaran: ${noPenawaran}</span>
+            <span style="color:#94a3b8; font-size:13px;">ID: ${barcodeId} | No. Penawaran: ${noPenawaranEsc}</span>
         </div>
         <div class="toolbar-actions">
             <button onclick="window.print();" class="btn-tb btn-tb-print">🖨 Cetak / Simpan PDF</button>
@@ -1811,16 +1844,16 @@ if ( $role === 1 ) {
     <div class="preview-wrapper" id="printArea">
         <!-- HALAMAN MUKA (FRONT) -->
         <div class="page" style="background-image: url('${imgFront}');">
-            <div class="text-val val-spk">${noPenawaran}</div>
-            <div class="text-val val-merk">${merk}</div>
-            <div class="text-val val-tgl">${tgl}</div>
-            <div class="text-val val-nama">${nama}</div>
-            <div class="text-val val-alamat">${alamat}</div>
-            <div class="text-val val-kota">${kotaPart}</div>
-            <div class="text-val val-telp">${telp}</div>
-            <div class="text-val val-email lowercase">${email}</div>
-            <div class="text-val val-marketing">${marketing}</div>
-            <div class="text-val val-telpmark">${telpMark}</div>
+            <div class="text-val val-spk">${noPenawaranEsc}</div>
+            <div class="text-val val-merk">${merkEsc}</div>
+            <div class="text-val val-tgl">${tglEsc}</div>
+            <div class="text-val val-nama">${namaEsc}</div>
+            <div class="text-val val-alamat">${alamatEsc}</div>
+            <div class="text-val val-kota">${kotaPartEsc}</div>
+            <div class="text-val val-telp">${telpEsc}</div>
+            <div class="text-val val-email lowercase">${emailEsc}</div>
+            <div class="text-val val-marketing">${marketingEsc}</div>
+            <div class="text-val val-telpmark">${telpMarkEsc}</div>
             <div class="signature-line"></div>
             <div class="barcode-container"><img src="${barcodeDataUrl}" alt="QR Code" /></div>
             <div class="footer-contacts">
@@ -1946,21 +1979,32 @@ if ( $role === 1 ) {
             var marketing = toTitleCase(info.marketing_nama);
             var telpMark = info.marketing_phone || "-";
 
+        var noPenawaranEsc = escapeHtml(noPenawaran);
+        var merkEsc = escapeHtml(merk);
+        var tglEsc = escapeHtml(tgl);
+        var namaEsc = escapeHtml(nama);
+        var alamatEsc = escapeHtml(alamat);
+        var kotaPartEsc = escapeHtml(kotaPart);
+        var telpEsc = escapeHtml(telp);
+        var emailEsc = escapeHtml(email);
+        var marketingEsc = escapeHtml(marketing);
+        var telpMarkEsc = escapeHtml(telpMark);
+
             var imgBack = (cardType === 'cw') ? imgBackCw : imgBackUpvc;
 
             pagesHtml += `
             <!-- KARTU #${index + 1}: ${barcodeId} FRONT -->
             <div class="page" style="background-image: url('${imgFront}');">
-                <div class="text-val val-spk">${noPenawaran}</div>
-                <div class="text-val val-merk">${merk}</div>
-                <div class="text-val val-tgl">${tgl}</div>
-                <div class="text-val val-nama">${nama}</div>
-                <div class="text-val val-alamat">${alamat}</div>
-                <div class="text-val val-kota">${kotaPart}</div>
-                <div class="text-val val-telp">${telp}</div>
-                <div class="text-val val-email lowercase">${email}</div>
-                <div class="text-val val-marketing">${marketing}</div>
-                <div class="text-val val-telpmark">${telpMark}</div>
+                <div class="text-val val-spk">${noPenawaranEsc}</div>
+                <div class="text-val val-merk">${merkEsc}</div>
+                <div class="text-val val-tgl">${tglEsc}</div>
+                <div class="text-val val-nama">${namaEsc}</div>
+                <div class="text-val val-alamat">${alamatEsc}</div>
+                <div class="text-val val-kota">${kotaPartEsc}</div>
+                <div class="text-val val-telp">${telpEsc}</div>
+                <div class="text-val val-email lowercase">${emailEsc}</div>
+                <div class="text-val val-marketing">${marketingEsc}</div>
+                <div class="text-val val-telpmark">${telpMarkEsc}</div>
                 <div class="signature-line"></div>
                 <div class="barcode-container"><img src="${barcodeDataUrl}" alt="QR Code" /></div>
                 <div class="footer-contacts">
@@ -2382,10 +2426,17 @@ if ( $role === 1 ) {
 </div>
 
 <script>
-function approveRequest(barcodeId, customerName, material, dateReq, typeReq, phone, location, desc, photoUrls) {
-    if (confirm("Setujui pengajuan " + barcodeId + "? (Pesan WhatsApp persetujuan akan otomatis dikirim ke Customer)")) {
-        document.getElementById('form_approve_' + barcodeId).submit();
+function approveRequest(reqId, barcodeId, customerName, material, dateReq, typeReq, phone, location, desc, photoUrls) {
+    var form = document.getElementById('form_approve_' + reqId) || document.getElementById('form_approve_' + barcodeId);
+    var displayId = barcodeId || reqId;
+    if (confirm("Setujui pengajuan " + displayId + "? (Pesan WhatsApp persetujuan akan otomatis dikirim ke Customer)")) {
+        if (form) {
+            form.submit();
+        } else {
+            alert('Form approval tidak ditemukan.');
+        }
     }
+}
 }
 
 function openDeclineModal(barcodeId, custPhone, custEmail, custName, reqId) {

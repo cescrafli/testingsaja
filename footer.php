@@ -125,42 +125,53 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
     </div>
     
     <!-- Global SEO Internal Link Directory for 100% Project & Blog Indexing -->
-    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 20px; border-top: 1px solid #1e3a5f; font-size: 12px; color: #94a3b8;">
-        <div style="margin-bottom: 12px;">
-            <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Portofolio Proyek:</strong>
-            <?php
-            $footer_projects = get_posts(array(
-                'post_type'      => 'project',
-                'posts_per_page' => 30,
-                'post_status'    => 'publish',
-                'orderby'        => 'date',
-                'order'          => 'DESC'
-            ));
-            $p_links = array();
-            foreach ($footer_projects as $fp) {
-                $p_links[] = '<a href="' . esc_url(get_permalink($fp->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fp->post_title) . '</a>';
-            }
-            echo implode(' &bull; ', $p_links);
-            ?>
+    <?php
+    $cached_footer_seo_links = get_transient( 'gjs_footer_seo_links_html_v1' );
+    if ( false === $cached_footer_seo_links ) {
+        ob_start();
+        ?>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 24px 20px; border-top: 1px solid #1e3a5f; font-size: 12px; color: #94a3b8;">
+            <div style="margin-bottom: 12px;">
+                <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Portofolio Proyek:</strong>
+                <?php
+                $footer_projects = get_posts(array(
+                    'post_type'      => 'project',
+                    'posts_per_page' => 30,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC'
+                ));
+                $p_links = array();
+                foreach ($footer_projects as $fp) {
+                    $p_links[] = '<a href="' . esc_url(get_permalink($fp->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fp->post_title) . '</a>';
+                }
+                echo implode(' &bull; ', $p_links);
+                ?>
+            </div>
+            <div>
+                <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Artikel &amp; Panduan:</strong>
+                <?php
+                $footer_posts = get_posts(array(
+                    'post_type'      => 'post',
+                    'posts_per_page' => 20,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC'
+                ));
+                $b_links = array();
+                foreach ($footer_posts as $fb) {
+                    $b_links[] = '<a href="' . esc_url(get_permalink($fb->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fb->post_title) . '</a>';
+                }
+                echo implode(' &bull; ', $b_links);
+                ?>
+            </div>
         </div>
-        <div>
-            <strong style="color: #cba85d; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Artikel &amp; Panduan:</strong>
-            <?php
-            $footer_posts = get_posts(array(
-                'post_type'      => 'post',
-                'posts_per_page' => 20,
-                'post_status'    => 'publish',
-                'orderby'        => 'date',
-                'order'          => 'DESC'
-            ));
-            $b_links = array();
-            foreach ($footer_posts as $fb) {
-                $b_links[] = '<a href="' . esc_url(get_permalink($fb->ID)) . '" style="color: #cbd5e1; text-decoration: none;">' . esc_html($fb->post_title) . '</a>';
-            }
-            echo implode(' &bull; ', $b_links);
-            ?>
-        </div>
-    </div>
+        <?php
+        $cached_footer_seo_links = ob_get_clean();
+        set_transient( 'gjs_footer_seo_links_html_v1', $cached_footer_seo_links, 12 * HOUR_IN_SECONDS );
+    }
+    echo $cached_footer_seo_links;
+    ?>
 
     <div class="footer-new-bottom">
         Copyright 2026 &copy; All Rights Reserved. Developed by <a href="https://website-mrmp.vercel.app/" target="_blank" rel="noopener noreferrer">cescrafli</a>
@@ -169,8 +180,6 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         <button id="scrollTrigger" type="button">
             <i class="icon icon-arrow_right"></i>
         </button>
-        <script id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js?v=2" async=""></script>
-        <script src="https://www.youtube.com/player_api"></script>
         <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js?v=4"></script>
                         <?php
                 global $custom_js; $script_name = isset($custom_js) && !empty($custom_js) ? $custom_js : '';

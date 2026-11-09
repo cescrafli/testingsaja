@@ -14,101 +14,122 @@ if (isset($_POST['action']) && $_POST['action'] === 'submit_claim') {
     if (!isset($_POST['gjs_claim_nonce']) || !wp_verify_nonce($_POST['gjs_claim_nonce'], 'gjs_submit_claim_action')) {
         $error_msg = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman dan coba lagi.';
         $searched_id = sanitize_text_field(isset($_POST['barcode_id_claim']) ? $_POST['barcode_id_claim'] : '');
-    } else
-    $claim_barcode = sanitize_text_field($_POST['barcode_id_claim']);
-    $jenis = sanitize_text_field($_POST['jenis_pengajuan']);
-    $deskripsi = sanitize_textarea_field($_POST['deskripsi']);
-    $whatsapp = sanitize_text_field($_POST['whatsapp']);
-    $alamat = sanitize_textarea_field($_POST['alamat']);
-    
-    // Upload File Multiple
-    $uploaded_urls = [];
-    if (!empty($_FILES['bukti_file']['name'][0])) {
-        $file_count = count($_FILES['bukti_file']['name']);
-        if ($file_count < 3) {
-            $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video.";
-        } elseif ($file_count > 5) {
-            $error_msg = "Pengajuan Gagal: Maksimal 5 file foto/video yang diperbolehkan.";
-        } else {
-            for ($i = 0; $i < $file_count; $i++) {
-                if ($_FILES['bukti_file']['name'][$i]) {
-                    $uploadedfile = array(
-                        'name'     => $_FILES['bukti_file']['name'][$i],
-                        'type'     => $_FILES['bukti_file']['type'][$i],
-                        'tmp_name' => $_FILES['bukti_file']['tmp_name'][$i],
-                        'error'    => $_FILES['bukti_file']['error'][$i],
-                        'size'     => $_FILES['bukti_file']['size'][$i]
-                    );
-                    $movefile = function_exists('gjs_secure_handle_upload')
-                        ? gjs_secure_handle_upload($uploadedfile, array('image', 'video'), 10485760)
-                        : wp_handle_upload($uploadedfile, array('test_form' => false));
-                    if ( $movefile && ! isset( $movefile['error'] ) && !empty($movefile['url']) ) {
-                        $uploaded_urls[] = $movefile['url'];
-                    } else {
-                        $error_msg = isset($movefile['error']) ? $movefile['error'] : 'Gagal mengunggah file bukti.';
-                        break;
+    } else {
+        $claim_barcode = sanitize_text_field(isset($_POST['barcode_id_claim']) ? $_POST['barcode_id_claim'] : '');
+        $searched_id = $claim_barcode;
+        $jenis = sanitize_text_field(isset($_POST['jenis_pengajuan']) ? $_POST['jenis_pengajuan'] : '');
+        $deskripsi = sanitize_textarea_field(isset($_POST['deskripsi']) ? $_POST['deskripsi'] : '');
+        $whatsapp = sanitize_text_field(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : '');
+        $alamat = sanitize_textarea_field(isset($_POST['alamat']) ? $_POST['alamat'] : '');
+        
+        // Upload File Multiple
+        $uploaded_urls = [];
+        $uploaded_paths = [];
+        if (!empty($_FILES['bukti_file']['name'][0])) {
+            $file_count = count($_FILES['bukti_file']['name']);
+            if ($file_count < 3) {
+                $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video.";
+            } elseif ($file_count > 5) {
+                $error_msg = "Pengajuan Gagal: Maksimal 5 file foto/video yang diperbolehkan.";
+            } else {
+                for ($i = 0; $i < $file_count; $i++) {
+                    if (!empty($_FILES['bukti_file']['name'][$i])) {
+                        $uploadedfile = array(
+                            'name'     => $_FILES['bukti_file']['name'][$i],
+                            'type'     => $_FILES['bukti_file']['type'][$i],
+                            'tmp_name' => $_FILES['bukti_file']['tmp_name'][$i],
+                            'error'    => $_FILES['bukti_file']['error'][$i],
+                            'size'     => $_FILES['bukti_file']['size'][$i]
+                        );
+                        $movefile = function_exists('gjs_secure_handle_upload')
+                            ? gjs_secure_handle_upload($uploadedfile, array('image', 'video'), 10485760)
+                            : wp_handle_upload($uploadedfile, array('test_form' => false));
+                        if ( $movefile && ! isset( $movefile['error'] ) && !empty($movefile['url']) ) {
+                            $uploaded_urls[] = $movefile['url'];
+                            if (!empty($movefile['file'])) {
+                                $uploaded_paths[] = $movefile['file'];
+                            }
+                        } else {
+                            $error_msg = isset($movefile['error']) ? $movefile['error'] : 'Gagal mengunggah file bukti.';
+                            // Clean up partially uploaded files on error
+                            foreach ($uploaded_paths as $partial_path) {
+                                if (file_exists($partial_path)) {
+                                    @unlink($partial_path);
+                                }
+                            }
+                            $uploaded_urls = [];
+                            break;
+                        }
                     }
                 }
-            }
-            
-            $uploaded_url = !empty($uploaded_urls) ? implode("
-Link File: ", $uploaded_urls) : '- Tidak ada file -';
-            
-            // Map category text to integer
-            $category_map = [
-                'Klaim Garansi' => 1,
-                'Servis Berbayar' => 2,
-                'Konsultasi Kendala' => 3,
-                'Minta Sparepart' => 4,
-                'Other' => 5
-            ];
-            $category_id = isset($category_map[$jenis]) ? $category_map[$jenis] : 5;
-            
-            // Setup proof files (fill missing with empty string to avoid errors)
-            $proof_1 = isset($uploaded_urls[0]) ? $uploaded_urls[0] : '';
-            $proof_2 = isset($uploaded_urls[1]) ? $uploaded_urls[1] : '';
-            $proof_3 = isset($uploaded_urls[2]) ? $uploaded_urls[2] : '';
-            $proof_4 = isset($uploaded_urls[3]) ? $uploaded_urls[3] : '';
-            $proof_5 = isset($uploaded_urls[4]) ? $uploaded_urls[4] : '';
-            
-            // Insert to wp_request
-            $wpdb->insert(
-                'wp_request',
-                array(
-                    'barcodeid' => $claim_barcode,
+                
+                if (empty($error_msg) && count($uploaded_urls) >= 3) {
+                    $uploaded_url = implode("
+Link File: ", $uploaded_urls);
                     
-                    'category' => $category_id,
-                    'phone' => $whatsapp,
-                    'lokasi' => $alamat,
-                    'deskripsi' => $deskripsi,
-                    'proof_1' => $proof_1,
-                    'proof_2' => $proof_2,
-                    'proof_3' => $proof_3,
-                    'proof_4' => $proof_4,
-                    'proof_5' => $proof_5,
-                    'created_at' => current_time('mysql')
-                )
-            );
-            
-            // Update status
-            $wpdb->update('wp_barcode', array('status' => 2), array('BarcodeID' => $claim_barcode));
-            
-            // Kirim email
-            $admin_email = 'griyadjayaupvc@gmail.com';
-            $subject = "Pengajuan Kendala Baru - Barcode: " . $claim_barcode;
-            $message = "Terdapat pengajuan kendala baru!\n\n";
-            $message .= "Barcode ID: " . $claim_barcode . "\n";
-            $message .= "Jenis Pengajuan: " . $jenis . "\n";
-            $message .= "WhatsApp: " . $whatsapp . "\n";
-            $message .= "Alamat/Titik Jemput: " . $alamat . "\n";
-            $message .= "Deskripsi Kendala: " . $deskripsi . "\n";
-            $message .= "Link File Bukti: \nLink File: " . $uploaded_url . "\n";
-            
-            wp_mail($admin_email, $subject, $message);
-            
-            $wa_data = $wpdb->get_row($wpdb->prepare("SELECT customer, material_description FROM wp_barcode WHERE BarcodeID = %s", $claim_barcode));
-            if ($wa_data) {
-                $wa_msg = "Halo Bapak/Ibu *{$wa_data->customer}*,
+                    // Map category text to integer
+                    $category_map = [
+                        'Klaim Garansi' => 1,
+                        'Servis Berbayar' => 2,
+                        'Konsultasi Kendala' => 3,
+                        'Minta Sparepart' => 4,
+                        'Other' => 5
+                    ];
+                    $category_id = isset($category_map[$jenis]) ? $category_map[$jenis] : 5;
+                    
+                    // Setup proof files (fill missing with empty string to avoid errors)
+                    $proof_1 = isset($uploaded_urls[0]) ? $uploaded_urls[0] : '';
+                    $proof_2 = isset($uploaded_urls[1]) ? $uploaded_urls[1] : '';
+                    $proof_3 = isset($uploaded_urls[2]) ? $uploaded_urls[2] : '';
+                    $proof_4 = isset($uploaded_urls[3]) ? $uploaded_urls[3] : '';
+                    $proof_5 = isset($uploaded_urls[4]) ? $uploaded_urls[4] : '';
+                    
+                    // Insert to wp_request
+                    $wpdb->insert(
+                        'wp_request',
+                        array(
+                            'barcodeid' => $claim_barcode,
+                            'category' => $category_id,
+                            'phone' => $whatsapp,
+                            'lokasi' => $alamat,
+                            'deskripsi' => $deskripsi,
+                            'proof_1' => $proof_1,
+                            'proof_2' => $proof_2,
+                            'proof_3' => $proof_3,
+                            'proof_4' => $proof_4,
+                            'proof_5' => $proof_5,
+                            'created_at' => current_time('mysql')
+                        )
+                    );
+                    
+                    // Update status
+                    $wpdb->update('wp_barcode', array('status' => 2), array('BarcodeID' => $claim_barcode));
+                    
+                    // Kirim email
+                    $admin_email = 'griyadjayaupvc@gmail.com';
+                    $subject = "Pengajuan Kendala Baru - Barcode: " . $claim_barcode;
+                    $message = "Terdapat pengajuan kendala baru!
+
+";
+                    $message .= "Barcode ID: " . $claim_barcode . "
+";
+                    $message .= "Jenis Pengajuan: " . $jenis . "
+";
+                    $message .= "WhatsApp: " . $whatsapp . "
+";
+                    $message .= "Alamat/Titik Jemput: " . $alamat . "
+";
+                    $message .= "Deskripsi Kendala: " . $deskripsi . "
+";
+                    $message .= "Link File Bukti: 
+Link File: " . $uploaded_url . "
+";
+                    
+                    wp_mail($admin_email, $subject, $message);
+                    
+                    $wa_data = $wpdb->get_row($wpdb->prepare("SELECT customer, material_description FROM wp_barcode WHERE BarcodeID = %s", $claim_barcode));
+                    if ($wa_data) {
+                        $wa_msg = "Halo Bapak/Ibu *{$wa_data->customer}*,
 
 Terima kasih telah menghubungi Griya Djaya Sentosa.
 Pengajuan *$jenis* untuk material *{$wa_data->material_description}* (ID: *$claim_barcode*) telah berhasil masuk ke sistem kami.
@@ -117,40 +138,38 @@ Tim kami akan segera meninjau laporan Anda. Mohon kesediaannya menunggu informas
 
 Salam hangat,
 Tim Griya Djaya Sentosa";
-                gjs_send_whatsapp($whatsapp, $wa_msg);
+                        gjs_send_whatsapp($whatsapp, $wa_msg);
+                    }
+                    
+                    // --- NOTIFIKASI KANTOR (OFFICE) ---
+                    $office_wa = '08111021088';
+                    $office_wa_msg = "Terdapat pengajuan kendala baru!
+
+";
+                    $office_wa_msg .= "*Barcode ID:* " . $claim_barcode . "
+";
+                    $office_wa_msg .= "*Jenis:* " . $jenis . "
+";
+                    $office_wa_msg .= "*Nama/WA:* " . ($wa_data ? $wa_data->customer : 'N/A') . " / " . $whatsapp . "
+";
+                    $office_wa_msg .= "*Alamat:* " . $alamat . "
+";
+                    $office_wa_msg .= "*Deskripsi:* " . $deskripsi . "
+";
+                    $office_wa_msg .= "*Bukti:* " . $uploaded_url . "
+
+";
+                    $office_wa_msg .= "Silakan cek Dashboard untuk info lebih lanjut.";
+                    
+                    gjs_send_whatsapp($office_wa, $office_wa_msg);
+
+                    $success_msg = "Pengajuan Anda telah berhasil dikirim!";
+                    $searched_id = $claim_barcode;
+                }
             }
-            
-            // --- NOTIFIKASI KANTOR (OFFICE) ---
-            $office_wa = '08111021088';
-            $office_wa_msg = "Terdapat pengajuan kendala baru!
-
-";
-            $office_wa_msg .= "*Barcode ID:* " . $claim_barcode . "
-";
-            $office_wa_msg .= "*Jenis:* " . $jenis . "
-";
-            $office_wa_msg .= "*Nama/WA:* " . ($wa_data ? $wa_data->customer : 'N/A') . " / " . $whatsapp . "
-";
-            $office_wa_msg .= "*Alamat:* " . $alamat . "
-";
-            $office_wa_msg .= "*Deskripsi:* " . $deskripsi . "
-";
-            $office_wa_msg .= "*Bukti:* " . $uploaded_url . "
-
-";
-            $office_wa_msg .= "Silakan cek Dashboard untuk info lebih lanjut.";
-            
-            gjs_send_whatsapp($office_wa, $office_wa_msg);
-
-            
-            $success_msg = "Pengajuan Anda telah berhasil dikirim!";
-            
-            // Re-fetch data so it stays on screen
-            $searched_id = $claim_barcode;
+        } else {
+            $error_msg = "Pengajuan Gagal: Harap lampirkan minimal 3 file foto/video bukti kerusakan.";
         }
-    } else {
-        $error_msg = "Pengajuan Gagal: Harap lampirkan foto bukti kerusakan.";
-        $searched_id = $claim_barcode;
     }
 }
 

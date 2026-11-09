@@ -11,21 +11,13 @@
                 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <meta name="google-site-verification" content="50BcLNeSoj22qWvDxQDStuBl8lHJ9L2r6c-PgcIWStA" />
         
-        <!-- SEO & Open Graph Meta Tags -->
-        <?php $gjs_is_interior = (is_page('interior') || is_page_template('page-product-interior.php') || (isset($_SERVER['REQUEST_URI']) && preg_match('#/(product/)?interior/?(\?|$)#', $_SERVER['REQUEST_URI']))); ?>
-        <?php if ($gjs_is_interior) : ?>
-        <!-- description managed via wp_head() -->
-        <link rel="canonical" href="<?php echo esc_url(home_url('/product/interior/')); ?>" />
-        <?php else : ?>
-        <!-- title handled via wp_head() -->
-        <!-- description managed via wp_head() -->
-        <?php endif; ?>
+        <!-- SEO & Open Graph Meta Tags dynamically managed via wp_head() -->
         
         <?php // Open Graph and Twitter Card meta tags are dynamically managed by Yoast SEO / wp_head ?>
         
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/preload2.min.css" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3" />
-        <link rel="stylesheet preload" as="style" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/preload2.min.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3" />
 
                         <?php
                 global $custom_css; $css_name = isset($custom_css) && !empty($custom_css) ? $custom_css : '';

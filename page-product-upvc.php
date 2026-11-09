@@ -1,11 +1,18 @@
 <?php
 /* Template Name: Product - UPVC */
-get_header();
-$upload_dir = get_template_directory_uri() . '/img/';
 
 // Handle Routing via Query Parameters
 $view = isset($_GET['view']) ? $_GET['view'] : 'main';
 $item_id = isset($_GET['item']) ? $_GET['item'] : '';
+
+// Redirect removed item 'kacamati' back to jendela view
+if ($item_id === 'kacamati') {
+    wp_safe_redirect( home_url('/product/upvc/?view=jendela') );
+    exit;
+}
+
+get_header();
+$upload_dir = get_template_directory_uri() . '/img/';
 
 $pData = [
     "jendela-lipat" => [
@@ -80,7 +87,6 @@ $jendela_items = [
     ['id' => 'jendela-sliding', 'title' => 'Jendela Sliding', 'gif' => 'Jendela-Sliding-1.png'],
     ['id' => 'jendela-sliding-vertikal', 'title' => 'Jendela Sliding Vertikal', 'gif' => 'Jendela-Sliding-Atas-1.png'],
     ['id' => 'jendela-swing', 'title' => 'Jendela Swing', 'gif' => 'Jendela-Swing-1.png'],
-    ['id' => 'kacamati', 'title' => 'Kacamati', 'gif' => 'Jendela-Pivot-1.png'],
 ];
 
 $pintu_items = [

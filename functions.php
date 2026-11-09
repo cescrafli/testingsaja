@@ -41,7 +41,6 @@ function gjs_get_custom_document_title() {
 			'jendela-sliding'          => 'Jendela Sliding UPVC Geser | Griya Djaya Sentosa',
 			'jendela-sliding-vertikal' => 'Jendela Sliding Vertikal UPVC | Griya Djaya Sentosa',
 			'jendela-swing'            => 'Jendela Swing UPVC Kedap Suara | Griya Djaya Sentosa',
-			'kacamati'                 => 'Kaca Mati UPVC Frameless & Partisi | Griya Djaya Sentosa',
 			'pintu-ekonomis'           => 'Pintu UPVC Ekonomis Kamar Mandi | Griya Djaya Sentosa',
 			'pintu-garasi'             => 'Pintu Garasi UPVC Kokoh & Awet | Griya Djaya Sentosa',
 			'pintu-lipat'              => 'Pintu Lipat UPVC Bukaan Lebar | Griya Djaya Sentosa',

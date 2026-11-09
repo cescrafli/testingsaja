@@ -17,86 +17,149 @@ $success_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     global $wpdb;
+    $table_name = 'wp_employee';
     
     // 1. NORMAL LOGIN
     if (isset($_POST['emp_username']) && isset($_POST['emp_password'])) {
-        $username = sanitize_text_field( $_POST['emp_username'] );
-        $password = $_POST['emp_password'];
-
-        $table_name = 'wp_employee';
-        $query = $wpdb->prepare( "SELECT * FROM {$table_name} WHERE username = %s AND password = %s", $username, $password );
-        $user = $wpdb->get_row( $query );
-
-        if ( $user ) {
-            if ( isset($user->status) && $user->status != 1 ) {
-                $error_message = "Akun Anda telah dinonaktifkan. Silakan hubungi Administrator.";
-            } else {
-                $wpdb->query( $wpdb->prepare( "UPDATE {$table_name} SET last_login = NOW() WHERE username = %s", $username ) );
-                
-                $_SESSION['emp_id'] = isset($user->employee_id) ? $user->employee_id : $user->id;
-                $_SESSION['emp_username'] = $user->username;
-                $_SESSION['emp_role'] = $user->role;
-                
-                echo '<script>window.location.replace("' . home_url( '/employee-dashboard/' ) . '");</script>';
-                exit;
-            }
+        if (!isset($_POST['emp_login_nonce']) || !wp_verify_nonce($_POST['emp_login_nonce'], 'emp_login_action')) {
+            $error_message = "Sesi keamanan kedaluwarsa. Silakan refresh dan coba lagi.";
         } else {
-            $error_message = "Username atau password salah.";
+            $username = sanitize_text_field( $_POST['emp_username'] );
+            $password = (string) $_POST['emp_password'];
+
+            $user = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE username = %s", $username ) );
+
+            $password_valid = false;
+            $needs_rehash = false;
+
+            if ( $user ) {
+                if ( function_exists('wp_check_password') && wp_check_password( $password, $user->password ) ) {
+                    $password_valid = true;
+                } elseif ( $password === $user->password ) {
+                    // Match legacy plaintext password and mark for automatic upgrade
+                    $password_valid = true;
+                    $needs_rehash = true;
+                }
+            }
+
+            if ( $user && $password_valid ) {
+                if ( isset($user->status) && (int)$user->status !== 1 ) {
+                    $error_message = "Akun Anda telah dinonaktifkan. Silakan hubungi Administrator.";
+                } else {
+                    if ( $needs_rehash && function_exists('wp_hash_password') ) {
+                        $wpdb->update( $table_name, array('password' => wp_hash_password($password)), array('username' => $username) );
+                    }
+                    $wpdb->query( $wpdb->prepare( "UPDATE {$table_name} SET last_login = NOW() WHERE username = %s", $username ) );
+                    
+                    $_SESSION['emp_id'] = isset($user->employee_id) ? $user->employee_id : $user->id;
+                    $_SESSION['emp_username'] = $user->username;
+                    $_SESSION['emp_role'] = (int) $user->role;
+                    
+                    echo '<script>window.location.replace("' . esc_url( home_url( '/employee-dashboard/' ) ) . '");</script>';
+                    exit;
+                }
+            } else {
+                $error_message = "Username atau password salah.";
+            }
         }
     }
     
     // 2. REQUEST OTP
     if (isset($_POST['forgot_email'])) {
-        $email = sanitize_email($_POST['forgot_email']);
-        $user = $wpdb->get_row($wpdb->prepare("SELECT * FROM wp_employee WHERE email = %s", $email));
-        
-        if ($user) {
-            $otp = mt_rand(100000, 999999);
-            $_SESSION['reset_otp'] = $otp;
-            $_SESSION['reset_email'] = $email;
-            
-            $to = $email;
-            $subject = 'Kode OTP Reset Password - Griya Djaya Sentosa';
-            $message = "Kode OTP Anda untuk reset password adalah: " . $otp . "\n\nJangan berikan kode ini kepada siapapun.";
-            $headers = array('Content-Type: text/plain; charset=UTF-8');
-            
-            wp_mail($to, $subject, $message, $headers);
-            
-            $step = 'otp';
-            $success_message = "Kode OTP telah dikirim ke email Anda.";
-        } else {
-            $error_message = "Email tidak ditemukan di sistem kami.";
+        if (!isset($_POST['emp_forgot_nonce']) || !wp_verify_nonce($_POST['emp_forgot_nonce'], 'emp_forgot_action')) {
+            $error_message = "Sesi keamanan kedaluwarsa. Silakan coba lagi.";
             $step = 'forgot';
+        } else {
+            $email = sanitize_email($_POST['forgot_email']);
+            $user = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table_name} WHERE email = %s", $email));
+            
+            if ($user) {
+                $otp = (string) random_int(100000, 999999);
+                $_SESSION['reset_otp_hash'] = wp_hash_password($otp);
+                $_SESSION['reset_email'] = $email;
+                $_SESSION['reset_otp_expires'] = time() + 600; // Valid for 10 minutes
+                $_SESSION['reset_otp_attempts'] = 0;
+                $_SESSION['reset_otp_verified'] = false;
+                
+                $to = $email;
+                $subject = 'Kode OTP Reset Password - Griya Djaya Sentosa';
+                $message = "Kode OTP Anda untuk reset password adalah: " . $otp . "\n\nKode berlaku selama 10 menit. Jangan berikan kode ini kepada siapapun demi keamanan akun Anda.";
+                $headers = array('Content-Type: text/plain; charset=UTF-8');
+                
+                wp_mail($to, $subject, $message, $headers);
+                
+                $step = 'otp';
+                $success_message = "Kode OTP telah dikirim ke email Anda.";
+            } else {
+                $error_message = "Email tidak ditemukan di sistem kami.";
+                $step = 'forgot';
+            }
         }
     }
     
     // 3. VERIFY OTP
     if (isset($_POST['verify_otp'])) {
-        $entered_otp = sanitize_text_field($_POST['verify_otp']);
-        if (isset($_SESSION['reset_otp']) && $entered_otp == $_SESSION['reset_otp']) {
-            $step = 'reset';
-        } else {
-            $error_message = "Kode OTP salah atau tidak valid.";
+        if (!isset($_POST['emp_otp_nonce']) || !wp_verify_nonce($_POST['emp_otp_nonce'], 'emp_otp_action')) {
+            $error_message = "Sesi keamanan kedaluwarsa. Silakan coba lagi.";
             $step = 'otp';
+        } elseif (empty($_SESSION['reset_otp_hash']) || empty($_SESSION['reset_email']) || empty($_SESSION['reset_otp_expires'])) {
+            $error_message = "Sesi reset password tidak ditemukan. Silakan minta kode OTP baru.";
+            $step = 'forgot';
+        } elseif (time() > $_SESSION['reset_otp_expires']) {
+            $error_message = "Kode OTP telah kedaluwarsa. Silakan minta kode baru.";
+            unset($_SESSION['reset_otp_hash'], $_SESSION['reset_email'], $_SESSION['reset_otp_expires'], $_SESSION['reset_otp_attempts'], $_SESSION['reset_otp_verified']);
+            $step = 'forgot';
+        } elseif (isset($_SESSION['reset_otp_attempts']) && $_SESSION['reset_otp_attempts'] >= 5) {
+            $error_message = "Batas percobaan OTP telah terlampaui. Silakan minta kode baru.";
+            unset($_SESSION['reset_otp_hash'], $_SESSION['reset_email'], $_SESSION['reset_otp_expires'], $_SESSION['reset_otp_attempts'], $_SESSION['reset_otp_verified']);
+            $step = 'forgot';
+        } else {
+            $_SESSION['reset_otp_attempts'] = isset($_SESSION['reset_otp_attempts']) ? $_SESSION['reset_otp_attempts'] + 1 : 1;
+            $entered_otp = sanitize_text_field($_POST['verify_otp']);
+            if (wp_check_password($entered_otp, $_SESSION['reset_otp_hash'])) {
+                $_SESSION['reset_otp_verified'] = true;
+                $step = 'reset';
+            } else {
+                $attempts_left = 5 - $_SESSION['reset_otp_attempts'];
+                $error_message = "Kode OTP salah atau tidak valid. (Sisa percobaan: " . max(0, $attempts_left) . ")";
+                $step = 'otp';
+            }
         }
     }
     
     // 4. SET NEW PASSWORD
     if (isset($_POST['new_password']) && isset($_POST['confirm_password'])) {
-        if ($_POST['new_password'] === $_POST['confirm_password']) {
-            $email = $_SESSION['reset_email'];
-            $new_password = $_POST['new_password']; 
-            
-            $wpdb->update('wp_employee', array('password' => $new_password), array('email' => $email));
-            
-            unset($_SESSION['reset_otp']);
-            unset($_SESSION['reset_email']);
-            
-            $success_message = "Password berhasil diubah. Silakan login kembali dengan password baru Anda.";
-            $step = 'login';
-        } else {
-            $error_message = "Konfirmasi password tidak cocok.";
+        if (!isset($_POST['emp_reset_nonce']) || !wp_verify_nonce($_POST['emp_reset_nonce'], 'emp_reset_action')) {
+            $error_message = "Sesi keamanan kedaluwarsa. Silakan coba lagi.";
             $step = 'reset';
+        } elseif (empty($_SESSION['reset_otp_verified']) || $_SESSION['reset_otp_verified'] !== true || empty($_SESSION['reset_email'])) {
+            $error_message = "Akses ditolak. Anda harus memverifikasi kode OTP terlebih dahulu.";
+            $step = 'forgot';
+        } elseif (empty($_SESSION['reset_otp_expires']) || time() > $_SESSION['reset_otp_expires']) {
+            $error_message = "Sesi OTP telah kedaluwarsa. Silakan minta kode baru.";
+            unset($_SESSION['reset_otp_hash'], $_SESSION['reset_email'], $_SESSION['reset_otp_expires'], $_SESSION['reset_otp_attempts'], $_SESSION['reset_otp_verified']);
+            $step = 'forgot';
+        } else {
+            $new_password = (string) $_POST['new_password'];
+            $confirm_password = (string) $_POST['confirm_password'];
+            
+            if (strlen($new_password) < 6) {
+                $error_message = "Password baru minimal harus 6 karakter.";
+                $step = 'reset';
+            } elseif ($new_password === $confirm_password) {
+                $email = $_SESSION['reset_email'];
+                $hashed_password = wp_hash_password($new_password);
+                
+                $wpdb->update($table_name, array('password' => $hashed_password), array('email' => $email));
+                
+                unset($_SESSION['reset_otp_hash'], $_SESSION['reset_email'], $_SESSION['reset_otp_expires'], $_SESSION['reset_otp_attempts'], $_SESSION['reset_otp_verified']);
+                
+                $success_message = "Password berhasil diubah. Silakan login kembali dengan password baru Anda.";
+                $step = 'login';
+            } else {
+                $error_message = "Konfirmasi password tidak cocok.";
+                $step = 'reset';
+            }
         }
     }
 }
@@ -332,6 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="page-desc">Silakan masukkan username dan password Anda</p>
             
             <form action="" method="POST">
+                <?php wp_nonce_field( 'emp_login_action', 'emp_login_nonce' ); ?>
                 <div class="form-group">
                     <input type="text" id="emp_username" name="emp_username" class="form-input" placeholder="Username" required autocomplete="off">
                 </div>
@@ -351,6 +415,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="page-desc">Masukkan alamat email yang terdaftar untuk menerima kode OTP.</p>
             
             <form action="" method="POST">
+                <?php wp_nonce_field( 'emp_forgot_action', 'emp_forgot_nonce' ); ?>
                 <div class="form-group">
                     <input type="email" name="forgot_email" class="form-input" placeholder="Alamat Email Anda" required autocomplete="off">
                 </div>
@@ -366,6 +431,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="page-desc">Masukkan 6 digit kode OTP yang telah kami kirimkan ke email Anda.</p>
             
             <form action="" method="POST">
+                <?php wp_nonce_field( 'emp_otp_action', 'emp_otp_nonce' ); ?>
                 <div class="form-group">
                     <input type="text" name="verify_otp" class="form-input" placeholder="Kode OTP (Contoh: 123456)" required autocomplete="off" maxlength="6" style="text-align: center; letter-spacing: 2px; font-size: 18px; font-weight: bold;">
                 </div>
@@ -381,6 +447,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="page-desc">Silakan masukkan password baru Anda.</p>
             
             <form action="" method="POST">
+                <?php wp_nonce_field( 'emp_reset_action', 'emp_reset_nonce' ); ?>
                 <div class="form-group">
                     <input type="password" name="new_password" class="form-input" placeholder="Password Baru" required>
                 </div>

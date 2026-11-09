@@ -229,7 +229,7 @@ function closeLightbox() {
 <!-- Lightbox Modal -->
 <div id="imageLightbox" class="lightbox" onclick="if(event.target !== document.getElementById('lightboxImg')) closeLightbox()">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" class="lightbox-content">
+    <img id="lightboxImg" class="lightbox-content" alt="Pratinjau Produk Fasad GJS">
 </div>
 
 <?php get_footer(); ?>

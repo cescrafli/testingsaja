@@ -11,6 +11,10 @@ $searched_id = '';
 
 // HANDLE SUBMIT KLAIM
 if (isset($_POST['action']) && $_POST['action'] === 'submit_claim') {
+    if (!isset($_POST['gjs_claim_nonce']) || !wp_verify_nonce($_POST['gjs_claim_nonce'], 'gjs_submit_claim_action')) {
+        $error_msg = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman dan coba lagi.';
+        $searched_id = sanitize_text_field(isset($_POST['barcode_id_claim']) ? $_POST['barcode_id_claim'] : '');
+    } else
     $claim_barcode = sanitize_text_field($_POST['barcode_id_claim']);
     $jenis = sanitize_text_field($_POST['jenis_pengajuan']);
     $deskripsi = sanitize_textarea_field($_POST['deskripsi']);
@@ -26,7 +30,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'submit_claim') {
         } elseif ($file_count > 5) {
             $error_msg = "Pengajuan Gagal: Maksimal 5 file foto/video yang diperbolehkan.";
         } else {
-            require_once( ABSPATH . 'wp-admin/includes/file.php' );
             for ($i = 0; $i < $file_count; $i++) {
                 if ($_FILES['bukti_file']['name'][$i]) {
                     $uploadedfile = array(
@@ -36,10 +39,14 @@ if (isset($_POST['action']) && $_POST['action'] === 'submit_claim') {
                         'error'    => $_FILES['bukti_file']['error'][$i],
                         'size'     => $_FILES['bukti_file']['size'][$i]
                     );
-                    $upload_overrides = array( 'test_form' => false );
-                    $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
-                    if ( $movefile && ! isset( $movefile['error'] ) ) {
+                    $movefile = function_exists('gjs_secure_handle_upload')
+                        ? gjs_secure_handle_upload($uploadedfile, array('image', 'video'), 10485760)
+                        : wp_handle_upload($uploadedfile, array('test_form' => false));
+                    if ( $movefile && ! isset( $movefile['error'] ) && !empty($movefile['url']) ) {
                         $uploaded_urls[] = $movefile['url'];
+                    } else {
+                        $error_msg = isset($movefile['error']) ? $movefile['error'] : 'Gagal mengunggah file bukti.';
+                        break;
                     }
                 }
             }
@@ -379,6 +386,7 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
                 <!-- Form Pengajuan -->
                 <h4 style="font-weight: 700; color: #0f172a; font-size: 16px; margin-bottom: 20px;">Form Pengajuan Kendala</h4>
                 <form method="POST" action="" enctype="multipart/form-data" id="claimForm">
+                <?php wp_nonce_field( 'gjs_submit_claim_action', 'gjs_claim_nonce' ); ?>
                     <input type="hidden" name="action" value="submit_claim">
                     <input type="hidden" name="barcode_id_claim" value="<?php echo esc_attr($search_result->BarcodeID); ?>">
                     

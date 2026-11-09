@@ -81,7 +81,7 @@ global $custom_css; $custom_css = 'index'; get_header();
         <!-- Top Row: Image & Text -->
         <div style="display: flex; flex-wrap: wrap; gap: 50px; align-items: center; margin-bottom: 80px;">
             <div style="flex: 1; min-width: 320px;">
-                <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" alt="Why Choose UPVC" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
+                <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" onerror="this.onerror=null;this.src='<?php echo esc_url(get_template_directory_uri() . '/img/placeholder.jpg'); ?>';" alt="Griya Djaya Sentosa - Kontraktor & Fabrikasi Arsitektural UPVC & Aluminium" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
             </div>
             <div style="flex: 1; min-width: 320px;">
                 <span style="color: #cda25b; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">MENGAPA PEMILIK RUMAH, KONTRAKTOR &amp; PERUSAHAAN MEMILIH GJS</span>
@@ -286,7 +286,7 @@ global $custom_css; $custom_css = 'index'; get_header();
                                 $active_class = ($i === 0) ? 'fp-active' : '';
                             ?>
                                 <div class="fp-review-avatar <?php echo $active_class; ?>" data-index="<?php echo $i; ?>" onclick="showFpReview(<?php echo $i; ?>)" style="cursor: pointer; transition: all 0.3s ease; width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin: 0 -8px;">
-                                    <img src="<?php echo esc_url($avatar_url); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr(!empty($comment->comment_author) ? $comment->comment_author : "Reviewer"); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             <?php 
                             $i++;

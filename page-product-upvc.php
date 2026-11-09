@@ -1528,7 +1528,7 @@ function changeColor(colorName, btnElement, colorTextLabel, brand) {
     
     if(brand === 'falken') {
         const itemId = mainImg.getAttribute('data-item-id') || '<?php echo esc_js($item_id); ?>';
-        newSrc = themeUrl + '/img/falken/' + itemId + '/' + colorName + '.jpg?v=2.8';
+        newSrc = themeUrl + '/img/falken/' + itemId + '/' + colorName + '.jpg?v=2.9';
     } else {
         let currentSrc = mainImg.getAttribute('data-base-src');
         if(!currentSrc) {

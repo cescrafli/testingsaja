@@ -34,41 +34,7 @@ global $wpdb;
 
 
 
-$has_email = $wpdb->get_results("SHOW COLUMNS FROM `wp_barcode` LIKE 'email'");
-if (empty($has_email)) {
-    $wpdb->query("ALTER TABLE `wp_barcode` ADD `email` VARCHAR(255) NULL");
-}
-
-// Ensure new columns exist for wp_barcode
-$has_nopen = $wpdb->get_results("SHOW COLUMNS FROM `wp_barcode` LIKE 'no_penawaran'");
-if (empty($has_nopen)) {
-    $wpdb->query("ALTER TABLE `wp_barcode` ADD `no_penawaran` VARCHAR(255) NULL");
-}
-
-
-$has_email = $wpdb->get_results("SHOW COLUMNS FROM `wp_barcode` LIKE 'email'");
-if (empty($has_email)) {
-    $wpdb->query("ALTER TABLE `wp_barcode` ADD `email` VARCHAR(255) NULL");
-}
-
-// Ensure new columns exist for wp_barcode
-$has_spk = $wpdb->get_results("SHOW COLUMNS FROM `wp_barcode` LIKE 'SPKID'");
-if (empty($has_spk)) {
-    $wpdb->query("ALTER TABLE `wp_barcode` ADD `SPKID` VARCHAR(50) NULL");
-}
-$has_emp_id = $wpdb->get_results("SHOW COLUMNS FROM `wp_barcode` LIKE 'employee_id'");
-if (empty($has_emp_id)) {
-    $wpdb->query("ALTER TABLE `wp_barcode` ADD `employee_id` VARCHAR(50) NULL");
-}
-
-// Ensure columns exist for wp_employee
-$has_name = $wpdb->get_results("SHOW COLUMNS FROM `wp_employee` LIKE 'name'");
-if (empty($has_name)) {
-    $wpdb->query("ALTER TABLE `wp_employee` ADD `name` VARCHAR(255) NULL");
-    $wpdb->query("ALTER TABLE `wp_employee` ADD `phone` VARCHAR(50) NULL");
-    $wpdb->query("ALTER TABLE `wp_employee` ADD `email` VARCHAR(100) NULL");
-    $wpdb->query("ALTER TABLE `wp_employee` ADD `address` TEXT NULL");
-}
+// Schema columns ensured via gjs_ensure_database_schema_v2_9() in functions.php
 
 $table_barcode = 'wp_barcode';
 $table_employee = 'wp_employee';
@@ -80,6 +46,12 @@ $message_type = 'success';
 // Handle Actions (POST)
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         $action = isset( $_POST['action'] ) ? sanitize_text_field( $_POST['action'] ) : '';
+
+        // Verify CSRF Nonce for all POST modifications in dashboard
+        if ( ! empty( $action ) && ( ! isset( $_POST['gjs_emp_dash_nonce'] ) || ! wp_verify_nonce( $_POST['gjs_emp_dash_nonce'], 'gjs_emp_dash_action' ) ) ) {
+            $error = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman.';
+            $action = '';
+        }
 
     // EXPORT CSV
     if ($action === 'export_csv' && $role === 2) {
@@ -97,8 +69,14 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         fputcsv($output, array('Barcode ID', 'No Penawaran', 'No. Project', 'Nama Customer', 'Material', 'Tanggal', 'Garansi Exp', 'Status', 'Email', 'Phone', 'Marketing ID', 'Location', 'Kota', 'Provinsi', 'Kode Pos', 'Nilai Project'), ';');
         
         $rows = $wpdb->get_results("SELECT * FROM wp_barcode ORDER BY date_transaction DESC", ARRAY_A);
+        $sanitize_csv_cell = function($val) {
+            if (is_string($val) && strlen($val) > 0 && in_array($val[0], ['=', '+', '-', '@'], true)) {
+                return "'" . $val;
+            }
+            return $val;
+        };
         foreach($rows as $row) {
-            fputcsv($output, array(
+            $csv_data = array(
                 $row['BarcodeID'],
                 $row['no_penawaran'],
                 $row['no_penawaran'],
@@ -115,7 +93,8 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
                 $row['provinsi'],
                 $row['kode_pos'],
                 $row['nilai_project']
-            ), ';');
+            );
+            fputcsv($output, array_map($sanitize_csv_cell, $csv_data), ';');
         }
         fclose($output);
         exit;
@@ -389,16 +368,12 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
         
     // SELESAI REQUEST
-    if (isset($_POST['action']) && $_POST['action'] === 'selesai_request') {
+    if (isset($_POST['action']) && $_POST['action'] === 'selesai_request' && ($role === 1 || $role === 2)) {
         $barcode_id = sanitize_text_field($_POST['barcode_id']);
         $deskripsi = sanitize_textarea_field($_POST['selesai_deskripsi']);
         $tanggal = sanitize_text_field($_POST['selesai_tanggal']);
         
-        // Ensure columns exist
-        $has_col1 = $wpdb->get_results("SHOW COLUMNS FROM `wp_request` LIKE 'date_repaired'");
-        if (empty($has_col1)) {
-            $wpdb->query("ALTER TABLE `wp_request` ADD `date_repaired` DATE NULL, ADD `description_warranty` TEXT NULL, ADD `proof_warranty_1` VARCHAR(255) NULL, ADD `proof_warranty_2` VARCHAR(255) NULL, ADD `proof_warranty_3` VARCHAR(255) NULL, ADD `proof_warranty_4` VARCHAR(255) NULL, ADD `proof_warranty_5` VARCHAR(255) NULL");
-        }
+        // Columns ensured via schema migration
         
         // Upload Photos
         $uploaded_urls = [];
@@ -416,8 +391,10 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
                         'error'    => $files['error'][$key],
                         'size'     => $files['size'][$key]
                     );
-                    $movefile = wp_handle_upload($file, array('test_form' => false));
-                    if ($movefile && !isset($movefile['error'])) {
+                    $movefile = function_exists('gjs_secure_handle_upload')
+                        ? gjs_secure_handle_upload($file, array('image'), 10485760)
+                        : wp_handle_upload($file, array('test_form' => false));
+                    if ($movefile && !isset($movefile['error']) && !empty($movefile['url'])) {
                         $uploaded_urls[] = $movefile['url'];
                     }
                 }
@@ -432,10 +409,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         
         // Update request
         // Get the current max claim_warranty for this barcode
-        $has_col2 = $wpdb->get_results("SHOW COLUMNS FROM `wp_request` LIKE 'claim_warranty'");
-        if (empty($has_col2)) {
-            $wpdb->query("ALTER TABLE `wp_request` ADD `claim_warranty` INT DEFAULT 0");
-        }
+        // Columns ensured via schema migration
         
         $current_claim = $wpdb->get_var($wpdb->prepare("SELECT MAX(claim_warranty) FROM `wp_request` WHERE barcodeid = %s", $barcode_id));
         $new_claim_number = $current_claim ? (int)$current_claim + 1 : 1;
@@ -514,10 +488,7 @@ Terima kasih atas kepercayaannya!";
         $alasan = sanitize_textarea_field($_POST['alasan_penolakan']);
         $cust_email = sanitize_email($_POST['cust_email']);
         
-        $has_alasan = $wpdb->get_results("SHOW COLUMNS FROM `wp_request` LIKE 'description_decline'");
-        if (empty($has_alasan)) {
-            $wpdb->query("ALTER TABLE `wp_request` ADD `description_decline` TEXT NULL");
-        }
+        // Columns ensured via schema migration
         
         if ($request_id > 0) {
             $wpdb->update('wp_request', array('description_decline' => $alasan), array('id' => $request_id));
@@ -566,13 +537,7 @@ Apabila ada pertanyaan lebih lanjut, silakan balas pesan ini. Terima kasih atas 
         $emp_role = (int) $_POST['emp_role'];
         
         // Auto-migrate table if needed
-        $has_name = $wpdb->get_results("SHOW COLUMNS FROM `{$table_employee}` LIKE 'name'");
-        if (empty($has_name)) {
-            $wpdb->query("ALTER TABLE `{$table_employee}` ADD `name` VARCHAR(255) NULL AFTER `employee_id`");
-            $wpdb->query("ALTER TABLE `{$table_employee}` ADD `phone` VARCHAR(50) NULL AFTER `password`");
-            $wpdb->query("ALTER TABLE `{$table_employee}` ADD `email` VARCHAR(100) NULL AFTER `phone`");
-            $wpdb->query("ALTER TABLE `{$table_employee}` ADD `address` TEXT NULL AFTER `email`");
-        }
+        // Columns ensured via schema migration
         
         $random_emp_id = 'EMP-' . mt_rand(10000, 99999);
         $inserted = $wpdb->insert(
@@ -1004,6 +969,7 @@ if ( $role === 1 ) {
             <div class="card">
                 <h3 class="card-title">Tambah Akun Karyawan Baru</h3>
                 <form action="?view=add_employee" method="POST">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                     <input type="hidden" name="action" value="add_employee_account">
                     <div class="grid-2">
                         <div class="form-group">
@@ -1202,6 +1168,7 @@ if ( $role === 1 ) {
                                 <td>
                                     <?php if($emp->role != 1): ?>
                                     <form action="" method="POST" onsubmit="return confirm('Yakin ingin menghapus akun ini permanen?');">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                                         <input type="hidden" name="action" value="delete_employee">
                                         <input type="hidden" name="target_emp_id" value="<?php echo esc_attr($emp->employee_id); ?>">
                                         <button type="submit" class="btn-outline" style="color:#dc2626; border-color:#dc2626;">Delete</button>
@@ -1225,6 +1192,7 @@ if ( $role === 1 ) {
             <div class="card">
                 <h3 class="card-title">Input Transaksi Baru (Barcode)</h3>
                   <form action="" method="POST">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                       <input type="hidden" name="action" value="add_transaction">
                       
                       <div class="grid-2">
@@ -1361,6 +1329,7 @@ if ( $role === 1 ) {
 
                           <!-- Bulk Upload Form -->
                           <form method="POST" enctype="multipart/form-data" style="margin:0; display:flex; gap:10px; align-items: center;">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                               <input type="hidden" name="action" value="import_csv">
                               <input type="file" name="csv_file" accept=".csv" class="form-control" style="padding: 5px; font-size:12px; width:200px; border: 1px solid #e2e8f0; border-radius: 6px;" required>
                               <button type="submit" class="btn" style="background:#0f172a; color:#d4b572; padding: 10px 20px; font-size:13px; font-weight:600; border-radius: 6px; border:none; cursor:pointer; font-family: 'Outfit', sans-serif;">Bulk Upload</button>
@@ -1368,6 +1337,7 @@ if ( $role === 1 ) {
 
                           <!-- Download CSV Form -->
                           <form method="POST" style="margin:0;">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                               <input type="hidden" name="action" value="export_csv">
                               <button type="submit" class="btn" style="background:#d4b572; color:#fff; padding: 10px 20px; font-size:13px; font-weight:600; border-radius: 6px; border:none; cursor:pointer; font-family: 'Outfit', sans-serif;">Download Template (CSV)</button>
                           </form>
@@ -1449,6 +1419,7 @@ if ( $role === 1 ) {
                                             <button type="button" class="btn-outline btn-print-warranty" data-card-type="<?php echo esc_attr($card_type); ?>" data-info='<?php echo esc_attr(json_encode($trx)); ?>' onclick="printWarrantyCard(this.dataset.info, this.dataset.cardType)">Print Kartu</button>
                                         <?php endif; ?>
                                         <form action="" method="POST" onsubmit="return confirm('Hapus transaksi ini secara permanen?');" style="display:inline-block;">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
                                             <input type="hidden" name="action" value="delete_transaction">
                                             <input type="hidden" name="barcodeID" value="<?php echo esc_attr($trx->BarcodeID); ?>">
                                             <button type="submit" class="btn-outline">Delete</button>
@@ -1459,6 +1430,7 @@ if ( $role === 1 ) {
                                     <td colspan="18" style="padding:0; border:none;">
                                         <div style="background-color: #f8fafc; padding: 15px; border-bottom: 1px solid #f1f5f9;">
                                             <form action="" method="POST" class="inline-edit-form">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
     <input type="hidden" name="action" value="edit_transaction">
     <input type="hidden" name="original_barcodeID" value="<?php echo esc_attr($trx->BarcodeID); ?>">
     
@@ -1699,7 +1671,7 @@ if ( $role === 1 ) {
         <!-- Image Modal -->
         <div id="imageModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.8); align-items:center; justify-content:center; backdrop-filter: blur(5px);">
             <span style="position:absolute; top:20px; right:35px; color:#f1f1f1; font-size:40px; font-weight:bold; cursor:pointer; transition:0.3s;" onclick="closeModal()" onmouseover="this.style.color='#fde047'" onmouseout="this.style.color='#f1f1f1'">&times;</span>
-            <img id="modalImg" style="margin:auto; display:block; max-width:90%; max-height:90%; border-radius:8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <img id="modalImg" alt="Pratinjau Bukti Pengerjaan" style="margin:auto; display:block; max-width:90%; max-height:90%; border-radius:8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
         </div>
     </main>
 
@@ -2391,6 +2363,7 @@ if ( $role === 1 ) {
     <div style="background:#fff; padding:20px; border-radius:8px; width:90%; max-width:400px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
         <h4 style="margin-top:0; font-weight:700;">Alasan Penolakan</h4>
         <form method="POST" action="" id="declineForm" onsubmit="return handleDeclineSubmit()">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
             <input type="hidden" name="action" value="decline_request">
             <input type="hidden" name="barcode_id" id="decline_barcode_id" value="">
             <input type="hidden" name="request_id" id="decline_request_id" value="">
@@ -2437,6 +2410,7 @@ function handleDeclineSubmit() {
     <div style="background:#fff; padding:20px; border-radius:8px; width:90%; max-width:500px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
         <h4 style="margin-top:0; font-weight:700;">Penyelesaian Pekerjaan</h4>
         <form method="POST" action="" enctype="multipart/form-data" id="selesaiForm">
+            <?php wp_nonce_field( 'gjs_emp_dash_action', 'gjs_emp_dash_nonce' ); ?>
             <input type="hidden" name="action" value="selesai_request">
             <input type="hidden" name="barcode_id" id="selesai_barcode_id" value="">
             <input type="hidden" name="request_id" id="selesai_request_id" value="">

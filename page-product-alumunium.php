@@ -10,7 +10,6 @@ $items = [
     ['id' => 'alumunium-jendela-jungkit', 'title' => 'Jendela Jungkit', 'img' => 'Jendela-Jungkit-2.png'],
     ['id' => 'alumunium-jendela-sliding', 'title' => 'Jendela Sliding', 'img' => 'Jendela-Sliding-1 (1).png'],
     ['id' => 'alumunium-jendela-swing', 'title' => 'Jendela Swing', 'img' => 'Jendela-Swing-1.png'],
-    ['id' => 'alumunium-kacamati', 'title' => 'Kacamati', 'img' => 'Jendela-Pivot-1.png'],
     ['id' => 'alumunium-kisi-kisi', 'title' => 'Kisi Kisi', 'img' => 'Kisi-Kisi.png'],
     ['id' => 'alumunium-pintu-lipat', 'title' => 'Pintu Lipat', 'img' => 'Pintu-Lipat-1 (1).png'],
     ['id' => 'alumunium-pintu-sliding', 'title' => 'Pintu Sliding', 'img' => 'Pintu-Sliding-2.png'],
@@ -231,7 +230,7 @@ function closeLightbox() {
 <!-- Lightbox Modal -->
 <div id="imageLightbox" class="lightbox" onclick="if(event.target !== document.getElementById('lightboxImg')) closeLightbox()">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" class="lightbox-content">
+    <img id="lightboxImg" class="lightbox-content" alt="Pratinjau Produk Aluminium GJS">
 </div>
 
 <?php get_footer(); ?>

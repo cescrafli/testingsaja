@@ -6,63 +6,78 @@ $message_status = '';
 $error_msg = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
-    $nama_pengirim = sanitize_text_field($_POST['nama_pengirim']);
-    $nomor_telpon = sanitize_text_field($_POST['nomor_telpon']);
-    $perusahaan = sanitize_text_field($_POST['perusahaan']);
-    $tipe = sanitize_text_field($_POST['tipe']);
-    $material = sanitize_text_field($_POST['material']);
-    $estimasi = sanitize_text_field($_POST['estimasi']);
-    $catatan = sanitize_textarea_field($_POST['catatan']);
-    
-    $to = 'griyadjayaupvc@gmail.com';
-    $subject = 'New Submission from ' . $nama_pengirim;
-    $body = "Nama Pengirim: $nama_pengirim\nNomor Telepon: $nomor_telpon\nNama Perusahaan: $perusahaan\nTipe Proyek: $tipe\nSpesifikasi Material: $material\nEstimasi Linimasa: $estimasi\n\nKebutuhan Teknis & Catatan:\n$catatan";
-    $headers = array('Content-Type: text/plain; charset=UTF-8', 'From: Website GJS <no-reply@griyadjayasentosa.id>');
-    
-    $attachments = array();
-    $has_blueprint = false;
-    
-    // Check if at least one file was uploaded
-    if (!empty($_FILES['blueprint_files']['name'][0])) {
-        $has_blueprint = true;
-        if ( ! function_exists( 'wp_handle_upload' ) ) {
-            require_once( ABSPATH . 'wp-admin/includes/file.php' );
-        }
+    if (!isset($_POST['gjs_contact_blueprint_nonce']) || !wp_verify_nonce($_POST['gjs_contact_blueprint_nonce'], 'gjs_contact_blueprint_action')) {
+        $message_status = 'error';
+        $error_msg = 'Sesi keamanan kedaluwarsa. Silakan muat ulang halaman dan coba lagi.';
+    } else {
+        $nama_pengirim = sanitize_text_field($_POST['nama_pengirim']);
+        $nomor_telpon = sanitize_text_field($_POST['nomor_telpon']);
+        $perusahaan = sanitize_text_field($_POST['perusahaan']);
+        $tipe = sanitize_text_field($_POST['tipe']);
+        $material = sanitize_text_field($_POST['material']);
+        $estimasi = sanitize_text_field($_POST['estimasi']);
+        $catatan = sanitize_textarea_field($_POST['catatan']);
         
-        $files = $_FILES['blueprint_files'];
-        $count = count($files['name']);
+        $to = 'griyadjayaupvc@gmail.com';
+        $subject = 'New Submission from ' . $nama_pengirim;
+        $body = "Nama Pengirim: $nama_pengirim\nNomor Telepon: $nomor_telpon\nNama Perusahaan: $perusahaan\nTipe Proyek: $tipe\nSpesifikasi Material: $material\nEstimasi Linimasa: $estimasi\n\nKebutuhan Teknis & Catatan:\n$catatan";
+        $headers = array('Content-Type: text/plain; charset=UTF-8', 'From: Website GJS <no-reply@griyadjayasentosa.id>');
         
-        for ($i = 0; $i < $count; $i++) {
-            if ($files['error'][$i] === UPLOAD_ERR_OK) {
-                $uploadedfile = array(
-                    'name'     => $files['name'][$i],
-                    'type'     => $files['type'][$i],
-                    'tmp_name' => $files['tmp_name'][$i],
-                    'error'    => $files['error'][$i],
-                    'size'     => $files['size'][$i]
-                );
-                
-                $upload_overrides = array( 'test_form' => false );
-                $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
-                
-                if ( $movefile && ! isset( $movefile['error'] ) ) {
-                    $attachments[] = $movefile['file'];
-                } else {
-                    $message_status = 'error';
-                    $error_msg = $movefile['error'];
-                    break;
+        $attachments = array();
+        $has_blueprint = false;
+        
+        if (!empty($_FILES['blueprint_files']['name'][0])) {
+            $has_blueprint = true;
+            $files = $_FILES['blueprint_files'];
+            $count = count($files['name']);
+            
+            if ($count > 5) {
+                $message_status = 'error';
+                $error_msg = 'Maksimal 5 file lampiran blueprint yang diperbolehkan.';
+            } else {
+                for ($i = 0; $i < $count; $i++) {
+                    if (!empty($files['name'][$i])) {
+                        $uploadedfile = array(
+                            'name'     => $files['name'][$i],
+                            'type'     => $files['type'][$i],
+                            'tmp_name' => $files['tmp_name'][$i],
+                            'error'    => $files['error'][$i],
+                            'size'     => $files['size'][$i]
+                        );
+                        
+                        $res = function_exists('gjs_secure_handle_upload') 
+                            ? gjs_secure_handle_upload($uploadedfile, array('image', 'blueprint'), 10485760)
+                            : wp_handle_upload($uploadedfile, array('test_form' => false));
+                        
+                        if ($res && !isset($res['error']) && !empty($res['file'])) {
+                            $attachments[] = $res['file'];
+                        } else {
+                            $message_status = 'error';
+                            $error_msg = isset($res['error']) ? $res['error'] : 'Gagal mengunggah file blueprint.';
+                            break;
+                        }
+                    }
                 }
             }
         }
-    }
-    
-    if ($message_status !== 'error') {
-        $sent = wp_mail($to, $subject, $body, $headers, $attachments);
-        if ($sent) {
-            $message_status = 'success';
-        } else {
-            $message_status = 'error';
-            $error_msg = 'Gagal mengirim email. Silakan hubungi kami langsung via WhatsApp.';
+        
+        if ($message_status !== 'error') {
+            $sent = wp_mail($to, $subject, $body, $headers, $attachments);
+            if ($sent) {
+                $message_status = 'success';
+            } else {
+                $message_status = 'error';
+                $error_msg = 'Gagal mengirim email. Silakan hubungi kami langsung via WhatsApp.';
+            }
+        }
+        
+        // Cleanup temporary attachments after mail delivery to preserve disk and confidentiality
+        if (!empty($attachments)) {
+            foreach ($attachments as $att_file) {
+                if (file_exists($att_file)) {
+                    @unlink($att_file);
+                }
+            }
         }
     }
 }
@@ -140,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
     <?php endif; ?>
 
     <form class="blueprint-wrapper" method="POST" enctype="multipart/form-data">
+        <?php wp_nonce_field( 'gjs_contact_blueprint_action', 'gjs_contact_blueprint_nonce' ); ?>
         <div class="bp-left">
             <div class="bp-subtitle">MULAI PROYEK ANDA</div>
             <h1 class="bp-title">CERITAKAN PROYEK ANDA</h1>

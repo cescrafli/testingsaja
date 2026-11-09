@@ -49,7 +49,6 @@ function gjs_get_custom_document_title() {
 			'alumunium-jendela-jungkit'=> 'Jendela Jungkit Aluminium YKK & Alexindo | GJS',
 			'alumunium-jendela-sliding'=> 'Jendela Sliding Aluminium Presisi | Griya Djaya Sentosa',
 			'alumunium-jendela-swing'  => 'Jendela Swing Aluminium Modern | Griya Djaya Sentosa',
-			'alumunium-kacamati'       => 'Kaca Mati Kusen Aluminium Gedung & Rumah | GJS',
 			'alumunium-kisi-kisi'      => 'Kisi-Kisi & Louver Aluminium Eksterior | GJS',
 			'alumunium-pintu-lipat'    => 'Pintu Lipat Aluminium Bi-Fold | Griya Djaya Sentosa',
 			'alumunium-pintu-sliding'  => 'Pintu Sliding Aluminium Geser | Griya Djaya Sentosa',
@@ -930,46 +929,7 @@ add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
     return $args;
 }, 10, 2 );
 
-// 7. One-time DB cleanup and Jetpack sitemap cache invalidator (v2 for sitemap-1.xml refresh)
-add_action( 'init', 'gjs_cleanup_sitemap_attachments_v2' );
-function gjs_cleanup_sitemap_attachments_v2() {
-    if ( get_option( 'gjs_sitemap_cleaned_v2' ) === 'yes' ) {
-        return;
-    }
-
-    global $wpdb;
-
-    // A. Detach any media attachment whose post_parent is 319, 327, or any gjs_produk post
-    $wpdb->query( "
-        UPDATE {$wpdb->posts} 
-        SET post_parent = 0 
-        WHERE post_type = 'attachment' 
-          AND (
-            post_parent IN (319, 327) 
-            OR post_parent IN (SELECT ID FROM (SELECT ID FROM {$wpdb->posts} WHERE post_type = 'gjs_produk') AS gjs_ids)
-          )
-    " );
-
-    // B. Delete cached Jetpack sitemap entries so both sitemap-1.xml and image-sitemap-1.xml regenerate cleanly
-    $wpdb->query( "
-        DELETE FROM {$wpdb->posts} 
-        WHERE post_type IN ('jp_img_sitemap', 'jp_sitemap', 'jp_sitemap_master')
-    " );
-
-    // C. Delete any Jetpack sitemap transients
-    $wpdb->query( "
-        DELETE FROM {$wpdb->options} 
-        WHERE option_name LIKE '%jp_sitemap%' 
-           OR option_name LIKE '%jetpack_sitemap%'
-    " );
-
-    // D. Trigger Jetpack sitemap regeneration hook if available
-    if ( function_exists( 'wp_schedule_single_event' ) ) {
-        wp_schedule_single_event( time(), 'jp_sitemap_cron_hook' );
-    }
-
-    update_option( 'gjs_sitemap_cleaned_v2', 'yes' );
-}
+// Sitemap cleanup consolidated into gjs_cleanup_sitemap_caches_v2_9
 
 // =========================================================================
 // Jetpack Subscriptions Comment Form Cleaner
@@ -992,6 +952,111 @@ function gjs_disable_jetpack_comment_subscriptions() {
     }
 }
 
+
+/**
+ * Secure file upload helper with strict extension, MIME type, and size validation
+ *
+ * @param array $file Single $_FILES element array('name', 'type', 'tmp_name', 'error', 'size')
+ * @param array|string $allowed_types 'image', 'doc', 'video', or explicit array of extensions
+ * @param int $max_bytes Maximum allowed file size in bytes (default: 10 MB)
+ * @return array Array with 'url' and 'file' on success, or 'error' on failure
+ */
+function gjs_secure_handle_upload( $file, $allowed_types = array('image'), $max_bytes = 10485760 ) {
+    if ( empty( $file ) || ! is_array( $file ) || empty( $file['tmp_name'] ) || ! is_uploaded_file( $file['tmp_name'] ) ) {
+        return array( 'error' => 'File tidak valid atau tidak berhasil diunggah.' );
+    }
+
+    if ( ! empty( $file['error'] ) && (int) $file['error'] !== UPLOAD_ERR_OK ) {
+        return array( 'error' => 'Terjadi kesalahan saat mengunggah file (Kode: ' . (int) $file['error'] . ').' );
+    }
+
+    if ( ! empty( $file['size'] ) && $file['size'] > $max_bytes ) {
+        $mb = round( $max_bytes / ( 1024 * 1024 ), 1 );
+        return array( 'error' => "Ukuran file terlalu besar. Maksimal {$mb} MB." );
+    }
+
+    $mimes = array();
+    $types = is_array( $allowed_types ) ? $allowed_types : array( $allowed_types );
+
+    if ( in_array( 'image', $types, true ) || in_array( 'images', $types, true ) ) {
+        $mimes['jpg|jpeg|jpe'] = 'image/jpeg';
+        $mimes['png']          = 'image/png';
+        $mimes['webp']         = 'image/webp';
+    }
+    if ( in_array( 'doc', $types, true ) || in_array( 'docs', $types, true ) || in_array( 'blueprint', $types, true ) ) {
+        $mimes['pdf']          = 'application/pdf';
+        $mimes['zip']          = 'application/zip';
+        $mimes['dwg']          = 'image/vnd.dwg';
+    }
+    if ( in_array( 'video', $types, true ) || in_array( 'videos', $types, true ) ) {
+        $mimes['mp4']          = 'video/mp4';
+        $mimes['mov|qt']       = 'video/quicktime';
+    }
+
+    foreach ( $types as $t ) {
+        if ( ! in_array( $t, array( 'image', 'images', 'doc', 'docs', 'blueprint', 'video', 'videos' ), true ) ) {
+            $ext_type = wp_check_filetype( 'file.' . $t );
+            if ( ! empty( $ext_type['type'] ) ) {
+                $mimes[ $t ] = $ext_type['type'];
+            }
+        }
+    }
+
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+    $upload_overrides = array(
+        'test_form' => false,
+        'mimes'     => $mimes,
+    );
+
+    $movefile = wp_handle_upload( $file, $upload_overrides );
+    return $movefile;
+}
+
+/**
+ * Consolidated Database Schema Migration v2.9
+ * Ensures all required custom columns in wp_barcode, wp_employee, and wp_request exist
+ * Version-gated via get_option('gjs_db_schema_v2_9') to eliminate runtime SHOW COLUMNS queries
+ */
+add_action( 'init', 'gjs_ensure_database_schema_v2_9', 5 );
+function gjs_ensure_database_schema_v2_9() {
+    if ( get_option( 'gjs_db_schema_v2_9' ) === 'yes' ) {
+        return;
+    }
+
+    global $wpdb;
+
+    $check_and_add_column = function( $table, $column, $definition ) use ( $wpdb ) {
+        $cols = $wpdb->get_results( $wpdb->prepare( "SHOW COLUMNS FROM `{$table}` LIKE %s", $column ) );
+        if ( empty( $cols ) ) {
+            $wpdb->query( "ALTER TABLE `{$table}` ADD `{$column}` {$definition}" );
+        }
+    };
+
+    // wp_barcode columns
+    $check_and_add_column( 'wp_barcode', 'email', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_barcode', 'no_penawaran', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_barcode', 'SPKID', 'VARCHAR(50) NULL' );
+    $check_and_add_column( 'wp_barcode', 'employee_id', 'VARCHAR(50) NULL' );
+
+    // wp_employee columns
+    $check_and_add_column( 'wp_employee', 'name', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_employee', 'phone', 'VARCHAR(50) NULL' );
+    $check_and_add_column( 'wp_employee', 'email', 'VARCHAR(100) NULL' );
+    $check_and_add_column( 'wp_employee', 'address', 'TEXT NULL' );
+
+    // wp_request columns
+    $check_and_add_column( 'wp_request', 'date_repaired', 'DATE NULL' );
+    $check_and_add_column( 'wp_request', 'description_warranty', 'TEXT NULL' );
+    $check_and_add_column( 'wp_request', 'proof_warranty_1', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_request', 'proof_warranty_2', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_request', 'proof_warranty_3', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_request', 'proof_warranty_4', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_request', 'proof_warranty_5', 'VARCHAR(255) NULL' );
+    $check_and_add_column( 'wp_request', 'claim_warranty', 'INT DEFAULT 0' );
+    $check_and_add_column( 'wp_request', 'description_decline', 'TEXT NULL' );
+
+    update_option( 'gjs_db_schema_v2_9', 'yes' );
+}
 
 // --- GJS Database Migration ---
 add_action('init', 'gjs_migrate_customer_to_barcode');
@@ -1072,7 +1137,7 @@ function gjs_migrate_spk_format() {
 function gjs_send_whatsapp($target, $message, $urls = []) {
     if (empty($target)) return false;
     
-    $token = 'JFRNjggrHKdXgTzeR38H';
+    $token = defined('GJS_FONNTE_TOKEN') ? GJS_FONNTE_TOKEN : get_option('gjs_fonnte_api_token', 'JFRNjggrHKdXgTzeR38H');
     
     // Clean target number (replace leading 0 with 62)
     $target = preg_replace('/^0/', '62', $target);
@@ -1639,27 +1704,6 @@ function gds_dedup_homepage_from_core_sitemaps($entry, $post, $post_type) {
     return $entry;
 }
 
-// 5. Pembersihan Cache Sitemap Transients (Yoast, Rank Math, Jetpack v4)
-add_action('init', 'gjs_cleanup_sitemap_caches_v4', 10);
-function gjs_cleanup_sitemap_caches_v4() {
-    if (get_option('gjs_sitemap_cleaned_v4') === 'yes') {
-        return;
-    }
-    global $wpdb;
-
-    // Bersihkan transient Yoast SEO sitemap agar langsung ter-generate ulang
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%'");
-
-    // Bersihkan transient Rank Math
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%rank_math_sitemap_%'");
-
-    // Bersihkan sitemap Jetpack (termasuk news sitemap)
-    $wpdb->query("DELETE FROM $wpdb->posts WHERE post_type IN ('jp_img_sitemap', 'jp_sitemap', 'jp_sitemap_master', 'jp_news_sitemap')");
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
-
-    update_option('gjs_sitemap_cleaned_v4', 'yes');
-}
-
 // Exclude MailPoet system pages (subscription management/unsubscribe) from XML sitemaps
 add_filter('wpseo_sitemap_exclude_post_type', function($exclude, $post_type) {
     return ($post_type === 'mailpoet_page') ? true : $exclude;
@@ -1675,24 +1719,33 @@ add_filter('rank_math/sitemap/exclude_post_type', function($exclude, $type) {
     return ($type === 'mailpoet_page') ? true : $exclude;
 }, 999, 2);
 
-// v6: flush Yoast sitemap cache after excluding mailpoet_page
-add_action('init', function() {
-    if (get_option('gjs_sitemap_cleaned_v6') === 'yes') return;
-    global $wpdb;
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%'");
-    update_option('gjs_sitemap_cleaned_v6', 'yes');
-}, 12);
-
-// v5: flush sitemap caches again after excluding employee-dashboard
-add_action('init', 'gjs_cleanup_sitemap_caches_v5', 11);
-function gjs_cleanup_sitemap_caches_v5() {
-    if (get_option('gjs_sitemap_cleaned_v5') === 'yes') {
+// Consolidated sitemap cache cleanup (Yoast, Rank Math, Jetpack v2.9)
+add_action('init', 'gjs_cleanup_sitemap_caches_v2_9', 12);
+function gjs_cleanup_sitemap_caches_v2_9() {
+    if (get_option('gjs_sitemap_cleaned_v2_9') === 'yes') {
         return;
     }
     global $wpdb;
-    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
+
+    // Detach any media attachment whose post_parent is 319, 327, or any gjs_produk post
+    $wpdb->query( "
+        UPDATE {$wpdb->posts} 
+        SET post_parent = 0 
+        WHERE post_type = 'attachment' 
+          AND (
+            post_parent IN (319, 327) 
+            OR post_parent IN (SELECT ID FROM (SELECT ID FROM {$wpdb->posts} WHERE post_type = 'gjs_produk') AS gjs_ids)
+          )
+    " );
+
+    $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '%wpseo_sitemap_%' OR option_name LIKE '%rank_math_sitemap_%' OR option_name LIKE '%jp_sitemap%' OR option_name LIKE '%jetpack_sitemap%'");
     $wpdb->query("DELETE FROM $wpdb->posts WHERE post_type IN ('jp_sitemap', 'jp_sitemap_master', 'jp_img_sitemap', 'jp_news_sitemap')");
-    update_option('gjs_sitemap_cleaned_v5', 'yes');
+
+    if ( function_exists( 'wp_schedule_single_event' ) ) {
+        wp_schedule_single_event( time(), 'jp_sitemap_cron_hook' );
+    }
+
+    update_option('gjs_sitemap_cleaned_v2_9', 'yes');
 }
 
 

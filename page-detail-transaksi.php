@@ -18,16 +18,15 @@ if ( ! empty( $barcode_id ) ) {
     
     $query = $wpdb->prepare( "
         SELECT 
-            b.barcodeID, 
+            b.BarcodeID AS barcodeID, 
             b.material_description, 
             b.status, 
             b.date_transaction, 
             b.warranty_exp, 
             b.customer AS customer_name, 
-            e.location 
+            b.location 
         FROM wp_barcode b 
-        LEFT JOIN wp_employee e ON b.employee_id = e.employee_id 
-        WHERE b.barcodeID = %s
+        WHERE b.BarcodeID = %s
     ", $barcode_id );
 
     $data = $wpdb->get_row( $query );
@@ -214,7 +213,7 @@ if ( ! empty( $barcode_id ) ) {
             }
         }
 
-        .not-found {
+        .not-found { text-align: center; padding: 2rem; }
         .not-found h2 { color: #ef4444; margin-bottom: 1rem; }
         .not-found p { color: #64748b; }
         

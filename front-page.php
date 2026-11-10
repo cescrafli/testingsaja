@@ -670,16 +670,21 @@ endif;
                     </ul>
                 </div>
             </section>
-            <section class="section cta-project" style="background-color: #041e3a; padding: 56px 0 !important; text-align: center; margin-bottom: 0 !important;">
-    <div class="container" style="max-width: 800px; margin: 0 auto;">
-        <span style="color: #cba85d; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">Wujudkan Visi Bangunan Anda Bersama Kami</span>
-        <h2 style="font-size: 38px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 25px;">Sedang Merancang Rumah Impian atau Menyiapkan Tender Proyek?</h2>
-        <p style="color: #cbd5e1; line-height: 1.8; font-size: 16px; margin-bottom: 40px;">
-            Kirimkan gambar kerja, referensi, atau spesifikasi proyek Anda. Tim kami selalu siap merespons dengan cepat untuk memberikan konsultasi dan penawaran terbaik bagi proyek Anda.
-        </p>
-        <a href="https://api.whatsapp.com/send/?phone=628111021088&text=Hi%2C+Saya+ingin+konsultasi+dan+mengajukan+penawaran+proyek" target="_blank" style="display: inline-block; padding: 18px 40px; background: #cba85d; color: #fff; text-transform: uppercase; font-weight: 700; font-size: 15px; letter-spacing: 1px; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(203,168,93,0.3);" onmouseover="this.style.background='#b39352';" onmouseout="this.style.background='#cba85d';">Konsultasi &amp; Ajukan Penawaran</a>
-    </div>
-</section>
+            <section class="section cta-project" style="background-color: #ffffff !important; padding: clamp(40px, 6vw, 64px) 0 !important; text-align: center; margin-bottom: 0 !important;">
+                <div style="width: min(100% - 32px, 1140px); margin-inline: auto;">
+                    <div class="homepage-cta-card" style="background: linear-gradient(135deg, #0a2f57, #041e3a); color: #ffffff; text-align: center; border-radius: 18px; padding: clamp(36px, 6vw, 64px) 24px; box-shadow: 0 12px 36px rgba(4, 30, 58, 0.12);">
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: #ffffff; line-height: 1.25; margin: 0 0 12px;">
+                            Sedang Merancang Rumah Impian atau Menyiapkan Tender Proyek?
+                        </h2>
+                        <p style="font-family: 'Outfit', sans-serif; font-size: clamp(14px, 1.8vw, 15px); color: rgba(255, 255, 255, 0.8); max-width: 580px; margin: 0 auto 28px; line-height: 1.7;">
+                            Kirimkan gambar kerja, referensi, atau spesifikasi proyek Anda. Tim kami selalu siap merespons dengan cepat untuk memberikan konsultasi dan penawaran terbaik bagi proyek Anda.
+                        </p>
+                        <a class="homepage-cta-btn" href="https://api.whatsapp.com/send/?phone=628111021088&text=Hi%2C+Saya+ingin+konsultasi+dan+mengajukan+penawaran+proyek" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; padding: 13px 28px; border-radius: 8px; text-decoration: none; border: 0; cursor: pointer; background: #cba85d; color: #041e3a; box-shadow: 0 6px 20px rgba(203,168,93,0.35); transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;" onmouseover="this.style.background='#dfbe75'; this.style.color='#041e3a'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#cba85d'; this.style.color='#041e3a'; this.style.transform='translateY(0)';">
+                            Konsultasi &amp; Ajukan Penawaran
+                        </a>
+                    </div>
+                </div>
+            </section>
 </main>
 
 <?php
@@ -730,6 +735,14 @@ endif;
 
 /* Fix flexbox overflow bug globally for the marquee container */
 div[style*="white-space: nowrap"] { min-width: 0 !important; }
+
+/* Homepage CTA Card & Button */
+.homepage-cta-btn:hover {
+    background: #dfbe75 !important;
+    color: #041e3a !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(203,168,93,0.45) !important;
+}
 </style>
 
 

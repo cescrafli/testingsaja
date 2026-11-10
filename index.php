@@ -17,6 +17,9 @@ get_header();
 /* Header & Navigation Fix */
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
+/* Full-width Main */
+.site-main { width: 100% !important; background-color: #ffffff !important; flex: 1 0 auto; display: block; margin: 0; padding: 0; min-height: 80vh; }
+
 /* Page Banner */
 .gjs-archive-header { padding: 104px 0 28px; text-align: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
 .gjs-archive-title { color: #041e3a; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; font-family: 'Outfit', 'Inter', -apple-system, sans-serif; }

@@ -35,7 +35,7 @@
 
 html { height: 100%; background-color: #021224; }
 body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; padding: 0; background-color: #021224; }
-main, .projects, .site-main, .company-profile, .about-main-wrapper, .team, .certificates, .workshop-facilities, .single-main-wrapper, .blog-main-wrapper, .gjs-interior-wrapper, .prod-page, .prod-sub-main, .prod-sub-container, .blueprint-container, .error, .faq-cta-section {
+main, .projects, .site-main, .company-profile, .about-main-wrapper, .team, .certificates, .workshop-facilities, .single-main-wrapper, .blog-main-wrapper, .blog-page-main, .blog-content-section, .gjs-interior-wrapper, .prod-page, .prod-sub-main, .prod-sub-container, .blueprint-container, .error, .faq-cta-section {
     flex: 1 0 auto;
     background-color: #ffffff;
 }

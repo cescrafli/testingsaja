@@ -20,6 +20,10 @@ if (have_posts()) : while (have_posts()) : the_post();
     width: 100%;
     height: 420px;
     min-height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 @media (max-width: 768px) {
     .single-hero {
@@ -28,15 +32,9 @@ if (have_posts()) : while (have_posts()) : the_post();
         min-height: 220px;
     }
 }
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    /* Optional overlay if text needs to be readable, but mockup image already has text baked in */
-}
 /* Main Content Wrapper */
 .single-main-wrapper {
+    width: 100% !important;
     background-color: #f7f9fa;
     padding-bottom: 40px;
 }

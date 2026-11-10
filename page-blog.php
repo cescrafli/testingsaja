@@ -6,15 +6,27 @@ global $custom_css; $custom_css = 'blog'; get_header();
 /* Force solid blue header */
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
+/* Full-width Page Main */
+.blog-page-main {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    flex: 1 0 auto !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 80vh !important;
+}
+
 /* Header Banner */
 .blog-header-custom {
-    padding: 100px 0 28px;
+    width: 100% !important;
+    padding: 104px 0 28px !important;
     text-align: center;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
+    background: #ffffff !important;
+    border-bottom: 1px solid #f1f5f9;
 }
 @media (max-width: 768px) {
-    .blog-header-custom { padding: 80px 15px 22px; }
+    .blog-header-custom { padding: 84px 15px 22px !important; }
 }
 .bh-title {
     color: #041e3a;
@@ -66,11 +78,17 @@ global $custom_css; $custom_css = 'blog'; get_header();
     font-weight: 600;
 }
 
-/* Main Layout */
+/* Main Content Area */
+.blog-content-section {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    padding: 36px 0 70px;
+}
 .blog-main-wrapper {
-    max-width: 1200px;
+    max-width: 1280px;
+    width: min(100% - 32px, 1280px);
     margin: 0 auto;
-    padding: 40px 20px 60px;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 36px;
@@ -81,18 +99,17 @@ global $custom_css; $custom_css = 'blog'; get_header();
     min-width: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 28px;
     align-content: start;
 }
 .blog-sidebar {
-    flex: 1 1 28%;
-    min-width: 280px;
+    flex: 0 0 340px;
     max-width: 360px;
+    width: 100%;
 }
 @media (max-width: 991px) {
     .blog-main-wrapper {
         flex-direction: column;
-        padding: 30px 16px 50px;
         gap: 32px;
     }
     .blog-sidebar {
@@ -375,22 +392,24 @@ global $custom_css; $custom_css = 'blog'; get_header();
 }
 </style>
 
-<section class="blog-header-custom">
-    <div class="container">
-        <h1 class="bh-title">Blog &amp; Inspirasi Proyek</h1>
-        <p class="bh-subtitle">Temukan ide, inovasi fabrikasi, panduan arsitektur, dan kisah di balik setiap proyek kami.</p>
-        <div class="bh-accent-line"></div>
-        <nav class="bh-breadcrumbs" aria-label="Breadcrumb">
-            <a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a>
-            <span class="sep">&rsaquo;</span>
-            <span class="active">Blog</span>
-        </nav>
-    </div>
-</section>
+<main class="blog-page-main">
+    <section class="blog-header-custom">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
+            <h1 class="bh-title">Blog &amp; Inspirasi Proyek</h1>
+            <p class="bh-subtitle">Temukan ide, inovasi fabrikasi, panduan arsitektur, dan kisah di balik setiap proyek kami.</p>
+            <div class="bh-accent-line"></div>
+            <nav class="bh-breadcrumbs" aria-label="Breadcrumb">
+                <a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a>
+                <span class="sep">&rsaquo;</span>
+                <span class="active">Blog</span>
+            </nav>
+        </div>
+    </section>
 
-<main class="blog-main-wrapper">
-    <!-- Posts Grid (Left) -->
-    <div class="blog-posts-grid">
+    <div class="blog-content-section">
+        <div class="blog-main-wrapper">
+            <!-- Posts Grid (Left) -->
+            <div class="blog-posts-grid">
         <?php
         $paged = max( 1, get_query_var('paged'), get_query_var('page') );
         $args = array(
@@ -552,6 +571,8 @@ global $custom_css; $custom_css = 'blog'; get_header();
             </div>
         </div>
     </aside>
+        </div>
+    </div>
 </main>
 
 <?php get_footer(); ?>

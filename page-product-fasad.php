@@ -15,10 +15,11 @@ $items = [
 ?>
 <style>
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-.prod-sub-container { padding: 100px 20px 44px !important; max-width: 1200px; margin: 0 auto; text-align: center; box-sizing: border-box; }
-@media (max-width: 768px) { .prod-sub-container { padding: 84px 16px 32px !important; } }
+main.prod-sub-main { width: 100% !important; background-color: #ffffff !important; flex: 1 0 auto !important; min-height: 80vh !important; display: block !important; margin: 0 !important; padding: 0 !important; }
+.prod-sub-container { background-color: #ffffff !important; padding: 100px 20px 56px !important; max-width: 1200px; margin: 0 auto; text-align: center; box-sizing: border-box; }
+@media (max-width: 768px) { .prod-sub-container { padding: 84px 16px 36px !important; } }
 .prod-sub-subtitle { font-size: 13px; font-weight: 700; color: #cba85d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
-.prod-sub-title { font-size: clamp(28px, 5vw, 46px); font-weight: 800; color: #1a202c; margin-bottom: 28px !important; font-family: 'Outfit', sans-serif; line-height: 1.2; }
+.prod-sub-title { font-size: clamp(28px, 5vw, 46px); font-weight: 800; color: #041e3a !important; margin-bottom: 32px !important; font-family: 'Outfit', sans-serif; line-height: 1.2; }
 
 /* Grid */
 .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 40px; text-align: left; }
@@ -29,20 +30,20 @@ $items = [
     .detail-card-cat { font-size: 11px; }
     .detail-card-text { padding: 12px 6px; }
 }
-.detail-card { display: flex; flex-direction: column; text-align: center; background: #fff; cursor: pointer; transition: transform 0.3s; text-decoration: none; border-radius: 8px; overflow: hidden; }
-.detail-card:hover { transform: translateY(-5px); }
-.detail-card-img-wrapper { padding: 0; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; }
+.detail-card { display: flex; flex-direction: column; text-align: center; background: #ffffff; cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; text-decoration: none; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+.detail-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(4,30,58,0.1); border-color: #cbd5e1; }
+.detail-card-img-wrapper { padding: 0; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1/1; position: relative; overflow: hidden; background: #f8fafc; }
 .detail-card-img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
 .detail-card-text { padding: 20px 10px; }
 .detail-card-cat { font-size: 13px; color: #bfa145; margin-bottom: 6px; }
 .detail-card-title { font-size: 16px; font-weight: 700; color: #111; }
 
-.back-btn { display: inline-flex; align-items: center; gap: 8px; background: #f1f1f1; padding: 10px 20px; border-radius: 4px; color: #333; text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; border: none; margin-bottom: 30px; transition: background 0.3s; }
-.back-btn:hover { background: #e2e2e2; }
+.back-btn { display: inline-flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 10px 20px; border-radius: 6px; color: #041e3a; text-decoration: none; font-weight: 700; font-size: 14px; cursor: pointer; border: 1px solid #e2e8f0; margin-bottom: 24px; transition: all 0.2s ease; }
+.back-btn:hover { background: #e2e8f0; color: #041e3a; }
 
 /* Single Item View */
 .si-grid { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px; text-align: left; }
-.si-left { flex: 1 1 48%; background: #e0e0e0; position: relative; display: flex; align-items: center; justify-content: center; padding: 40px; border-radius: 8px; min-width: 280px; box-sizing: border-box; }
+.si-left { flex: 1 1 48%; background: #f8fafc; border: 1px solid #e2e8f0; position: relative; display: flex; align-items: center; justify-content: center; padding: 40px; border-radius: 12px; min-width: 280px; box-sizing: border-box; }
 .si-left img { max-width: 100%; height: auto; mix-blend-mode: multiply; }
 .si-arrow { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 30px; cursor: pointer; opacity: 0.7; }
 .si-arrow:hover { opacity: 1; }
@@ -53,13 +54,13 @@ $items = [
 .si-dot.active { background: #555; }
 .si-right { flex: 1 1 48%; min-width: 280px; box-sizing: border-box; }
 .si-cat { font-size: 14px; color: #bfa145; font-weight: 600; margin-bottom: 10px; }
-.si-title { font-size: 32px; font-weight: 800; color: #1a202c; margin-bottom: 25px; line-height: 1.25; }
+.si-title { font-size: 32px; font-weight: 800; color: #041e3a; margin-bottom: 25px; line-height: 1.25; font-family: 'Outfit', sans-serif; }
 .si-desc { font-size: 15px; color: #4a5568; line-height: 1.8; margin-bottom: 25px; }
 .si-list-title { font-size: 15px; font-weight: 700; color: #1a202c; margin-bottom: 15px; }
 .si-list { padding-left: 20px; margin-bottom: 40px; }
 .si-list li { font-size: 15px; color: #4a5568; margin-bottom: 8px; }
-.si-wa-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #bfa145; color: #fff; padding: 14px 28px; font-size: 15px; font-weight: 700; border-radius: 6px; text-decoration: none; transition: background 0.3s; }
-.si-wa-btn:hover { background: #a68a36; color: #fff; }
+.si-wa-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25d366; color: #fff; padding: 14px 28px; font-size: 15px; font-weight: 700; border-radius: 8px; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(37,211,102,0.25); }
+.si-wa-btn:hover { background: #1eb857; color: #fff; box-shadow: 0 6px 18px rgba(37,211,102,0.35); }
 
 @media(max-width: 991px) {
     .si-grid { flex-direction: column; gap: 30px; }
@@ -111,7 +112,7 @@ $items = [
 
 </style>
 
-
+<main class="prod-sub-main">
 <?php if ($is_cw): include get_template_directory() . "/inc-curtain-wall.php"; elseif ($is_acp): include get_template_directory() . "/inc-acp.php"; else: ?>
 <div class="prod-sub-container container">
     
@@ -232,6 +233,7 @@ function closeLightbox() {
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
     <img id="lightboxImg" class="lightbox-content" alt="Pratinjau Produk Fasad GJS">
 </div>
+</main>
 
 <?php get_footer(); ?>
 

@@ -35,7 +35,7 @@
 
 html { height: 100%; background-color: #021224; }
 body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; padding: 0; background-color: #021224; }
-main, .projects, .site-main, .company-profile, .single-main-wrapper, .blog-main-wrapper, .gjs-interior-wrapper, .prod-page, .blueprint-container, .error {
+main, .projects, .site-main, .company-profile, .single-main-wrapper, .blog-main-wrapper, .gjs-interior-wrapper, .prod-page, .prod-sub-main, .prod-sub-container, .blueprint-container, .error {
     flex: 1 0 auto;
     background-color: #ffffff;
 }

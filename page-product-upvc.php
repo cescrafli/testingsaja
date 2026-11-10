@@ -100,18 +100,28 @@ $pintu_items = [
 <style>
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
-/* Sub Container */
-.prod-sub-container {
-    padding: 100px 20px 44px !important;
-}
-@media (max-width: 768px) {
-    .prod-sub-container { padding: 84px 16px 32px !important; }
+/* Base Full-Width White Background Wrapper */
+main.prod-sub-main {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    flex: 1 0 auto !important;
+    min-height: 80vh !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
+/* Sub Container */
+.prod-sub-container {
+    background-color: #ffffff !important;
+    padding: 100px 20px 56px !important;
     max-width: 1240px !important;
     margin: 0 auto !important;
     text-align: left !important;
     box-sizing: border-box !important;
+}
+@media (max-width: 768px) {
+    .prod-sub-container { padding: 84px 16px 36px !important; }
 }
 .prod-sub-subtitle {
     font-size: 14px;
@@ -806,6 +816,7 @@ $pintu_items = [
 .prod-card:hover .hover-banner, .detail-card:hover .hover-banner { opacity: 1; }
 </style>
 
+<main class="prod-sub-main">
 <div class="prod-sub-container container">
     <?php if ($view == 'main'): ?>
     <div style="text-align: left; margin-bottom: 20px; position: relative;">
@@ -1597,4 +1608,5 @@ function switchBrand(brand) {
     }
 }
 </script>
+</main>
 <?php get_footer(); ?>

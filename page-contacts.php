@@ -113,73 +113,6 @@ main {
     padding: 0 !important;
 }
 
-/* Quick Contact Info Cards Strip */
-.contact-quick-strip {
-    background: #ffffff;
-    padding: 44px 0 36px;
-    border-bottom: 1px solid #e2e8f0;
-    width: 100%;
-}
-.contact-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-.contact-card-item {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 24px 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.contact-card-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(4,30,58,0.08);
-}
-.contact-card-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-}
-.contact-card-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-.contact-card-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #041e3a;
-    font-family: 'Outfit', sans-serif;
-    margin: 0;
-}
-.contact-card-body {
-    font-size: 14px;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 18px;
-    flex-grow: 1;
-}
-.contact-card-action a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 9px 16px;
-    transition: all 0.2s ease;
-}
-
 /* Main Section: Two Columns */
 .contact-main-section {
     background-color: #f8fafc;
@@ -479,47 +412,115 @@ main {
     line-height: 1.5;
 }
 
-/* Trust Badges */
-.trust-badge-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-.trust-badge-item:last-child {
-    margin-bottom: 0;
-}
-.trust-badge-icon {
-    width: 22px;
-    height: 22px;
-    color: #0f9d58;
-    flex-shrink: 0;
-    margin-top: 2px;
-}
-.trust-badge-text {
-    font-size: 13px;
-    color: #334155;
-    line-height: 1.5;
-}
-.trust-badge-text strong {
-    color: #041e3a;
-}
-
 /* Map Iframe Wrapper */
 .map-embed-wrapper {
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #e2e8f0;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+/* Jam Operasional & Kontak Langsung */
+.contact-hours-block {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+.contact-hours-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #041e3a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.contact-hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #475569;
+    padding: 3px 0;
+}
+.contact-hours-row strong {
+    color: #0f172a;
+    font-weight: 600;
+}
+.contact-direct-info {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+.contact-direct-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #334155;
+    margin-bottom: 10px;
+}
+.contact-direct-item:last-child {
+    margin-bottom: 0;
+}
+.contact-direct-item a {
+    color: #041e3a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+.contact-direct-item a:hover {
+    color: #cba85d;
+}
+.contact-action-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+.contact-btn-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+.contact-btn-map {
+    background: #041e3a;
+    color: #ffffff;
+}
+.contact-btn-map:hover {
+    background: #0b2f59;
+    color: #ffffff;
+}
+.contact-btn-wa {
+    background: #25d366;
+    color: #ffffff;
+}
+.contact-btn-wa:hover {
+    background: #1eb956;
+    color: #ffffff;
+}
+@media (max-width: 480px) {
+    .contact-action-btns {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Responsive Media Queries */
 @media (max-width: 991px) {
-    .contact-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
     .contact-main-grid {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -533,9 +534,6 @@ main {
         grid-template-columns: 1fr;
         gap: 0;
     }
-    .contact-quick-strip {
-        padding: 28px 0 20px;
-    }
     .contact-main-section {
         padding: 32px 0 44px;
     }
@@ -543,87 +541,6 @@ main {
 </style>
 
 <?php get_template_part("template-parts/page-banner"); ?>
-
-<!-- Strip Kartu Kontak Cepat -->
-<section class="contact-quick-strip">
-    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-        <div class="contact-cards-grid">
-            
-            <!-- Card 1: WhatsApp & Telepon -->
-            <div class="contact-card-item">
-                <div class="contact-card-header">
-                    <div class="contact-card-icon" style="background: #e8f5e9; color: #25d366;">
-                        <svg width="24" height="24" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                    </div>
-                    <div>
-                        <h3 class="contact-card-title">Konsultasi WhatsApp</h3>
-                        <span style="font-size: 12px; color: #16a34a; font-weight: 700;">Fast Response</span>
-                    </div>
-                </div>
-                <div class="contact-card-body">
-                    Tanya estimasi harga, konsultasi denah, atau jadwal survei lokasi langsung dengan teknisi kami.
-                    <div style="margin-top: 8px; font-weight: 700; color: #041e3a;">
-                        WA: +62 811-102-1088<br>
-                        Telp: (021) 8047 6151
-                    </div>
-                </div>
-                <div class="contact-card-action">
-                    <a href="https://wa.me/628111021088?text=Halo%20Griya%20Djaya%20Sentosa,%20saya%20ingin%20konsultasi%20mengenai%20kebutuhan%20proyek%20saya" target="_blank" style="background: #25d366; color: #fff;">
-                        <svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1z"/></svg>
-                        Chat WhatsApp Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 2: Lokasi Kantor & Workshop -->
-            <div class="contact-card-item">
-                <div class="contact-card-header">
-                    <div class="contact-card-icon" style="background: #eff6ff; color: #0284c7;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    </div>
-                    <div>
-                        <h3 class="contact-card-title">Kantor & Workshop</h3>
-                        <span style="font-size: 12px; color: #0284c7; font-weight: 700;">Bogor &amp; Bekasi</span>
-                    </div>
-                </div>
-                <div class="contact-card-body">
-                    <strong>Workshop I:</strong> Jl. Raya Transyogi No 8 Cileungsi, Bogor.<br>
-                    <strong>Workshop II:</strong> Jl. Raya Jati Asih No 3, Bekasi.<br>
-                    <strong>Gudang:</strong> Kapuk Cengkareng, Jakarta Barat.
-                </div>
-                <div class="contact-card-action">
-                    <a href="https://maps.google.com/?q=Griya+Djaya+Sentosa+Cileungsi" target="_blank" style="background: #041e3a; color: #fff;">
-                        Petunjuk Arah Maps &rarr;
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3: Jam Layanan & Dukungan -->
-            <div class="contact-card-item">
-                <div class="contact-card-header">
-                    <div class="contact-card-icon" style="background: #fffbeb; color: #d97706;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    </div>
-                    <div>
-                        <h3 class="contact-card-title">Jam Operasional</h3>
-                        <span style="font-size: 12px; color: #d97706; font-weight: 700;">Senin &ndash; Sabtu</span>
-                    </div>
-                </div>
-                <div class="contact-card-body">
-                    <strong>Workshop & Kantor:</strong> 08:00 &ndash; 17:00 WIB.<br>
-                    <strong>Konsultasi Online:</strong> Tersedia setiap hari.<br>
-                    <strong>Email:</strong> info@griyadjayasentosa.id
-                </div>
-                <div class="contact-card-action">
-                    <a href="mailto:info@griyadjayasentosa.id" style="background: #f1f5f9; color: #041e3a; border: 1px solid #cbd5e1;">
-                        Kirim Email Resmi
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <!-- Konten Utama: Formulir Konsultasi Proyek & Peta Workshop -->
 <section class="contact-main-section">
@@ -723,21 +640,19 @@ main {
                 </form>
             </div>
 
-            <!-- Kolom Kanan: Peta Google Maps, Workshop, & Keunggulan Layanan -->
+            <!-- Kolom Kanan: Informasi Kantor, Workshop, & Jam Layanan -->
             <div class="contact-sidebar-box">
-                
-                <!-- Card 1: Google Maps Embed & Alamat Workshop -->
                 <div class="contact-side-card">
                     <h3 class="contact-side-title">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        Kunjungi Workshop Kami
+                        Kantor &amp; Workshop Fabrikasi
                     </h3>
                     
                     <div class="map-embed-wrapper">
                         <iframe 
                             src="https://maps.google.com/maps?q=Griya%20Djaya%20Sentosa%20Jl.%20Raya%20Transyogi%20No%208%20Cileungsi%20Bogor&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                             width="100%" 
-                            height="240" 
+                            height="230" 
                             style="border:0; display:block;" 
                             allowfullscreen="" 
                             loading="lazy">
@@ -762,60 +677,50 @@ main {
                         </li>
                     </ul>
 
-                    <a href="https://maps.google.com/?q=Griya+Djaya+Sentosa+Cileungsi" target="_blank" style="display: block; text-align: center; margin-top: 16px; background: #041e3a; color: #fff; padding: 10px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; text-decoration: none;">
-                        Buka di Google Maps Langsung &rarr;
-                    </a>
+                    <!-- Jam Operasional -->
+                    <div class="contact-hours-block">
+                        <div class="contact-hours-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Jam Operasional
+                        </div>
+                        <div class="contact-hours-row">
+                            <span>Senin &ndash; Sabtu</span>
+                            <strong>08:00 &ndash; 17:00 WIB</strong>
+                        </div>
+                        <div class="contact-hours-row" style="color: #64748b; font-size: 12px; margin-top: 4px;">
+                            <span>Minggu &amp; Libur Nasional</span>
+                            <span>Tutup (Konsultasi via WA tetap aktif)</span>
+                        </div>
+                    </div>
+
+                    <!-- Kontak Langsung -->
+                    <div class="contact-direct-info">
+                        <div class="contact-direct-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span>Telepon: <a href="tel:+622180476151">(021) 8047 6151</a></span>
+                        </div>
+                        <div class="contact-direct-item">
+                            <svg width="15" height="15" viewBox="0 0 448 512" fill="#25d366"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+                            <span>WhatsApp: <a href="https://wa.me/628111021088" target="_blank">+62 811-102-1088</a></span>
+                        </div>
+                        <div class="contact-direct-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>Email: <a href="mailto:info@griyadjayasentosa.id">info@griyadjayasentosa.id</a></span>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi -->
+                    <div class="contact-action-btns">
+                        <a href="https://maps.google.com/?q=Griya+Djaya+Sentosa+Cileungsi" target="_blank" class="contact-btn-nav contact-btn-map">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Petunjuk Arah Maps
+                        </a>
+                        <a href="https://wa.me/628111021088?text=Halo%20Griya%20Djaya%20Sentosa,%20saya%20ingin%20konsultasi%20mengenai%20kebutuhan%20proyek%20saya" target="_blank" class="contact-btn-nav contact-btn-wa">
+                            <svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+                            Chat WhatsApp
+                        </a>
+                    </div>
                 </div>
-
-                <!-- Card 2: 4 Komitmen Mutu Layanan GJS -->
-                <div class="contact-side-card" style="background: #ffffff;">
-                    <h3 class="contact-side-title">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        Keunggulan Griya Djaya Sentosa
-                    </h3>
-                    
-                    <div class="trust-badge-item">
-                        <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <div class="trust-badge-text">
-                            <strong>Garansi Resmi 10 Tahun:</strong> Perlindungan garansi material profil UPVC Conch terhadap perubahan warna, getas, dan rayap.
-                        </div>
-                    </div>
-                    
-                    <div class="trust-badge-item">
-                        <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <div class="trust-badge-text">
-                            <strong>Gratis Survei &amp; RAB:</strong> Pengukuran presisi langsung di lokasi proyek Anda se-Jabodetabek tanpa dipungut biaya tambahan.
-                        </div>
-                    </div>
-
-                    <div class="trust-badge-item">
-                        <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <div class="trust-badge-text">
-                            <strong>Fabrikasi Workshop Sendiri:</strong> Dikerjakan dengan mesin presisi modern dan kontrol kualitas (QC) ketat oleh teknisi berpengalaman sejak 2011.
-                        </div>
-                    </div>
-
-                    <div class="trust-badge-item">
-                        <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <div class="trust-badge-text">
-                            <strong>Material 100% Original:</strong> Spesifikasi aluminium YKK / Alexindo dan UPVC Conch bersertifikasi resmi pabrik.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Kotak Chat WhatsApp Cepat -->
-                <div class="contact-side-card" style="background: linear-gradient(135deg, #041e3a 0%, #082d54 100%); color: #ffffff;">
-                    <div style="font-size: 12px; font-weight: 800; color: #25d366; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Butuh Respons Kilat?</div>
-                    <h4 style="font-size: 19px; font-weight: 800; font-family: 'Outfit', sans-serif; color: #fff; margin-bottom: 10px;">Konsultasi Online via WhatsApp</h4>
-                    <p style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin-bottom: 18px;">
-                        Kirimkan sketsa coretan denah atau pertanyaan Anda secara instan langsung ke tim konsultasi kami.
-                    </p>
-                    <a href="https://wa.me/628111021088?text=Halo%20Griya%20Djaya%20Sentosa,%20saya%20ingin%20tanya%20seputar%20layanan%20dan%20estimasi%20biaya" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #25d366; color: #ffffff; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
-                        <svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                        Hubungi Kami via WhatsApp
-                    </a>
-                </div>
-
             </div>
         </div>
     </div>

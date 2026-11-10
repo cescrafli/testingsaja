@@ -87,6 +87,7 @@ main, .projects, .site-main, .company-profile, .about-main-wrapper, .team, .cert
                 <li><i class="icon-call"></i> <a href="tel:+622180476151">+6221 - 8047 6151</a></li>
                 <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <a href="mailto:info@griyadjayasentosa.id">info@griyadjayasentosa.id</a></li>
                 <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <a href="mailto:griyadjayaupvc@gmail.com">griyadjayaupvc@gmail.com</a></li>
+                <li style="margin-top: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span style="color:#cbd5e1; font-size: 13px;">Senin &ndash; Sabtu, 08:00 &ndash; 17:00 WIB</span></li>
             </ul>
         </div>
         

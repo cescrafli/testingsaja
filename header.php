@@ -16,8 +16,8 @@
         <?php // Open Graph and Twitter Card meta tags are dynamically managed by Yoast SEO / wp_head ?>
         
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/preload2.min.css" />
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3.2" />
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3.2.2" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/icomoon.css?v=3.2.3" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/libs.min.css?v=3.2.3" />
 
                         <?php
                 global $custom_css; $css_name = isset($custom_css) && !empty($custom_css) ? $custom_css : '';
@@ -38,10 +38,10 @@
         
         if ($css_name !== '') {
         ?>
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/<?php echo $css_name; ?>.min.css?v=3.2" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/<?php echo $css_name; ?>.min.css?v=3.2.3" />
         <?php } ?>
-                <style>
-              /* DYNAMIC FLUID LAYOUT & STANDARISASI HEADER GLOBAL (v3.2) */
+        <style>
+              /* DYNAMIC FLUID LAYOUT & STANDARISASI HEADER GLOBAL (v3.2.3) */
               .brand { font-size: clamp(20px, 2.5vw, 30px) !important; gap: clamp(8px, 1vw, 15px) !important; white-space: nowrap; }
               .brand_logo { width: clamp(35px, 4vw, 55px) !important; height: auto !important; }
               
@@ -66,6 +66,97 @@
                   }
               }
 
+              /* HEADER CONTAINER: Always single row on desktop, space-between, vertically centered */
+              .header .container {
+                  display: flex !important;
+                  flex-direction: row !important;
+                  justify-content: space-between !important;
+                  align-items: center !important;
+                  max-width: 1290px !important;
+                  width: 100% !important;
+                  margin-left: auto !important;
+                  margin-right: auto !important;
+                  padding-left: 20px !important;
+                  padding-right: 20px !important;
+                  box-sizing: border-box !important;
+              }
+              .header .brand {
+                  display: inline-flex !important;
+                  align-items: center !important;
+                  flex-shrink: 0 !important;
+                  margin-bottom: 0 !important;
+                  text-decoration: none !important;
+              }
+              .header .brand_name {
+                  display: inline-block !important;
+                  white-space: nowrap !important;
+              }
+
+              @media screen and (min-width: 992px) {
+                  .header .container {
+                      flex-wrap: nowrap !important;
+                  }
+                  .header_nav {
+                      display: flex !important;
+                      width: auto !important;
+                      flex: 0 0 auto !important;
+                      order: unset !important;
+                      margin-top: 0 !important;
+                      height: auto !important;
+                      visibility: visible !important;
+                      opacity: 1 !important;
+                  }
+                  .header_nav-list {
+                      display: flex !important;
+                      flex-direction: row !important;
+                      align-items: center !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                      height: auto !important;
+                      max-height: none !important;
+                      overflow: visible !important;
+                      gap: clamp(8px, 1.4vw, 24px) !important;
+                  }
+                  .header_nav-list_item {
+                      display: inline-flex !important;
+                      align-items: center !important;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                  }
+                  .nav-item {
+                      font-size: clamp(12px, 0.9vw, 14px) !important;
+                      white-space: nowrap !important;
+                  }
+                  .header_trigger {
+                      display: none !important;
+                  }
+              }
+
+              @media screen and (max-width: 991.98px) {
+                  .header .container {
+                      flex-wrap: wrap !important;
+                  }
+                  .header .brand {
+                      order: 1 !important;
+                  }
+                  .header_trigger {
+                      display: inline-flex !important;
+                      order: 2 !important;
+                      margin-left: auto !important;
+                  }
+                  .header_nav {
+                      order: 3 !important;
+                      width: 100% !important;
+                  }
+                  .header_nav-list {
+                      display: flex !important;
+                      flex-direction: column !important;
+                      width: 100% !important;
+                      margin-top: 15px !important;
+                      gap: 15px !important;
+                  }
+              }
+
               /* Override Global Section & Page Spacing (Mengeliminasi Gap 180px/200px) */
               @media screen and (min-width: 1024px) {
                   .section { padding: 56px 0; }
@@ -74,11 +165,6 @@
               @media screen and (max-width: 1023.98px) {
                   .section { padding: 44px 0; }
                   .page { padding: 92px 0 32px; }
-              }
-              
-              @media screen and (min-width: 992px) {
-                  .header_nav-list { gap: clamp(10px, 2vw, 40px) !important; }
-                  .nav-item { font-size: clamp(12px, 1vw, 14px) !important; }
               }
               
               @media screen and (max-width: 767.98px) {
@@ -244,10 +330,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const menu = document.getElementById('headerMenu');
     
     if (trigger && menu) {
-        // Setup initial state if not already set
-        if (trigger.getAttribute('aria-expanded') !== 'true') {
+        // Setup initial state for mobile only
+        if (window.innerWidth <= 991 && trigger.getAttribute('aria-expanded') !== 'true') {
             menu.style.display = 'none';
         }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 991) {
+                menu.style.display = '';
+                menu.style.height = '';
+                menu.style.overflow = '';
+            } else if (trigger.getAttribute('aria-expanded') !== 'true') {
+                menu.style.display = 'none';
+            }
+        });
         
         trigger.addEventListener('click', function(e) {
             e.preventDefault();
@@ -268,7 +364,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 menu.style.height = '0px';
                 
                 setTimeout(() => {
-                    
                     menu.style.display = 'none';
                     menu.style.height = '';
                     menu.style.transition = '';

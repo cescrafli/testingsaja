@@ -222,7 +222,8 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
 }
 ?>
 
-<?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
+<style>
+.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 .bp-preview-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
 .bp-preview-item { position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; background: #f9f9f9; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .bp-preview-img { width: 100%; height: 100%; object-fit: cover; }
@@ -234,15 +235,25 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+.warranty-hero-container {
+    background-color: #fafbfc;
+    padding: 104px 20px 44px;
+    font-family: 'Outfit', sans-serif;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
 @media (max-width: 768px) {
     .warranty-responsive-grid {
         grid-template-columns: 1fr !important;
     }
+    .warranty-hero-container {
+        padding: 84px 16px 32px !important;
+    }
 }
-</style>'; ?>
+</style>
 
-<div class="container" style="background-color: #fafbfc; padding: 104px 20px 44px; font-family: 'Outfit', sans-serif; width: 100%; max-width: 100%; overflow: hidden;"
-<style>@media (max-width: 768px) { .container[style*="padding: 104px"] { padding: 84px 16px 32px !important; } }</style>>
+<div class="container warranty-hero-container">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 60px; align-items: center;">
         
         <!-- Kiri: Judul -->

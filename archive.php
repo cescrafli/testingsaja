@@ -516,18 +516,6 @@ get_header();
         </div>
         
         <div class="b-widget">
-            <h3 class="b-widget-title">Kategori</h3>
-            <ul class="b-list">
-                <?php
-                $categories = get_categories(array('hide_empty' => true));
-                foreach( $categories as $cat ) {
-                    echo '<li><a href="' . esc_url(get_category_link($cat->term_id)) . '">' . esc_html($cat->name) . '</a> <span class="b-list-badge">' . esc_html($cat->count) . '</span></li>';
-                }
-                ?>
-            </ul>
-        </div>
-        
-        <div class="b-widget">
             <h3 class="b-widget-title">Komentar Terbaru</h3>
             <div class="b-comments-list">
                 <?php

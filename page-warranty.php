@@ -254,18 +254,18 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
 </style>
 
 <div class="container warranty-hero-container">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 60px; align-items: center;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 50px); align-items: center;">
         
         <!-- Kiri: Judul -->
-        <div style="flex: 1; min-width: 280px;">
+        <div style="flex: 1; min-width: min(100%, 280px);">
             <h1 style="color: #0f172a; font-weight: 800; font-size: clamp(30px, 5vw, 54px); margin-bottom: 20px; line-height: 1.15;">Pusat Klaim Garansi</h1>
-            <p style="color: #334155; font-size: 18px; line-height: 1.6; max-width: 450px;">
+            <p style="color: #334155; font-size: clamp(15px, 2vw, 18px); line-height: 1.6; max-width: 450px;">
                 Produk Anda butuh perhatian? Masukkan Barcode ID transaksi Anda di bawah ini, lalu kami bantu dari sini.
             </p>
         </div>
         
         <!-- Kanan: Card Form -->
-        <div style="flex: 1.2; min-width: 280px; background: #ffffff; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #f1f5f9;">
+        <div style="flex: 1.2; min-width: min(100%, 280px); background: #ffffff; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #f1f5f9;">
             <!-- Top Green Border -->
             <div style="height: 10px; background-color: #10b981; width: 100%;"></div>
             

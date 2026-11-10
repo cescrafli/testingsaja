@@ -9,7 +9,7 @@ global $custom_css; $custom_css = 'projects'; get_header();
             <div class="container">
                 
                 <div style="text-align: center; margin-bottom: 32px;">
-                    <h1 style="color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Outfit', 'Inter', -apple-system, sans-serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
+                    <h1 style="color: #041e3a; font-size: clamp(24px, 3.8vw, 38px); font-weight: 700; line-height: 1.25; margin-bottom: 0; font-family: 'Outfit', 'Inter', -apple-system, sans-serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
                     <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 20px; display: block;">
                         <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                     </svg>
@@ -104,14 +104,21 @@ global $custom_css; $custom_css = 'projects'; get_header();
                 <div id="pagination-container" class="projects-pagination"></div>
             </div>
             <style>
-            .projects-filters { display: flex; justify-content: center; gap: 30px; list-style: none; padding: 0; margin-bottom: 50px; flex-wrap: wrap; }
-            .projects-filters li { font-size: 15px; font-weight: 500; color: #4a5568; cursor: pointer; transition: color 0.3s; }
-            .projects-filters li.active, .projects-filters li:hover { color: #eab308; }
+            .projects-filters { display: flex; justify-content: center; gap: clamp(8px, 1.8vw, 16px); list-style: none; padding: 0; margin-bottom: clamp(24px, 4vw, 40px); flex-wrap: wrap; }
+            .projects-filters li { font-size: 13.5px; font-weight: 600; color: #4a5568; cursor: pointer; transition: all 0.25s ease; padding: 6px 14px; border-radius: 20px; background: #f8fafc; border: 1px solid #e2e8f0; }
+            .projects-filters li.active, .projects-filters li:hover { color: #ffffff; background: #cba85d; border-color: #cba85d; }
             
             .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 20px; }
             @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
-            @media (max-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
-            @media (max-width: 480px) { .projects-grid { grid-template-columns: 1fr; } }
+            @media (max-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; } }
+            @media (max-width: 480px) { 
+                .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }
+                .project-card-body { padding: 10px 6px !important; }
+                .project-card-title { font-size: 13px !important; line-height: 1.3 !important; }
+                .project-card-btn { padding: 4px 10px !important; font-size: 11px !important; margin-top: 8px !important; }
+                .photo-count { font-size: 10px !important; padding: 2px 6px !important; }
+                .projects-filters li { font-size: 12px; padding: 5px 10px; }
+            }
             
             .project-card { background: #fff; border-radius: 8px; overflow: hidden; text-align: center; text-decoration: none; display: block; transition: transform 0.3s; }
             .project-card:hover { transform: translateY(-5px); }

@@ -1,5 +1,5 @@
 <header class="page primary-bg" style="padding: 104px 0 36px !important;">
-<style>@media (max-width: 768px) { .page.primary-bg { padding: 84px 0 28px !important; } }</style>
+<style>@media (max-width: 768px) { .page.primary-bg { padding: 84px 0 28px !important; } .page.primary-bg .title { font-size: clamp(24px, 5vw, 36px) !important; line-height: 1.25 !important; } }</style>
     <?php
     $banner_bg_url = '';
     $obj_id = get_queried_object_id();

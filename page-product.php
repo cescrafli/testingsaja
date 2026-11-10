@@ -29,8 +29,8 @@ global $custom_css; $custom_css = 'product'; get_header();
     text-align: center;
     color: white;
 }
-.hero-title { font-size: 42px; font-weight: 800; margin-bottom: 15px; line-height: 1.2; }
-.hero-subtitle { font-size: 16px; font-weight: 400; color: #cbd5e1; }
+.hero-title { font-size: clamp(24px, 4vw, 42px); font-weight: 800; margin-bottom: 15px; line-height: 1.25; }
+.hero-subtitle { font-size: clamp(14px, 1.5vw, 16px); font-weight: 400; color: #cbd5e1; }
 
 /* SECTION 1: CARDS (From Image 2) */
 .s1-wrap { padding: 48px 24px 32px; }
@@ -65,7 +65,7 @@ global $custom_css; $custom_css = 'product'; get_header();
 @media(max-width: 900px) { .s2-grid { grid-template-columns: 1fr; gap: 40px; } }
 
 .s2-subtitle { font-size: 13px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-.s2-title { font-size: 32px; font-weight: 800; color: var(--dark-blue); line-height: 1.3; margin-bottom: 30px; }
+.s2-title { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; color: var(--dark-blue); line-height: 1.3; margin-bottom: 24px; }
 
 /* Accordion */
 .s2-accordion { display: flex; flex-direction: column; gap: 0; }
@@ -88,7 +88,11 @@ global $custom_css; $custom_css = 'product'; get_header();
     box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #f1f5f9;
 }
 @media(max-width: 1250px) { .s2-quote-box { right: 20px; } }
-@media(max-width: 600px) { .s2-quote-box { position: relative; right: 0; top: 0; transform: none; width: 100%; margin-top: -30px; margin-bottom: 20px; } .s2-grid { gap: 40px; } }
+@media(max-width: 600px) { 
+    .s2-img-wrap { height: 260px; }
+    .s2-quote-box { position: relative; right: 0; top: 0; transform: none; width: 100%; margin-top: -30px; margin-bottom: 20px; } 
+    .s2-grid { gap: 40px; } 
+}
 .s2-quote-text { font-size: 14px; font-style: italic; color: var(--dark-blue); margin-bottom: 15px; line-height: 1.6; }
 .s2-quote-author { font-size: 13px; font-weight: 700; color: var(--dark-blue); }
 
@@ -106,7 +110,13 @@ global $custom_css; $custom_css = 'product'; get_header();
 /* Right Icons Blocks */
 .s3-right { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 20px; }
 @media(max-width: 991px) { .s3-right { grid-template-columns: repeat(2, 1fr); } }
-@media(max-width: 575px) { .s3-right { grid-template-columns: 1fr; } }
+@media(max-width: 575px) { 
+    .s3-right { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+    .s3-icon { width: 48px; height: 48px; margin: 0 auto 10px; }
+    .s3-icon svg { width: 24px; height: 24px; }
+    .s3-icon-title { font-size: 13px; margin-bottom: 4px; }
+    .s3-icon-desc { font-size: 11px; line-height: 1.4; }
+}
 .s3-icon-box { text-align: center; }
 .s3-icon { 
     width: 60px; height: 60px; margin: 0 auto 15px; 

@@ -36,11 +36,11 @@ global $custom_css; $custom_css = 'index'; get_header();
             <div style="height: 1px; width: 40px; background: #fff;"></div>
         </div>
         
-        <h1 style="font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 45px; color: #fff;">
+        <h1 style="font-size: clamp(26px, 4.5vw, 52px); font-weight: 700; line-height: 1.2; margin-bottom: clamp(24px, 4vw, 45px); color: #fff;">
             Mitra Fabrikasi Terpercaya untuk Pemilik Rumah, Kontraktor & Perusahaan Besar
         </h1>
         
-        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 70px; padding: 0 15px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: clamp(32px, 5vw, 70px); padding: 0 15px;">
             <a href="<?php echo home_url('/projects/'); ?>" style="padding: 16px 36px; border: 1px solid #fff; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='#fff';">Lihat Proyek Kami</a>
             <a href="<?php echo home_url('/contacts/'); ?>" style="padding: 16px 36px; background: #cda25b; color: #fff; text-transform: uppercase; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease; border: 1px solid #cda25b;" onmouseover="this.style.background='#a87b32'; this.style.borderColor='#a87b32';" onmouseout="this.style.background='#cda25b'; this.style.borderColor='#cda25b';">Minta Penawaran Gratis</a>
         </div>
@@ -79,13 +79,13 @@ global $custom_css; $custom_css = 'index'; get_header();
     <div class="container">
         <div>
         <!-- Top Row: Image & Text -->
-        <div style="display: flex; flex-wrap: wrap; gap: 50px; align-items: center; margin-bottom: 80px;">
-            <div style="flex: 1; min-width: 320px;">
+        <div style="display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 50px); align-items: center; margin-bottom: clamp(36px, 6vw, 80px);">
+            <div style="flex: 1; min-width: min(100%, 300px);">
                 <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" onerror="this.onerror=null;this.src='<?php echo esc_url(get_template_directory_uri() . '/img/placeholder.jpg'); ?>';" alt="Griya Djaya Sentosa - Kontraktor & Fabrikasi Arsitektural UPVC & Aluminium" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
             </div>
-            <div style="flex: 1; min-width: 320px;">
+            <div style="flex: 1; min-width: min(100%, 300px);">
                 <span style="color: #cda25b; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">MENGAPA PEMILIK RUMAH, KONTRAKTOR &amp; PERUSAHAAN MEMILIH GJS</span>
-                <h2 style="font-size: 38px; font-weight: 700; color: #1a202c; line-height: 1.2; margin-bottom: 25px;">Satu Vendor, Lima Lini Produk &mdash; Koordinasi Proyek Jadi Lebih Sederhana</h2>
+                <h2 style="font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; color: #1a202c; line-height: 1.25; margin-bottom: 20px;">Satu Vendor, Lima Lini Produk &mdash; Koordinasi Proyek Jadi Lebih Sederhana</h2>
                 <p style="color: #555555; line-height: 1.8; font-size: 15px;">
                     Mengelola banyak vendor untuk kusen, fasad, railing, dan kaca sering memperlambat timeline proyek dan menyulitkan kontrol kualitas. GJS menyatukan seluruh proses &mdash; desain, fabrikasi, hingga instalasi lapangan &mdash; di bawah satu tim, satu jadwal, dan satu penanggung jawab teknis. Hasilnya: koordinasi lebih cepat, spesifikasi lebih konsisten antar elemen bangunan, dan risiko keterlambatan akibat miskomunikasi antar-vendor jauh berkurang.
                 </p>
@@ -156,10 +156,10 @@ global $custom_css; $custom_css = 'index'; get_header();
 </section>
 <section class="section product-overview" style="background-color: #fff; padding: 36px 0 56px 0;">
     <div class="container" style="max-width: 1300px;">
-        <div style="text-align: center; margin-bottom: 70px;">
+        <div style="text-align: center; margin-bottom: clamp(32px, 5vw, 60px);">
             <div style="width: 80px; height: 2px; background-color: #cda25b; margin: 0 auto 25px;"></div>
             <span style="color: #cda25b; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 15px;">LINGKUP PEKERJAAN</span>
-            <h2 style="font-size: 32px; font-weight: 700; color: #1a202c; line-height: 1.2; margin-bottom: 20px;">Lima Kategori, Satu Standar Kualitas</h2>
+            <h2 style="font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: #1a202c; line-height: 1.25; margin-bottom: 16px;">Lima Kategori, Satu Standar Kualitas</h2>
             <p style="color: #777; line-height: 1.8; font-size: 15px; max-width: 700px; margin: 0 auto;">Setiap lini dikerjakan oleh tim fabrikasi khusus dan SOP sesuai karakteristik materialnya masing-masing.</p>
         </div>
         
@@ -170,13 +170,20 @@ global $custom_css; $custom_css = 'index'; get_header();
                 gap: 25px;
             }
             @media(max-width: 1024px) {
-                .po-grid { grid-template-columns: repeat(3, 1fr); }
+                .po-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
             }
             @media(max-width: 767px) {
-                .po-grid { grid-template-columns: repeat(2, 1fr); }
+                .po-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+                .po-card { padding: 22px 14px !important; }
+                .po-icon-wrap { width: 38px !important; height: 38px !important; margin: 0 auto 14px !important; }
+                .po-icon-wrap svg { width: 18px !important; height: 18px !important; }
+                .po-title { font-size: 14px !important; margin-bottom: 8px !important; }
+                .po-title span { font-size: 12px !important; }
+                .po-desc { font-size: 12px !important; line-height: 1.5 !important; }
             }
             @media(max-width: 480px) {
-                .po-grid { grid-template-columns: 1fr; }
+                .po-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+                .po-card { padding: 18px 10px !important; }
             }
             .po-card {
                 background: #fdfbf7;
@@ -199,7 +206,7 @@ global $custom_css; $custom_css = 'index'; get_header();
                 color: #cda25b;
             }
             .po-title {
-                font-size: 16px; font-weight: 700; color: #cda25b; 
+                font-size: clamp(14px, 1.5vw, 16px); font-weight: 700; color: #cda25b; 
                 margin-bottom: 15px; line-height: 1.4;
             }
             .po-desc {
@@ -254,14 +261,14 @@ global $custom_css; $custom_css = 'index'; get_header();
     <div class="container" style="max-width: 1300px; margin: 0 auto; text-align: center;">
         
         <!-- Header -->
-        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 42px; font-weight: 700; color: #b89851; margin-bottom: 15px;">Apa Kata Klien Kami?</h2>
-        <p style="color: #334155; font-size: 16px; font-weight: 500; margin-bottom: 60px;">Pendapat jujur dari pemilik rumah, kontraktor, dan perusahaan setelah bekerja sama dengan kami.</p>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: clamp(24px, 3.8vw, 42px); font-weight: 700; color: #b89851; margin-bottom: 15px;">Apa Kata Klien Kami?</h2>
+        <p style="color: #334155; font-size: clamp(14px, 1.8vw, 16px); font-weight: 500; margin-bottom: clamp(28px, 4vw, 50px);">Pendapat jujur dari pemilik rumah, kontraktor, dan perusahaan setelah bekerja sama dengan kami.</p>
         
         <!-- Side by Side Container -->
-        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: stretch; margin-bottom: 80px;">
+        <div style="display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 40px); align-items: stretch; margin-bottom: clamp(36px, 6vw, 70px);">
             
             <!-- Left: Video -->
-            <div style="flex: 1; min-width: 320px;" data-aos="fade-right" data-aos-duration="600">
+            <div style="flex: 1; min-width: min(100%, 300px);" data-aos="fade-right" data-aos-duration="600">
                 <div style="padding: 10px; background: #fff; border-radius: 20px; border: 1px solid #ebdcb5; box-shadow: 0 10px 40px rgba(0,0,0,0.06); height: 100%; display: flex; flex-direction: column; justify-content: center;">
                     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
                         <iframe src="https://www.youtube.com/embed/zvPAu0tPrPY?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=zvPAu0tPrPY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -270,8 +277,8 @@ global $custom_css; $custom_css = 'index'; get_header();
             </div>
 
             <!-- Right: Testimonial -->
-            <div style="flex: 1; min-width: 320px;" data-aos="fade-left" data-aos-duration="600">
-                <div class="fp-custom-reviews" style="background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); padding: 50px 30px; height: 100%; display: flex; flex-direction: column; justify-content: center; position: relative; text-align: center;">
+            <div style="flex: 1; min-width: min(100%, 300px);" data-aos="fade-left" data-aos-duration="600">
+                <div class="fp-custom-reviews" style="background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); padding: clamp(28px, 4vw, 50px) clamp(16px, 3vw, 30px); height: 100%; display: flex; flex-direction: column; justify-content: center; position: relative; text-align: center;">
                     <?php
                     $comments_args = array('status' => 'approve', 'parent' => 0, 'number' => 5);
                     $all_comments = get_comments($comments_args);
@@ -294,8 +301,8 @@ global $custom_css; $custom_css = 'index'; get_header();
                             ?>
                         </div>
                         
-                        <hr style="border: 0; height: 1px; background: #f1f5f9; margin-bottom: 30px; width: 80%; margin-left: auto; margin-right: auto;">
-                        <div style="font-size: 60px; color: #94a3b8; line-height: 0.5; margin-bottom: 20px; font-family: serif; font-weight: bold;">&ldquo;</div>
+                        <hr style="border: 0; height: 1px; background: #f1f5f9; margin-bottom: 25px; width: 80%; margin-left: auto; margin-right: auto;">
+                        <div style="font-size: clamp(36px, 5vw, 60px); color: #94a3b8; line-height: 0.5; margin-bottom: 20px; font-family: serif; font-weight: bold;">&ldquo;</div>
                         
                         <!-- Review Contents -->
                         <div class="fp-review-contents-wrapper" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
@@ -307,7 +314,7 @@ global $custom_css; $custom_css = 'index'; get_header();
                                 $display = ($j === 0) ? 'block' : 'none';
                             ?>
                                 <div class="fp-review-content" id="fp-review-content-<?php echo $j; ?>" style="display: <?php echo $display; ?>; animation: fpFadeIn 0.5s;">
-                                    <p style="font-style: italic; font-size: 18px; color: #1e293b; line-height: 1.6; margin-bottom: 30px; font-weight: 500; padding: 0 20px;">
+                                    <p style="font-style: italic; font-size: clamp(15px, 2vw, 18px); color: #1e293b; line-height: 1.6; margin-bottom: 25px; font-weight: 500; padding: 0 10px;">
                                         "<?php echo esc_html(wp_strip_all_tags($comment_text)); ?>"
                                     </p>
                                     <h4 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 5px 0;"><?php echo esc_html($comment_author); ?></h4>
@@ -326,12 +333,12 @@ global $custom_css; $custom_css = 'index'; get_header();
         </div>
 
         <!-- Counter Section -->
-        <div style="text-align: center; margin-top: 80px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-            <h3 style="font-size: 26px; color: #0f172a; margin-bottom: 40px; font-weight: 700;">Griya Djaya Sentosa sudah mengerjakan lebih dari:</h3>
+        <div style="text-align: center; margin-top: clamp(40px, 6vw, 80px); max-width: 1000px; margin-left: auto; margin-right: auto;">
+            <h3 style="font-size: clamp(18px, 2.5vw, 26px); color: #0f172a; margin-bottom: clamp(20px, 3vw, 40px); font-weight: 700;">Griya Djaya Sentosa sudah mengerjakan lebih dari:</h3>
             <div style="display: flex; align-items: center; justify-content: center; gap: 30px;">
                 <div style="flex: 1; height: 2px; background: #cda25b;"></div>
                 <div style="text-align: center;">
-                    <div style="font-size: 72px; font-weight: 800; color: #cda25b; line-height: 1; font-family: 'Outfit', sans-serif;"><span class="gjs-counter" data-target="2972">0</span>+</div>
+                    <div style="font-size: clamp(42px, 7vw, 72px); font-weight: 800; color: #cda25b; line-height: 1; font-family: 'Outfit', sans-serif;"><span class="gjs-counter" data-target="2972">0</span>+</div>
                     <div style="font-size: 16px; color: #0f172a; margin-top: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;">PROJECT</div>
                 </div>
                 <div style="flex: 1; height: 2px; background: #cda25b;"></div>
@@ -340,15 +347,15 @@ global $custom_css; $custom_css = 'index'; get_header();
 
         
         <!-- Clients Marquee Section -->
-        <div style="margin-top: 100px; padding-top: 40px; border-top: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; align-items: center; gap: 40px;">
-            <div style="flex: 0 0 300px; min-width: 250px; text-align: left;">
+        <div style="margin-top: clamp(40px, 7vw, 80px); padding-top: 40px; border-top: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; align-items: center; gap: 40px;">
+            <div style="flex: 0 0 clamp(240px, 25vw, 300px); min-width: min(100%, 240px); text-align: left;">
                 <div style="color: #cda25b; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">CLIENT</div>
-                <h3 style="font-size: 24px; font-weight: 800; color: #1a202c; line-height: 1.3; margin: 0;">Dipercaya Kontraktor dan Pemilik Rumah di Berbagai Lokasi di Indonesia</h3>
+                <h3 style="font-size: clamp(18px, 2.5vw, 24px); font-weight: 800; color: #1a202c; line-height: 1.3; margin: 0;">Dipercaya Kontraktor dan Pemilik Rumah di Berbagai Lokasi di Indonesia</h3>
             </div>
             <div style="flex: 1; overflow: hidden; position: relative; white-space: nowrap;">
                 <!-- Gradient masks for smooth fade -->
-                <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 80px; background: linear-gradient(to right, #ffffff, transparent); z-index: 2;"></div>
-                <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 80px; background: linear-gradient(to left, #ffffff, transparent); z-index: 2;"></div>
+                <div class="marquee-fade-left" style="position: absolute; left: 0; top: 0; bottom: 0; width: 80px; background: linear-gradient(to right, #ffffff, transparent); z-index: 2;"></div>
+                <div class="marquee-fade-right" style="position: absolute; right: 0; top: 0; bottom: 0; width: 80px; background: linear-gradient(to left, #ffffff, transparent); z-index: 2;"></div>
                 
                 <div class="marquee-track" style="display: inline-flex; align-items: center;">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/clients/c3.png" alt="Client Logo" loading="eager" class="skip-lazy" style="height: 140px; width: auto; object-fit: contain; margin: 0 20px;">
@@ -411,17 +418,20 @@ global $custom_css; $custom_css = 'index'; get_header();
                 margin: 0 15px !important;
             }
         }
+        @media (max-width: 768px) {
+            .marquee-fade-left, .marquee-fade-right { width: 28px !important; }
+        }
         @media (max-width: 480px) {
             .marquee-track img {
-                height: 85px !important;
-                margin: 0 12px !important;
+                height: 64px !important;
+                margin: 0 8px !important;
             }
         }
         </style>
 
 <!-- Product Support Section -->
-        <div style="margin-top: 80px; padding-top: 60px; padding-bottom: 40px; text-align: center; border-top: 1px solid #e2e8f0;">
-            <h3 style="font-size: 28px; font-weight: 800; color: #1a202c; margin-bottom: 50px;">Dukungan Brand & Material Terbaik</h3>
+        <div style="margin-top: clamp(40px, 6vw, 80px); padding-top: clamp(30px, 5vw, 60px); padding-bottom: 40px; text-align: center; border-top: 1px solid #e2e8f0;">
+            <h3 style="font-size: clamp(20px, 3vw, 28px); font-weight: 800; color: #1a202c; margin-bottom: clamp(24px, 4vw, 50px);">Dukungan Brand & Material Terbaik</h3>
             <div style="display: grid; gap: 40px; align-items: center; justify-items: center; max-width: 1200px; margin: 0 auto;" class="product-support-grid">
               <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-ccius.png?v=4" alt="Product Support" class="brand-logo">
               <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-ata.png?v=4" alt="Product Support" class="brand-logo">
@@ -555,7 +565,7 @@ global $custom_css; $custom_css = 'index'; get_header();
                                 <div style="height: 2px; width: 40px; background: #fbbf24;"></div>
                                 <span style="font-size: 14px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">Jejak Karya Kami</span>
                             </div>
-                            <h2 style="font-size: 48px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.1; font-family: 'Outfit', sans-serif;">
+                            <h2 style="font-size: clamp(26px, 4.2vw, 48px); font-weight: 800; color: #0f172a; margin: 0; line-height: 1.15; font-family: 'Outfit', sans-serif;">
                                 Proyek <span style="color: #059669;">Terbaru</span>
                             </h2>
                         </div>
@@ -618,7 +628,7 @@ endif;
                                 <div style="height: 2px; width: 40px; background: #cba85d;"></div>
                                 <span style="font-size: 14px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">Edukasi &amp; Referensi Konstruksi</span>
                             </div>
-                            <h2 style="font-size: 42px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.15; font-family: 'Outfit', sans-serif;">
+                            <h2 style="font-size: clamp(24px, 3.8vw, 42px); font-weight: 800; color: #0f172a; margin: 0; line-height: 1.15; font-family: 'Outfit', sans-serif;">
                                 Artikel &amp; Panduan <span style="color: #cba85d;">Terbaru</span>
                             </h2>
                         </div>

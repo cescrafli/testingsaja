@@ -383,6 +383,19 @@ body.admin-bar .about {
         padding: 0 10px !important;
     }
 }
+.single-proj-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+@media (max-width: 640px) {
+    .single-proj-related-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    .single-proj-related-grid h3 { font-size: 13px !important; line-height: 1.3 !important; }
+    .single-proj-related-grid a > div:nth-child(2) { padding: 12px 10px !important; }
+}
 </style>
 <?php
 if ( have_posts() ) : while ( have_posts() ) : the_post();
@@ -422,7 +435,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
                         <a href="<?php echo esc_url( home_url('/projects/') ); ?>" style="color:#64748b; text-decoration:none;">Proyek</a> &nbsp;/&nbsp;
                         <span style="color:#cba85d; font-weight:600;"><?php the_title(); ?></span>
                     </nav>
-                    <h1 class="about_article-header" style="font-size:32px;margin-bottom:20px;"><?php the_title(); ?></h1>
+                    <h1 class="about_article-header" style="font-size:clamp(22px, 3.5vw, 32px); line-height: 1.25; margin-bottom:20px;"><?php the_title(); ?></h1>
                     
                     <?php
                     $raw_hero = get_the_post_thumbnail_url( $pid, 'full' );
@@ -520,7 +533,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
         <div class="container project-gallery-header">
             <div class="section_header" style="margin-bottom:0;">
                 <span class="subtitle">Dokumentasi Pengerjaan</span>
-                <h2 class="title" style="font-size:26px;margin-bottom:0;">Foto <span class="highlight">Project</span></h2>
+                <h2 class="title" style="font-size:clamp(20px, 2.8vw, 26px);margin-bottom:0;">Foto <span class="highlight">Project</span></h2>
             </div>
         </div>
         <div class="gallery presentation" id="gjsGalleryGrid" style="padding-bottom: 36px;">
@@ -573,10 +586,10 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
             <div class="section_header" style="margin-bottom: 35px; text-align:center;">
                 <span class="subtitle" style="color:#cba85d; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; font-size:13px;">Portofolio Lainnya</span>
-                <h2 class="title" style="font-size:28px; color:#041e3a; margin-top:8px;">Proyek Terkait <span class="highlight">Griya Djaya Sentosa</span></h2>
+                <h2 class="title" style="font-size:clamp(20px, 3vw, 28px); color:#041e3a; margin-top:8px;">Proyek Terkait <span class="highlight">Griya Djaya Sentosa</span></h2>
             </div>
 
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:25px;">
+            <div class="single-proj-related-grid">
                 <?php
                 $rel_args = array(
                     'post_type'      => 'project',

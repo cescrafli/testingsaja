@@ -26,6 +26,14 @@ global $custom_css; $custom_css = 'faq'; get_header();
     }
 }
 
+@media (max-width: 768px) {
+    .faq.section { padding: 32px 0 !important; }
+    .faq_accordion-item .trigger { padding: 14px 16px !important; font-size: 14px !important; }
+    .faq_accordion-item .content { padding: 14px 16px !important; }
+    .faq_accordion-item .content .text { font-size: 13.5px !important; }
+    .faq-contact-card { padding: 16px !important; margin-top: 20px !important; }
+}
+
 /* Accordion Polish */
 .faq_accordion-item .trigger {
     border-radius: 8px 8px 0 0;

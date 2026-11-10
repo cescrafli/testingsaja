@@ -64,7 +64,7 @@ main.prod-sub-main { width: 100% !important; background-color: #ffffff !importan
 
 @media(max-width: 991px) {
     .si-grid { flex-direction: column; gap: 30px; }
-    .si-left, .si-right { flex: 1 1 100%; width: 100%; }
+    .si-left, .si-right { flex: 1 1 100%; width: 100%; min-width: 0 !important; }
     .si-left { padding: 25px 15px; }
     .si-title { font-size: clamp(24px, 5vw, 30px) !important; margin-bottom: 15px !important; }
 }

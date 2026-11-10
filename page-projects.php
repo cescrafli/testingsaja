@@ -9,7 +9,7 @@ global $custom_css; $custom_css = 'projects'; get_header();
             <div class="container">
                 
                 <div style="text-align: center; margin-bottom: 32px;">
-                    <h1 style="color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Times New Roman', Times, serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
+                    <h1 style="color: #041e3a; font-size: 38px; font-weight: 700; line-height: 1.2; margin-bottom: 0; font-family: 'Outfit', 'Inter', -apple-system, sans-serif;">Proyek yang Sudah Kami Selesaikan<br>dari Rumah Tinggal hingga Gedung Komersial</h1>
                     <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 20px; display: block;">
                         <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                     </svg>

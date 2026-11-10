@@ -19,7 +19,7 @@ get_header();
 
 /* Page Banner */
 .gjs-archive-header { padding: 104px 0 28px; text-align: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
-.gjs-archive-title { color: #041e3a; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; font-family: 'Times New Roman', Times, serif; }
+.gjs-archive-title { color: #041e3a; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; font-family: 'Outfit', 'Inter', -apple-system, sans-serif; }
 .gjs-breadcrumbs { font-size: 14px; font-weight: 500; color: #64748b; }
 .gjs-breadcrumbs a { color: #041e3a; text-decoration: none; font-weight: 600; }
 .gjs-breadcrumbs a:hover { color: #cba85d; }

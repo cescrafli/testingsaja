@@ -747,21 +747,21 @@ div[style*="white-space: nowrap"] { min-width: 0 !important; }
 
 
 <!-- Seksi Internal Link Kontekstual ke Halaman FAQ di front-page.php -->
-<section class="faq-cta-section section" style="padding: 48px 0 !important; background: linear-gradient(135deg, #041e3a 0%, #082d54 100%); color: #ffffff; position: relative; overflow: hidden; border-top: 1px solid rgba(203,168,93,0.3);">
+<section class="faq-cta-section section" style="padding: 48px 0 !important; background: #ffffff !important; color: #041e3a; position: relative; overflow: hidden; border-top: 1px solid #e2e8f0;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px;">
         <div class="faq-cta-content" style="flex: 1 1 650px;">
-            <span class="subtitle" style="display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #cba85d; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">
+            <span class="subtitle" style="display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #b89851; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">
                 Pusat Bantuan &amp; Informasi Layanan
             </span>
-            <h2 class="title" style="font-size: clamp(24px, 3vw, 34px); font-weight: 700; margin: 0 0 14px; color: #ffffff; font-family: 'Playfair Display', Georgia, serif; line-height: 1.3;">
+            <h2 class="title" style="font-size: clamp(24px, 3vw, 34px); font-weight: 800; margin: 0 0 14px; color: #041e3a !important; font-family: 'Outfit', sans-serif; line-height: 1.3;">
                 Punya Pertanyaan Seputar Fabrikasi Kusen, Fasad, Besi &amp; Kaca?
             </h2>
-            <p style="margin: 0; color: #cbd5e1; font-size: 15px; line-height: 1.7; font-family: 'Outfit', sans-serif;">
+            <p style="margin: 0; color: #475569 !important; font-size: 15px; line-height: 1.7; font-family: 'Outfit', sans-serif;">
                 Pelajari informasi lengkap mengenai prosedur survei lokasi, estimasi waktu pengerjaan, spesifikasi material, hingga ketentuan garansi proyek fabrikasi kami.
             </p>
         </div>
         <div class="faq-cta-action" style="flex: 0 0 auto;">
-            <a class="btn" href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; background: linear-gradient(135deg, #cba85d 0%, #a88235 100%); color: #041e3a; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border-radius: 8px; box-shadow: 0 6px 20px rgba(203,168,93,0.35); transition: transform 0.25s, box-shadow 0.25s;">
+            <a class="btn" href="<?php echo esc_url( home_url( '/faq/' ) ); ?>" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; background: #cba85d; color: #041e3a; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border-radius: 8px; box-shadow: 0 6px 20px rgba(203,168,93,0.35); transition: transform 0.25s, box-shadow 0.25s, background 0.25s;" onmouseover="this.style.background='#dfbe75'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#cba85d'; this.style.transform='translateY(0)';">
                 <span>Lihat FAQ Selengkapnya</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>

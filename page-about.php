@@ -1,15 +1,32 @@
 <?php
 /* Template Name: About */
 global $custom_css; $custom_css = 'about'; get_header();
-?><?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }</style>'; ?>
+?>
+<style>
+.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
+main.about-main-wrapper {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    flex: 1 0 auto !important;
+    min-height: 80vh !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.company-profile, .team, .workshop-facilities, .certificates {
+    background-color: #ffffff !important;
+    width: 100% !important;
+}
+</style>
 
-            <section class="company-profile section" style="padding-top: 104px !important; padding-bottom: 44px !important;">
+<main class="about-main-wrapper">
+            <section class="company-profile section" style="background-color: #ffffff !important; padding-top: 104px !important; padding-bottom: 44px !important;">
                 <div class="container">
                     
                     <div style="margin-bottom: 40px;">
                         <img src="<?php echo content_url('/uploads/2026/08/Griya-Djaya-Sentosa-GJS-EDIT.jpg'); ?>" alt="Griya Djaya Sentosa" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                     </div>
-                    <h1 style="font-size: 32px; font-weight: 700; color: #1a202c; margin-bottom: 25px;">PT Griya Djaya Sentosa</h1>
+                    <h1 style="font-size: 32px; font-weight: 800; color: #041e3a; margin-bottom: 25px; font-family: 'Outfit', sans-serif;">PT Griya Djaya Sentosa</h1>
                     
                     <div style="font-size: 15px; line-height: 1.8; color: #4a5568; margin-bottom: 50px;">
                         <p style="margin-bottom: 15px;"><strong>PT Griya Djaya Sentosa (GJS)</strong> merupakan Supplier dan juga Sub Kontraktor dalam menyediakan kebutuhan <strong>Kusen Pintu dan Jendela berbahan dasar UPVC, Alumunium, Kaca, dan Besi</strong>. Kegiatan usaha fabrikasi dan konstruksi kami dimulai sejak tahun 2011. Berawal dari fasilitas sederhana di kawasan Kapuk, Jakarta, komitmen kami terhadap presisi dan kualitas membawa GJS terus berkembang pesat. Kini, kami telah dipercaya menjadi mitra strategis dan aplikator resmi untuk berbagai material standar global, termasuk UPVC Conch di Indonesia.</p>
@@ -38,15 +55,15 @@ global $custom_css; $custom_css = 'about'; get_header();
                     </div>
                 </div>
             </section>
-<section class="team section">
+<section class="team section" style="background-color: #ffffff !important; padding: 40px 0 !important;">
                     <div class="container">
         <div style="display: flex; flex-wrap: wrap; gap: 50px; align-items: center;">
             <!-- Left Column: Text & Button -->
             <div style="flex: 1; min-width: 320px;" data-aos="fade-right" data-aos-duration="500">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 38px; font-weight: 700; color: #b89851; line-height: 1.25; margin-bottom: 20px;">
+                <h2 style="font-family: 'Outfit', sans-serif; font-size: 38px; font-weight: 800; color: #b89851; line-height: 1.25; margin-bottom: 20px;">
                     Tim Kami Menjamin Setiap Detail Fabrikasi hingga Instalasi
                 </h2>
-                <p style="color: #334155; line-height: 1.7; font-size: 15px; margin-bottom: 30px;">
+                <p style="color: #475569; line-height: 1.7; font-size: 15px; margin-bottom: 30px;">
                     Video di bawah menunjukkan proses produksi kusen di fasilitas fabrikasi kami &mdash; mulai dari pemotongan presisi hingga quality check sebelum pengiriman ke lokasi proyek. Standar yang sama kami terapkan di seluruh lini produk: aluminium, UPVC, fasad, besi, dan kaca.
                 </p>
                 <a href="#fasilitas-workshop" style="display: inline-block; background: linear-gradient(135deg, #cda25b 0%, #a88235 100%); color: #fff; border: none; padding: 14px 35px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(205,162,91,0.3);">LIHAT FASILITAS WORKSHOP</a>
@@ -96,28 +113,32 @@ global $custom_css; $custom_css = 'about'; get_header();
             
             ?>
 
-            <div id="fasilitas-workshop" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; scroll-margin-top: 100px;">
-                <?php 
-                $machines = array(
-                    array('file' => '1. Mesin Potong profil.jpg.jpeg', 'title' => 'Mesin Potong Profil'),
-                    array('file' => '2. Mesin Bobok.jpg.jpeg', 'title' => 'Mesin Bobok'),
-                    array('file' => '3. Potong Besi penguat upvc.jpg.jpeg', 'title' => 'Potong Besi Penguat UPVC'),
-                    array('file' => '4. Mesin V.jpg.jpeg', 'title' => 'Mesin V'),
-                    array('file' => '5. Mesin Welding.jpg.jpeg', 'title' => 'Mesin Welding')
-                );
-                foreach($machines as $machine): 
-                    $raw_img = get_template_directory_uri() . '/img/machines/' . $machine['file'] . '?v=3';
-                    $display_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'medium_large') : $raw_img;
-                    $lightbox_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'lightbox') : $raw_img;
-                ?>
-                <div style="text-align: center;">
-                    <a class="faq-gallery-link" style="display: block; border: 4px solid #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 15px;" href="<?php echo esc_url($lightbox_url); ?>" data-caption="<?php echo esc_attr($machine['title']); ?>">
-                        <img src="<?php echo esc_url($display_url); ?>" alt="<?php echo esc_attr($machine['title']); ?>" loading="lazy" decoding="async" style="object-fit: cover; width: 100%; aspect-ratio: 1/1; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
-                    </a>
-                    <h4 style="font-size: 16px; font-weight: 700; color: #1a202c; margin: 0; line-height: 1.4;"><?php echo esc_html($machine['title']); ?></h4>
+            <section class="workshop-facilities section" style="background-color: #ffffff !important; padding: 10px 0 50px !important;">
+                <div class="container">
+                    <div id="fasilitas-workshop" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; scroll-margin-top: 100px;">
+                        <?php 
+                        $machines = array(
+                            array('file' => '1. Mesin Potong profil.jpg.jpeg', 'title' => 'Mesin Potong Profil'),
+                            array('file' => '2. Mesin Bobok.jpg.jpeg', 'title' => 'Mesin Bobok'),
+                            array('file' => '3. Potong Besi penguat upvc.jpg.jpeg', 'title' => 'Potong Besi Penguat UPVC'),
+                            array('file' => '4. Mesin V.jpg.jpeg', 'title' => 'Mesin V'),
+                            array('file' => '5. Mesin Welding.jpg.jpeg', 'title' => 'Mesin Welding')
+                        );
+                        foreach($machines as $machine): 
+                            $raw_img = get_template_directory_uri() . '/img/machines/' . $machine['file'] . '?v=3';
+                            $display_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'medium_large') : $raw_img;
+                            $lightbox_url = function_exists('gjs_get_optimized_image_url') ? gjs_get_optimized_image_url($raw_img, 'lightbox') : $raw_img;
+                        ?>
+                        <div style="text-align: center;">
+                            <a class="faq-gallery-link" style="display: block; border: 4px solid #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 15px;" href="<?php echo esc_url($lightbox_url); ?>" data-caption="<?php echo esc_attr($machine['title']); ?>">
+                                <img src="<?php echo esc_url($display_url); ?>" alt="<?php echo esc_attr($machine['title']); ?>" loading="lazy" decoding="async" style="object-fit: cover; width: 100%; aspect-ratio: 1/1; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+                            </a>
+                            <h4 style="font-size: 15px; font-weight: 700; color: #041e3a; margin: 0; line-height: 1.4; font-family: 'Outfit', sans-serif;"><?php echo esc_html($machine['title']); ?></h4>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-                <?php endforeach; ?>
-            </div>
+            </section>
 
             <script>
             // Bulletproof Custom Vanilla Lightbox for About Page
@@ -191,12 +212,12 @@ global $custom_css; $custom_css = 'about'; get_header();
                 });
             });
             </script>
-            <section class="certificates section" style="padding-top: 44px !important; padding-bottom: 40px !important; overflow: hidden;">
+            <section class="certificates section" style="background-color: #ffffff !important; padding-top: 44px !important; padding-bottom: 60px !important; overflow: hidden;">
                 <div class="container">
                     <div>
                         <div class="certificates_text" style="text-align: center; margin-bottom: 40px;">
                             <span class="subtitle" style="color: #cda25b; text-transform: uppercase; font-weight: 700; letter-spacing: 3px; font-size: 24px; display: block; margin-bottom: 20px;">Certificate</span>
-                            <h2 class="title" style="font-size: 36px; line-height: 1.2; font-weight: 700; color: #1a202c; margin: 0 auto;">
+                            <h2 class="title" style="font-size: 36px; line-height: 1.25; font-weight: 800; color: #041e3a; margin: 0 auto; font-family: 'Outfit', sans-serif;">
                                 Menjamin Kualitas dan<br>Kepercayaan dalam<br>Setiap Proyek Kami
                             </h2>
                         </div>
@@ -206,35 +227,35 @@ global $custom_css; $custom_css = 'about'; get_header();
                             <div class="native-slider" id="certSlider" style="display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth;  -ms-overflow-style: none; scrollbar-width: none; padding: 10px 0;">
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" class="faq-gallery-link" data-caption="Verification of Compliance" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" alt="Verification of Compliance" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
-                                    <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">Verification of Compliance</p>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" class="faq-gallery-link" data-caption="Verification of Compliance" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>Verification-of-Compliance-768x1087-1.jpg" alt="Verification of Compliance" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 6px; border: 1px solid #e2e8f0; background: #fff;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <p style="margin-top: 15px; font-weight: 700; font-size: 16px; color: #041e3a; font-family: 'Outfit', sans-serif;">Verification of Compliance</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" alt="ZSBC" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
-                                    <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">ZSBC</p>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-768x1087-1.jpg" alt="ZSBC" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 6px; border: 1px solid #e2e8f0; background: #fff;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <p style="margin-top: 15px; font-weight: 700; font-size: 16px; color: #041e3a; font-family: 'Outfit', sans-serif;">ZSBC</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC 2" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" alt="ZSBC 2" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
-                                    <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">ZSBC 2</p>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" class="faq-gallery-link" data-caption="ZSBC 2" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>ZSBC-2-768x1087-1.jpg" alt="ZSBC 2" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 6px; border: 1px solid #e2e8f0; background: #fff;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <p style="margin-top: 15px; font-weight: 700; font-size: 16px; color: #041e3a; font-family: 'Outfit', sans-serif;">ZSBC 2</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" class="faq-gallery-link" data-caption="CONCH" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" alt="CONCH" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
-                                    <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">CONCH</p>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" class="faq-gallery-link" data-caption="CONCH" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>CONCH-768x1087-1.jpg" alt="CONCH" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 6px; border: 1px solid #e2e8f0; background: #fff;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <p style="margin-top: 15px; font-weight: 700; font-size: 16px; color: #041e3a; font-family: 'Outfit', sans-serif;">CONCH</p>
                                 </div>
                                 
                                 <div class="native-slide" style="flex: 0 0 calc(25% - 15px);  text-align: center;">
-                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" class="faq-gallery-link" data-caption="KIN LONG" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" alt="KIN LONG" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
-                                    <p style="margin-top: 15px; font-weight: 600; font-size: 16px; color: #111;">KIN LONG</p>
+                                    <a href="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" class="faq-gallery-link" data-caption="KIN LONG" style="display:block;"><img src="<?php echo content_url('/uploads/2026/08/'); ?>KIN-LONG-768x1087-1.jpg" alt="KIN LONG" style="width: 100%; aspect-ratio: 1/1.4; object-fit: contain; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 6px; border: 1px solid #e2e8f0; background: #fff;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"></a>
+                                    <p style="margin-top: 15px; font-weight: 700; font-size: 16px; color: #041e3a; font-family: 'Outfit', sans-serif;">KIN LONG</p>
                                 </div>
                                 
                             </div>
                             
                             <!-- Slider Nav -->
-                            <div id="certPrev" style="position: absolute; left: -20px; top: 40%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #a87b32; font-weight: bold; font-size: 20px; z-index: 10; transition: all 0.3s ease;">&#10094;</div>
-                            <div id="certNext" style="position: absolute; right: -20px; top: 40%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #a87b32; font-weight: bold; font-size: 20px; z-index: 10; transition: all 0.3s ease;">&#10095;</div>
+                            <div id="certPrev" style="position: absolute; left: -20px; top: 40%; transform: translateY(-50%); width: 40px; height: 40px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #b89851; font-weight: bold; font-size: 20px; z-index: 10; transition: all 0.3s ease;">&#10094;</div>
+                            <div id="certNext" style="position: absolute; right: -20px; top: 40%; transform: translateY(-50%); width: 40px; height: 40px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #b89851; font-weight: bold; font-size: 20px; z-index: 10; transition: all 0.3s ease;">&#10095;</div>
                         </div>
                         
                         <script>
@@ -285,7 +306,7 @@ global $custom_css; $custom_css = 'about'; get_header();
             
             <style>
             .native-slider::-webkit-scrollbar { display: none; }
-            #certPrev:hover, #certNext:hover { background: #fff !important; transform: translateY(-50%) scale(1.1) !important; color: #8a6528 !important; }
+            #certPrev:hover, #certNext:hover { background: #b89851 !important; color: #ffffff !important; border-color: #b89851 !important; transform: translateY(-50%) scale(1.1) !important; }
             @media (max-width: 1024px) {
                 .native-slide { flex: 0 0 calc(33.333% - 14px) !important; }
             }

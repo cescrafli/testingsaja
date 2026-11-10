@@ -462,7 +462,7 @@ function gjs_end_head_buffer() {
  */
 function cobain_scripts() {
 	// Theme stylesheet
-	wp_enqueue_style( 'cobain-style', get_stylesheet_uri(), array(), '3.2' );
+	wp_enqueue_style( 'cobain-style', get_stylesheet_uri(), array(), '3.2.3' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

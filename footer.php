@@ -33,9 +33,14 @@
     .footer-new-col { max-width: 100% !important; }
 }
 
-html, body { min-height: 100%; }
-body { display: flex; flex-direction: column; min-height: 100vh; }
-.footer-new { margin-top: 0 !important; }
+html { height: 100%; background-color: #021224; }
+body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; padding: 0; background-color: #021224; }
+main, .projects, .site-main, .company-profile, .single-main-wrapper, .blog-main-wrapper, .gjs-interior-wrapper, .prod-page, .blueprint-container, .error {
+    flex: 1 0 auto;
+    background-color: #ffffff;
+}
+.footer-new { margin-top: auto !important; margin-bottom: 0 !important; width: 100%; }
+.footer-new-bottom { margin-bottom: 0 !important; }
 </style>
 
 <footer class="footer-new">
@@ -180,7 +185,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         <button id="scrollTrigger" type="button">
             <i class="icon icon-arrow_right"></i>
         </button>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js?v=3.2.2"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/common.min.js?v=3.2.3"></script>
                         <?php
                 global $custom_js; $script_name = isset($custom_js) && !empty($custom_js) ? $custom_js : '';
         if (is_front_page() || is_page_template('front-page.php')) { $script_name = 'index'; }
@@ -193,7 +198,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
         
         if ($script_name !== '') {
         ?>
-        <script src="<?php echo get_template_directory_uri(); ?>/js/<?php echo $script_name; ?>.min.js?v=3.2"></script>
+        <script src="<?php echo get_template_directory_uri(); ?>/js/<?php echo $script_name; ?>.min.js?v=3.2.3"></script>
         <?php } ?>
         <?php wp_footer(); ?>
 <video class="video_content" style="display:none;"></video><a class="video_btn" style="display:none;" href="#"></a>

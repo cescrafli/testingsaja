@@ -45,26 +45,17 @@
               .brand { font-size: clamp(20px, 2.5vw, 30px) !important; gap: clamp(8px, 1vw, 15px) !important; white-space: nowrap; }
               .brand_logo { width: clamp(35px, 4vw, 55px) !important; height: auto !important; }
               
-              /* Standarisasi Navbar Header di Seluruh Halaman */
+              /* Standarisasi Navbar Header di Seluruh Halaman (Termasuk Beranda / Homepage) */
               .header {
-                  width: 100% !important;
-                  left: 0;
-                  z-index: 9999;
-                  transition: background-color 0.25s ease, padding 0.25s ease;
-              }
-              body:not(.home) .header,
-              .header.sticky {
                   position: fixed !important;
                   top: 0 !important;
+                  left: 0 !important;
+                  width: 100% !important;
                   background-color: #041e3a !important;
                   padding: 14px 0 !important;
-                  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-              }
-              .home .header:not(.sticky) {
-                  position: absolute;
-                  top: 0;
-                  padding: 20px 0 !important;
-                  background: transparent;
+                  box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+                  z-index: 9999 !important;
+                  transition: background-color 0.25s ease, padding 0.25s ease;
               }
               body.admin-bar .header {
                   top: 32px !important;

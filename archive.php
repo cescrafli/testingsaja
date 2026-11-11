@@ -399,14 +399,7 @@ get_header();
     <section class="blog-header-custom">
         <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
             <h1 class="bh-title"><?php the_archive_title(); ?></h1>
-            <div class="bh-accent-line"></div>
-            <nav class="bh-breadcrumbs" aria-label="Breadcrumb">
-                <a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a>
-                <span class="sep">&rsaquo;</span>
-                <a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a>
-                <span class="sep">&rsaquo;</span>
-                <span class="active"><?php single_term_title(); ?></span>
-            </nav>
+            <div class="bh-accent-line" style="margin-bottom: 0;"></div>
         </div>
     </section>
 

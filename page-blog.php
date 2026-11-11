@@ -397,12 +397,7 @@ global $custom_css; $custom_css = 'blog'; get_header();
         <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
             <h1 class="bh-title">Blog &amp; Inspirasi Proyek</h1>
             <p class="bh-subtitle">Temukan ide, inovasi fabrikasi, panduan arsitektur, dan kisah di balik setiap proyek kami.</p>
-            <div class="bh-accent-line"></div>
-            <nav class="bh-breadcrumbs" aria-label="Breadcrumb">
-                <a href="<?php echo esc_url(home_url('/')); ?>">Beranda</a>
-                <span class="sep">&rsaquo;</span>
-                <span class="active">Blog</span>
-            </nav>
+            <div class="bh-accent-line" style="margin-bottom: 0;"></div>
         </div>
     </section>
 

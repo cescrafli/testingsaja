@@ -824,10 +824,14 @@ main.prod-sub-main {
     </div>
     <!-- Main Options -->
     <div>
-        <div style="position: relative; max-width: 700px; margin: 0 auto 36px; text-align:center;">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/badge_warranty.png?v=1787832010" alt="10 Year Warranty" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 120px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); z-index: 10;">
+        <div style="max-width: 700px; margin: 0 auto 36px; text-align:center;">
             <div class="prod-sub-subtitle">PRODUK ARSITEKTURAL</div>
-            <h1 class="prod-sub-title" style="margin-bottom: 0;">Sistem Kusen & Pintu Jendela uPVC</h1>
+            <h1 class="prod-sub-title" style="margin-bottom: 14px;">Sistem Kusen &amp; Pintu Jendela uPVC</h1>
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 14px;">
+                <a href="<?php echo home_url('/warranty/'); ?>" title="Garansi Resmi Profil uPVC 10 Tahun" style="display: inline-block; transition: transform 0.25s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/badge_warranty.png?v=1787832010" alt="10 Year Warranty - Garansi Resmi Profil 10 Tahun" style="width: 85px; height: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.12)); display: block;">
+                </a>
+            </div>
         </div>
         
         <div class="prod-grid" style="max-width: 700px; margin: 0 auto;">

@@ -61,7 +61,7 @@ global $custom_css; $custom_css = 'product'; get_header();
         justify-content: center;
         gap: clamp(8px, 1.8vw, 14px);
         flex-wrap: wrap;
-        margin-bottom: 32px;
+        margin-bottom: clamp(24px, 3.5vw, 40px);
     }
     .product-trust-pill {
         display: inline-flex;
@@ -86,35 +86,6 @@ global $custom_css; $custom_css = 'product'; get_header();
     .product-trust-pill svg {
         color: #cba85d;
         flex-shrink: 0;
-    }
-
-    /* Filters (Exact Projects Page Filter Styling) */
-    .product-filters {
-        display: flex;
-        justify-content: center;
-        gap: clamp(8px, 1.8vw, 16px);
-        list-style: none;
-        padding: 0;
-        margin-bottom: clamp(24px, 4vw, 40px);
-        flex-wrap: wrap;
-    }
-    .product-filters li {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #4a5568;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        padding: 7px 16px;
-        border-radius: 20px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-    }
-    .product-filters li.active, 
-    .product-filters li:hover {
-        color: #ffffff;
-        background: #cba85d;
-        border-color: #cba85d;
-        box-shadow: 0 4px 14px rgba(203, 168, 93, 0.25);
     }
 
     /* Product Grid & Cards (Projects Card Aesthetics) */
@@ -629,17 +600,6 @@ global $custom_css; $custom_css = 'product'; get_header();
                     Kedap Suara 30-40dB & Anti Bocor
                 </span>
             </div>
-
-            <!-- Category Filters (Exact Projects Page Filter Buttons) -->
-            <ul class="product-filters" id="productFilters">
-                <li class="active" data-filter="all">Semua Produk (6)</li>
-                <li data-filter="upvc">Kusen & Pintu uPVC</li>
-                <li data-filter="alumunium">Alumunium</li>
-                <li data-filter="kaca">Kaca Tempered</li>
-                <li data-filter="besi">Besi & Stainless</li>
-                <li data-filter="fasad">Fasad (ACP & Curtain Wall)</li>
-                <li data-filter="interior">Interior Fit-Out</li>
-            </ul>
         </div>
 
         <!-- PRODUCT CARDS GRID (Projects Style Card Redesign) -->
@@ -685,11 +645,11 @@ global $custom_css; $custom_css = 'product'; get_header();
             <!-- CARD 2: ALUMUNIUM -->
             <a href="<?php echo home_url('/product/alumunium/'); ?>" class="product-card" data-category="alumunium">
                 <div class="product-card-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/Screenshot-2024-10-30-at-11.21.32.png" alt="Kusen & Jendela Alumunium YKK Alexindo" loading="lazy">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/Screenshot-2024-10-30-at-11.21.32.png" alt="Kusen & Jendela Alumunium Arsitektural" loading="lazy">
                     <span class="product-card-badge-top">Struktur Kokoh</span>
                     <span class="product-card-badge-sub">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="#cba85d" stroke-width="2.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        YKK AP & Alexindo
+                        Profil 3 & 4 Inch
                     </span>
                 </div>
                 <div class="product-card-body">
@@ -701,7 +661,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <ul class="product-card-features">
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Pilihan Merek: YKK AP, Alexindo, Forta
+                            Pilihan Profil 3 & 4 Inch Berstandar SNI
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -800,7 +760,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <span class="product-card-badge-top">Eksterior Gedung</span>
                     <span class="product-card-badge-sub">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="#cba85d" stroke-width="2.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        ACP Seven & Marks
+                        ACP & Curtain Wall
                     </span>
                 </div>
                 <div class="product-card-body">
@@ -812,7 +772,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <ul class="product-card-features">
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            ACP Seven, Marks, Alucobond Resmi
+                            Panel ACP PVDF & PE Kualitas Arsitektural
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -883,7 +843,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                                 <svg class="product-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </div>
                             <div class="product-acc-body" style="display: block;">
-                                Kami hanya menggunakan bahan baku pilihan dari produsen resmi berstandar SNI dan internasional (uPVC Conch/Falken, Alumunium YKK AP/Alexindo, Kaca Asahimas). Hal ini memastikan setiap produk memiliki daya tahan cuaca maksimal dan usia pakai puluhan tahun.
+                                Kami hanya menggunakan bahan baku pilihan berstandar mutu SNI dan internasional, termasuk profil resmi uPVC Conch dan Falken bergaransi 10 tahun, profil alumunium arsitektural presisi, serta kaca safety glass berkualitas tinggi. Hal ini memastikan setiap produk memiliki daya tahan cuaca maksimal dan usia pakai puluhan tahun.
                             </div>
                         </div>
 
@@ -961,7 +921,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <div class="product-spec-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
-                    <h4 class="product-spec-title">Alumunium YKK & Alexindo</h4>
+                    <h4 class="product-spec-title">Alumunium Arsitektural Presisi</h4>
                     <p class="product-spec-desc">Ketebalan presisi standar arsitektural dengan lapisan anodize / powder coating premium tahan gores dan anti karat.</p>
                 </div>
 
@@ -994,7 +954,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                     </div>
                     <h4 class="product-spec-title">Interior Fit-Out & Joinery</h4>
-                    <p class="product-spec-desc">Material plywood kualitas tinggi, finishing HPL Taco/Duco rapi, didukung perancangan 3D realistis sesuai luas ruangan.</p>
+                    <p class="product-spec-desc">Material plywood kualitas tinggi, finishing HPL dan cat Duco rapi, didukung perancangan 3D realistis sesuai luas ruangan.</p>
                 </div>
             </div>
         </div>
@@ -1021,34 +981,6 @@ global $custom_css; $custom_css = 'product'; get_header();
 <!-- product main content end -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Dynamic Filter Interaction (Exact Projects Page Functionality)
-    var filterItems = document.querySelectorAll('#productFilters li');
-    var productCards = Array.from(document.querySelectorAll('#productGrid .product-card'));
-
-    filterItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            // Remove active class from all
-            filterItems.forEach(function(el) { el.classList.remove('active'); });
-            this.classList.add('active');
-
-            var filterValue = this.getAttribute('data-filter');
-
-            productCards.forEach(function(card) {
-                if (filterValue === 'all') {
-                    card.style.display = 'flex';
-                } else {
-                    if (card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        });
-    });
-});
-
 // Interactive Accordion Function for "Mengapa Memilih Kami"
 function toggleProductAcc(element) {
     var item = element.parentElement;

@@ -94,44 +94,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
 /* Solid Header */
 .header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 
-/* Contact Hero Header Section */
-.contact-hero {
-    background: linear-gradient(135deg, #041e3a 0%, #082d54 55%, #051a30 100%);
-    padding: 120px 20px 48px;
+/* ========================================================
+   Clean White Hero Header Section (Projects Page Style)
+   ======================================================== */
+.contact-hero-white {
+    background: #ffffff;
+    padding: 104px 20px 36px;
     position: relative;
-    color: #ffffff;
     text-align: center;
-    border-bottom: 1px solid rgba(203, 168, 93, 0.25);
+    border-bottom: 1px solid #f1f5f9;
 }
 .contact-hero-container {
     max-width: 860px;
     margin: 0 auto;
 }
-.contact-hero-eyebrow {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 800;
-    color: #cba85d;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    font-family: 'Outfit', sans-serif;
-}
 .contact-hero-title {
-    font-size: clamp(30px, 4.5vw, 44px);
-    font-weight: 800;
-    font-family: 'Outfit', sans-serif;
-    color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    color: #041e3a;
+    font-size: clamp(24px, 3.8vw, 38px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0;
+    font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
     letter-spacing: -0.5px;
 }
+.contact-hero-subtitle-lead {
+    font-size: clamp(15px, 2.2vw, 20px);
+    font-weight: 600;
+    color: #041e3a;
+    display: block;
+    margin-top: 4px;
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+.contact-gold-arc {
+    margin: 10px auto 16px;
+    display: block;
+}
 .contact-hero-desc {
-    font-size: clamp(14px, 1.8vw, 16px);
-    color: #cbd5e1;
+    font-size: clamp(14px, 1.6vw, 15px);
+    color: #64748b;
     line-height: 1.65;
-    margin-bottom: 24px;
-    max-width: 740px;
+    margin-bottom: 22px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -139,34 +142,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blueprint'])) {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: clamp(8px, 1.8vw, 14px);
     flex-wrap: wrap;
-    margin-top: 6px;
+    margin-top: 8px;
 }
 .contact-trust-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 7px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 7px 18px;
     border-radius: 50px;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 600;
-    color: #e2e8f0;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    color: #334155;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.25s ease;
+}
+.contact-trust-badge:hover {
+    border-color: #cba85d;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(203, 168, 93, 0.15);
 }
 @media (max-width: 768px) {
-    .contact-hero {
-        padding: 95px 16px 36px;
+    .contact-hero-white {
+        padding: 84px 16px 28px !important;
     }
     .contact-trust-strip {
         gap: 8px;
     }
     .contact-trust-badge {
         font-size: 12px;
-        padding: 6px 12px;
+        padding: 5px 12px;
     }
 }
 
@@ -606,17 +614,23 @@ main {
 }
 </style>
 
-<!-- 1. Hero Header Section -->
-<section class="contact-hero">
+<main class="contact-page-main" style="background: #ffffff;">
+<!-- 1. Hero Header Section (Clean White - Projects Page Style) -->
+<section class="contact-hero-white">
     <div class="contact-hero-container">
-        <span class="contact-hero-eyebrow">KONSULTASI &amp; ESTIMASI PROYEK</span>
-        <h1 class="contact-hero-title">Hubungi Kami &amp; Konsultasi Proyek</h1>
+        <h1 class="contact-hero-title">
+            Hubungi Kami &amp; Konsultasi Proyek<br>
+            <span class="contact-hero-subtitle-lead">Spesialis Kusen UPVC &amp; Aluminium Arsitektural</span>
+        </h1>
+        <svg class="contact-gold-arc" width="300" height="15" viewBox="0 0 300 15">
+            <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
         <p class="contact-hero-desc">
             Diskusikan denah arsitektur, gambar kerja, atau kebutuhan spesifikasi kusen UPVC Conch, aluminium arsitektural, kaca tempered, dan fasad curtain wall bersama tim engineering kami. Layanan survei lokasi pengukuran presisi tersedia gratis se-Jabodetabek.
         </p>
         <div class="contact-trust-strip">
             <div class="contact-trust-badge">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 <span>Respon Kilat via WhatsApp</span>
             </div>
             <div class="contact-trust-badge">
@@ -624,7 +638,7 @@ main {
                 <span>Gratis Survei Ukuran &amp; RAB</span>
             </div>
             <div class="contact-trust-badge">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 <span>Garansi Resmi Pabrik 10 Tahun</span>
             </div>
         </div>

@@ -406,8 +406,10 @@ get_header();
     <!-- Header Banner -->
     <header class="blog-header-custom">
         <h1 class="bh-title">Hasil Pencarian: &ldquo;<?php echo esc_html(get_search_query()); ?>&rdquo;</h1>
+        <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 16px; display: block;">
+            <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
         <p class="bh-subtitle">Menampilkan artikel, panduan teknis, dan portofolio terkait kata kunci pencarian Anda</p>
-        <div class="bh-accent-line"></div>
         <div class="bh-breadcrumbs">
             <a href="<?php echo home_url('/'); ?>">Beranda</a>
             <span>/</span>

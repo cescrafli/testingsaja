@@ -27,17 +27,17 @@ global $custom_css; $custom_css = 'blog'; get_header();
 }
 .bh-title {
     color: #041e3a;
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 800;
+    font-size: clamp(24px, 3.8vw, 38px);
+    font-weight: 700;
     line-height: 1.25;
-    margin: 0 0 10px;
+    margin: 0;
     font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
     letter-spacing: -0.5px;
 }
 .bh-subtitle {
     font-size: clamp(14px, 1.2vw, 16px);
     color: #64748b;
-    margin: 0 auto 16px;
+    margin: 0 auto;
     max-width: 680px;
     line-height: 1.6;
     font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
@@ -393,8 +393,10 @@ global $custom_css; $custom_css = 'blog'; get_header();
     <section class="blog-header-custom">
         <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
             <h1 class="bh-title">Blog &amp; Inspirasi Proyek</h1>
-            <p class="bh-subtitle">Temukan ide, inovasi fabrikasi, panduan arsitektur, dan kisah di balik setiap proyek kami.</p>
-            <div class="bh-accent-line" style="margin-bottom: 0;"></div>
+            <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 16px; display: block;">
+                <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            <p class="bh-subtitle" style="margin-bottom: 0;">Temukan ide, inovasi fabrikasi, panduan arsitektur, dan kisah di balik setiap proyek kami.</p>
         </div>
     </section>
 

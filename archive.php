@@ -399,7 +399,9 @@ get_header();
     <section class="blog-header-custom">
         <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 20px;">
             <h1 class="bh-title"><?php the_archive_title(); ?></h1>
-            <div class="bh-accent-line" style="margin-bottom: 0;"></div>
+            <svg width="300" height="15" viewBox="0 0 300 15" style="margin: 10px auto 16px; display: block;">
+                <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
         </div>
     </section>
 

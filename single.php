@@ -118,11 +118,6 @@ if (!$img_url) $img_url = get_template_directory_uri() . '/img/placeholder.jpg?v
 <main class="single-main-wrapper">
     <div class="container">
         <article class="single-article-box">
-            <nav aria-label="Breadcrumb" style="font-size:13px; color:#64748b; margin-bottom:14px;">
-                <a href="<?php echo esc_url(home_url('/')); ?>" style="color:#64748b; text-decoration:none;">Beranda</a> &nbsp;/&nbsp;
-                <a href="<?php echo esc_url(home_url('/blog/')); ?>" style="color:#64748b; text-decoration:none;">Blog</a> &nbsp;/&nbsp;
-                <span style="color:#cba85d; font-weight:600;"><?php the_title(); ?></span>
-            </nav>
             <div class="single-meta-top">
                 <?php 
                 $categories = get_the_category();

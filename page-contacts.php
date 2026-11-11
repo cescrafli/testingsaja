@@ -524,70 +524,142 @@ main {
     color: #0f172a;
     font-weight: 600;
 }
-.contact-direct-info {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid #f1f5f9;
+/* Kontak Langsung & Tombol Aksi */
+.contact-direct-box {
+    margin-top: 20px;
+    padding: 18px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+.contact-direct-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 .contact-direct-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 13px;
+    font-size: 13.5px;
     color: #334155;
-    margin-bottom: 10px;
+    transition: transform 0.2s ease;
 }
-.contact-direct-item:last-child {
-    margin-bottom: 0;
+.contact-direct-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 12px;
+    transition: all 0.2s ease;
 }
-.contact-direct-item a {
+.contact-icon-phone {
+    color: #041e3a;
+    background: #eef2f6;
+    border: 1px solid #dbeafe;
+}
+.contact-icon-wa {
+    color: #16a34a;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+}
+.contact-icon-mail {
+    color: #b8923f;
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+}
+.contact-direct-label {
+    width: 82px;
+    flex-shrink: 0;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 13.5px;
+}
+.contact-direct-sep {
+    margin-right: 10px;
+    color: #94a3b8;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.contact-direct-link {
     color: #041e3a;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s;
+    font-weight: 700;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    word-break: break-all;
 }
-.contact-direct-item a:hover {
+.contact-direct-link:hover {
     color: #cba85d;
+    text-decoration: underline;
+}
+.contact-direct-item:hover .contact-direct-icon {
+    transform: scale(1.1);
 }
 .contact-action-btns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
 }
 .contact-btn-nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 6px;
-    padding: 10px 14px;
-    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
+    box-sizing: border-box;
 }
 .contact-btn-map {
     background: #041e3a;
     color: #ffffff;
+    border: 1px solid #041e3a;
+    box-shadow: 0 2px 6px rgba(4, 30, 58, 0.12);
 }
 .contact-btn-map:hover {
     background: #0b2f59;
+    border-color: #0b2f59;
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(4, 30, 58, 0.2);
 }
 .contact-btn-wa {
     background: #25d366;
     color: #ffffff;
+    border: 1px solid #25d366;
+    box-shadow: 0 2px 6px rgba(37, 211, 102, 0.15);
 }
 .contact-btn-wa:hover {
     background: #1eb956;
+    border-color: #1eb956;
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(37, 211, 102, 0.25);
 }
 @media (max-width: 480px) {
     .contact-action-btns {
         grid-template-columns: 1fr;
+        gap: 10px;
     }
+    .contact-direct-label {
+        width: 74px;
+        font-size: 12.5px;
+    }
+    .contact-direct-link {
+        font-size: 13px;
+    }
+}
 }
 
 /* Responsive Media Queries */
@@ -793,32 +865,46 @@ main {
                         </div>
                     </div>
 
-                    <!-- Kontak Langsung -->
-                    <div class="contact-direct-info">
-                        <div class="contact-direct-item">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <span>Telepon: <a href="tel:+622180476151">(021) 8047 6151</a></span>
+                    <!-- Kontak Langsung & Tombol Aksi -->
+                    <div class="contact-direct-box">
+                        <div class="contact-direct-list">
+                            <div class="contact-direct-item">
+                                <span class="contact-direct-icon contact-icon-phone">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </span>
+                                <span class="contact-direct-label">Telepon</span>
+                                <span class="contact-direct-sep">:</span>
+                                <a href="tel:+622180476151" class="contact-direct-link">(021) 8047 6151</a>
+                            </div>
+                            <div class="contact-direct-item">
+                                <span class="contact-direct-icon contact-icon-wa">
+                                    <svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+                                </span>
+                                <span class="contact-direct-label">WhatsApp</span>
+                                <span class="contact-direct-sep">:</span>
+                                <a href="https://wa.me/628111021088" target="_blank" class="contact-direct-link">+62 811-102-1088</a>
+                            </div>
+                            <div class="contact-direct-item">
+                                <span class="contact-direct-icon contact-icon-mail">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </span>
+                                <span class="contact-direct-label">Email</span>
+                                <span class="contact-direct-sep">:</span>
+                                <a href="mailto:info@griyadjayasentosa.id" class="contact-direct-link">info@griyadjayasentosa.id</a>
+                            </div>
                         </div>
-                        <div class="contact-direct-item">
-                            <svg width="15" height="15" viewBox="0 0 448 512" fill="#25d366"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
-                            <span>WhatsApp: <a href="https://wa.me/628111021088" target="_blank">+62 811-102-1088</a></span>
-                        </div>
-                        <div class="contact-direct-item">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#041e3a" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span>Email: <a href="mailto:info@griyadjayasentosa.id">info@griyadjayasentosa.id</a></span>
-                        </div>
-                    </div>
 
-                    <!-- Tombol Aksi -->
-                    <div class="contact-action-btns">
-                        <a href="https://maps.google.com/?q=Griya+Djaya+Sentosa+Cileungsi" target="_blank" class="contact-btn-nav contact-btn-map">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Petunjuk Arah Maps
-                        </a>
-                        <a href="https://wa.me/628111021088?text=Halo%20Griya%20Djaya%20Sentosa,%20saya%20ingin%20konsultasi%20mengenai%20kebutuhan%20proyek%20saya" target="_blank" class="contact-btn-nav contact-btn-wa">
-                            <svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
-                            Chat WhatsApp
-                        </a>
+                        <!-- Tombol Aksi -->
+                        <div class="contact-action-btns">
+                            <a href="https://maps.google.com/?q=Griya+Djaya+Sentosa+Cileungsi" target="_blank" class="contact-btn-nav contact-btn-map">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Petunjuk Arah Maps
+                            </a>
+                            <a href="https://wa.me/628111021088?text=Halo%20Griya%20Djaya%20Sentosa,%20saya%20ingin%20konsultasi%20mengenai%20kebutuhan%20proyek%20saya" target="_blank" class="contact-btn-nav contact-btn-wa">
+                                <svg width="15" height="15" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path></svg>
+                                Chat WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

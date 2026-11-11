@@ -420,7 +420,6 @@ get_header();
         <article class="blog-card">
             <a href="<?php the_permalink(); ?>" class="blog-card-img-wrap" aria-label="<?php the_title_attribute(); ?>">
                 <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php the_title_attribute(); ?>" class="blog-card-img" loading="lazy">
-                <span class="blog-card-badge"><?php echo $cat_name; ?></span>
             </a>
             <div class="blog-card-body">
                 <div class="blog-card-meta">

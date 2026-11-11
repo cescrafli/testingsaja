@@ -13,72 +13,74 @@ global $custom_css; $custom_css = 'faq'; get_header();
 }
 
 /* ========================================================
-   Hero Header Section
+   Clean White Hero Header Section (Projects Page Style)
    ======================================================== */
-.faq-hero {
-    background: linear-gradient(135deg, #041e3a 0%, #082d54 55%, #051a30 100%);
-    padding: 120px 20px 50px;
+.faq-hero-white {
+    background: #ffffff;
+    padding: 104px 20px 36px;
     position: relative;
-    color: #ffffff;
     text-align: center;
-    border-bottom: 1px solid rgba(203, 168, 93, 0.25);
+    border-bottom: 1px solid #f1f5f9;
 }
 .faq-hero-container {
     max-width: 860px;
     margin: 0 auto;
 }
-.faq-hero-eyebrow {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 800;
-    color: #cba85d;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    font-family: 'Outfit', sans-serif;
-}
 .faq-hero-title {
-    font-size: clamp(30px, 4.5vw, 46px);
-    font-weight: 800;
-    font-family: 'Outfit', sans-serif;
-    color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    color: #041e3a;
+    font-size: clamp(24px, 3.8vw, 38px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0;
+    font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
     letter-spacing: -0.5px;
 }
+.faq-hero-subtitle-lead {
+    font-size: clamp(15px, 2.2vw, 20px);
+    font-weight: 600;
+    color: #041e3a;
+    display: block;
+    margin-top: 4px;
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+.faq-gold-arc {
+    margin: 10px auto 16px;
+    display: block;
+}
 .faq-hero-desc {
-    font-size: clamp(14px, 1.8vw, 16.5px);
-    color: #cbd5e1;
+    font-size: clamp(14px, 1.6vw, 15px);
+    color: #64748b;
     line-height: 1.65;
-    margin-bottom: 28px;
-    max-width: 720px;
+    margin-bottom: 22px;
+    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Live Search Box */
+/* Light-Themed Search Box */
 .faq-search-wrap {
-    max-width: 620px;
-    margin: 0 auto 24px;
+    max-width: 580px;
+    margin: 0 auto 18px;
     position: relative;
 }
 .faq-search-input-box {
     display: flex;
     align-items: center;
-    background: #ffffff;
+    background: #f8fafc;
     border-radius: 50px;
-    padding: 6px 12px 6px 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    border: 2px solid transparent;
+    padding: 5px 14px 5px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1.5px solid #e2e8f0;
     transition: all 0.25s ease;
 }
 .faq-search-input-box:focus-within {
     border-color: #cba85d;
-    box-shadow: 0 12px 35px rgba(203, 168, 93, 0.3);
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(203, 168, 93, 0.2);
 }
 .faq-search-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     color: #041e3a;
     flex-shrink: 0;
     margin-right: 12px;
@@ -88,10 +90,10 @@ global $custom_css; $custom_css = 'faq'; get_header();
     border: none;
     outline: none;
     background: transparent;
-    font-size: 15px;
+    font-size: 14.5px;
     color: #0f172a;
     font-family: inherit;
-    padding: 8px 0;
+    padding: 7px 0;
 }
 .faq-search-input::placeholder {
     color: #94a3b8;
@@ -100,14 +102,14 @@ global $custom_css; $custom_css = 'faq'; get_header();
     background: #e2e8f0;
     border: none;
     border-radius: 50%;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     display: none;
     align-items: center;
     justify-content: center;
     color: #475569;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1;
     transition: all 0.2s ease;
     flex-shrink: 0;
@@ -118,38 +120,39 @@ global $custom_css; $custom_css = 'faq'; get_header();
     color: #0f172a;
 }
 
-/* Category Filter Pills */
+/* Category Filter Pills (Matches .projects-filters) */
 .faq-filter-pills {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: clamp(8px, 1.8vw, 12px);
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 6px;
+    padding: 0;
+    list-style: none;
 }
 .faq-pill {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #e2e8f0;
-    padding: 7px 16px;
-    border-radius: 50px;
-    font-size: 13px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #4a5568;
+    padding: 7px 18px;
+    border-radius: 25px;
+    font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+    font-family: inherit;
 }
 .faq-pill:hover {
-    background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.35);
+    background: #cba85d;
+    border-color: #cba85d;
 }
 .faq-pill.active {
+    color: #ffffff;
     background: #cba85d;
-    color: #041e3a;
     border-color: #cba85d;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(203, 168, 93, 0.35);
+    box-shadow: 0 4px 12px rgba(203, 168, 93, 0.3);
 }
 
 /* ========================================================
@@ -157,7 +160,7 @@ global $custom_css; $custom_css = 'faq'; get_header();
    ======================================================== */
 .faq-main-wrapper {
     background-color: #f8fafc;
-    padding: 50px 0 70px;
+    padding: 44px 0 70px;
 }
 .faq-grid-layout {
     display: grid;
@@ -524,11 +527,11 @@ global $custom_css; $custom_css = 'faq'; get_header();
     }
 }
 @media (max-width: 768px) {
-    .faq-hero {
-        padding: 95px 16px 40px;
+    .faq-hero-white {
+        padding: 84px 16px 28px !important;
     }
     .faq-main-wrapper {
-        padding: 32px 0 50px;
+        padding: 30px 0 50px;
     }
     .faq-trigger {
         padding: 16px 16px;
@@ -539,15 +542,24 @@ global $custom_css; $custom_css = 'faq'; get_header();
     .faq-question-title {
         font-size: 15px;
     }
+    .faq-pill {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
 }
 </style>
 
-<main>
-    <!-- 1. Hero Header & Live Search Section -->
-    <section class="faq-hero">
+<main class="faq-page-main" style="background: #ffffff;">
+    <!-- 1. Hero Header Section (Clean White - Projects Page Style) -->
+    <section class="faq-hero-white">
         <div class="faq-hero-container">
-            <span class="faq-hero-eyebrow">PUSAT BANTUAN &amp; INFORMASI RESMI</span>
-            <h1 class="faq-hero-title">Pertanyaan yang Sering Diajukan</h1>
+            <h1 class="faq-hero-title">
+                Pertanyaan yang Sering Diajukan<br>
+                <span class="faq-hero-subtitle-lead">Seputar Produk, Pemesanan &amp; Garansi Resmi</span>
+            </h1>
+            <svg class="faq-gold-arc" width="300" height="15" viewBox="0 0 300 15">
+                <path d="M 0,12 Q 150,0 300,12" stroke="#cba85d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
             <p class="faq-hero-desc">
                 Temukan jawaban lengkap dan transparan seputar spesifikasi material kusen UPVC Conch, aluminium arsitektural, sistem fasad, alur pemesanan, hingga garansi resmi pekerjaan kami.
             </p>
@@ -564,9 +576,9 @@ global $custom_css; $custom_css = 'faq'; get_header();
                 </div>
             </div>
 
-            <!-- Category Filter Pills -->
+            <!-- Category Filter Pills (Matches Projects page filter style) -->
             <div class="faq-filter-pills" id="faqFilterPills">
-                <button type="button" class="faq-pill active" data-filter="all">Semua Pertanyaan</button>
+                <button type="button" class="faq-pill active" data-filter="all">Semua Kategori</button>
                 <button type="button" class="faq-pill" data-filter="material">Material &amp; Spesifikasi</button>
                 <button type="button" class="faq-pill" data-filter="layanan">Layanan &amp; Pemesanan</button>
                 <button type="button" class="faq-pill" data-filter="proyek">Proyek &amp; Wilayah</button>

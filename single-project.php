@@ -430,11 +430,6 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
         <div class="container">
             <div class="about_content">
                 <article class="about_article">
-                    <nav aria-label="Breadcrumb" style="font-size:13px; color:#64748b; margin-bottom:14px;">
-                        <a href="<?php echo esc_url( home_url('/') ); ?>" style="color:#64748b; text-decoration:none;">Beranda</a> &nbsp;/&nbsp;
-                        <a href="<?php echo esc_url( home_url('/projects/') ); ?>" style="color:#64748b; text-decoration:none;">Proyek</a> &nbsp;/&nbsp;
-                        <span style="color:#cba85d; font-weight:600;"><?php the_title(); ?></span>
-                    </nav>
                     <h1 class="about_article-header" style="font-size:clamp(22px, 3.5vw, 32px); line-height: 1.25; margin-bottom:20px;"><?php the_title(); ?></h1>
                     
                     <?php

@@ -142,6 +142,86 @@ main.prod-sub-main {
     text-align: center;
 }
 
+/* UPVC Header with Dynamic Left-Aligned Warranty Badge */
+.upvc-main-header {
+    max-width: 740px;
+    margin: 0 auto 36px;
+    padding: 0 10px;
+}
+.upvc-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 3.2vw, 30px);
+}
+.upvc-warranty-link {
+    flex-shrink: 0;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+    line-height: 0;
+}
+.upvc-warranty-link:hover {
+    transform: scale(1.08) rotate(-2deg);
+}
+.upvc-warranty-img {
+    width: clamp(90px, 12vw, 118px);
+    height: auto;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
+    display: block;
+}
+.upvc-title-group {
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+}
+.upvc-eyebrow {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #cba85d;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+}
+.upvc-main-title {
+    font-size: clamp(24px, 3.8vw, 38px);
+    font-weight: 800;
+    color: #041e3a;
+    line-height: 1.22;
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.5px;
+}
+@media (max-width: 600px) {
+    .upvc-header-flex {
+        gap: 14px;
+    }
+    .upvc-warranty-img {
+        width: clamp(76px, 19vw, 92px);
+    }
+    .upvc-eyebrow {
+        font-size: 11.5px;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+    }
+    .upvc-main-title {
+        font-size: clamp(20px, 5.2vw, 26px);
+        line-height: 1.25;
+    }
+}
+@media (max-width: 420px) {
+    .upvc-header-flex {
+        gap: 12px;
+    }
+    .upvc-warranty-img {
+        width: 72px;
+    }
+    .upvc-main-title {
+        font-size: 19px;
+    }
+}
+
 /* Main & Detailed Grid for Index/Pintu/Jendela Views */
 .prod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; text-align: center; justify-content: center; }
 @media(max-width: 575px) { .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
@@ -824,13 +904,15 @@ main.prod-sub-main {
     </div>
     <!-- Main Options -->
     <div>
-        <div style="max-width: 700px; margin: 0 auto 36px; text-align:center;">
-            <div class="prod-sub-subtitle">PRODUK ARSITEKTURAL</div>
-            <h1 class="prod-sub-title" style="margin-bottom: 14px;">Sistem Kusen &amp; Pintu Jendela uPVC</h1>
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 14px;">
-                <a href="<?php echo home_url('/warranty/'); ?>" title="Garansi Resmi Profil uPVC 10 Tahun" style="display: inline-block; transition: transform 0.25s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/badge_warranty.png?v=1787832010" alt="10 Year Warranty - Garansi Resmi Profil 10 Tahun" style="width: 85px; height: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.12)); display: block;">
+        <div class="upvc-main-header">
+            <div class="upvc-header-flex">
+                <a href="<?php echo home_url('/warranty/'); ?>" class="upvc-warranty-link" title="Garansi Resmi Profil uPVC 10 Tahun (Klik untuk rincian garansi)">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/badge_warranty.png?v=1787832010" alt="10 Year Warranty - Garansi Resmi Profil 10 Tahun" class="upvc-warranty-img">
                 </a>
+                <div class="upvc-title-group">
+                    <div class="upvc-eyebrow">PRODUK ARSITEKTURAL</div>
+                    <h1 class="upvc-main-title">Sistem Kusen &amp; Pintu Jendela uPVC</h1>
+                </div>
             </div>
         </div>
         

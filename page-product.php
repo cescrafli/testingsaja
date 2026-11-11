@@ -645,11 +645,11 @@ global $custom_css; $custom_css = 'product'; get_header();
             <!-- CARD 2: ALUMUNIUM -->
             <a href="<?php echo home_url('/product/alumunium/'); ?>" class="product-card" data-category="alumunium">
                 <div class="product-card-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/Screenshot-2024-10-30-at-11.21.32.png" alt="Kusen & Jendela Alumunium Arsitektural" loading="lazy">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/Screenshot-2024-10-30-at-11.21.32.png" alt="Kusen & Jendela Alumunium YKK Alexindo" loading="lazy">
                     <span class="product-card-badge-top">Struktur Kokoh</span>
                     <span class="product-card-badge-sub">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="#cba85d" stroke-width="2.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        Profil 3 & 4 Inch
+                        YKK AP & Alexindo
                     </span>
                 </div>
                 <div class="product-card-body">
@@ -661,7 +661,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <ul class="product-card-features">
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Pilihan Profil 3 & 4 Inch Berstandar SNI
+                            Pilihan Merek: YKK AP, Alexindo, Forta
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -760,7 +760,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <span class="product-card-badge-top">Eksterior Gedung</span>
                     <span class="product-card-badge-sub">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="#cba85d" stroke-width="2.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        ACP & Curtain Wall
+                        ACP Seven & Marks
                     </span>
                 </div>
                 <div class="product-card-body">
@@ -772,7 +772,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <ul class="product-card-features">
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Panel ACP PVDF & PE Kualitas Arsitektural
+                            ACP Seven, Marks, Alucobond Resmi
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -843,7 +843,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                                 <svg class="product-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </div>
                             <div class="product-acc-body" style="display: block;">
-                                Kami hanya menggunakan bahan baku pilihan berstandar mutu SNI dan internasional, termasuk profil resmi uPVC Conch dan Falken bergaransi 10 tahun, profil alumunium arsitektural presisi, serta kaca safety glass berkualitas tinggi. Hal ini memastikan setiap produk memiliki daya tahan cuaca maksimal dan usia pakai puluhan tahun.
+                                Kami hanya menggunakan bahan baku pilihan dari produsen resmi berstandar SNI dan internasional (uPVC Conch/Falken, Alumunium YKK AP/Alexindo, Kaca Asahimas). Hal ini memastikan setiap produk memiliki daya tahan cuaca maksimal dan usia pakai puluhan tahun.
                             </div>
                         </div>
 
@@ -921,7 +921,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                     <div class="product-spec-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
-                    <h4 class="product-spec-title">Alumunium Arsitektural Presisi</h4>
+                    <h4 class="product-spec-title">Alumunium YKK & Alexindo</h4>
                     <p class="product-spec-desc">Ketebalan presisi standar arsitektural dengan lapisan anodize / powder coating premium tahan gores dan anti karat.</p>
                 </div>
 
@@ -954,7 +954,7 @@ global $custom_css; $custom_css = 'product'; get_header();
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                     </div>
                     <h4 class="product-spec-title">Interior Fit-Out & Joinery</h4>
-                    <p class="product-spec-desc">Material plywood kualitas tinggi, finishing HPL dan cat Duco rapi, didukung perancangan 3D realistis sesuai luas ruangan.</p>
+                    <p class="product-spec-desc">Material plywood kualitas tinggi, finishing HPL Taco/Duco rapi, didukung perancangan 3D realistis sesuai luas ruangan.</p>
                 </div>
             </div>
         </div>

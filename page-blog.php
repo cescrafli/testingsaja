@@ -3,9 +3,6 @@
 global $custom_css; $custom_css = 'blog'; get_header();
 ?>
 <style>
-/* Force solid blue header */
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-
 /* Full-width Page Main */
 .blog-page-main {
     width: 100% !important;

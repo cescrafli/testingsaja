@@ -54,8 +54,10 @@
                   background-color: #041e3a !important;
                   padding: 14px 0 !important;
                   box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
-                  z-index: 9999 !important;
-                  transition: background-color 0.25s ease, padding 0.25s ease;
+                  z-index: 99999 !important;
+                  transition: background-color 0.25s ease, padding 0.25s ease, box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                  will-change: transform, padding, background-color;
+                  box-sizing: border-box !important;
               }
               body.admin-bar .header {
                   top: 32px !important;
@@ -64,6 +66,24 @@
                   body.admin-bar .header {
                       top: 46px !important;
                   }
+              }
+
+              /* Dynamic Compact & Scrolled State */
+              .header.sticky,
+              .header.scrolled {
+                  padding: 10px 0 !important;
+                  background-color: rgba(4, 30, 58, 0.98) !important;
+                  backdrop-filter: blur(12px) !important;
+                  -webkit-backdrop-filter: blur(12px) !important;
+                  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25) !important;
+              }
+
+              /* Headroom Dynamic Animation */
+              .header.header--unpinned {
+                  transform: translateY(-100%) !important;
+              }
+              .header.header--pinned {
+                  transform: translateY(0) !important;
               }
 
               /* HEADER CONTAINER: Always single row on desktop, space-between, vertically centered */
@@ -123,13 +143,47 @@
                       margin: 0 !important;
                       padding: 0 !important;
                   }
-                  .nav-item {
-                      font-size: clamp(12px, 0.9vw, 14px) !important;
-                      white-space: nowrap !important;
-                  }
                   .header_trigger {
                       display: none !important;
                   }
+              }
+
+              /* Dynamic Nav Link with Signature Gold Indicator */
+              .header_nav .nav-link {
+                  position: relative !important;
+                  color: #ffffff !important;
+                  text-transform: uppercase !important;
+                  font-size: clamp(12px, 0.92vw, 14px) !important;
+                  font-weight: 600 !important;
+                  text-decoration: none !important;
+                  padding: 6px 0 !important;
+                  transition: color 0.25s ease !important;
+                  display: inline-block !important;
+                  white-space: nowrap !important;
+                  letter-spacing: 0.5px !important;
+              }
+              .header_nav .nav-link:after {
+                  content: '' !important;
+                  position: absolute !important;
+                  width: 0 !important;
+                  height: 2.5px !important;
+                  background-color: #cba85d !important;
+                  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+                  bottom: -3px !important;
+                  left: 0 !important;
+                  border-radius: 2px !important;
+              }
+              .header_nav .nav-link:hover {
+                  color: #cba85d !important;
+              }
+              .header_nav .nav-link:hover:after {
+                  width: 100% !important;
+              }
+              .header_nav .nav-link.current {
+                  color: #ffffff !important;
+              }
+              .header_nav .nav-link.current:after {
+                  width: 100% !important;
               }
 
               @media screen and (max-width: 991.98px) {
@@ -171,7 +225,7 @@
                   .brand_logo { width: 40px !important; }
                   .brand { font-size: 22px !important; gap: 10px !important; }
                   
-                  body:not(.home) .header,
+                  .header,
                   .header.sticky {
                       padding: 10px 0 !important;
                   }
@@ -244,13 +298,25 @@
 </head>
     <body <?php body_class(); ?>>
         <?php 
-        $data_page = ($css_name === "index") ? "home" : $css_name; 
-        if (is_page('warranty') || is_page_template('page-warranty.php')) {
-            $data_page = 'warranty';
+        $current_page = 'home';
+        if (is_front_page() || is_home()) {
+            $current_page = 'home';
+        } elseif (is_page('about') || is_page_template('page-about.php')) {
+            $current_page = 'about';
+        } elseif (is_page('product') || is_page_template('page-product.php') || is_page('interior') || is_page_template('page-product-interior.php') || is_page_template('page-product-upvc.php') || is_page_template('page-product-kaca.php') || is_page_template('page-product-besi.php') || is_page_template('page-product-alumunium.php') || is_page_template('page-product-fasad.php')) {
+            $current_page = 'services';
+        } elseif (is_page(array('projects', 'project')) || is_page_template('page-projects.php') || is_singular('project')) {
+            $current_page = 'projects';
+        } elseif (is_page('blog') || is_page_template('page-blog.php') || is_single() || is_category() || is_tag() || is_archive()) {
+            $current_page = 'blog';
+        } elseif (is_page('warranty') || is_page_template('page-warranty.php')) {
+            $current_page = 'warranty';
+        } elseif (is_page('faq') || is_page_template('page-faq.php')) {
+            $current_page = 'faq';
+        } elseif (is_page('contacts') || is_page_template('page-contacts.php')) {
+            $current_page = 'contacts';
         }
-        if (is_page('interior') || is_page_template('page-product-interior.php')) {
-            $data_page = 'services';
-        }
+        $data_page = $current_page;
         ?>
         <header class="header" data-page="<?php echo $data_page; ?>" data-page-parent="<?php echo $data_page; ?>">
             <div class="container d-flex">
@@ -258,54 +324,53 @@
                     <img class="brand_logo" src="<?php echo get_template_directory_uri(); ?>/svg/logo.svg" alt="Griya Djaya Sentosa" />
                     <span class="brand_name"> Griya Djaya <span class="highlight">Sentosa</span> </span>
                 </a>
-                                <nav class="header_nav collapse" id="headerMenu">
+                <nav class="header_nav collapse" id="headerMenu">
                     <ul class="header_nav-list">
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/'); ?>" data-page="home" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'home') echo 'current'; ?>" href="<?php echo home_url('/'); ?>" data-page="home" data-single="true">
                                 <span class="nav-item_text">Beranda</span>
                             </a>
                         </li>
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/about/'); ?>" data-page="about" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'about') echo 'current'; ?>" href="<?php echo home_url('/about/'); ?>" data-page="about" data-single="true">
                                 <span class="nav-item_text">Tentang Kami</span>
                             </a>
                         </li>
                         <li class="header_nav-list_item dropdown-custom">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/product/'); ?>" data-page="services" data-single="true" onclick="if(window.innerWidth <= 991 && !this.parentElement.classList.contains('mobile-open')){ event.preventDefault(); this.parentElement.classList.add('mobile-open'); }">
+                            <a class="nav-item nav-link <?php if ($current_page === 'services') echo 'current'; ?>" href="<?php echo home_url('/product/'); ?>" data-page="services" data-single="true" onclick="if(window.innerWidth <= 991 && !this.parentElement.classList.contains('mobile-open')){ event.preventDefault(); this.parentElement.classList.add('mobile-open'); }">
                                 <span class="nav-item_text">Produk <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                             </a>
-                            <ul class="dropdown-menu-custom">                                <li><a href="<?php echo home_url('/product/fasad/'); ?>">Fasad</a></li>
+                            <ul class="dropdown-menu-custom">
+                                <li><a href="<?php echo home_url('/product/fasad/'); ?>">Fasad</a></li>
                                 <li><a href="<?php echo home_url('/product/interior/'); ?>">Interior</a></li>
                                 <li><a href="<?php echo home_url('/product/upvc/'); ?>">UPVC</a></li>
                                 <li><a href="<?php echo home_url('/product/alumunium/'); ?>">Alumunium</a></li>
                                 <li><a href="<?php echo home_url('/product/kaca/'); ?>">Kaca</a></li>
-                                <li><a href="<?php echo home_url('/product/besi-stainless/'); ?>">Besi & Stainless</a></li>
+                                <li><a href="<?php echo home_url('/product/besi-stainless/'); ?>">Besi &amp; Stainless</a></li>
                             </ul>
                         </li>
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/projects/'); ?>" data-page="projects" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'projects') echo 'current'; ?>" href="<?php echo home_url('/projects/'); ?>" data-page="projects" data-single="true">
                                 <span class="nav-item_text">Proyek</span>
                             </a>
                         </li>
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/blog/'); ?>" data-page="blog" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'blog') echo 'current'; ?>" href="<?php echo home_url('/blog/'); ?>" data-page="blog" data-single="true">
                                 <span class="nav-item_text">Blog</span>
                             </a>
                         </li>
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/warranty/'); ?>" data-page="warranty" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'warranty') echo 'current'; ?>" href="<?php echo home_url('/warranty/'); ?>" data-page="warranty" data-single="true">
                                 <span class="nav-item_text">Garansi</span>
                             </a>
                         </li>
-                        
-                        
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo esc_url(home_url('/faq/')); ?>" data-page="faq" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'faq') echo 'current'; ?>" href="<?php echo esc_url(home_url('/faq/')); ?>" data-page="faq" data-single="true">
                                 <span class="nav-item_text">FAQ</span>
                             </a>
                         </li>
                         <li class="header_nav-list_item">
-                            <a class="nav-item nav-link" href="<?php echo home_url('/contacts/'); ?>" data-page="contacts" data-single="true">
+                            <a class="nav-item nav-link <?php if ($current_page === 'contacts') echo 'current'; ?>" href="<?php echo home_url('/contacts/'); ?>" data-page="contacts" data-single="true">
                                 <span class="nav-item_text">Kontak</span>
                             </a>
                         </li>
@@ -323,6 +388,36 @@
                 </button>
             </div>
         </header>
+
+<script>
+(function() {
+    let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    function handleNavScroll() {
+        const currentY = window.pageYOffset || document.documentElement.scrollTop;
+        if (currentY > 10) {
+            header.classList.add('sticky', 'scrolled');
+        } else {
+            header.classList.remove('sticky', 'scrolled');
+        }
+
+        // Dynamic headroom: hide on scroll down, reveal on scroll up
+        if (currentY > 150 && currentY > lastScrollY + 6) {
+            header.classList.add('header--unpinned');
+            header.classList.remove('header--pinned');
+        } else if (currentY < lastScrollY - 6 || currentY <= 150) {
+            header.classList.remove('header--unpinned');
+            header.classList.add('header--pinned');
+        }
+        lastScrollY = currentY;
+    }
+
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    window.addEventListener('DOMContentLoaded', handleNavScroll);
+})();
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

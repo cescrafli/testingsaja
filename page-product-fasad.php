@@ -14,7 +14,6 @@ $items = [
 ];
 ?>
 <style>
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 main.prod-sub-main { width: 100% !important; background-color: #ffffff !important; flex: 1 0 auto !important; min-height: 80vh !important; display: block !important; margin: 0 !important; padding: 0 !important; }
 .prod-sub-container { background-color: #ffffff !important; padding: 100px 20px 56px !important; max-width: 1200px; margin: 0 auto; text-align: center; box-sizing: border-box; }
 @media (max-width: 768px) { .prod-sub-container { padding: 84px 16px 36px !important; } }

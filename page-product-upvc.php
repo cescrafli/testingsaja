@@ -98,8 +98,6 @@ $pintu_items = [
 ];
 ?>
 <style>
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-
 /* Base Full-Width White Background Wrapper */
 main.prod-sub-main {
     width: 100% !important;

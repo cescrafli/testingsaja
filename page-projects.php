@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Projects */
 global $custom_css; $custom_css = 'projects'; get_header();
-?><?php echo '<style>.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }</style>'; ?>
+?>
 
         <!-- projects2 main content start  -->
         <main class="projects section" style="padding: 104px 0 44px !important; background: #fff;">

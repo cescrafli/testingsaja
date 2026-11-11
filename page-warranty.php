@@ -223,7 +223,6 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
 ?>
 
 <style>
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 .bp-preview-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
 .bp-preview-item { position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; background: #f9f9f9; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .bp-preview-img { width: 100%; height: 100%; object-fit: cover; }

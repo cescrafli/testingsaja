@@ -234,9 +234,6 @@ $item_id = isset($_GET['item']) ? sanitize_title($_GET['item']) : '';
 
 <link rel="stylesheet" href="<?php echo esc_url($theme_uri . '/css/interior.css'); ?>?v=<?php echo @filemtime(get_template_directory() . '/css/interior.css'); ?>" />
 <style>
-/* Force blue header matching other product pages */
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-
 /* Lightbox Modal */
 .gjs-int-lightbox { display: none; position: fixed; z-index: 999999; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(4,30,58,0.94); backdrop-filter: blur(8px); }
 .gjs-int-lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }

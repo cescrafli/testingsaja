@@ -3,9 +3,6 @@
 global $custom_css; $custom_css = 'product'; get_header();
 ?>
 <style>
-/* Force blue header */
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
-
 /* Global reset for product page */
 .prod-page { font-family: 'Inter', sans-serif; color: #1e293b; background-color: #f3f4f6; padding-top: 72px; }
 @media (max-width: 768px) { .prod-page { padding-top: 62px; } }

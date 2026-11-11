@@ -3,15 +3,6 @@
 global $custom_css; $custom_css = 'faq'; get_header();
 ?>
 <style>
-/* Solid Header */
-.header {
-    background-color: #041e3a !important;
-    position: fixed !important;
-    top: 0 !important;
-    width: 100% !important;
-    z-index: 9999 !important;
-}
-
 /* ========================================================
    Clean White Hero Header Section (Projects Page Style)
    ======================================================== */

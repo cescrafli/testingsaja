@@ -3,7 +3,6 @@
 global $custom_css; $custom_css = 'about'; get_header();
 ?>
 <style>
-.header { background-color: #041e3a !important; position: fixed !important; top: 0 !important; width: 100% !important; z-index: 9999 !important; }
 main.about-main-wrapper {
     width: 100% !important;
     background-color: #ffffff !important;

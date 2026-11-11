@@ -41,6 +41,27 @@
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/<?php echo $css_name; ?>.min.css?v=3.2.3" />
         <?php } ?>
         <style>
+              /* RESET GLOBAL ANTI-GAP (Eliminasi Black Bar Gap Header & Footer untuk Semua Site) */
+              html {
+                  background-color: #ffffff !important;
+                  margin: 0 !important;
+                  padding: 0 !important;
+              }
+              body,
+              body.page,
+              body.page-template,
+              body.wp-singular,
+              body.home {
+                  margin: 0 !important;
+                  padding: 0 !important;
+                  padding-top: 0 !important;
+                  padding-bottom: 0 !important;
+                  background-color: #ffffff !important;
+              }
+              main, .site-main, .about-main-wrapper, .blog-page-main, .contact-page-main {
+                  margin-top: 0 !important;
+              }
+
               /* DYNAMIC FLUID LAYOUT & STANDARISASI HEADER GLOBAL (v3.2.3) */
               .brand { font-size: clamp(20px, 2.5vw, 30px) !important; gap: clamp(8px, 1vw, 15px) !important; white-space: nowrap; }
               .brand_logo { width: clamp(35px, 4vw, 55px) !important; height: auto !important; }
@@ -214,11 +235,11 @@
               /* Override Global Section & Page Spacing (Mengeliminasi Gap 180px/200px) */
               @media screen and (min-width: 1024px) {
                   .section { padding: 56px 0; }
-                  .page { padding: 104px 0 40px; }
+                  div.page, header.page, section.page { padding: 104px 0 40px; }
               }
               @media screen and (max-width: 1023.98px) {
                   .section { padding: 44px 0; }
-                  .page { padding: 92px 0 32px; }
+                  div.page, header.page, section.page { padding: 92px 0 32px; }
               }
               
               @media screen and (max-width: 767.98px) {

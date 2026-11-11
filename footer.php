@@ -221,19 +221,60 @@
     }
 }
 
-html { height: 100%; background-color: #021224; }
-body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; padding: 0; background-color: #021224; }
+html {
+    height: 100%;
+    background-color: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+body,
+body.page,
+body.page-template,
+body.wp-singular,
+body.home {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #ffffff !important;
+}
 main, .projects, .site-main, .company-profile, .about-main-wrapper, .team, .certificates, .workshop-facilities, .single-main-wrapper, .blog-main-wrapper, .blog-page-main, .blog-content-section, .gjs-interior-wrapper, .prod-page, .prod-sub-main, .prod-sub-container, .blueprint-container, .error, .faq-cta-section {
     flex: 1 0 auto;
     background-color: #ffffff;
+    margin-top: 0 !important;
 }
 #scrollTrigger {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 9998;
+    position: fixed !important;
+    right: 25px !important;
+    bottom: 25px !important;
+    z-index: 9998 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+    background: #cba85d !important;
+    color: #041e3a !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 #scrollTrigger:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background: #e0be6c !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 20px rgba(203, 168, 93, 0.4) !important;
+}
+#scrollTrigger .icon {
+    font-size: 14px !important;
+    color: #041e3a !important;
+    transform: rotate(-90deg) !important;
+    display: inline-block !important;
 }
 </style>
 

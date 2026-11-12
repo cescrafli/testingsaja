@@ -604,7 +604,7 @@ if ((isset($_POST['action']) && $_POST['action'] === 'search_barcode') || !empty
     
     <!-- PANDUAN KLAIM GAMBAR -->
     <div style="max-width: 1200px; margin: 44px auto 0; text-align: center;">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/warranty-steps.png" alt="Panduan Klaim Garansi" style="width: 100%; max-width: 1100px; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/gambar_hd_3x_upscaled.jpeg" alt="Panduan Klaim Garansi" loading="lazy" style="width: 100%; max-width: 1100px; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
     </div>
 </div>
 

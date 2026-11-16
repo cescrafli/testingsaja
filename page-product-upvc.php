@@ -15,67 +15,261 @@ get_header();
 $upload_dir = get_template_directory_uri() . '/img/';
 
 $pData = [
-    "jendela-lipat" => [
-        "cat" => "Jendela",
-        "title" => "Jendela Lipat uPVC Presisi Tinggi",
-        "subtitle" => "Conch & Falken High-Precision Architectural Bi-Fold Window System",
-        "img" => "Jendela-Lipat-1.png",
-        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
-        "green_badge" => "Double EPDM Gasket",
-        "desc" => "Sistem jendela lipat uPVC Conch & Falken dirancang secara arsitektural untuk memaksimalkan bentang bukaan view, sirkulasi udara alami, dan pencahayaan optimal tanpa mengorbankan isolasi akustik maupun integritas struktural.<br><br>Sangat ideal sebagai penghubung interior mewah dengan patio, teras belakang, void taman samping, maupun partisi fleksibel dengan pergerakan daun yang senyap dan kedap udara.",
-        "listTitle" => "KEUNGGULAN SISTEM JENDELA LIPAT:",
-        "features" => [
-            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
-            "<b>Hardware & Roda Stainless 304:</b> Rel bawah heavy-duty untuk tarikan mulus, stabil, dan bebas macet bertahun-tahun.",
-            "<b>Multi-Point Locking System:</b> Penguncian multiposisi perimeter menjamin keamanan maksimal dan kekedapan angin optimal.",
-            "<b>Ketahanan Cuaca Tropis Anti-UV:</b> Formulasi ASA compound tahan cuaca ekstrem tidak akan keropos, getas, atau menguning."
-        ],
-        "specs" => [
-            "Pilihan Konfigurasi:" => "3, 4, 5, 6 s/d 8 Daun Lipat",
-            "Spesifikasi Kaca:" => "Single 5mm-8mm / Double Glass 5+9A+5mm",
-            "Rangka Penguat Internal:" => "Galvanized Steel Core (Anti-Karat)",
-            "Aksesoris & Engsel:" => "Kinlong / Hopo / Roto Architectural Gear"
-        ],
-        "short_desc" => "<b>Jendela Lipat</b> memiliki keunggulan bisa membuka bukaan lebih lebar dari jenis jendela lainnya. Jendela ini sering diaplikasikan untuk area ke taman atau penyekat ruangan indoor.",
-        "short_listTitle" => "Tipe -tipe Jendela Lipat:",
-        "short_list" => [
-            "Jendela Lipat 3 Daun",
-            "Jendela Lipat 4 Daun",
-            "Jendela Lipat 5 Daun",
-            "Jendela Lipat 6 Daun",
-            "Dll"
-        ]
-    ],
     "jendela-jungkit" => [
         "cat" => "Jendela",
         "title" => "Jendela Jungkit uPVC",
         "subtitle" => "Conch & Falken Awning / Hopper Window Architectural System",
         "img" => "Jendela-Jungkit-2.png",
-        "badges" => ["Garansi Profil 10 Tahun", "Kedap Suara & Debu"],
+        "badges" => ["Garansi Profil 10 Tahun", "Kedap Suara & Anti Bocor"],
         "green_badge" => "Double EPDM Weatherseal",
-        "desc" => "<b>Jendela Jungkit (Awning Window)</b> adalah jendela dengan sistem engsel geser (<i>friction stay</i>) yang dibuka dengan cara mendorong bagian bawah daun ke arah luar atau membuka bagian atas ke arah dalam. Memungkinkan ventilasi udara tetap mengalir optimal bahkan saat hujan gerimis tanpa khawatir air tampias ke dalam ruangan.<br><br>Dilengkapi penguncian multi-titik dan karet peredam ganda EPDM yang menjamin kekedapan akustik serta efisiensi pendingin ruangan (AC).",
-        "listTitle" => "PILIHAN TIPE JENDELA JUNGKIT:",
+        "desc" => "Jendela Jungkit (Awning Window) adalah jendela dengan sistem engsel yang dibuka dengan cara mendorong bagian bawah daun ke arah luar atau membuka bagian atas ke arah dalam. Memungkinkan ventilasi udara tetap mengalir optimal bahkan saat hujan gerimis tanpa khawatir air tampias ke dalam ruangan.",
+        "listTitle" => "KEUNGGULAN JENDELA JUNGKIT UPVC:",
         "features" => [
-            "<b>Sirkulasi Bebas Tampias:</b> Sudut bukaan miring melindungi interior dari percikan air hujan saat ventilasi terbuka.",
-            "<b>Engsel Geser Stainless Steel:</b> Menggunakan friction stay heavy-duty yang kokoh menahan daun jendela pada berbagai sudut bukaan.",
-            "<b>Multi-Chamber Insulation:</b> Ruang insulasi udara multi-sekat yang efektif meredam kebisingan luar dan panas matahari.",
-            "<b>Kekedapan Ganda EPDM:</b> Karet gasket sintetis lentur tahan lama yang mengunci rapat celah daun jendela."
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Ventilasi aman saat hujan ringan."
         ],
         "specs" => [
+            "Material Profil:" => "uPVC",
             "Arah Bukaan:" => "Jungkit Luar (Awning) / Jungkit Dalam (Hopper)",
-            "Pilihan Profil:" => "uPVC Conch & Falken (White / Color Series)",
-            "Spesifikasi Kaca:" => "Single Glass 5mm - 8mm / Double Glass",
-            "Hardware & Engsel:" => "Friction Stay Stainless 304 & Casement Handle",
-            "Rangka Penguat:" => "Galvanized Steel Core 1.5mm (Anti-Karat)"
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle Kinlong & Engsel Casement / Engsel Kupu-Kupu + Windbreak",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "jendela-swing" => [
+        "cat" => "Jendela",
+        "title" => "Jendela Swing uPVC",
+        "subtitle" => "Conch & Falken Casement / Side-Hung Swing Window System",
+        "img" => "Jendela-Swing-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Jendela swing adalah jendela dengan daun yang dibuka dengan diayun pada engsel di sisi samping, seperti pintu. Bukaannya lebar dan penuh sehingga udara dan cahaya alami masuk maksimal.",
+        "listTitle" => "KEUNGGULAN JENDELA SWING UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Bukaan lebar dan penuh."
         ],
-        "short_desc" => "<b>Jendela Jungkit</b> adalah jendela yang dibuka dengan cara mendorong bagian bawah daun jendela, sehingga daun jendela terbuka miring ke depan.",
-        "short_listTitle" => "Tipe -tipe Jendela Jungkit:",
-        "short_list" => [
-            "Jendela Jungkit Single",
-            "Jendela Jungkit 1/2/3/4/5 Daun (sesuai request)",
-            "Jendela Jungkit Kaca + Ornament",
-            "Jendela Jungkit Kombinasi",
-            "Dll"
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Swing (ayun), ke luar atau ke dalam (custom sesuai kebutuhan)",
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle Kinlong & Engsel Casement / Engsel Kupu-Kupu + Windbreak",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "jendela-sliding" => [
+        "cat" => "Jendela",
+        "title" => "Jendela Sliding uPVC",
+        "subtitle" => "Conch & Falken Smooth Horizontal Sliding Window System",
+        "img" => "Jendela-Sliding-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Jendela sliding adalah jendela dengan daun yang dibuka dengan cara digeser menyamping pada rel (track), sehingga tidak memakan ruang bukaan ke dalam maupun ke luar. Cocok untuk ruangan dengan area terbatas, balkon, atau lokasi yang dekat dengan perabot dan taman.",
+        "listTitle" => "KEUNGGULAN JENDELA SLIDING UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Hemat ruang karena daun digeser.",
+            "Operasional ringan dan halus."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Sliding (geser), 2 daun atau lebih (custom sesuai kebutuhan)",
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Roda Jendela Kinlong, Crescent Lock Kinlong",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "jendela-pivot" => [
+        "cat" => "Jendela",
+        "title" => "Jendela Pivot uPVC",
+        "subtitle" => "Conch & Falken Architectural Center-Axis Pivot Window System",
+        "img" => "Jendela-Pivot-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Jendela pivot adalah jendela yang daunnya berputar pada poros (pivot) di titik tengah. Saat dibuka, satu sisi daun bergerak ke dalam dan sisi lainnya ke luar, sehingga tercipta dua celah bukaan untuk sirkulasi udara dan cahaya. Bentuknya modern, cocok untuk jendela berukuran besar, dan kaca mudah dibersihkan karena kedua sisinya terjangkau dari dalam.",
+        "listTitle" => "KEUNGGULAN JENDELA PIVOT UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Bukaan tidak memakan banyak ruang ayun.",
+            "Desain modern."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Pivot (putar pada poros tengah)",
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Pivot Kinlong",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "jendela-lipat" => [
+        "cat" => "Jendela",
+        "title" => "Jendela Lipat uPVC",
+        "subtitle" => "Conch & Falken High-Precision Architectural Bi-Fold Window System",
+        "img" => "Jendela-Lipat-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Gasket",
+        "desc" => "Jendela lipat adalah jendela dengan beberapa daun yang terhubung engsel dan bisa dilipat, lalu ditumpuk ke satu sisi (atau dua sisi) saat dibuka. Hasilnya, bukaan sangat lebar, bahkan hampir seluruh lebar dinding, sehingga ruangan terasa menyatu dengan area luar seperti teras, balkon, taman, atau area bar dan kafe.",
+        "listTitle" => "KEUNGGULAN JENDELA LIPAT UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Bukaan sangat lebar sehingga sirkulasi udara dan cahaya alami maksimal.",
+            "Fleksibel."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Folding (lipat), menumpuk ke satu sisi atau dua sisi (custom sesuai kebutuhan)",
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Wina",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "jendela-sliding-vertikal" => [
+        "cat" => "Jendela",
+        "title" => "Jendela Sliding Vertikal uPVC",
+        "subtitle" => "Conch & Falken Single / Double Hung Vertical Sliding Window System",
+        "img" => "Jendela-Sliding-Atas-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Jendela sliding vertikal adalah jendela yang daunnya dibuka dengan cara digeser naik dan turun, bukan menyamping. Pada tipe single hung, hanya daun bawah yang bergerak, sedangkan pada tipe double hung daun atas dan bawah sama-sama bisa digeser. Karena tidak memakai ruang ayun sama sekali, jendela ini cocok untuk ruangan dengan area terbatas, dekat perabot, atau yang menghadap teras sempit.",
+        "listTitle" => "KEUNGGULAN JENDELA SLIDING VERTIKAL UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Hemat ruang."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Vertical Sliding (geser naik-turun), Single Hung / Double Hung",
+            "Spesifikasi Kaca:" => "Single 5–10 mm / Tempered 5–10 mm / Laminated 5–10 mm / Double Glass / Triple Glass",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Vertical Sliding",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "pintu-ekonomis" => [
+        "cat" => "Pintu",
+        "title" => "Pintu Ekonomis uPVC",
+        "subtitle" => "Conch Economical Weather-Resistant uPVC Door System",
+        "img" => "Pintu-Ekonomis-1.png",
+        "badges" => ["Garansi Profil 10 Tahun", "Profil Conch Resmi"],
+        "green_badge" => "Tahan Air & Anti Rayap",
+        "desc" => "Pintu ekonomis uPVC adalah pintu dengan rangka profil uPVC yang dirancang untuk kebutuhan yang mengutamakan harga terjangkau tanpa meninggalkan ketahanan bahan. Karena terbuat dari uPVC, pintu ini tidak berkarat, tidak lapuk, dan tidak dimakan rayap, serta tahan terhadap hujan dan panas.",
+        "listTitle" => "KEUNGGULAN PINTU EKONOMIS UPVC:",
+        "features" => [
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Harga terjangkau."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC Conch (Putih, Hitam, Coklat)",
+            "Arah Bukaan:" => "Swing (engsel)",
+            "Spesifikasi Isi Daun:" => "Panel Ekonomis uPVC, Kaca Es",
+            "Hardware & Engsel:" => "Handle & Engsel Nylon",
+            "Rangka Penguat:" => "Galvanized Steel di beberapa titik"
+        ]
+    ],
+    "pintu-garasi" => [
+        "cat" => "Pintu",
+        "title" => "Pintu Garasi uPVC",
+        "subtitle" => "Conch & Falken Curved-Track Architectural Garage Door System",
+        "img" => "Pintu-Garasi-1.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Heavy Duty Curved Track",
+        "desc" => "Pintu garasi uPVC adalah pintu garasi dengan beberapa daun yang saling terhubung engsel dan bergerak pada rel atas yang melengkung. Saat dibuka, daun terlipat dan mengikuti lengkungan rel hingga menumpuk rapi di sisi bukaan, sehingga bukaan garasi bisa lebar tanpa memakan ruang ayun di depan.",
+        "listTitle" => "KEUNGGULAN PINTU GARASI UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Bukaan lebar dan leluasa untuk keluar-masuk kendaraan.",
+            "Tampilan modern dan unik."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Folding (lipat) dengan rel lengkung",
+            "Spesifikasi Isi Daun:" => "Panel uPVC, Panel Kaca, atau kombinasi dengan kisi ventilasi (custom sesuai kebutuhan)",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Engsel Lipat, Rel Heavy Duty",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "pintu-lipat" => [
+        "cat" => "Pintu",
+        "title" => "Pintu Lipat uPVC",
+        "subtitle" => "Conch & Falken Wide-Span Architectural Bi-Fold Door System",
+        "img" => "Pintu-Lipat-1 (1).png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Pintu lipat adalah pintu dengan beberapa daun yang saling terhubung engsel dan bergerak pada rel, sehingga saat dibuka daun terlipat dan menumpuk rapi ke satu sisi atau dua sisi. Bukaannya sangat lebar, hingga hampir seluruh lebar dinding, sehingga ruang dalam terasa menyatu dengan teras, balkon, taman, atau area usaha.",
+        "listTitle" => "KEUNGGULAN PINTU LIPAT UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Bukaan sangat lebar sehingga sirkulasi udara dan cahaya alami maksimal.",
+            "Ruang dalam dan luar terasa menyatu.",
+            "Hemat ruang."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Folding (lipat), menumpuk ke satu sisi atau dua sisi, ke dalam atau ke luar (custom sesuai kebutuhan)",
+            "Spesifikasi Isi Daun:" => "Panel uPVC atau Panel Kaca (custom sesuai kebutuhan)",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Engsel Lipat, Rel Heavy Duty",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "pintu-swing" => [
+        "cat" => "Pintu",
+        "title" => "Pintu Swing uPVC",
+        "subtitle" => "Conch & Falken Single / Double Side-Hung Swing Door System",
+        "img" => "Pintu-Swing-3.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Pintu swing adalah pintu dengan daun yang dibuka dengan diayun pada engsel di sisi samping, ke dalam atau ke luar, seperti pintu pada umumnya. Karena memakai profil uPVC dan gasket EPDM, pintu ini rapat terhadap air dan debu, meredam suara, tahan cuaca, dan tidak memerlukan perawatan khusus. Tersedia dalam model single maupun double daun, dengan isian kaca atau panel.",
+        "listTitle" => "KEUNGGULAN PINTU SWING UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Operasional sederhana dan familiar."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Swing Single atau Double (ayun), ke dalam atau ke luar (custom sesuai kebutuhan)",
+            "Spesifikasi Isi Daun:" => "Panel uPVC atau Panel Kaca atau Kombinasi (custom sesuai kebutuhan)",
+            "Hardware & Engsel:" => "Handle & Transmisi Multipoint Kinlong, Engsel Kinlong",
+            "Rangka Penguat:" => "Galvanized Steel Core"
+        ]
+    ],
+    "pintu-sliding" => [
+        "cat" => "Pintu",
+        "title" => "Pintu Sliding uPVC",
+        "subtitle" => "Conch & Falken Heavy-Duty Smooth Sliding Door System",
+        "img" => "Pintu-Sliding-2.png",
+        "badges" => ["Standar Mutu ISO 9001:2015", "Garansi Profil 10 Tahun"],
+        "green_badge" => "Double EPDM Weatherseal",
+        "desc" => "Pintu sliding uPVC adalah pintu dengan daun yang dibuka dengan cara digeser menyamping pada rel, sehingga tidak memerlukan ruang ayun ke dalam maupun ke luar. Bidang kacanya luas, sehingga pandangan lebih lapang dan cahaya alami masuk maksimal.",
+        "listTitle" => "KEUNGGULAN PINTU SLIDING UPVC:",
+        "features" => [
+            "<b>Profil uPVC Multi-Chamber:</b> Sekat berongga multi-ruang yang meredam radiasi panas matahari dan kebisingan secara efisien.",
+            "Anti rayap, anti karat, kedap suara, dan tahan cuaca.",
+            "Sistem kunci multipoint lock yang mengunci di beberapa titik sekaligus.",
+            "Hemat ruang."
+        ],
+        "specs" => [
+            "Material Profil:" => "uPVC",
+            "Arah Bukaan:" => "Sliding (geser), 2 daun atau lebih (custom sesuai kebutuhan)",
+            "Spesifikasi Isi Daun:" => "Kaca atau kombinasi dengan Panel uPVC (custom sesuai kebutuhan)",
+            "Hardware & Engsel:" => "Handle & Transmisi Kinlong, Roller Heavy Duty Kinlong",
+            "Rangka Penguat:" => "Galvanized Steel Core"
         ]
     ]
 ];
@@ -1083,9 +1277,11 @@ main.prod-sub-main {
                     <button type="button" class="conf-brand-btn active" id="btn-conch" onclick="switchBrand('conch')" title="Pilih Profil CONCH">
                         <img src="<?php echo get_template_directory_uri(); ?>/img/brands/brand-custom-2.png" alt="CONCH">
                     </button>
+                    <?php if ($item_id !== 'pintu-ekonomis'): ?>
                     <button type="button" class="conf-brand-btn" id="btn-falken" onclick="switchBrand('falken')" title="Pilih Profil FALKEN">
                         <img src="<?php echo get_template_directory_uri(); ?>/img/brands/btn-falken.png" alt="FALKEN">
                     </button>
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Main Box / Window Stage -->
@@ -1111,7 +1307,7 @@ main.prod-sub-main {
 
                         <div class="conf-stage-footer">
                             <div id="conf-color-name" class="conf-mekanisme">
-                                <span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> <span style="color:#041e3a; font-weight:700;">CONCH</span> Black
+                                <span style="font-size:11px; opacity:0.8; font-weight:normal; text-transform:uppercase;">Warna:</span> <span style="color:#041e3a; font-weight:700;">CONCH</span> White
                             </div>
                             <div class="conf-zoom-hint" onclick="openCurrentProductLightbox();" title="Klik untuk memperbesar gambar">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -1125,12 +1321,15 @@ main.prod-sub-main {
                         <div class="conf-swatches-left">
                             <span class="conf-swatches-title">Pilihan Warna:</span>
                             <div id="colors-conch" class="conf-swatches-list">
-                                <div class="cp-btn c-hitam active" onclick="changeColor('hitam', this, 'Black', 'conch')" title="CONCH Hitam / Black"></div>
-                                <div class="cp-btn c-putih" onclick="changeColor('putih', this, 'White', 'conch')" title="CONCH Putih / White"></div>
+                                <div class="cp-btn c-putih active" onclick="changeColor('putih', this, 'White', 'conch')" title="CONCH Putih / White"></div>
+                                <div class="cp-btn c-hitam" onclick="changeColor('hitam', this, 'Black', 'conch')" title="CONCH Hitam / Black"></div>
                                 <div class="cp-btn c-coklat" onclick="changeColor('coklat', this, 'Brown', 'conch')" title="CONCH Coklat / Brown"></div>
-                                <div class="cp-btn c-wood-golden" onclick="changeColor('wood-golden', this, 'Golden Wood', 'conch')" title="CONCH Kayu Golden / Golden Wood"></div>
-                                <div class="cp-btn c-wood-dark" onclick="changeColor('wood-dark', this, 'Dark Wood', 'conch')" title="CONCH Kayu Gelap / Dark Wood"></div>
+                                <?php if ($item_id !== 'pintu-ekonomis'): ?>
+                                <div class="cp-btn c-wood-golden" onclick="changeColor('wood-golden', this, 'Golden Oak', 'conch')" title="CONCH Golden Oak"></div>
+                                <div class="cp-btn c-wood-dark" onclick="changeColor('wood-dark', this, 'Dark Oak', 'conch')" title="CONCH Dark Oak"></div>
+                                <?php endif; ?>
                             </div>
+                            <?php if ($item_id !== 'pintu-ekonomis'): ?>
                             <?php 
                             $falken_supported_items = [
                                 'jendela-jungkit',
@@ -1159,6 +1358,7 @@ main.prod-sub-main {
                             <div id="colors-falken" class="conf-swatches-list" style="display:none;">
                                 <span style="font-size:12px; color:#94a3b8; font-style:italic;">Katalog warna FALKEN segera hadir</span>
                             </div>
+                            <?php endif; ?>
                             <?php endif; ?>
                         </div>
                         <button type="button" class="conf-swatches-reset" onclick="resetToWhite()" title="Kembalikan ke warna Putih">
@@ -1660,6 +1860,11 @@ function changeColor(colorName, btnElement, colorTextLabel, brand) {
         setTimeout(() => clone.remove(), 250);
     };
     mainImg.onerror = () => {
+        mainImg.onerror = null;
+        const fallbackSrc = mainImg.getAttribute('data-base-src');
+        if (fallbackSrc) {
+            mainImg.src = fallbackSrc;
+        }
         clone.remove();
     };
 }
@@ -1674,8 +1879,10 @@ function switchBrand(brand) {
         activeBtn.classList.add('active');
     }
     
-    document.getElementById('colors-conch').style.display = 'none';
-    document.getElementById('colors-falken').style.display = 'none';
+    let conchGroup = document.getElementById('colors-conch');
+    let falkenGroup = document.getElementById('colors-falken');
+    if (conchGroup) conchGroup.style.display = 'none';
+    if (falkenGroup) falkenGroup.style.display = 'none';
     
     let activeGroup = document.getElementById('colors-' + brand);
     if(activeGroup) {
